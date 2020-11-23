@@ -1,0 +1,36 @@
+.card {
+  background-color: #FAFAFA;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px -3px rgba(0, 0, 0, 0.15);
+  margin: 5px 0px;
+}
+
+.card-s {
+  height: 90px;
+  img {
+    border-radius: 10px 0px 0px 10px;
+    object-fit: cover;
+    width: 90px;
+  }
+  section {
+    padding: 10px;
+  }
+}
+
+.card-m {
+  min-height: 350px;
+  position: relative;
+  .badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  img {
+    border-radius: 10px 10px 0px 0px;
+    object-fit: cover;
+    width: 100%;
+  }
+  section {
+    padding: 10px;
+  }
+}
