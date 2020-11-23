@@ -1,3 +1,81 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <h1>Components</h1>
+  <p>Find me in app/views/pages/home.html.erb</p>
 
+  <%# Buttons %>
+  <h4>Buttons</h4>
+  <a href="#" class=' btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow'>Button primary</a>
+  <a href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button'>Button primary outlined</a>
+
+  <%# Inputs %>
+  <h4 class="mt-3">Inputs</h4>
+  <div class="input">
+    <label for="" class="d-block">Input label</label>
+    <input type="text" class="col-12">
+  </div>
+
+  <div class="input mt-2">
+    <label for="" class="d-block">Select label -- <em>Please use Select2</em></label>
+    <select type="select" class="col-12">
+      <option value="">Please choose an option</option>
+      <option value="dog">Dog</option>
+      <option value="cat">Cat</option>
+    </select>
+  </div>
+
+  <div class="mt-3">
+    <label class="checkbox">One
+      <input type="checkbox" checked="checked">
+      <span class="checkmark"></span>
+    </label>
+
+    <label class="checkbox">Two
+      <input type="checkbox">
+      <span class="checkmark"></span>
+    </label>
+
+    <label class="checkbox">Three
+      <input type="checkbox">
+      <span class="checkmark"></span>
+    </label>
+  </div>
+</div>
+
+<!-- card-s -->
+<div class="container">
+  <div class="d-flex flex-row card card-s">
+    <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+    <section>
+      <h6>headline 6</h6>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </section>
+  </div>
+</div>
+
+<!-- card-m -->
+<div class="container">
+  <div class="card card-m">
+    <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+    <span class="badge badge-pill badge-success">Step 1</span>
+    <section>
+      <h6>headline 6</h6>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec diam placerat, imperdiet nunc sit amet, elementum lectus. Nullam quis venenatis odio, sit amet interdum ligula. Integer mattis diam ut finibus elementum. Cras nec nibh orci. </p>
+    </section>
+  </div>
+</div>
+
+<!-- package-badge-square -->
+<div class="container">
+  <div class="package-badge package-badge-square">
+    <div class="d-flex justify-content-around align-item-center">
+      <div>
+        <i class="fas fa-weight-hanging text-primary"></i>
+        <p>2kg</p>
+      </div>
+      <div>
+        <i class="fas fa-angle-double-up text-primary"></i>
+        <p>10xp</p>
+      </div>
+    </div>
+  </div>
+</div>
