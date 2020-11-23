@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Materials</h1>
+    <%= link_to 'Add material', new_material_path, class: "btn btn-primary" %>
+  </div>
+  <%= simple_form_for(@material) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :category, as: :select, collection: Material::CATEGORIES %>
+    <%= f.input :phoot, as: :file %>
+    <%= f.submit %>
+  <% end %>
+</div>

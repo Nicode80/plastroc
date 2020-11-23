@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Materials</h1>
+    <%= link_to 'Add material', new_material_path, class: "btn btn-primary" %>
+  </div>
+  <ul class="list-group">
+    <% @materials.each do |material| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center justify-content-between">
+          <%= cl_image_tag, height: 20 , width: 20, crop: :fill %>
+          <h3 class="mb-0 mr-3" ><%= material.name %></h3>
+          <span class="badge badge-primary badge-pill mr-3"><%= material.category %></span>
+          <p class="mb-0" ><%= material.description %></p>
+        </div>
+        <div>
+          <%= link_to 'details', material_path(material), class: "badge badge-primary badge-pill" %>
+          <%= link_to 'edit', edit_material_path(material), class: "badge badge-primary badge-pill" %>
+          <%= link_to 'delete', material_path(material), method: :delete, class: "badge badge-primary badge-pill" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
