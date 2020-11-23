@@ -1,3 +1,7 @@
 .plastroc-light-shadow {
   box-shadow: $plastroc-shadow;
 }
+
+.plastroc-bg-primary-gradient {
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0) 99.23%), #00CD60;
+}
