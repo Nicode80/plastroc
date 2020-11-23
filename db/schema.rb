@@ -10,10 +10,78 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_151027) do
+ActiveRecord::Schema.define(version: 2020_11_23_154312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campaigns", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.date "deadline"
+    t.string "status"
+    t.integer "target"
+    t.string "unit"
+    t.boolean "published", default: false, null: false
+    t.integer "min_package"
+    t.bigint "material_id", null: false
+    t.bigint "organisation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["material_id"], name: "index_campaigns_on_material_id"
+    t.index ["organisation_id"], name: "index_campaigns_on_organisation_id"
+  end
+
+  create_table "instructions", force: :cascade do |t|
+    t.integer "step_order"
+    t.string "title"
+    t.text "content"
+    t.bigint "material_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["material_id"], name: "index_instructions_on_material_id"
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "missions", force: :cascade do |t|
+    t.string "status"
+    t.bigint "user_id", null: false
+    t.bigint "package_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["package_id"], name: "index_missions_on_package_id"
+    t.index ["user_id"], name: "index_missions_on_user_id"
+  end
+
+  create_table "organisations", force: :cascade do |t|
+    t.string "name"
+    t.text "about"
+    t.string "address"
+    t.integer "postcode"
+    t.string "city"
+    t.string "contact"
+    t.string "opening_hours"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_organisations_on_user_id"
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.string "name"
+    t.integer "quantity"
+    t.integer "xp_reward"
+    t.bigint "campaign_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["campaign_id"], name: "index_packages_on_campaign_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -30,4 +98,10 @@ ActiveRecord::Schema.define(version: 2020_11_23_151027) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "campaigns", "materials"
+  add_foreign_key "campaigns", "organisations"
+  add_foreign_key "instructions", "materials"
+  add_foreign_key "missions", "packages"
+  add_foreign_key "missions", "users"
+  add_foreign_key "packages", "campaigns"
 end
