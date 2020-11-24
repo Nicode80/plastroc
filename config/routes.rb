@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :organisations do
     resources :campaigns, only: [ :new, :create ]
   end
-
+  resources :materials do
+    resources :instructions, only: [:create, :new, :edit, :destroy, :update]
+  end
   resources :campaigns, only: [ :index, :edit, :update, :delete ]
-
 end
