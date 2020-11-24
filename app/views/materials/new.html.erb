@@ -3,13 +3,26 @@
     <h1>New Material</h1>
   </div>
   <%= simple_form_for(@material) do |f| %>
+  <p>Select Material Category</p>
+    <%= f.input :category,
+            label: false,
+            as: :radio_buttons,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'category-item',
+            input_html: {class: 'category-selector'},
+            boolean_style: :inline,
+            collection: Material::CATEGORIES %>
+    <br>
+    <p>Give it a name & a description</p>
     <%= f.input :name, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Name" %>
     <%= f.input :description, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Description" %>
-    <%= f.input :category, as: :select, collection: Material::CATEGORIES, html: { class: "col-12 mb-3" }, label: false %>
-    <%= f.input :photo, as: :file, label: false %>
-    <div class='d-flex'>
-      <%= f.submit "Create", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow mr-3" %>
-      <%= link_to 'Cancel', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+    <br>
+    <p>Select a picture</p>
+    <%= f.input :photo, as: :file, label: false, input_html: { class: "input col-12 mb-3" } %>
+    <div class='d-flex justify-content-end'>
+      <%= link_to 'Cancel', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+      <%= f.submit "Create", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
     </div>
   <% end %>
 </div>
