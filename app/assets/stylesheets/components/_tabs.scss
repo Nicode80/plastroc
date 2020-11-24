@@ -1,0 +1,28 @@
+.plastroc-tabs {
+    p {
+        text-align: center;
+        width: 100%;
+        border-right: 2px solid rgba(0,0,0,.3);
+        transition-duration: .07s;
+        &:last-child {
+            border-right: none;
+        }
+        &:hover {
+            font-weight: bold;
+        }
+    }
+    .active-tab {
+        font-weight: bold;
+        // border-bottom: 1px solid green;
+        &:after {
+            content: "";
+            width: 7px;
+            height: 3px;
+            display: block;
+            margin: 5px auto -8px;
+            background: $plastroc-main;
+            border-radius: 2px;
+        }
+    }
+
+}
