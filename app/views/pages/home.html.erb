@@ -1,100 +1,138 @@
 <div class="container">
-  <h1>Components</h1>
-  <p>Find me in app/views/pages/home.html.erb</p>
+    <h1>Components</h1>
+    <p>Find me in app/views/pages/home.html.erb</p>
 
-  <%# Buttons %>
-  <h4>Buttons</h4>
-  <a href="#" class='btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow'>Button primary</a>
-  <a href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button'>Button primary outlined</a>
+    <%# Buttons %>
+    <h4>Buttons</h4>
+    <hr class="mb-4">
+    <a href="#" class=' btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow'>Button
+        primary</a>
+    <a href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button'>Button primary
+        outlined</a>
 
-  <%# Inputs %>
-  <h4 class="mt-3">Inputs</h4>
-  <div class="input">
-    <label for="" class="d-block">Input label</label>
-    <input type="text" class="col-12">
-  </div>
-
-  <div class="input mt-2">
-    <label for="" class="d-block">Select label -- <em>Please use Select2</em></label>
-    <select type="select" class="col-12">
-      <option value="">Please choose an option</option>
-      <option value="dog">Dog</option>
-      <option value="cat">Cat</option>
-    </select>
-  </div>
-
-  <div class="mt-3">
-    <label class="checkbox">One
-      <input type="checkbox" checked="checked">
-      <span class="checkmark"></span>
-    </label>
-
-    <label class="checkbox">Two
-      <input type="checkbox">
-      <span class="checkmark"></span>
-    </label>
-
-    <label class="checkbox">Three
-      <input type="checkbox">
-      <span class="checkmark"></span>
-    </label>
-  </div>
-</div>
-
-<!-- card-s -->
-<div class="container">
-  <div class="d-flex flex-row card card-s">
-    <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-    <section>
-      <h6>headline 6</h6>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </section>
-  </div>
-</div>
-
-<!-- card-m -->
-<div class="container">
-  <div class="card card-m">
-    <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-    <span class="badge badge-pill badge-success">Step 1</span>
-    <section>
-      <h6>headline 6</h6>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec diam placerat, imperdiet nunc sit amet, elementum lectus. Nullam quis venenatis odio, sit amet interdum ligula. Integer mattis diam ut finibus elementum. Cras nec nibh orci. </p>
-    </section>
-  </div>
-</div>
-
-<!-- package-badge-square -->
-<div class="container">
-  <div class="package-badge package-badge-square">
-    <div class="container p-3">
-      <h6>Bushtit</h6>
-      <div class="d-flex justify-content-between align-items-center text-center">
-        <div>
-          <i class="fas fa-weight-hanging text-primary"></i>
-          <p>2kg</p>
-        </div>
-        <div>
-          <i class="fas fa-angle-double-up text-primary"></i>
-          <p>10xp</p>
-        </div>
-      </div>
+    <%# Inputs %>
+    <h4 class="mt-5">Inputs</h4>
+    <hr class="mb-4">
+    <div class="input">
+        <label for="" class="d-block">Input label</label>
+        <input type="text" class="col-12" placeholder="Please type something">
     </div>
-  </div>
-</div>
 
-<!-- package-badge-fluid -->
-<div class="container">
-  <div class="package-badge package-badge-fluid">
-    <div class="container p-3">
-      <p class="mb-0">Your participation</p>
-      <div class="d-flex justify-content-between align-items-center text-left">
-      <h6>Bushtit</h6>
-        <p class="mb-0"><i class="fas fa-weight-hanging text-primary"></i> 2kg</p>
-        <p class="mb-0"><i class="fas fa-angle-double-up text-primary"></i> 10xp</p>
-      </div>
+    <h6 class="mt-3">Select</h6>
+    <div class="input mt-2">
+        <label for="" class="d-block"><em>Please add class select2 to your select tag</em></label>
+        <select type="select" class="col-12 select2">
+            <option value="">Please choose an option</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+        </select>
     </div>
-  </div>
-</div>
 
-<!-- tabs -->
+    <h6 class="mt-3">Checkbox</h6>
+    <div>
+        <label class="checkbox">One
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="checkbox">Two
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="checkbox">Three
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+
+    <%# Progress bar %>
+    <h4 class="mt-5">Progress Bar</h4>
+    <hr class="mb-4">
+    <div class="plastroc-progress-bar mt-4">
+        <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+    </div>
+
+    <h4 class="mt-5">Cards</h4>
+    <hr class="mb-4">
+    <!-- card-s -->
+    <h5 class="mt-3">card-s</h5>
+    <div class="d-flex flex-row card card-s">
+        <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+            alt="">
+        <section>
+            <h6>headline 6</h6>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+    </div>
+
+    <!-- card-m -->
+    <h5 class="mt-3">card-m</h5>
+    <div class="card card-m mt-3">
+        <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+        <div class="card-body">
+            <span class="badge badge-pill badge-success">Step 1</span>
+            <section>
+                <h6>headline 6</h6>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec diam placerat, imperdiet nunc sit amet,
+                    elementum lectus. Nullam quis venenatis odio, sit amet interdum ligula. Integer mattis diam ut finibus
+                    elementum. Cras nec nibh orci. </p>
+            </section>
+        </div>
+    </div>
+
+    <!-- package-badge-square -->
+    <h5 class="mt-3">package-badge-square</h5>
+    <div class="package-badge package-badge-square mt-3">
+        <div class="container p-3">
+            <h6>Bushtit</h6>
+            <div class="d-flex justify-content-between align-items-center text-center mt-3">
+                <div>
+                    <i class="fas fa-weight-hanging text-primary mb-2"></i>
+                    <p>2kg</p>
+                </div>
+                <div>
+                    <i class="fas fa-angle-double-up text-primary mb-2"></i>
+                    <p>10xp</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- package-badge-fluid -->
+    <h5 class="mt-3">package-badge-fluid</h5>
+    <div class="package-badge package-badge-fluid mt-3 d-flex align-items-center">
+        <div class="container p-3">
+            <div class="d-flex justify-content-between align-items-center text-left">
+                <div>
+                    <p class="mb-1">Your participation</p>
+                    <h6 class="mb-0">Bushtit</h6>
+                </div>
+                <p class="mb-0"><i class="fas fa-weight-hanging text-primary"></i> 2kg</p>
+                <p class="mb-0"><i class="fas fa-angle-double-up text-primary"></i> 10xp</p>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-5">Typography</h4>
+    <hr class="mb-4">
+    <h1>I'm a title of level 1</h1>
+    <h2>I'm a title of level 2</h2>
+    <h3>I'm a title of level 3</h3>
+    <h4>I'm a title of level 4</h4>
+    <h5>I'm a title of level 5</h5>
+    <h6>I'm a title of level 6</h6>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra elementum libero, vitae faucibus diam commodo id. Nam sollicitudin nibh vel vulputate imperdiet. Pellentesque id faucibus massa. Etiam ac lorem turpis. Donec finibus consequat leo. Integer pellentesque turpis placerat tellus interdum blandit. Nam accumsan mauris purus, sed gravida felis ultricies at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pretium in lorem id accumsan. Nullam tempor vestibulum fringilla. Vestibulum urna est, tempor sed massa id, convallis rhoncus dui. Nulla a lacinia nunc, placerat scelerisque dui. </p>
+
+    <h4 class="mt-5">Tabs</h4>
+    <hr class="mb-4">
+    <div class="plastroc-tabs d-flex justify-content-around">
+        <p class="active-tab">Tab</p>
+        <p>Tab</p>
+    </div>
+    <div class="plastroc-tabs d-flex justify-content-around mt-3">
+        <p class="active-tab">AZERTY</p>
+        <p>Tab</p>
+        <p>Tab</p>
+    </div>
+</div>
