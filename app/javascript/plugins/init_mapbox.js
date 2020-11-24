@@ -10,7 +10,7 @@ const initMapbox = async () => {
     container: 'map',
     style: 'mapbox://styles/nicode80/ckhwgqtuw0xvk1aoe3yvx7g9k',
     center: [2.34, 48.85], // starting position
-    zoom: 4
+    zoom: 6
   });
   // locateUser(map);
   const userPosition = navigator.geolocation.getCurrentPosition((position) => {
@@ -25,7 +25,7 @@ const locateUser = (map, position) => {
 
   map.flyTo({center: [position.coords.longitude, position.coords.latitude],
     zoom: 14,
-    speed: 0.7, // make the flying slow
+    speed: 0.8, // make the flying slow
     curve: 1, // change the speed at which it zooms out
   });
 }
