@@ -1,8 +1,6 @@
 <%= simple_form_for @organisation do |f| %>
     <%= f.input :name, label: false, placeholder: "name*", input_html: { class: "col-12 mb-3" } %>
-    <%= f.input :address, label: false, placeholder: "address*", input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :city, label: false, placeholder: "city*", input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :postcode, label: false, placeholder: "postcode*", input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :address, label: false, placeholder: "address*", input_html: { class: "input col-12 mb-3", id: "address-for-autocomplete" } %>
     <%= f.input :opening_hours, label: false, placeholder: "opening hours* eg. 8am to 6pm", input_html: { class: "input col-12 mb-3" } %>
     <%= f.input :contact, label: false, placeholder: "contact*", input_html: { class: "input col-12 mb-3" } %>
     <%= f.input :about, label: false, placeholder: "If you want, tell us about what you do...", input_html: { class: "input col-12 mb-3" } %>
