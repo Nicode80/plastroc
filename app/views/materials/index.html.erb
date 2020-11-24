@@ -9,6 +9,8 @@
         <div class="d-flex align-items-center justify-content-between">
           <% if material.photo.attached? %>
             <%= cl_image_tag material.photo.key, height: 40 , width: 40, crop: :fill, class: "mr-3" %>
+          <% else %>
+            <div style='height: 40 , width: 40,' class='p-auto mr-3'><i class="fas fa-recycle"></i></div>
           <% end %>
           <h3 class="mb-0 mr-3" ><%= material.name %></h3>
           <span class="badge badge-primary badge-pill mr-3"><%= material.category %></span>
