@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Edit Material</h1>
+  </div>
+  <%= simple_form_for(@material) do |f| %>
+    <%= f.input :name, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Name" %>
+    <%= f.input :description, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Description" %>
+    <%= f.input :category, as: :select, collection: Material::CATEGORIES, html: { class: "col-12 mb-3" }, label: false %>
+    <%= f.input :photo, as: :file, label: false %>
+    <div class='d-flex'>
+      <%= f.submit "Save", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow mr-3" %>
+      <%= link_to 'Delete', material_path(@material), method: :delete, class: "btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+      <%= link_to 'Cancel', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+    </div>
+  <% end %>
+</div>

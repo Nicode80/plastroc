@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Edit instruction</h1>
+  </div>
+  <%= simple_form_for [@material, @instruction] do |f| %>
+    <%= f.input :title, label: false, input_html: { class: "col-12 mb-3" } %>
+    <%= f.input :content, label: false, input_html: { class: "col-12 mb-3" } %>
+    <%= f.input :step_order, collection: (1..100), label: "select display order" %>
+    <%= f.input :media, as: :file, label: false %>
+    <div class='d-flex'>
+      <%= f.submit "Update", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow mr-3" %>
+      <%= link_to 'Delete', material_instruction_path(@material), method: :delete, class: "btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+      <%= link_to 'Cancel', material_path(@material), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+    </div>
+  <% end %>
+</div>
