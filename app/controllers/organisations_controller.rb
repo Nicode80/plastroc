@@ -10,7 +10,7 @@ class OrganisationsController < ApplicationController
   end
 
   def create
-    @organisation = current_user.organisation.new(organisation_params)
+    @organisation = current_user.organisations.new(organisation_params)
     if @organisation.save
       flash[:notice] = "Organisation created"
       redirect_to organisations_path
