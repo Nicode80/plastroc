@@ -1,6 +1,6 @@
 <div class="container">
   <div class="d-flex align-items-center justify-content-between">
-    <h1><%= @material.name %></h1>
+    <h3><%= @material.name %></h3>
   </div>
   <%= simple_form_for(@material) do |f| %>
     <p>Edit Material Category</p>
@@ -14,13 +14,13 @@
             boolean_style: :inline,
             collection: Material::CATEGORIES %>
     <br>
-    <p>Edit name & a description</p>
+    <p>Edit name & description</p>
     <%= f.input :name, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Name" %>
     <%= f.input :description, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Description" %>
     <br>
     <p>Change picture if necessary</p>
     <%= f.input :photo, as: :file, label: false, input_html: { class: "input col-12 mb-3" } %>
-    <div class='d-flex justify-content-end'>
+    <div class='d-flex justify-content-end mb-3'>
       <%= link_to 'Cancel', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3 mb-3" %>
       <%= link_to 'Delete', material_path(@material), method: :delete, class: "btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button mr-3 mb-3" %>
       <%= f.submit "Update", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow mb-3" %>

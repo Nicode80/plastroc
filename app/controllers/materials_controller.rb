@@ -38,10 +38,15 @@ class MaterialsController < ApplicationController
 
   def destroy
     @material = Material.find(params[:id])
-    @material.photo.purge
-    @material.destroy
+    if @material.instructions == []
+      @material.photo.purge
+      @material.destroy
+      redirect_to materials_path
+    else
+      redirect_to edit_material_path(@material)
+      flash[:notice] = "You cannot delete a Material with instructions"
+    end
     authorize @material
-    redirect_to materials_path
   end
 
   private

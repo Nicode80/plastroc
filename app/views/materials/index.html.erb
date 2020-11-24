@@ -1,21 +1,28 @@
 <div class="container">
   <div class="d-flex align-items-center justify-content-between">
-    <h1>Materials</h1>
-    <%= link_to 'Add material', new_material_path, class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow" %>
+    <h2>Materials</h2>
+    <%= link_to 'New', new_material_path, class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow" %>
   </div>
   <ul class="list-group">
     <% @materials.each do |material| %>
-      <div class="d-flex flex-row card card-s">
-        <% if material.photo.attached? %>
-          <%= cl_image_tag material.photo.key, crop: :fill, class: "mr-3" %>
-        <% else %>
-          <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-        <% end %>
-        <section>
-          <h6><%= material.name %><span class="ml-3 badge badge-primary badge-pill mr-3"><%= material.category %></span></h6>
-          <%= link_to 'see', material_path(material), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
-        </section>
-      </div>
+      <%= link_to material_path(material), class: 'text-decoration-none' do %>
+        <div class="d-flex flex-row card card-s">
+          <% if material.photo.attached? %>
+            <%= cl_image_tag material.photo.key, crop: :fill %>
+          <% else %>
+            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+          <% end %>
+          <section class="w-100">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 style='color: grey'><%= material.name %></h6>
+              <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= material.category %></span>
+            </div>
+            <div style='color: grey; max-width: 230px' class='d-inline-block text-truncate'>
+              <%= material.description %>
+            </div>
+          </section>
+        </div>
+      <% end %>
     <% end %>
   </ul>
 </div>
