@@ -12,11 +12,37 @@ class OrganisationsController < ApplicationController
   def create
     @organisation = Organisation.new(organisation_params)
     @organisation.user = current_user
-    if @organisation.save!
+    if @organisation.save
+      flash[:notice] = "Organisation created"
       redirect_to organisations_path
     else
       render :new
     end
+    authorize @organisation
+  end
+
+  def edit
+    @organisation = Organisation.find(params[:id])
+    authorize @organisation
+  end
+
+  def update
+    @organisation = Organisation.find(params[:id])
+    @organisation.update(organisation_params)
+    if @organisation.save
+      flash[:notice] = "Organisation updated"
+      redirect_to organisations_path
+    else
+      render :new
+    end
+    authorize @organisation
+  end
+
+  def destroy
+    @organisation = Organisation.find(params[:id])
+    @organisation.destroy
+    flash[:notice] = "Organisation deleted"
+    redirect_to organisations_path
     authorize @organisation
   end
 
