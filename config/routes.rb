@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :materials do
     resources :instructions, only: [:create, :new, :edit, :destroy, :update]
   end
+  resources :missions, only: [:index]
 end
