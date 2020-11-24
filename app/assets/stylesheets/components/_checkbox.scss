@@ -1,18 +1,66 @@
-.plastroc-light-shadow {
-  box-shadow: $plastroc-shadow;
+/* Customize the label (the checkbox) */
+.checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
 }
 
-.plastroc-button {
-  border: none;
-  text-transform: uppercase;
-  font-weight: 200;
-  letter-spacing: .05em;
+/* Hide the browser's default checkbox */
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
-.plastroc-outline-button {
-  background: $plastroc-text-light;
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #FAFAFA;
   box-shadow: $plastroc-shadow;
-  border: none;
-  text-transform: uppercase;
-  font-weight: 200;
-  letter-spacing: .05em;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox:hover input~.checkmark {
+  background-color: rgb(210, 210, 210);
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox input:checked~.checkmark {
+  background-color: $primary;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox .checkmark:after {
+  left: 10px;
+  top: 7px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
