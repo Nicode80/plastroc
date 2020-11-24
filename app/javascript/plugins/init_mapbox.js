@@ -8,7 +8,7 @@ const initMapbox = async () => {
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
   const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v10',
+    style: 'mapbox://styles/nicode80/ckhwgqtuw0xvk1aoe3yvx7g9k',
     center: [2.34, 48.85], // starting position
     zoom: 4
   });
@@ -24,8 +24,8 @@ const locateUser = (map, position) => {
   if (!mapElement) return; // only build a map if there's a div#map to inject into
 
   map.flyTo({center: [position.coords.longitude, position.coords.latitude],
-    zoom: 12,
-    speed: 0.6, // make the flying slow
+    zoom: 14,
+    speed: 0.7, // make the flying slow
     curve: 1, // change the speed at which it zooms out
   });
 }
