@@ -1,7 +1,3 @@
-.plastroc-light-shadow {
-  box-shadow: $plastroc-shadow;
-}
-
 .plastroc-button {
   border: none;
   text-transform: uppercase;
@@ -9,7 +5,7 @@
   letter-spacing: .05em;
 }
 .plastroc-outline-button {
-  background: $plastroc-text-light;
+  background: $plastroc-card-background;
   box-shadow: $plastroc-shadow;
   border: none;
   text-transform: uppercase;

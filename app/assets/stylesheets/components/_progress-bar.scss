@@ -1,0 +1,20 @@
+.plastroc-progress-bar:first-child {
+  height: 25px;
+  background: red;
+}
+
+.plastroc-progress-bar {
+  height: 15px;
+  border-radius: 20px;
+  display: grid;
+  box-shadow: $plastroc-shadow;
+  background: $plastroc-text-light;
+}
+.plastroc-progress-bar div {
+  height: 15px;
+  width: 40%;
+  box-shadow: $plastroc-shadow
+}
+// .plastroc-progress-bar div:last-child {
+//   background: grey;
+// }
