@@ -1,8 +1,12 @@
 .package-badge {
-  background-color: $plastroc-text-light;
+  background-color: $plastroc-card-background;
   box-shadow: $plastroc-shadow;
   margin: 5px 0px;
   border-radius: 20px;
+
+  i {
+      font-size: 14px;
+  }
 }
 
 .package-badge-square {
