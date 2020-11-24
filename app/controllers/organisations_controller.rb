@@ -4,4 +4,8 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.new
     authorize @organisation
   end
+
+  def create
+
+  end
 end
