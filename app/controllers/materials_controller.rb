@@ -38,6 +38,7 @@ class MaterialsController < ApplicationController
 
   def destroy
     @material = Material.find(params[:id])
+    @material.photo.purge
     @material.destroy
     authorize @material
     redirect_to materials_path

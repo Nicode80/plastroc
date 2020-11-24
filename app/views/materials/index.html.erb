@@ -1,27 +1,21 @@
 <div class="container">
   <div class="d-flex align-items-center justify-content-between">
     <h1>Materials</h1>
-    <%= link_to 'Add material', new_material_path, class: "btn btn-primary" %>
+    <%= link_to 'Add material', new_material_path, class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow" %>
   </div>
   <ul class="list-group">
     <% @materials.each do |material| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center justify-content-between">
-          <% if material.photo.attached? %>
-            <%= cl_image_tag material.photo.key, height: 40 , width: 40, crop: :fill, class: "mr-3" %>
-          <% else %>
-            <div style='height: 40 , width: 40,' class='p-auto mr-3'><i class="fas fa-recycle"></i></div>
-          <% end %>
-          <h3 class="mb-0 mr-3" ><%= material.name %></h3>
-          <span class="badge badge-primary badge-pill mr-3"><%= material.category %></span>
-          <p class="mb-0" ><%= material.description %></p>
-        </div>
-        <div>
-          <%= link_to 'details', material_path(material), class: "badge badge-primary badge-pill" %>
-          <%= link_to 'edit', edit_material_path(material), class: "badge badge-primary badge-pill" %>
-          <%= link_to 'delete', material_path(material), method: :delete, class: "badge badge-primary badge-pill" %>
-        </div>
-      </li>
+      <div class="d-flex flex-row card card-s">
+        <% if material.photo.attached? %>
+          <%= cl_image_tag material.photo.key, crop: :fill, class: "mr-3" %>
+        <% else %>
+          <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+        <% end %>
+        <section>
+          <h6><%= material.name %><span class="ml-3 badge badge-primary badge-pill mr-3"><%= material.category %></span></h6>
+          <%= link_to 'see', material_path(material), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+        </section>
+      </div>
     <% end %>
   </ul>
 </div>
