@@ -7,7 +7,9 @@
     <% @materials.each do |material| %>
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-          <%#= cl_image_tag, mheight: 20 , width: 20, crop: :fill %>
+          <% if material.photo.attached? %>
+            <%= cl_image_tag material.photo.key, height: 40 , width: 40, crop: :fill, class: "mr-3" %>
+          <% end %>
           <h3 class="mb-0 mr-3" ><%= material.name %></h3>
           <span class="badge badge-primary badge-pill mr-3"><%= material.category %></span>
           <p class="mb-0" ><%= material.description %></p>
