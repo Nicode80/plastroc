@@ -1,34 +1,15 @@
 <div class="container">
   <h4 class="mt-3">New Organisation</h4>
-  <%= simple_form_for(@organisation) do |f| %>
-    <div class="input mb-3">
-      <%= f.text_field :name, placeholder: "name", class: "input col-12" %>
-    </div>
-    <div class="input mb-3">
-      <%= f.text_field :address, placeholder: "address", class: "input col-12" %>
-    </div>
-    <div class="input mb-3">
-      <%= f.text_field :city, placeholder: "city", class: "input col-12" %>
-    </div>
-    <div class="input mb-3">
-      <%= f.text_field :postcode, placeholder: "postcode", class: "input col-12" %>
-    </div>
-    <div class="input mb-3">
-      <%= f.text_area :about, placeholder: "Tell us about what you do...", class: "input col-12" %>
-    </div>
-    <div class="input mb-3">
-      <%= f.text_field :opening_hours, placeholder: "opening hours: 8am to 6pm", class: "input col-12" %>
-    </div>
-    <div class="input mb-3">
-      <%= f.text_field :contact, placeholder: "contact", class: "input col-12" %>
-    </div>
-    <div class="input mb-3">
-      <%= f.label "logo", class: "d-block" %>
-      <%= f.file_field :photo, class: "input col-12" %>
-    </div>
-    <div class="input mb-3">
-      <%= f.submit link_to 'create', organisations_path(@organisation), class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow col-12" %>
-    </div>
+  <%= simple_form_for @organisation do |f| %>
+    <%= f.input :name, label: false, placeholder: "name*", input_html: { class: "col-12 mb-3" } %>
+    <%= f.input :address, label: false, placeholder: "address*", input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :city, label: false, placeholder: "city*", input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :postcode, label: false, placeholder: "postcode*", input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :opening_hours, label: false, placeholder: "opening hours* eg. 8am to 6pm", input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :contact, label: false, placeholder: "contact*", input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :about, label: false, placeholder: "If you want, tell us about what you do...", input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :photo, as: :file, input_html: { class: "input col-12 mb-3" } %>
+    <%= f.submit 'create', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
   <% end %>
 </div>
 
