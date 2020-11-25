@@ -25,7 +25,6 @@
                       as: :radio_buttons,
                       collection: @materials,
                       label: false,
-                      placeholder: "target quantity*",
                       input_html: { class: "col-12 mb-3" } %>
 
     <%= f.input :target,
@@ -45,7 +44,7 @@
 
     <%= f.input :min_package,
                 label: false,
-                placeholder: "minimum package*",
+                placeholder: "minimum quantity for a mission*",
                 input_html: { class: "col-12 mb-3" } %>
 
     <%= f.input :photo,
