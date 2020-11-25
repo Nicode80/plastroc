@@ -1,4 +1,6 @@
 class Campaign < ApplicationRecord
+  attr_accessor :material_category
+
   belongs_to :organisation
   belongs_to :material
   has_many :packages
@@ -11,7 +13,7 @@ class Campaign < ApplicationRecord
   validates :description, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :published, presence: true
+  # validates :published, presence: true
   validates :target, presence: true, numericality: { only_integer: true }
   validates :unit, presence: true, inclusion: { in: UNITS }
 

@@ -1,4 +1,5 @@
 <div class="container">
+  <div id="materials" data-materials="<%= @materials.to_json %>"></div>
   <h4 class="mt-3">New Campaign</h4>
   <%= simple_form_for [@organisation, @campaign] do |f| %>
     <%= f.input :name,
@@ -21,11 +22,20 @@
                 required: false,
                 input_html: { class: "date-picker col-12 mb-3" } %>
 
+    <%= f.input :material_category,
+                as: :select,
+                collection: Material::CATEGORIES,
+                input_html: { class: "col-12" } %>
+
     <%= f.association :material,
                       as: :radio_buttons,
-                      collection: @materials,
+                      collection: [],
                       label: false,
-                      input_html: { class: "col-12 mb-3" } %>
+                      collection_wrapper_tag: 'div',
+                      collection_wrapper_class: 'material-wrapper',
+                      item_wrapper_class: 'material-item',
+                      input_html: { class: 'material-selector' },
+                      boolean_style: :inline %>
 
     <%= f.input :target,
                 label: false,
