@@ -1,3 +1,16 @@
+#address-for-autocomplete {
+  background: $plastroc-text-light;
+  border: none;
+  border-radius: 50px;
+  box-shadow: $plastroc-shadow;
+  padding: 8px;
+  color: $plastroc-text;
+  &:focus{
+    border: none;
+    outline: none;
+  }
+}
+
 input {
   background: $plastroc-text-light;
   border: none;
