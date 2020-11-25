@@ -28,12 +28,13 @@ import { initAutoFadeAlert } from "../plugins/auto_fade_alert"
 
 // Internal imports, e.g:
 import { initSelect2 } from '../components/init_select2';
-import { initSweetalert } from '../plugins/init_sweetalert';
+import { initSweetalert, deleteAlert } from '../plugins/init_sweetalert';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   initSelect2();
   initAutoFadeAlert();
+  deleteAlert();
 });
 
 initSweetalert('#sweet-alert-demo', {
@@ -42,15 +43,4 @@ initSweetalert('#sweet-alert-demo', {
     icon: "success"
 }, (value) => {
     console.log(value);
-});
-
-initSweetalert('#delete-organisation', {
-    title: "Delete",
-    text: "Are you sure you want to delete organisation ?",
-    icon: "error"
-}, (value) => {
-    if (value) {
-        // const link = document.getElementById('#delete-orga');
-        document.getElementById('delete-orga').click()
-    }
 });
