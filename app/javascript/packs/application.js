@@ -34,5 +34,5 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   initSelect2();
   initAutoFadeAlert();
-  if (document.getElementById('address-for-autocomplete')) initAutocomplete();
+  initAutocomplete();
 });
