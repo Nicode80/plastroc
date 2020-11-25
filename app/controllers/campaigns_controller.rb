@@ -17,11 +17,17 @@ class CampaignsController < ApplicationController
     @campaign.organisation = @organisation
     if @campaign.save
       flash[:alert] = 'campaign created'
-      redirect_to organisations_path
+      redirect_to my_campaigns_campaigns_path
     else
       render :new
     end
     authorize @campaign
+  end
+
+  def my_campaigns
+    @campaigns = Campaign.where(id: current_user)
+    raise
+    authorize @campaigns
   end
 
   private
