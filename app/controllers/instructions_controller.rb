@@ -21,7 +21,7 @@ class InstructionsController < ApplicationController
 
   def edit
     @instruction = Instruction.find(params[:id])
-    @material = Material.find(@instruction.material_id)
+    # @material = Material.find(@instruction.material_id)
     authorize @instruction
   end
 
