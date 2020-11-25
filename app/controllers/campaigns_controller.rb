@@ -1,5 +1,9 @@
 class CampaignsController < ApplicationController
 
+  def index # for the moment show all campaigns but will need to sort if on organisation view
+    @campaigns = policy_scope(Campaign)
+  end
+
   def new
     @campaign = Campaign.new
     @organisation = Organisation.find(params[:organisation_id])
