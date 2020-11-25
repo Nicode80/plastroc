@@ -48,7 +48,7 @@ class CampaignsController < ApplicationController
 
   def current_user_campaigns
     Campaign.all.select do |c|
-      c.organisation.user == current_user
+      c.user == current_user
     end
   end
 end
