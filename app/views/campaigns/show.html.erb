@@ -1,1 +1,8 @@
-<%= cl_image_tag @campaign.photo.key %>
+<div class="banner d-flex align-items-end"
+style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                          url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
+  <div class="container">
+    <h4 class="mb-0"><%= @campaign.name %></h4>
+    <h6>by <%= @campaign.organisation.name %></h6>
+  </div>
+</div>
