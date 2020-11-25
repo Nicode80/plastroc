@@ -20,14 +20,30 @@ const initSweetalert = (selector, options = {}, callback = () => {}) => {
 const deleteAlert = () => {
     const elements = document.querySelectorAll(".delete-organisation");
     elements.forEach((swalButton) => {
-        if (swalButton) { // protect other pages
+        if (swalButton) {
             swalButton.addEventListener('click', () => {
                 const organisationId = event.target.dataset.id
 
                 swal({
-                    title: "Delete",
-                    text: "Are you sure you want to delete organisation ?",
-                    icon: "error"
+                    title: "Delete Organisation",
+                    text: "Are you sure ?",
+                    icon: "error",
+                    {
+                        cancel: {
+                            text: "Cancel",
+                            value: null,
+                            visible: false,
+                            className: "",
+                            closeModal: true,
+                        },
+                        confirm: {
+                            text: "OK",
+                            value: true,
+                            visible: true,
+                            className: "",
+                            closeModal: true
+                        }
+                    }
                 }).then((value) => {
                     console.log(value)
                     if (value) {
