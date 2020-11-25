@@ -9,8 +9,9 @@ class InstructionsController < ApplicationController
     @instruction = Instruction.new(instruction_params)
     @material = Material.find(params[:material_id])
     @instruction.media = params[:media]
+    @instruction.rich_content = params[:instruction][:rich_content]
     @instruction.material = @material
-    if @instruction.save
+    if @instruction.save!
       redirect_to material_path(@material)
     else
       render :new
@@ -26,6 +27,9 @@ class InstructionsController < ApplicationController
 
   def update
     @instruction = Instruction.find(params[:id])
+    @material = Material.find(params[:material_id])
+    @instruction.media = params[:media]
+    @instruction.rich_content = params[:instruction][:rich_content]
     @instruction.material = @material
     if @instruction.update(instruction_params)
       redirect_to material_path(@material)
@@ -46,6 +50,6 @@ class InstructionsController < ApplicationController
   private
 
   def instruction_params
-    params.require(:instruction).permit(:title, :content, :media, :step_order)
+    params.require(:instruction).permit(:title, :rich_body, :media, :step_order)
   end
 end

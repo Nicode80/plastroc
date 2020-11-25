@@ -5,7 +5,5 @@ class Organisation < ApplicationRecord
 
   validates :name, presence: true
   validates :address, presence: true
-  validates :postcode, presence: true
-  validates :city, presence: true
   validates :opening_hours, presence: true
 end
