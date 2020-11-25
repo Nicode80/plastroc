@@ -1,0 +1,68 @@
+.unit-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.unit-item {
+  flex: 0 0 24%;
+}
+
+.unit-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.unit-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  padding: 15px 10px 15px 10px;
+  border: 1px solid $plastroc-main;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.unit-selector:checked + label {
+  color: white !important;
+}
+
+
+#campaign_unit_g + label {
+  color: $plastroc-main;
+}
+
+#campaign_unit_g:checked + label {
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
+
+#campaign_unit_kg + label {
+  color: $plastroc-main;
+}
+
+#campaign_unit_kg:checked + label {
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
+
+#campaign_unit_l + label {
+  color: $plastroc-main;
+}
+
+#campaign_unit_l:checked + label {
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
+
+#campaign_unit_cbm + label {
+  color: $plastroc-main;
+}
+
+#campaign_unit_cbm:checked + label {
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
