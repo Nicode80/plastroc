@@ -1,0 +1,29 @@
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: $plastroc-card-background;
+    p {
+        width: 100%;
+        text-align: center;
+        border-top: 3px solid lightgrey;
+        color: lightgrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        margin-bottom: 0;
+        transition-duration: .15s;
+        transition-timing-function: ease-in-out;
+    }
+    p:hover {
+        color: $primary;
+        border-top: 3px solid $primary;
+
+    }
+    .active-tab {
+        border-top: 3px solid $primary;
+        color: $primary;
+    }
+}
