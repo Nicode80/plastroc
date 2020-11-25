@@ -27,23 +27,7 @@ const deleteAlert = () => {
                 swal({
                     title: "Delete Organisation",
                     text: "Are you sure ?",
-                    icon: "error",
-                    {
-                        cancel: {
-                            text: "Cancel",
-                            value: null,
-                            visible: false,
-                            className: "",
-                            closeModal: true,
-                        },
-                        confirm: {
-                            text: "OK",
-                            value: true,
-                            visible: true,
-                            className: "",
-                            closeModal: true
-                        }
-                    }
+                    icon: "error"
                 }).then((value) => {
                     console.log(value)
                     if (value) {
