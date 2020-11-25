@@ -36,7 +36,6 @@ document.addEventListener('turbolinks:load', () => {
   initAutoFadeAlert();
 });
 
-
 initSweetalert('#sweet-alert-demo', {
     title: "A nice alert",
     text: "This is a great alert, isn't it?",
