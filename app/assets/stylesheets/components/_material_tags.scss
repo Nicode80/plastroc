@@ -1,0 +1,60 @@
+.material-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.material-item {
+  flex: 0 0 30%;
+}
+
+.material-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.material-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+  text-align: left;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid $plastroc-main;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.material-selector:checked + label {
+  color: white !important;
+}
+
+
+#campaign_material_id_pet + label {
+  color: $plastroc-main;
+}
+
+#campaign_material_id_pet:checked + label {
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
+
+#campaign_material_id_abs + label {
+  color: $plastroc-main;
+}
+
+#campaign_material_id_abs:checked + label {
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
+
+#campaign_material_id_carton + label {
+  color: $plastroc-main;
+}
+
+#campaign_material_id_carton:checked + label {
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
