@@ -13,7 +13,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <p>Contact</p>
 </div>
 
-<div class="container" id="campaign-infos">
+<div class="container" id="campaign-infos" style="margin-bottom: 75px;">
   <div class="d-flex justify-content-between align-items-center">
       <h5 class="mb-0">Mission progress</h5>
       <p class="mb-0">sum of missions done/<%= @campaign.target %><%= @campaign.unit %></p>
@@ -62,7 +62,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <%= link_to 'ASK A QUESTION', root_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
 </div>
 
-<div class="container" id="campaign-how-to">
+<div class="container" id="campaign-how-to" style="margin-bottom: 75px;">
   <% @campaign.material.instructions.each do |instruction| %>
     <div class="card card-m mt-3">
       <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
@@ -74,6 +74,40 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
               </section>
           </div>
       </div>
-
   <% end %>
+</div>
+
+<div class="container" id="campaign-contact" style="margin-bottom: 75px;">
+  <div class="card mt-3">
+    <div class="card-body">
+      <section>
+        <h6>What do we do ?</h6>
+        <p><%= @campaign.organisation.about %></p>
+      </section>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <section>
+        <h6>Our Address</h6>
+        <p><%= @campaign.organisation.address %></p>
+      </section>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <section>
+        <h6>Opening hours</h6>
+        <p><%= @campaign.organisation.opening_hours %></p>
+      </section>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <section>
+        <h6>Contact</h6>
+        <p><%= @campaign.organisation.contact %></p>
+      </section>
+    </div>
+  </div>
 </div>
