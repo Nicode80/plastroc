@@ -8,9 +8,9 @@
         <section>
           <h6><%= org.name %></h6>
           <p><%= org.about %></p>
-          <p><%= org.address %>, <%= org.city %>, <%= org.postcode %></p>
-          <p><%= org.opening_hours %></p>
-          <p><%= org.contact %></p>
+          <p><i class="fas fa-map-marker-alt mr-2"></i><%= org.address %>, <%= org.city %>, <%= org.postcode %></p>
+          <p><i class="fas fa-clock mr-2"></i><%= org.opening_hours %></p>
+          <p><i class="fas fa-envelope mr-2"></i><%= org.contact %></p>
           <% if policy(org).update? %>
             <%= link_to 'Edit',
                         edit_organisation_path(org),
