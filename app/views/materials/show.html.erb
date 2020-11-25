@@ -27,7 +27,7 @@
 
   <ul class="list-group mb-3">
     <% @material.instructions.order(:step_order).each do |instruction| %>
-      <%= link_to edit_material_instruction_path(@material, instruction), class: 'text-decoration-none' do %>
+      <%= link_to edit_instruction_path(instruction), class: 'text-decoration-none' do %>
         <div class="d-flex flex-row card card-s">
           <% if instruction.media.attached? %>
             <%= cl_image_tag instruction.media.key %>
