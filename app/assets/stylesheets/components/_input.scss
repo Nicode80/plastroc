@@ -12,6 +12,12 @@ textarea:focus, input:focus {
 }
 
 textarea {
+    box-sizing: border-box;
     width: 100%;
     background: $plastroc-card-background;
+    border-radius: 20px;
+    resize: none;
+    border: none;
+    box-shadow: $plastroc-shadow;
+    padding: 12px;
 }
