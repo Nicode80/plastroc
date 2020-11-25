@@ -34,3 +34,6 @@ document.addEventListener('turbolinks:load', () => {
   initSelect2();
   initAutoFadeAlert();
 });
+
+require("trix")
+require("@rails/actiontext")
