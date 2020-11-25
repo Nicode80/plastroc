@@ -9,11 +9,14 @@
                 label: false,
                 placeholder: "description*",
                 input_html: { class: "col-12 mb-3" } %>
-    <%= f.input :deadline,
-                label: false,
+    <%= f.input :start_date,
                 as: :string,
-                placeholder: "deadline*",
+                required: false,
                 input_html: {id: "range_start"} %>
+    <%= f.input :end_date,
+                as: :string,
+                required: false,
+                input_html: {id: "range_end"} %>
     <%= f.association :material,
                       as: :radio_buttons,
                       collection: @materials,
