@@ -7,6 +7,8 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("trix")
+require("@rails/actiontext")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -38,18 +40,12 @@ document.addEventListener('turbolinks:load', () => {
   initSelect2();
   initAutoFadeAlert();
   deleteAlert();
-});
-initAutocomplete();
-initFlatpickr();
-initMapbox();
-initSweetalert('#sweet-alert-demo', {
-    title: "A nice alert",
-    text: "This is a great alert, isn't it?",
-    icon: "success"
-}, (value) => {
-    console.log(value);
+  initAutocomplete();
+  initFlatpickr();
+  initMapbox();
 });
 
+// sweet alerts
 initSweetalert('#sweet-alert-demo', {
     title: "A nice alert",
     text: "This is a great alert, isn't it?",
@@ -68,5 +64,3 @@ initSweetalert('#delete-organisation', {
         document.getElementById('delete-orga').click()
     }
 });
-require("trix")
-require("@rails/actiontext")
