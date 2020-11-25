@@ -25,9 +25,8 @@ class CampaignsController < ApplicationController
   end
 
   def my_campaigns
-    @campaigns = Campaign.where(id: current_user)
-    raise
-    authorize @campaigns
+    @campaigns = current_user_campaigns
+    authorize Campaign
   end
 
   private
@@ -45,5 +44,11 @@ class CampaignsController < ApplicationController
       :status,
       :min_package,
       :published)
+  end
+
+  def current_user_campaigns
+    Campaign.all.select do |c|
+      c.organisation.user == current_user
+    end
   end
 end
