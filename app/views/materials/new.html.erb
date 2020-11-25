@@ -15,11 +15,23 @@
             collection: Material::CATEGORIES %>
     <br>
     <p>Give it a name & a description</p>
-    <%= f.input :name, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Name" %>
-    <%= f.input :description, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Description" %>
+    <%= f.input :name,
+                label: false,
+                input_html: { class: "col-12 mb-3" },
+                placeholder: "Name" %>
+
+    <%= f.input :description,
+                label:
+                false,
+                input_html: { class: "col-12 mb-3" },
+                placeholder: "Description" %>
     <br>
     <p>Select a picture</p>
-    <%= f.input :photo, as: :file, label: false, input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :photo,
+                as: :file,
+                label: false,
+                input_html: { class: "input col-12 mb-3" } %>
+
     <div class='d-flex justify-content-end'>
       <%= link_to 'Cancel', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
       <%= f.submit "Create", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
