@@ -17,17 +17,13 @@
                         class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
           <% end %>
           <% if policy(org).destroy? %>
-            <button id="delete-organisation" class="btn btn-outline-danger rounded-pill mt-3 plastroc-button">Delete</button>
-            <%#= link_to "", organisation_path(org),
-                            method: :delete,
-                            id: "delete-organisation",
-                            class: "hidden" %>
-            <%= link_to "Delete",
+            <button id="delete-organisation" class="btn btn-outline-danger rounded-pill mt-3 plastroc-button d-block">Delete</button>
+            <%= link_to "",
                         organisation_path(org),
                         method: :delete,
                         # data: { confirm: "Are you sure?" },
                         id: "delete-orga",
-                        class: 'hidden btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button' %>
+                        class: 'hidden' %>
           <% end %>
         </section>
       </div>
