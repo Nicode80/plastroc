@@ -1,0 +1,13 @@
+.map-container {
+  position: relative;
+}
+
+.map-transition {
+  height: 100px;
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+  bottom: -3px;
+  left: 0px;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 75%);
+}
