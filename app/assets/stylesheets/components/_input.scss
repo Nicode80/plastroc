@@ -12,7 +12,7 @@
 }
 
 input {
-  background: $plastroc-text-light;
+  background: $plastroc-card-background;
   border: none;
   border-radius: 50px;
   box-shadow: $plastroc-shadow;
@@ -22,4 +22,15 @@ input {
 textarea:focus, input:focus {
   border: none;
   outline: none;
+}
+
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+    background: $plastroc-card-background;
+    border-radius: 20px;
+    resize: none;
+    border: none;
+    box-shadow: $plastroc-shadow;
+    padding: 8px 16px;
 }

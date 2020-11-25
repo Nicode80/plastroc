@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" style="margin-bottom: 75px;">
   <h3 class="mt-3 mb-3">Organisations</h3>
 
   <% @organisations.each do |org| %>
     <div class="container">
-      <div class="card card-m">
+      <div class="card card-m mb-3">
         <%= cl_image_tag org.photo.key %>
         <section>
           <h6><%= org.name %></h6>
@@ -17,16 +17,16 @@
                         class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
           <% end %>
           <% if policy(org).destroy? %>
-            <%= link_to "Delete",
+            <button data-id="<%= org.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-button">Delete</button>
+            <%= link_to "",
                         organisation_path(org),
                         method: :delete,
-                        data: { confirm: "Are you sure?" },
-                        class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button' %>
+                        # data: { confirm: "Are you sure?" },
+                        class: 'delete-orga hidden',
+                        id: "del-org-#{org.id}" %>
           <% end %>
         </section>
       </div>
     </div>
   <% end %>
 </div>
-
-
