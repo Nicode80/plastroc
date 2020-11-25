@@ -1,5 +1,5 @@
 input {
-  background: $plastroc-text-light;
+  background: $plastroc-card-background;
   border: none;
   border-radius: 50px;
   box-shadow: $plastroc-shadow;
@@ -9,4 +9,9 @@ input {
 textarea:focus, input:focus {
   border: none;
   outline: none;
+}
+
+textarea {
+    width: 100%;
+    background: $plastroc-card-background;
 }
