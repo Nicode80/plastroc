@@ -1,11 +1,7 @@
 class CampaignPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.organisation
-        scope.where(organisation: user.organisation)
-      else
-        scope.all
-      end
+      scope.all
     end
   end
 
@@ -22,5 +18,4 @@ class CampaignPolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
->>>>>>> master
 end
