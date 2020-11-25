@@ -1,14 +1,40 @@
 <div class="container">
   <h4 class="mt-3">New Campaign</h4>
   <%= simple_form_for [@organisation, @campaign] do |f| %>
-    <%= f.input :name, label: false, placeholder: "name*", input_html: { class: "col-12 mb-3" } %>
-    <%= f.input :description, label: false, placeholder: "description*", input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :deadline, as: :datepicker, label: false, placeholder: "deadline*", input_html: { class: "input col-12 mb-3" } %>
-    <%= f.association :material, collection: @materials, label: false, placeholder: "target quantity*", input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :target, label: false, placeholder: "target quantity*", input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :unit, collection: UNITS, label: false, placeholder: "g, kg, l, etc*", input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :min_package, label: false, placeholder: "minimum package*", input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :photo, as: :file, input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :name,
+                label: false,
+                placeholder: "name*",
+                input_html: { class: "col-12 mb-3" } %>
+    <%= f.input :description,
+                label: false,
+                placeholder: "description*",
+                input_html: { class: "col-12 mb-3" } %>
+    <%= f.input :deadline,
+                label: false,
+                as: :string,
+                placeholder: "deadline*",
+                input_html: {id: "range_start"} %>
+    <%= f.association :material,
+                      as: :radio_buttons,
+                      collection: @materials,
+                      label: false,
+                      placeholder: "target quantity*",
+                      input_html: { class: "col-12 mb-3" } %>
+    <%= f.input :target,
+                label: false,
+                placeholder: "target quantity*",
+                input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :unit,
+                label: false,
+                as: :radio_buttons,
+                collection: Campaign::UNITS %>
+    <%= f.input :min_package,
+                label: false,
+                placeholder: "minimum package*",
+                input_html: { class: "col-12 mb-3" } %>
+    <%= f.input :photo,
+                as: :file,
+                input_html: { class: "input col-12 mb-3" } %>
     <%= f.submit 'create', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
   <% end %>
 </div>

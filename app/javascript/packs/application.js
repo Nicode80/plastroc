@@ -24,10 +24,11 @@ require("channels")
 
 // External imports
 import "bootstrap";
-import { initAutoFadeAlert } from "../plugins/auto_fade_alert"
 
 // Internal imports, e.g:
 import { initSelect2 } from '../components/init_select2';
+import { initAutoFadeAlert } from "../plugins/auto_fade_alert"
+import "../plugins/flatpickr"
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
