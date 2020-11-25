@@ -41,3 +41,4 @@ const deleteAlert = () => {
 };
 
 export { initSweetalert, deleteAlert };
+
