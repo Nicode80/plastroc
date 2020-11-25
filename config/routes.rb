@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :instructions, only: [ :create, :new ]
   end
 
-  resources :campaigns, only: [ :index, :edit, :update, :delete ] do
+  resources :campaigns, only: [ :index, :show, :edit, :update, :delete ] do
     resources :package, only: :index
   end
   resources :instructions, only: [ :edit, :destroy, :update ]
