@@ -25,6 +25,7 @@ require("channels")
 // External imports
 import "bootstrap";
 import { initAutoFadeAlert } from "../plugins/auto_fade_alert"
+import { initAutocomplete } from "../plugins/init_autocomplete"
 
 // Internal imports, e.g:
 import { initSelect2 } from '../components/init_select2';
@@ -43,4 +44,8 @@ initSweetalert('#sweet-alert-demo', {
     icon: "success"
 }, (value) => {
     console.log(value);
+    initAutocomplete();
 });
+
+require("trix")
+require("@rails/actiontext")
