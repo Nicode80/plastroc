@@ -6,3 +6,74 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <h6>by <%= @campaign.organisation.name %></h6>
   </div>
 </div>
+
+<div class="plastroc-tabs d-flex justify-content-around mt-3">
+    <p class="active-tab">Info</p>
+    <p>How to</p>
+    <p>Contact</p>
+</div>
+
+<div class="container" id="campaign-infos">
+  <div class="d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Mission progress</h5>
+      <p class="mb-0">sum of missions done/<%= @campaign.target %><%= @campaign.unit %></p>
+  </div>
+
+  <div class="plastroc-progress-bar mt-4 mb-4">
+      <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+  </div>
+
+  <h5>Infos</h5>
+  <div class="d-flex justify-content-between">
+    <div>
+      img or picto?
+      <p><%= @campaign.material.category %> type: <%= @campaign.material.name %></p>
+    </div>
+    <div>
+      img or picto?
+      <% end_date_year = @campaign.end_date.split("-")[0].to_i %>
+      <% end_date_month = @campaign.end_date.split("-")[1].to_i %>
+      <% end_date_day = @campaign.end_date.split("-")[2].to_i %>
+      <% now_year = Time.now.year %>
+      <% now_month = Time.now.month %>
+      <% now_day = Time.now.day %>
+      <% now = DateTime.new(now_year, now_month, now_day) %>
+      <% end_date = DateTime.new(end_date_year, end_date_month, end_date_day) %>
+      <p>Deadline: <%= (end_date - now).to_i %></p>
+    </div>
+    <div>
+      img or picto?
+      <p>Difficulty: </p>
+    </div>
+  </div>
+
+  <h5>Details</h5>
+  <p><%= @campaign.description %></p>
+
+  <h5>Members</h5>
+  <div class="d-flex">
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+  </div>
+
+  <%= link_to 'JOIN THE MISSION', root_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+  <%= link_to 'ASK A QUESTION', root_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+</div>
+
+<div class="container" id="campaign-how-to">
+  <% @campaign.material.instructions.each do |instruction| %>
+    <div class="card card-m mt-3">
+      <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
+          <div class="card-body">
+              <span class="badge badge-pill badge-success">Step <%= instruction.step_order %></span>
+              <section>
+                  <h6><%= instruction.title %></h6>
+                  <p><%= instruction.content %></p>
+              </section>
+          </div>
+      </div>
+
+  <% end %>
+</div>
