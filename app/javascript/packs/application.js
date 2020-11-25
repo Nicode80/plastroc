@@ -31,6 +31,7 @@ import { initSelect2 } from '../components/init_select2';
 import { initAutocomplete } from "../plugins/init_autocomplete"
 import { initAutoFadeAlert } from "../plugins/auto_fade_alert"
 import { initFlatpickr} from "../plugins/init_flatpickr"
+import { materialSelect } from "../components/material_select"
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -38,6 +39,7 @@ document.addEventListener('turbolinks:load', () => {
   initAutoFadeAlert();
   initAutocomplete();
   initFlatpickr();
+  materialSelect();
 });
 
 require("trix")

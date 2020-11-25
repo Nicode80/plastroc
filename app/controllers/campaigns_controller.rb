@@ -1,15 +1,23 @@
 class CampaignsController < ApplicationController
 
   def new
-    @campaign = Campaign.new
     @organisation = Organisation.find(params[:organisation_id])
-    @materials = Material.all
+    @campaign = Campaign.new
+    @materials = Material.all.select(:id, :name, :category).group_by(&:category)
     authorize @campaign
   end
 
   def create
+    @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new(campaign_params)
-
+    @campaign.organisation = @organisation
+    if @campaign.save
+      flash[:alert] = 'campaign created'
+      redirect_to organisations_path
+    else
+      render :new
+    end
+    authorize @campaign
   end
 
   private
@@ -22,9 +30,10 @@ class CampaignsController < ApplicationController
       :end_date,
       :target,
       :unit,
-      :status,
-      :published,
       :photo,
-      )
+      :material_id,
+      :status,
+      :min_package,
+      :published)
   end
 end
