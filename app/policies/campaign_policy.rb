@@ -9,6 +9,10 @@ class CampaignPolicy < ApplicationPolicy
     true
   end
 
+  def my_campaigns?
+    true
+  end
+
   def create?
     return true
   end

@@ -22,11 +22,20 @@ class CampaignsController < ApplicationController
     @campaign.organisation = @organisation
     if @campaign.save
       flash[:alert] = 'campaign created'
+<<<<<<< HEAD
       redirect_to organisations_path #should redirect to campaign show?
+=======
+      redirect_to my_campaigns_campaigns_path
+>>>>>>> master
     else
       render :new
     end
     authorize @campaign
+  end
+
+  def my_campaigns
+    @campaigns = current_user_campaigns
+    authorize Campaign
   end
 
   private
@@ -44,5 +53,11 @@ class CampaignsController < ApplicationController
       :status,
       :min_package,
       :published)
+  end
+
+  def current_user_campaigns
+    Campaign.all.select do |c|
+      c.user == current_user
+    end
   end
 end
