@@ -23,16 +23,7 @@ class CampaignsController < ApplicationController
 
     if @campaign.save
       # => Crétation automatique des packages
-      iterators = [(@campaign.target / @campaign.min_package).floor, 4].min
-      names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
-      x = 0
-      iterators.times do
-        @name = names[x]
-        @quantity = (x + 1) * @campaign.min_package
-        @reward = (x + 1) * @campaign.min_package / 2
-        @campaign.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
-        x += 1
-      end
+      create_packages
       flash[:alert] = 'campagne ajoutée'
       redirect_to campaign_path(@campaign) #redirect to campaign show
     else
@@ -48,6 +39,19 @@ class CampaignsController < ApplicationController
   end
 
   private
+
+  def create_packages
+    iterators = [(@campaign.target / @campaign.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    x = 0
+    iterators.times do
+      @name = names[x]
+      @quantity = (x + 1) * @campaign.min_package
+      @reward = (x + 1) * @campaign.min_package / 2
+      @campaign.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      x += 1
+    end
+  end
 
   def campaign_params
     params.require(:campaign).permit(
