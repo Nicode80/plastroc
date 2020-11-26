@@ -414,7 +414,8 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @campaign1.target = 2000
     @campaign1.unit = "kg"
     @campaign1.min_package = 10
-    @campaign1.end_date = "2020-12-25"
+    @campaign1.start_date = Date.today
+    @campaign1.end_date = Date.today + 2.weeks
     @campaign1.organisation = @organisation3
     @campaign1.material = @pet
     @campaign1.published = true
@@ -446,7 +447,8 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @campaign2.target = 1000
     @campaign2.unit = "kg"
     @campaign2.min_package = 5
-    @campaign2.end_date = "2020-12-25"
+    @campaign2.start_date = Date.today
+    @campaign2.end_date = Date.today + 4.weeks
     @campaign2.organisation = @organisation4
     @campaign2.material = @abs
     @campaign2.published = true

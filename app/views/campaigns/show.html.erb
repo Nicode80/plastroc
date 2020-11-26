@@ -3,7 +3,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
   <div class="container">
     <!-- add if statement depending on sorter or recycler -->
-    <h4><%= link_to my_campaigns_campaigns_path do %>
+    <h4><%= link_to :back do %>
       <i class="fas fa-arrow-left"></i>
       <% end %>
     </h4>
@@ -44,22 +44,14 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <%= image_tag "https://images.unsplash.com/photo-1580227974546-fbd48825d991?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80", class: "avatar m-2"%>
 
           <!-- Creation of date objects -->
-          <% end_date_year = @campaign.end_date.split("-")[0].to_i %>
-          <% end_date_month = @campaign.end_date.split("-")[1].to_i %>
-          <% end_date_day = @campaign.end_date.split("-")[2].to_i %>
-          <% now_year = Time.now.year %>
-          <% now_month = Time.now.month %>
-          <% now_day = Time.now.day %>
-          <% now = DateTime.new(now_year, now_month, now_day) %>
-          <% end_date = DateTime.new(end_date_year, end_date_month, end_date_day) %>
 
-          <% if (end_date - now).to_i > 1 %>
-          <p><%= (end_date - now).to_i %> jours</p>
-          <% elsif (end_date - now).to_i == 1 %>
+          <% #if (end_date - now).to_i > 1 %>
+          <p><%#= (end_date - now).to_i %> jours</p>
+          <%# elsif (end_date - now).to_i == 1 %>
           <p>1 jour</p>
-          <% else %>
+          <%# else %>
           <p>Terminé</p>
-          <% end %>
+          <% #end %>
         </div>
 
         <div class="d-flex flex-column align-items-center">
