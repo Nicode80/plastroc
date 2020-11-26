@@ -25,7 +25,7 @@ puts 'Creating PET material...'
 @pet = Material.new
   @pet.name = "PET"
   @pet.description = "Polytéréphtalate d'éthylène"
-  @pet.category  = "plastic"
+  @pet.category  = "Plastique"
   @pet.photo.attach(
     io: File.open(Rails.root.join('db/fixtures/plastic.jpeg')),
     filename: 'plastic.jpeg',
@@ -78,7 +78,7 @@ puts 'Creating ABS material...'
 @abs = Material.new
   @abs.name = "ABS"
   @abs.description = "Acrylonitrile butadiène styrène"
-  @abs.category  = "plastic"
+  @abs.category  = "Plastique"
   @abs.photo.attach(
     io: File.open(Rails.root.join('db/fixtures/keyboard.jpeg')),
     filename: 'keyboard.jpeg',
@@ -376,7 +376,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @organisation2.save!
 
   # Second user
-  puts "2/2 - including 2 campaigns each for yann@goodplanet.com (pwd: 123456)"
+  puts "2/2 - including 2 campaigns for yann@goodplanet.com (pwd: 123456)"
   @user2 = User.new
     @user2.first_name = "Yann"
     @user2.last_name = "A. Bertrand"
