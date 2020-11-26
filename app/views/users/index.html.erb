@@ -1,8 +1,13 @@
 <div class="container" style="margin-bottom: 75px;">
-  <div class="d-flex align-items-center justify-content-left">
-    <%= link_to '◀︎', user_path(current_user), class: "btn btn-outline-primary rounded-pill d-block plastroc-outline-button mr-5" %>
-    <h3 class="mb-0">Classement</h3>
+    <div class="d-flex align-items-center justify-content-left">
+    <h4 class='mt-3 mr-3'>
+      <%= link_to user_path(current_user) do %>
+        <i class="fas fa-arrow-left"></i>
+      <% end %>
+    </h4>
+    <h4 class="mt-3">Classement</h4>
   </div>
+  <hr class="mb-3">
   <ul class="list-group">
     <% @users.order(:xp).reverse.each do |user| %>
       <li class="list-group-item d-flex justify-content-between align-items-center">
