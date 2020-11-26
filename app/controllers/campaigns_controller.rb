@@ -4,6 +4,11 @@ class CampaignsController < ApplicationController
     @campaigns = policy_scope(Campaign)
   end
 
+  def show
+    @campaign = Campaign.find(params[:id])
+    authorize @campaign
+  end
+
   def new
     @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new
@@ -16,8 +21,8 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new(campaign_params)
     @campaign.organisation = @organisation
     if @campaign.save
-      flash[:alert] = 'campagne ajoutée'
-      redirect_to my_campaigns_campaigns_path
+       flash[:alert] = 'campagne ajoutée'
+      redirect_to campaign_path(@campaign) #redirect to campaign show
     else
       render :new
     end
