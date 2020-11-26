@@ -22,11 +22,7 @@ class CampaignsController < ApplicationController
     @campaign.organisation = @organisation
     if @campaign.save
       flash[:alert] = 'campaign created'
-<<<<<<< HEAD
-      redirect_to organisations_path #should redirect to campaign show?
-=======
-      redirect_to my_campaigns_campaigns_path
->>>>>>> master
+      redirect_to campaign_path(@campaign) #redirect to campaign show
     else
       render :new
     end

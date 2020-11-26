@@ -1,4 +1,9 @@
 .plastroc-tabs {
+  z-index: 10;
+  margin-top: -15px;
+  padding-top: 15px;
+  background-color: $plastroc-background;
+  border-radius: 10px 10px 0 0;
     p {
         text-align: center;
         width: 100%;

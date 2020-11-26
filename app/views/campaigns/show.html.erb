@@ -1,13 +1,20 @@
-<div class="banner d-flex"
+<div class="banner"
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
-  <div class="container align-self-end">
+  <div class="container">
+    <!-- add if statement depending on sorter or recycler -->
+    <h3><%= link_to my_campaigns_campaigns_path do %>
+      <i class="fas fa-arrow-left"></i>
+      <% end %>
+    </h3>
+  </div>
+  <div class="container">
     <h4 class="mb-0"><%= @campaign.name %></h4>
     <h6>by <%= @campaign.organisation.name %></h6>
   </div>
 </div>
 
-<div class="plastroc-tabs d-flex justify-content-around mt-3">
+<div class="plastroc-tabs d-flex justify-content-around">
     <p class="active-tab">Info</p>
     <p>How to</p>
     <p>Contact</p>
