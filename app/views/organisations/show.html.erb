@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="card card-m mb-3">
+    <%= cl_image_tag @organisation.photo.key %>
+    <section>
+      <div class="d-flex justify-content-between">
+        <h6><%= @organisation.name %></h6>
+          <% if policy(@organisation).update? %>
+            <%= link_to ' ',
+                        edit_organisation_path(@organisation),
+                        class: 'icon edit ml-3' %>
+          <% end %>
+      </div>
+      <p><%= @organisation.about %></p>
+      <p><span class="icon address"><%= @organisation.address %>, <%= @organisation.city %>, <%= @organisation.postcode %></p></span>
+      <p><i class="icon clock"></i><%= @organisation.opening_hours %></p>
+      <p><i class="icon mail"></i><%= @organisation.contact %></p>
+      <% if policy(Campaign).create? %>
+        <%= link_to '✚ Campagne',
+                    new_organisation_campaign_path(@organisation),
+                    class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
+      <% end %>
+      <% if policy(@organisation).destroy? %>
+        <button data-id="<%= @organisation.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-button">Supprimer</button>
+        <%= link_to "",
+                    organisation_path(@organisation),
+                    method: :delete,
+                    # data: { confirm: "Are you sure?" },
+                    class: 'delete-orga hidden',
+                    id: "del-org-#{@organisation.id}" %>
+      <% end %>
+    </section>
+  </div>
+    <% if !current_user.campaigns.empty? %>
+    <h4 class="mt-3">Mes campagnes</h4>
+    <hr class="mb-3">
+    <% @campaigns.each do |campaign| %>
+      <%= link_to campaign_path(campaign), class: 'text-decoration-none' do %>
+        <div class="d-flex flex-row card card-s">
+          <% if campaign.photo.attached? %>
+            <%= cl_image_tag campaign.photo.key, crop: :fill %>
+          <% else %>
+            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+          <% end %>
+          <section class="w-100">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 style='color: grey'><%= campaign.name %></h6>
+            </div>
+          </section>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+
+
+

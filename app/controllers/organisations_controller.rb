@@ -4,6 +4,12 @@ class OrganisationsController < ApplicationController
     @organisations = policy_scope(Organisation)
   end
 
+  def show
+    @organisation = Organisation.find(params[:id])
+    @campaigns = @organisation.campaigns
+    authorize @organisation
+  end
+
   def new
     @organisation = Organisation.new
     authorize @organisation
