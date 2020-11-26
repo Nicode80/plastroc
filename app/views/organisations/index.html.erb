@@ -6,20 +6,22 @@
       <div class="card card-m mb-3">
         <%= cl_image_tag org.photo.key %>
         <section>
-          <h6><%= org.name %></h6>
+          <div class="d-flex justify-content-between">
+            <h6><%= org.name %></h6>
+              <% if policy(org).update? %>
+                <%= link_to ' ',
+                            edit_organisation_path(org),
+                            class: 'fas fa-edit ml-3' %>
+              <% end %>
+          </div>
           <p><%= org.about %></p>
           <p><i class="fas fa-map-marker-alt mr-2"></i><%= org.address %>, <%= org.city %>, <%= org.postcode %></p>
           <p><i class="fas fa-clock mr-2"></i><%= org.opening_hours %></p>
           <p><i class="fas fa-envelope mr-2"></i><%= org.contact %></p>
-          <% if policy(org).update? %>
+          <% if policy(Campaign).create? %>
             <%= link_to 'Add Campaign',
                         new_organisation_campaign_path(org),
                         class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
-          <% end %>
-          <% if policy(org).update? %>
-            <%= link_to 'Edit',
-                        edit_organisation_path(org),
-                        class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button' %>
           <% end %>
           <% if policy(org).destroy? %>
             <button data-id="<%= org.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-button">Delete</button>
