@@ -146,6 +146,7 @@ puts 'Deleting all Users...'
     @max.email = "maximin.daudiffret@gmail.com"
     @max.password = "123456"
     @max.xp = 1000
+    @max.admin = true
     file = URI.open('https://i.pravatar.cc/200')
     @max.photo.attach(
       io: file,
