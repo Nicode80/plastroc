@@ -3,14 +3,14 @@
     <h3>Editer Instruction</h3>
   </div>
   <%= simple_form_for @instruction do |f| %>
-    <p>Editer le titre et l'illustrration</p>
+    <p>Editer le titre et l'illustration</p>
     <%= f.input :title, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Title" %>
     <%= f.input :media, as: :file, label: false, input_html: { class: "input col-12 mb-3" } %>
     <br>
     <p>Editer les détails de l'instruction</p>
     <%= f.rich_text_area :rich_content, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Content" %>
     <br>
-    <p>Changer l'order d'apparition</p>
+    <p>Changer l'ordre d'apparition</p>
     <%= f.input :step_order, collection: (1..20), label: false, input_html: { class: "col-12 mb-3" } %>
     <div class='d-flex justify-content-end mb-3'>
       <%= link_to 'Annuler', instruction_path(@instruction), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>

@@ -12,7 +12,7 @@ class OrganisationsController < ApplicationController
   def create
     @organisation = current_user.organisations.new(organisation_params)
     if @organisation.save
-      flash[:notice] = "Organisation crée"
+      flash[:notice] = "Organisation ajoutée"
       redirect_to organisations_path
     else
       render :new
@@ -29,7 +29,7 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.find(params[:id])
     @organisation.update(organisation_params)
     if @organisation.save
-      flash[:notice] = "Organisation mise à joure"
+      flash[:notice] = "Organisation mise à jour"
       redirect_to organisations_path
     else
       render :new
