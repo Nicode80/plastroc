@@ -26,7 +26,7 @@ const deleteAlert = () => {
 
                 swal({
                     title: "Supprimer Organisation",
-                    text: "ëtes-vous sûr ?",
+                    text: "Êtes-vous sûr ?",
                     icon: "erreur",
                     buttons: ["Oh nooon!", "Ooh ouiii!"],
                 }).then((value) => {
