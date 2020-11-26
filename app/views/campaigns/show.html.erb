@@ -1,7 +1,7 @@
-<div class="banner d-flex align-items-end"
+<div class="banner d-flex"
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
-  <div class="container">
+  <div class="container align-self-end">
     <h4 class="mb-0"><%= @campaign.name %></h4>
     <h6>by <%= @campaign.organisation.name %></h6>
   </div>
