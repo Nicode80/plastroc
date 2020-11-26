@@ -5,6 +5,7 @@ class Campaign < ApplicationRecord
   belongs_to :material
   has_many :packages
   has_many :missions, through: :packages
+  has_one :user, through: :organisation
   has_one_attached :photo
 
   UNITS = ['g', 'kg', 'l', 'cbm']
