@@ -137,7 +137,7 @@ puts 'Deleting all Users...'
 # Users Seed
 #####################################################################
 
-# Maximin's accrount
+# Platroc Admin Team's accrounts
   if Rails.env.development?
     puts "Creating Maximin's Admin account..."
     @max = User.new
@@ -156,7 +156,106 @@ puts 'Deleting all Users...'
 
     @organisation = Organisation.new
     @organisation.user = @max
-    @organisation.name = Faker::Company.name
+    @organisation.name = "MaxPlanet"
+    @organisation.about = "Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    @organisation.address = "Paris 750#{rand(10..20)}"
+    @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
+    @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+    file = URI.open("https://fakeimg.pl/200x200/?text=#{@organisation.name}")
+    @organisation.photo.attach(
+      io: file,
+      filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
+      )
+    @organisation.save!
+  end
+
+  if Rails.env.development?
+    puts "Creating Nicolas' Admin account..."
+    @nico = User.new
+    @nico.first_name = "Nicolas"
+    @nico.last_name = "Constantin"
+    @nico.email = "nicolasconstantin@hotmail.fr"
+    @nico.password = "123456"
+    @nico.xp = 1000
+    @nico.admin = true
+    file = URI.open('https://i.pravatar.cc/200')
+    @nico.photo.attach(
+      io: file,
+      filename: "nico.jpg",
+      )
+    @nico.save!
+
+    @organisation = Organisation.new
+    @organisation.user = @nico
+    @organisation.name = "NicoTri"
+    @organisation.about = "Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    @organisation.address = "Paris 750#{rand(10..20)}"
+    @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
+    @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+    file = URI.open("https://fakeimg.pl/200x200/?text=#{@organisation.name}")
+    @organisation.photo.attach(
+      io: file,
+      filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
+      )
+    @organisation.save!
+  end
+
+  if Rails.env.development?
+    puts "Creating Thomas' Admin account..."
+    @tom = User.new
+    @tom.first_name = "Thomas"
+    @tom.last_name = "Le Bihan"
+    @tom.email = "thomas.66days@gmail"
+    @tom.password = "123456"
+    @tom.xp = 1000
+    @tom.admin = true
+    file = URI.open('https://i.pravatar.cc/200')
+    @tom.photo.attach(
+      io: file,
+      filename: "tom.jpg",
+      )
+    @tom.save!
+
+    @organisation = Organisation.new
+    @organisation.user = @tom
+    @organisation.name = "AshSort"
+    @organisation.about = "Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    @organisation.address = "Paris 750#{rand(10..20)}"
+    @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
+    @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+    file = URI.open("https://fakeimg.pl/200x200/?text=#{@organisation.name}")
+    @organisation.photo.attach(
+      io: file,
+      filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
+      )
+    @organisation.save!
+  end
+
+  if Rails.env.development?
+    puts "Creating JR's Admin account..."
+    @jr = User.new
+    @jr.first_name = "JR"
+    @jr.last_name = "Lherm"
+    @jr.email = "lherm.jr@gmail.com"
+    @jr.password = "123456"
+    @jr.xp = 1000
+    @jr.admin = true
+    file = URI.open('https://i.pravatar.cc/200')
+    @jr.photo.attach(
+      io: file,
+      filename: "jr.jpg",
+      )
+    @jr.save!
+
+    @organisation = Organisation.new
+    @organisation.user = @jr
+    @organisation.name = "JR Select"
     @organisation.about = "Lorem ipsum dolor sit amet,
       consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
