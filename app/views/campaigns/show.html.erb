@@ -15,12 +15,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 </div>
 
 <nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
-  <a class="active" href="#p1" data-toggle="tab">Info</a>
-  <a class="" href="#p2" data-toggle="tab">Tuto</a>
-  <a class="" href="#p3" data-toggle="tab">Contact</a>
+  <a class="active" href="#tab-info" data-toggle="tab">Info</a>
+  <a class="" href="#tab-how-to" data-toggle="tab">Tuto</a>
+  <a class="" href="#tab-contact" data-toggle="tab">Contact</a>
 </nav>
 <div class="tab-content">
-  <div class="tab-pane active" id="p1">
+  <div class="tab-pane active" id="tab-info">
     <div class="container" id="campaign-infos" style="margin-bottom: 75px;">
       <div class="d-flex justify-content-between align-items-center">
           <h5 class="mb-0">Progression</h5>
@@ -86,7 +86,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       <%= link_to 'ASK A QUESTION', root_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
     </div>
   </div>
-  <div class="tab-pane" id="p2">
+  <div class="tab-pane" id="tab-how-to">
     <div class="container" id="campaign-how-to" style="margin-bottom: 75px;">
       <% @campaign.material.instructions.each do |instruction| %>
         <div class="card card-m mt-3">
@@ -103,7 +103,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 
-  <div class="tab-pane" id="p3">
+  <div class="tab-pane" id="tab-contact">
     <div class="container" id="campaign-contact" style="margin-bottom: 75px;">
       <div class="card mt-3">
         <div class="card-body">
