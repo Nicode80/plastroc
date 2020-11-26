@@ -11,16 +11,19 @@
 
 <div class="campaigns-wrapper" style="margin-bottom: 45px;">
     <% @campaigns.each do |campaign| %>
-        <div class="col-10 mt-3">
+        <div class="col-11 mt-3">
             <div class="card campaign-card">
                 <div class="card-horizontal">
                     <div class="img-square-wrapper campaign-card-img">
                         <%= cl_image_tag campaign.photo.key, height: 300, width: 400, crop: :fill %>
                     </div>
                     <div class="card-body d-flex flex-column justify-content-between">
-                        <h6 class="card-title"><%= campaign.name %></h6>
-                        <%# <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> %>
-                        <div class="text-right"><%= link_to 'Plus d\'info', campaign_path(campaign), class: 'btn btn-outline-primary' %></div>
+                        <h6 class="card-title">
+                            <%= link_to campaign_path(campaign) do %>
+                                <%= campaign.name %>
+                            <% end %>
+                        </h6>
+                        <p class="badge badge-primary rounded-pill"><%= campaign.material.category %></p>
                     </div>
                 </div>
             </div>
