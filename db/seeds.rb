@@ -13,6 +13,8 @@ require ('faker')
 require "open-uri"
 
 # clear DB before seed
+puts 'Deleting all packages...'
+  Package.destroy_all if Rails.env.development?
 puts 'Deleting all campaigns...'
   Campaign.destroy_all if Rails.env.development?
 puts 'Deleting all instructions...'
@@ -413,7 +415,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @campaign1.unit = "kg"
     @campaign1.min_package = 10
     @campaign1.start_date = Date.today
-    @campaign1.end_date = Date.today + 2.weeks
+    @campaign1.end_date = Date.today + 4.weeks
     @campaign1.organisation = @organisation3
     @campaign1.material = @pet
     @campaign1.published = true
@@ -423,6 +425,17 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       filename: "campagne1.jpg",
       )
     @campaign1.save!
+
+    iterators = [(@campaign1.target / @campaign1.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    x = 0
+    iterators.times do
+      @name = names[x]
+      @quantity = (x + 1) * @campaign1.min_package
+      @reward = (x + 1) * @campaign1.min_package / 2
+      @campaign1.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      x += 1
+    end
 
     # organisation4
     @organisation4 = Organisation.new
@@ -446,7 +459,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @campaign2.unit = "kg"
     @campaign2.min_package = 5
     @campaign2.start_date = Date.today
-    @campaign2.end_date = Date.today + 4.weeks
+    @campaign2.end_date = Date.today + 3.weeks
     @campaign2.organisation = @organisation4
     @campaign2.material = @abs
     @campaign2.published = true
@@ -456,6 +469,16 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       filename: "campagne2.jpg",
       )
     @campaign2.save!
+
+    iterators = [(@campaign2.target / @campaign2.min_package).floor, 4].min
+    x = 0
+    iterators.times do
+      @name = names[x]
+      @quantity = (x + 1) * @campaign2.min_package
+      @reward = (x + 1) * @campaign2.min_package / 2
+      @campaign2.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      x += 1
+    end
 
 # End of users seed
 
