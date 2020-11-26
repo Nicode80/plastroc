@@ -35,3 +35,24 @@
   content: "\f044";
   color: $plastroc-main;
 }
+
+.edit-white::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f044";
+  color: $white;
+}
+
+.back-white::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f044";
+  color: $white;
+}
+
+.stop-white::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 100;
+  content: "\f28d";
+  color: $white;
+}

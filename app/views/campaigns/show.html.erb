@@ -6,16 +6,16 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <% if current_user == @campaign.user %>
       <h4><%= link_to organisation_path(@campaign.organisation) do %>
         <i class="fas fa-arrow-left"></i>
-      <% end %>
+      <% end %></h4>
     <% else %>
       <h4><%= link_to organisation_path(@campaign.organisation) do %>
         <i class="fas fa-arrow-left"></i>
-      <% end %>
+      <% end %></h4>
     <% end %>
-    </h4>
   </div>
+
   <div class="container">
-    <h4 class="mb-0"><%= @campaign.name %></h4>
+    <h5 class="mb-0"><%= @campaign.name %></h5>
     <h6>by <%= @campaign.organisation.name %></h6>
   </div>
 </div>
@@ -85,9 +85,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
       </div>
 
-      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-        Poser une question
-      </button>
+      <% if current_user != @campaign.user %>
+        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+          Poser une question
+        </button>
+      <% end %>
 
     </div>
   </div>
@@ -150,8 +152,9 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 
+
   <button href="#" class='plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3'>
-  Joindre la mission
+    Joindre la mission
   </button>
 </div>
 

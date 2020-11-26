@@ -1,4 +1,7 @@
 <div class="container">
+  <h4><%= link_to missions_path do %>
+    <i class="fas fa-arrow-left"></i>
+  <% end %>
   <div class="card card-m mb-3">
     <%= cl_image_tag @organisation.photo.key %>
     <section>
@@ -30,7 +33,7 @@
       <% end %>
     </section>
   </div>
-    <% if !current_user.campaigns.empty? %>
+  <% if !current_user.campaigns.empty? %>
     <h4 class="mt-3">Mes campagnes</h4>
     <hr class="mb-3">
     <% @campaigns.each do |campaign| %>
@@ -51,7 +54,3 @@
     <% end %>
   <% end %>
 </div>
-
-
-
-
