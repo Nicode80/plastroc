@@ -1,12 +1,12 @@
-<div class="banner"
+<div class="banner d-flex flex-column justify-content-between"
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
   <div class="container">
     <!-- add if statement depending on sorter or recycler -->
-    <h3><%= link_to my_campaigns_campaigns_path do %>
+    <h4><%= link_to my_campaigns_campaigns_path do %>
       <i class="fas fa-arrow-left"></i>
       <% end %>
-    </h3>
+    </h4>
   </div>
   <div class="container">
     <h4 class="mb-0"><%= @campaign.name %></h4>
@@ -14,107 +14,136 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   </div>
 </div>
 
-<div class="plastroc-tabs d-flex justify-content-around">
-    <p class="active-tab">Info</p>
-    <p>How to</p>
-    <p>Contact</p>
-</div>
-
-<div class="container" id="campaign-infos" style="margin-bottom: 75px;">
-  <div class="d-flex justify-content-between align-items-center">
-      <h5 class="mb-0">Mission progress</h5>
-      <p class="mb-0">sum of missions done/<%= @campaign.target %><%= @campaign.unit %></p>
-  </div>
-
-  <div class="plastroc-progress-bar mt-4 mb-4">
-      <div class="rounded-pill plastroc-bg-primary-gradient"></div>
-  </div>
-
-  <h5>Infos</h5>
-  <div class="d-flex justify-content-between">
-    <div>
-      img or picto?
-      <p><%= @campaign.material.category %> type: <%= @campaign.material.name %></p>
-    </div>
-    <div>
-      img or picto?
-      <% end_date_year = @campaign.end_date.split("-")[0].to_i %>
-      <% end_date_month = @campaign.end_date.split("-")[1].to_i %>
-      <% end_date_day = @campaign.end_date.split("-")[2].to_i %>
-      <% now_year = Time.now.year %>
-      <% now_month = Time.now.month %>
-      <% now_day = Time.now.day %>
-      <% now = DateTime.new(now_year, now_month, now_day) %>
-      <% end_date = DateTime.new(end_date_year, end_date_month, end_date_day) %>
-      <p>Deadline: <%= (end_date - now).to_i %></p>
-    </div>
-    <div>
-      img or picto?
-      <p>Difficulty: </p>
-    </div>
-  </div>
-
-  <h5>Details</h5>
-  <p><%= @campaign.description %></p>
-
-  <h5>Members</h5>
-  <div class="d-flex">
-    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-  </div>
-
-  <%= link_to 'JOIN THE MISSION', root_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
-  <%= link_to 'ASK A QUESTION', root_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
-</div>
-
-<div class="container" id="campaign-how-to" style="margin-bottom: 75px;">
-  <% @campaign.material.instructions.each do |instruction| %>
-    <div class="card card-m mt-3">
-      <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
-          <div class="card-body">
-              <span class="badge badge-pill badge-success">Step <%= instruction.step_order %></span>
-              <section>
-                  <h6><%= instruction.title %></h6>
-                  <p><%= instruction.content %></p>
-              </section>
-          </div>
+<nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
+  <a class="active" href="#p1" data-toggle="tab">Info</a>
+  <a class="" href="#p2" data-toggle="tab">Tuto</a>
+  <a class="" href="#p3" data-toggle="tab">Contact</a>
+</nav>
+<div class="tab-content">
+  <div class="tab-pane active" id="p1">
+    <div class="container" id="campaign-infos" style="margin-bottom: 75px;">
+      <div class="d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Progression</h5>
+          <!-- calcul from missions to add -->
+          <%#= @campaign.mission.where(:status :done) %>
+          <p class="mb-0">200/<%= @campaign.target %><%= @campaign.unit %></p>
       </div>
-  <% end %>
+
+      <div class="plastroc-progress-bar mt-4 mb-4">
+        <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+      </div>
+
+      <h5>Infos</h5>
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column align-items-center">
+          <%= cl_image_tag @campaign.material.photo.key, class: "avatar m-2"%>
+
+          <p class="mb-2">Type de <%= @campaign.material.category %>:</p>
+          <p class="mb-2"><%= @campaign.material.name %></p>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <%= image_tag "https://images.unsplash.com/photo-1580227974546-fbd48825d991?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80", class: "avatar m-2"%>
+
+          <!-- Creation of date objects -->
+          <% end_date_year = @campaign.end_date.split("-")[0].to_i %>
+          <% end_date_month = @campaign.end_date.split("-")[1].to_i %>
+          <% end_date_day = @campaign.end_date.split("-")[2].to_i %>
+          <% now_year = Time.now.year %>
+          <% now_month = Time.now.month %>
+          <% now_day = Time.now.day %>
+          <% now = DateTime.new(now_year, now_month, now_day) %>
+          <% end_date = DateTime.new(end_date_year, end_date_month, end_date_day) %>
+
+          <% if (end_date - now).to_i > 1 %>
+          <p>Echéances:</p>
+          <p><%= (end_date - now).to_i %> jours</p>
+          <% elsif (end_date - now).to_i == 1 %>
+          <p>1 jour</p>
+          <% else %>
+          <p>Terminé</p>
+          <% end %>
+        </div>
+
+        <div class="d-flex flex-column align-items-center">
+          <%= image_tag "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80", class: "avatar m-2"%>
+          <p>Niveau:</p>
+          <p>1</p> <!-- turn it dynamic when possible -->
+        </div>
+      </div>
+
+      <h5>Détails</h5>
+      <p><%= @campaign.description %></p>
+
+      <h5>Membres</h5>
+      <div class="d-flex">
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+      </div>
+
+      <%= link_to 'JOIN THE MISSION', root_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+      <%= link_to 'ASK A QUESTION', root_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+    </div>
+  </div>
+  <div class="tab-pane" id="p2">
+    <div class="container" id="campaign-how-to" style="margin-bottom: 75px;">
+      <% @campaign.material.instructions.each do |instruction| %>
+        <div class="card card-m mt-3">
+          <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
+              <div class="card-body">
+                  <span class="badge badge-pill badge-success">Etape <%= instruction.step_order %></span>
+                  <section>
+                      <h6><%= instruction.title %></h6>
+                      <p><%= instruction.content %></p>
+                  </section>
+              </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="tab-pane" id="p3">
+    <div class="container" id="campaign-contact" style="margin-bottom: 75px;">
+      <div class="card mt-3">
+        <div class="card-body">
+          <section>
+            <h6>Que faisons nous ?</h6>
+            <p><%= @campaign.organisation.about %></p>
+          </section>
+        </div>
+      </div>
+      <div class="card mt-3">
+        <div class="card-body">
+          <section>
+            <h6>Notre Adresse</h6>
+            <p><%= @campaign.organisation.address %></p>
+          </section>
+        </div>
+      </div>
+      <div class="card mt-3">
+        <div class="card-body">
+          <section>
+            <h6>Horaires d'ouverture</h6>
+            <p><%= @campaign.organisation.opening_hours %></p>
+          </section>
+        </div>
+      </div>
+      <div class="card mt-3">
+        <div class="card-body">
+          <section>
+            <h6>Contact</h6>
+            <p><%= @campaign.organisation.contact %></p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="container" id="campaign-contact" style="margin-bottom: 75px;">
-  <div class="card mt-3">
-    <div class="card-body">
-      <section>
-        <h6>What do we do ?</h6>
-        <p><%= @campaign.organisation.about %></p>
-      </section>
-    </div>
-  </div>
-  <div class="card mt-3">
-    <div class="card-body">
-      <section>
-        <h6>Our Address</h6>
-        <p><%= @campaign.organisation.address %></p>
-      </section>
-    </div>
-  </div>
-  <div class="card mt-3">
-    <div class="card-body">
-      <section>
-        <h6>Opening hours</h6>
-        <p><%= @campaign.organisation.opening_hours %></p>
-      </section>
-    </div>
-  </div>
-  <div class="card mt-3">
-    <div class="card-body">
-      <section>
-        <h6>Contact</h6>
-        <p><%= @campaign.organisation.contact %></p>
-      </section>
-    </div>
-  </div>
-</div>
+
+
+
+
+
