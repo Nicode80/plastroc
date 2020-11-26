@@ -13,6 +13,8 @@ require ('faker')
 require "open-uri"
 
 # clear DB before seed
+puts 'Deleting all campaigns...'
+  Campaign.destroy_all if Rails.env.development?
 puts 'Deleting all instructions...'
   Instruction.destroy_all if Rails.env.development?
 puts 'Deleting all materials...'
@@ -230,7 +232,7 @@ puts "Creating 5 more fake user accounts with organisation..."
 puts "Creating 2 more fake user accounts with 2 organisations each..."
 
   # Premier user
-  puts "1/2 - including 2 campaigns each"
+  puts "1/2"
   @user1 = User.new
     @user1.first_name = "Michel"
     @user1.last_name = "Flantier"
@@ -259,23 +261,6 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       )
     @organisation1.save!
 
-    # campaign1
-    @campaign1 = Campaign.new
-    @campaign1.name = "Recyclage PET Automn 2020"
-    @campaign1.description = "Recyclage de materiaux PET transparents"
-    @campaign1.target = 2000
-    @campaign1.unit = "kg"
-    @campaign1.min_package = 10
-    @campaign1.end_date = "2020-12-25"
-    @campaign1.organisation = @organisation1
-    @campaign1.material = @pet
-    file = URI.open('https://images.unsplash.com/photo-1572964734607-0051976fac79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80')
-    @campaign1.photo.attach(
-      io: file,
-      filename: "campagne1.jpg",
-      )
-    @campaign1.save!
-
     # organisation2
     @organisation2 = Organisation.new
     @organisation2.user = @user1
@@ -290,25 +275,8 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       )
     @organisation2.save!
 
-    # campaign2
-    @campaign2 = Campaign.new
-    @campaign2.name = "Recyclage ABS Automn 2020"
-    @campaign2.description = "Recyclage de materiaux ABS blancs"
-    @campaign2.target = 1000
-    @campaign2.unit = "kg"
-    @campaign2.min_package = 5
-    @campaign2.end_date = "2020-12-25"
-    @campaign2.organisation = @organisation1
-    @campaign2.material = @abs
-    file = URI.open('https://images.unsplash.com/photo-1569372069325-270201150e3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80')
-    @campaign2.photo.attach(
-      io: file,
-      filename: "campagne2.jpg",
-      )
-    @campaign2.save!
-
   # Second user
-  puts "2/2"
+  puts "2/2 - including 2 campaigns each"
   @user2 = User.new
     @user2.first_name = "Yann"
     @user2.last_name = "A. Bertrand"
@@ -337,6 +305,24 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       )
     @organisation3.save!
 
+    # campaign1
+    @campaign1 = Campaign.new
+    @campaign1.name = "Recyclage PET Automn 2020"
+    @campaign1.description = "Recyclage de materiaux PET transparents"
+    @campaign1.target = 2000
+    @campaign1.unit = "kg"
+    @campaign1.min_package = 10
+    @campaign1.end_date = "2020-12-25"
+    @campaign1.organisation = @organisation3
+    @campaign1.material = @pet
+    @campaign1.published = true
+    file = URI.open('https://images.unsplash.com/photo-1572964734607-0051976fac79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80')
+    @campaign1.photo.attach(
+      io: file,
+      filename: "campagne1.jpg",
+      )
+    @campaign1.save!
+
     # organisation4
     @organisation4 = Organisation.new
     @organisation4.user = @user2
@@ -350,6 +336,24 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       filename: 'goodplanet.jpeg',
       )
     @organisation4.save!
+
+    # campaign2
+    @campaign2 = Campaign.new
+    @campaign2.name = "Recyclage ABS Automn 2020"
+    @campaign2.description = "Recyclage de materiaux ABS blancs"
+    @campaign2.target = 1000
+    @campaign2.unit = "kg"
+    @campaign2.min_package = 5
+    @campaign2.end_date = "2020-12-25"
+    @campaign2.organisation = @organisation4
+    @campaign2.material = @abs
+    @campaign2.published = true
+    file = URI.open('https://images.unsplash.com/photo-1569372069325-270201150e3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80')
+    @campaign2.photo.attach(
+      io: file,
+      filename: "campagne2.jpg",
+      )
+    @campaign2.save!
 
 # End of users seed
 
