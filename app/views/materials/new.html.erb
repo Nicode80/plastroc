@@ -1,9 +1,9 @@
 <div class="container">
   <div class="d-flex align-items-center justify-content-between">
-    <h3>New Material</h3>
+    <h3>Nouveau Matériau</h3>
   </div>
   <%= simple_form_for(@material) do |f| %>
-  <p>Select Material Category</p>
+  <p>Selectionner une catégorie</p>
     <%= f.input :category,
             label: false,
             as: :radio_buttons,
@@ -14,11 +14,11 @@
             boolean_style: :inline,
             collection: Material::CATEGORIES %>
     <br>
-    <p>Give it a name & a description</p>
+    <p>Donner un nom et une description</p>
     <%= f.input :name,
                 label: false,
                 input_html: { class: "col-12 mb-3" },
-                placeholder: "Name" %>
+                placeholder: "Nom" %>
 
     <%= f.input :description,
                 label:
@@ -33,8 +33,8 @@
                 input_html: { class: "input col-12 mb-3" } %>
 
     <div class='d-flex justify-content-end'>
-      <%= link_to 'Cancel', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
-      <%= f.submit "Create", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+      <%= link_to 'Annuler', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+      <%= f.submit "Valider", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
     </div>
   <% end %>
 </div>

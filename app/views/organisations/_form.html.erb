@@ -1,26 +1,26 @@
 <%= simple_form_for @organisation do |f| %>
     <%= f.input :name,
                 label: false,
-                placeholder: "name*",
+                placeholder: "Nom*",
                 input_html: { class: "col-12 mb-3" } %>
     <%= f.input :address,
                 label: false,
-                placeholder: "address*",
+                placeholder: "Addresse*",
                 input_html: { class: "input col-12 mb-3",
                 id: "address-for-autocomplete" } %>
     <%= f.input :opening_hours,
                 label: false,
-                placeholder: "opening hours* eg. 8am to 6pm",
+                placeholder: "Horaires d'ouvertures: 8h à 18h",
                 input_html: { class: "input col-12 mb-3" } %>
     <%= f.input :contact,
                 label: false, placeholder: "contact*",
                 input_html: { class: "input col-12 mb-3" } %>
     <%= f.input :about,
                 label: false,
-                placeholder: "If you want, tell us about what you do...",
+                placeholder: "Présentez vous aux trieur qui effecturont vos missions...",
                 input_html: { class: "col-12 mb-3" } %>
     <%= f.input :photo,
                 as: :file,
                 input_html: { class: "col-12 mb-3" } %>
-    <%= f.submit 'validate', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
+    <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
 <% end %>

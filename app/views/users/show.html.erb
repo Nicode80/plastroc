@@ -15,7 +15,7 @@
   <p><i class="fas fa-envelope"></i> <%= @user.email %></p>
   <p><i class="fas fa-trophy"></i> <%= @user.xp %></p>
   <div class="d-flex justify-content-between">
-    <%= link_to "Edit profile",  edit_user_registration_path, class: "flex-fill mr-3 btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+    <%= link_to "Editer profile",  edit_user_registration_path, class: "flex-fill mr-3 btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
     <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "flex-fill btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
   </div>
 
@@ -23,8 +23,8 @@
   <% if policy(User).index? %>
     <h4 class="mt-3">Admin</h4>
     <hr class="mb-3">
-    <%= link_to "All users", users_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
-    <%= link_to "All materials", materials_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+    <%= link_to "Utilisateurs", users_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+    <%= link_to "Materiaux", materials_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
   <% end %>
 </div>
 

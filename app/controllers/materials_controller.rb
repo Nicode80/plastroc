@@ -44,7 +44,7 @@ class MaterialsController < ApplicationController
       redirect_to materials_path
     else
       redirect_to edit_material_path(@material)
-      flash[:notice] = "You cannot delete a Material with instructions"
+      flash[:notice] = "Vous ne pouvez pas supprimer un matériaux qui a des instructions"
     end
     authorize @material
   end
