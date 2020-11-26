@@ -12,7 +12,7 @@ class OrganisationsController < ApplicationController
   def create
     @organisation = current_user.organisations.new(organisation_params)
     if @organisation.save
-      flash[:notice] = "Organisation created"
+      flash[:notice] = "Organisation ajoutée"
       redirect_to organisations_path
     else
       render :new
@@ -29,7 +29,7 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.find(params[:id])
     @organisation.update(organisation_params)
     if @organisation.save
-      flash[:notice] = "Organisation updated"
+      flash[:notice] = "Organisation mise à jour"
       redirect_to organisations_path
     else
       render :new
@@ -40,7 +40,7 @@ class OrganisationsController < ApplicationController
   def destroy
     @organisation = Organisation.find(params[:id])
     @organisation.destroy
-    flash[:notice] = "Organisation deleted"
+    flash[:notice] = "Organisation supprimée"
     redirect_to organisations_path
     authorize @organisation
   end

@@ -1,7 +1,6 @@
 <div class="container">
-  <h3>My Campaigns</h3>
+  <h3>Mes Campagnes</h3>
   <% @campaigns.each do |campaign| %>
-    <% link_to  %>
     <div class="d-flex flex-row card card-s">
         <% if campaign.photo.attached?%>
            <img src="<%= cl_image_path campaign.photo.key %>"

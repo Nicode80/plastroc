@@ -1,9 +1,9 @@
 <div class='container'>
-  <h2>Home</h2>
+  <h2>Accueil</h2>
 
   <!-- My organisations -->
   <% if !current_user.organisations.empty? %>
-    <h4 class="mt-3">My Organisations</h4>
+    <h4 class="mt-3">Mes Organisations</h4>
     <hr class="mb-3">
     <% current_user.organisations.each do |organisation| %>
       <%= organisation.name %>
@@ -11,7 +11,7 @@
   <% end %>
 
   <!-- Ongoing missions -->
-  <h4 class="mt-3">My Missions</h4>
+  <h4 class="mt-3">Mes Missions</h4>
   <hr class="mb-3">
   <% if current_user.missions.empty? %>
     <p>No mission ongoing yet</p>

@@ -25,10 +25,10 @@ const deleteAlert = () => {
                 const organisationId = event.target.dataset.id
 
                 swal({
-                    title: "Delete Organisation",
-                    text: "Are you sure ?",
-                    icon: "error",
-                    buttons: ["Oh nooo!", "Aww yesss!"],
+                    title: "Supprimer Organisation",
+                    text: "Êtes-vous sûr ?",
+                    icon: "erreur",
+                    buttons: ["Oh nooon!", "Ooh ouiii!"],
                 }).then((value) => {
                     console.log(value)
                     if (value) {

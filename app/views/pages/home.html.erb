@@ -1,9 +1,9 @@
 <div class='container'>
   <h1>Plastroc</h1>
   <% if user_signed_in? %>
-    <%= link_to "You're logged in, go back to recycling", campaigns_path, class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
+    <%= link_to "Vous êtes connecté, retournez au recyclage", campaigns_path, class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
   <% else %>
-    <%= link_to "I want to change the world", new_user_session_path, class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
-    <%= link_to "I'm already changing the world", new_user_session_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+    <%= link_to "Je veux changer le monde", new_user_session_path, class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
+    <%= link_to "Je change déjà le monde", new_user_session_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
   <% end %>
 </div>
