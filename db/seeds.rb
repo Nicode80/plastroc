@@ -13,6 +13,8 @@ require ('faker')
 require "open-uri"
 
 # clear DB before seed
+puts 'Deleting all Packages...'
+  Package.destroy_all if Rails.env.development?
 puts 'Deleting all campaigns...'
   Campaign.destroy_all if Rails.env.development?
 puts 'Deleting all instructions...'
