@@ -20,13 +20,25 @@ class CampaignsController < ApplicationController
     @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new(campaign_params)
     @campaign.organisation = @organisation
+
     if @campaign.save
-       flash[:alert] = 'campagne ajoutée'
+      # => Crétation automatique des packages
+      create_packages
+      flash[:alert] = 'campagne ajoutée'
       redirect_to campaign_path(@campaign) #redirect to campaign show
     else
       render :new
     end
+
     authorize @campaign
+  end
+
+  def edit
+    @campaign = Campaign.find(params[:id])
+  end
+
+  def update
+
   end
 
   def my_campaigns
@@ -35,6 +47,19 @@ class CampaignsController < ApplicationController
   end
 
   private
+
+  def create_packages
+    iterators = [(@campaign.target / @campaign.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    x = 0
+    iterators.times do
+      @name = names[x]
+      @quantity = (x + 1) * @campaign.min_package
+      @reward = (x + 1) * @campaign.min_package / 2
+      @campaign.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      x += 1
+    end
+  end
 
   def campaign_params
     params.require(:campaign).permit(
