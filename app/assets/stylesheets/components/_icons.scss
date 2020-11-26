@@ -1,0 +1,37 @@
+.icon::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    margin-right: 0.5rem;
+    width: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+.address::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f3c5";
+  color: $plastroc-main;
+}
+
+.mail::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0e0";
+  color: $plastroc-main;
+}
+
+.clock::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f017";
+  color: $plastroc-main;
+}
+
+.edit::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f044";
+  color: $plastroc-main;
+}
