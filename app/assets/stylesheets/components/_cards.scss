@@ -38,3 +38,26 @@
     color: $plastroc-main;
   }
 }
+
+.campaigns-wrapper {
+    padding: 16px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    .campaign-card {
+        flex: 0 0 auto;
+        height: 200px;
+        width: 400px;
+        a {
+            display: inline-block;
+            text-align: right;
+        }
+        img {
+            width: 160px;
+        }
+    }
+}
