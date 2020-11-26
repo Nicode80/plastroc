@@ -276,7 +276,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @organisation2.save!
 
   # Second user
-  puts "2/2 - including 2 campaigns each"
+  puts "2/2 - including 2 campaigns each for yann@goodplanet.com (pwd: 123456)"
   @user2 = User.new
     @user2.first_name = "Yann"
     @user2.last_name = "A. Bertrand"
