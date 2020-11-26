@@ -39,3 +39,42 @@
     color: $plastroc-main;
   }
 }
+
+.campaigns-wrapper {
+    padding: 0px 16px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+body::-webkit-scrollbar {
+   display: none;
+   width: 0px;
+   background: transparent;
+}
+
+.campaign-card {
+    overflow: hidden;
+    a { color: #737373; }
+}
+
+.card-horizontal {
+    height: 100px;
+}
+
+.campaign-card-img {
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    img { object-fit: cover; }
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
