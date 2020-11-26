@@ -1,20 +1,20 @@
 <div class="container">
   <div class="d-flex align-items-center justify-content-between">
-    <h3>New instruction</h3>
+    <h3>Nouvelle Instruction</h3>
   </div>
   <%= simple_form_for [@material, @instruction] do |f| %>
-    <p>Give it a title & a picture</p>
+    <p>Donner un titre et une illustration</p>
     <%= f.input :title, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Title" %>
     <%= f.input :media, as: :file, label: false, input_html: { class: "input col-12 mb-3" } %>
     <br>
-    <p>Details instructions here</p>
+    <p>Details de l'instruction</p>
     <%= f.rich_text_area :rich_content, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Content" %>
     <br>
-    <p>Select the displayed order</p>
+    <p>Selectionner l'ordre d'apparition</p>
     <%= f.input :step_order, collection: (1..20), label: false, input_html: { class: "col-12 mb-3" } %>
     <div class='d-flex justify-content-end'>
-      <%= link_to 'Cancel', material_path(@material), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
-      <%= f.submit "Create", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+      <%= link_to 'Annuler', material_path(@material), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+      <%= f.submit "Vaider", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
     </div>
   <% end %>
 </div>

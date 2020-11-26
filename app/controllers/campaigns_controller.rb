@@ -21,7 +21,7 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new(campaign_params)
     @campaign.organisation = @organisation
     if @campaign.save
-      flash[:alert] = 'campaign created'
+       flash[:alert] = 'campagne ajoutée'
       redirect_to campaign_path(@campaign) #redirect to campaign show
     else
       render :new

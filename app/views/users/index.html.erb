@@ -1,7 +1,7 @@
 <div class="container" style="margin-bottom: 75px;">
   <div class="d-flex align-items-center justify-content-left">
     <%= link_to '◀︎', user_path(current_user), class: "btn btn-outline-primary rounded-pill d-block plastroc-outline-button mr-5" %>
-    <h2 class="mb-0">All users</h2>
+    <h2 class="mb-0">Classement</h2>
   </div>
   <ul class="list-group">
     <% @users.order(:xp).reverse.each do |user| %>

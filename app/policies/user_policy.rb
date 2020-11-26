@@ -6,8 +6,9 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    user.admin = true
+    user.admin
   end
+
   def show?
     record == user
   end
