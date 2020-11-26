@@ -4,6 +4,12 @@ class OrganisationsController < ApplicationController
     @organisations = policy_scope(Organisation)
   end
 
+  def show
+    @organisation = Organisation.find(params[:id])
+    @campaigns = @organisation.campaigns
+    authorize @organisation
+  end
+
   def new
     @organisation = Organisation.new
     authorize @organisation
@@ -32,7 +38,7 @@ class OrganisationsController < ApplicationController
       flash[:notice] = "Organisation mise à jour"
       redirect_to organisations_path
     else
-      render :new
+      render :edit
     end
     authorize @organisation
   end

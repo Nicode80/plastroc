@@ -13,6 +13,10 @@ class OrganisationPolicy < ApplicationPolicy
     return true
   end
 
+  def show?
+    record.user == user
+  end
+
   def update?
     record.user == user
     # - record: the organisation passed to the `authorize` method in controller

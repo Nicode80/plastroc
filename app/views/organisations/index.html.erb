@@ -1,5 +1,5 @@
 <div class="container" style="margin-bottom: 75px;">
-  <h3 class="mt-3 mb-3">Mes Organisations</h3>
+  <h3 class="mt-3 mb-3">Organisations</h3>
 
   <% @organisations.each do |org| %>
     <div class="container">
@@ -11,13 +11,13 @@
               <% if policy(org).update? %>
                 <%= link_to ' ',
                             edit_organisation_path(org),
-                            class: 'fas fa-edit ml-3' %>
+                            class: 'icon edit ml-3' %>
               <% end %>
           </div>
           <p><%= org.about %></p>
-          <p><i class="fas fa-map-marker-alt mr-2"></i><%= org.address %>, <%= org.city %>, <%= org.postcode %></p>
-          <p><i class="fas fa-clock mr-2"></i><%= org.opening_hours %></p>
-          <p><i class="fas fa-envelope mr-2"></i><%= org.contact %></p>
+          <p><span class="icon address"><%= org.address %>, <%= org.city %>, <%= org.postcode %></p></span>
+          <p><i class="icon clock"></i><%= org.opening_hours %></p>
+          <p><i class="icon mail"></i><%= org.contact %></p>
           <% if policy(Campaign).create? %>
             <%= link_to '✚ Campagne',
                         new_organisation_campaign_path(org),
