@@ -155,8 +155,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <% if current_user == @campaign.user %>
     <div class="bottom-nav">
         <div class="d-flex justify-content-around">
-            <p><%= link_to 'Editer',  %></p>
-            <p><%= link_to 'Stoper',   %></p>
+            <p><%= link_to 'Editer', edit_campaign_path(@campaign)  %></p>
+            <p><a href="#" style="color: red;">Stopper</a></p>
         </div>
     </div>
 

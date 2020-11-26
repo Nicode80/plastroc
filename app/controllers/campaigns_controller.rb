@@ -35,10 +35,19 @@ class CampaignsController < ApplicationController
 
   def edit
     @campaign = Campaign.find(params[:id])
+    authorize @campaign
   end
 
   def update
-
+    @campaign = Campaign.find(params[:id])
+    @campaign.update(campaign_params)
+    if @campaign.save
+      flash[:notice] = "campagne mise à jour"
+      redirect_to campaign_path(@campaign)
+    else
+      render :edit
+    end
+    authorize @campaign
   end
 
   def my_campaigns

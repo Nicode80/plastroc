@@ -38,7 +38,7 @@ class OrganisationsController < ApplicationController
       flash[:notice] = "Organisation mise à jour"
       redirect_to organisations_path
     else
-      render :new
+      render :edit
     end
     authorize @organisation
   end
