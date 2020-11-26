@@ -15,8 +15,22 @@
           <%= link_to "Home", "#", class: "nav-link" %>
         </li>
         <li class="nav-item">
+          <% if policy(Organisation).index? %>
+            <%= link_to "My Organisations", organisations_path, class: "nav-link" %>
+          <% end %>
+        </li>
+        <li class="nav-item">
           <% if policy(Organisation).create? %>
             <%= link_to "Add Organisation", new_organisation_path, class: "nav-link" %>
+          <% end %>
+        </li>
+          <% if policy(Campaign).my_campaigns? %>
+            <%= link_to "My Campaigns", my_campaigns_campaigns_path, class: "nav-link" %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if policy(Campaign).create? %>
+            <%= link_to "Add Campaign", organisations_path, class: "nav-link" %>
           <% end %>
         </li>
         <li class="nav-item">

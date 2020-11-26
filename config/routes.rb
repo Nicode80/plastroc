@@ -10,9 +10,13 @@ Rails.application.routes.draw do
     resources :instructions, only: [ :create, :new ]
   end
 
-  resources :campaigns, only: [ :index, :edit, :update, :delete ] do
+  resources :campaigns, only: [ :index, :edit, :update ] do
     resources :package, only: :index
+    collection do
+      get :my_campaigns
+    end
   end
+
   resources :instructions, only: [ :edit, :destroy, :update ]
   resources :users, only: [ :index, :show ]
   resources :missions, only: [ :index ]
