@@ -1,1 +1,40 @@
-<h1>Missions index</h1>
+<div class='container'>
+  <h2>Accueil</h2>
+
+  <!-- My organisations -->
+  <% if !current_user.organisations.empty? %>
+    <h4 class="mt-3">Mes Organisations</h4>
+    <hr class="mb-3">
+    <% current_user.organisations.each do |organisation| %>
+      <%= organisation.name %>
+    <% end %>
+  <% end %>
+
+  <!-- Ongoing missions -->
+  <h4 class="mt-3">Mes Missions</h4>
+  <hr class="mb-3">
+  <% if current_user.missions.empty? %>
+    <p>No mission ongoing yet</p>
+  </div>
+  <% else %>
+    <% current_user.missions.each do |mission| %>
+      <%= mission %>
+    <% end %>
+  <% end %>
+
+</div>
+
+<!-- nav bar -->
+<div class="bottom-nav">
+    <div class="d-flex justify-content-between">
+      <%= link_to missions_path, class: 'text-decoration-none flex-fill' do %>
+        <p class="active-tab"><i class="fas fa-home"></i></p>
+      <% end %>
+      <%= link_to campaigns_path, class: 'text-decoration-none flex-fill' do %>
+        <p class=""><i class="fas fa-search"></i></p>
+      <% end %>
+      <%= link_to user_path(current_user), class: 'text-decoration-none flex-fill' do %>
+        <p class=""><i class=" fas fa-user"></i></p>
+      <% end %>
+    </div>
+</div>

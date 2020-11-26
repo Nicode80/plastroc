@@ -1,21 +1,21 @@
 <div class="container">
   <div class="d-flex align-items-center justify-content-between">
-    <h3>Edit instruction</h3>
+    <h3>Editer Instruction</h3>
   </div>
   <%= simple_form_for @instruction do |f| %>
-    <p>Edit title & a picture</p>
+    <p>Editer le titre et l'illustration</p>
     <%= f.input :title, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Title" %>
     <%= f.input :media, as: :file, label: false, input_html: { class: "input col-12 mb-3" } %>
     <br>
-    <p>Edit instructions</p>
+    <p>Editer les détails de l'instruction</p>
     <%= f.rich_text_area :rich_content, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Content" %>
     <br>
-    <p>Change the displayed order</p>
+    <p>Changer l'ordre d'apparition</p>
     <%= f.input :step_order, collection: (1..20), label: false, input_html: { class: "col-12 mb-3" } %>
     <div class='d-flex justify-content-end mb-3'>
-      <%= link_to 'Cancel', instruction_path(@instruction), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
-      <%= link_to 'Delete', instruction_path(@instruction), method: :delete, class: "btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
-      <%= f.submit "Update", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+      <%= link_to 'Annuler', instruction_path(@instruction), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+      <%= link_to 'Supprimer', instruction_path(@instruction), method: :delete, class: "btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+      <%= f.submit "Valider", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
     </div>
   <% end %>
 </div>

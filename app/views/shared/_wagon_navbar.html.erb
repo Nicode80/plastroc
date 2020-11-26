@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to "#", class: "navbar-brand" do %>
     <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
+  <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -16,26 +16,26 @@
         </li>
         <li class="nav-item">
           <% if policy(Organisation).index? %>
-            <%= link_to "My Organisations", organisations_path, class: "nav-link" %>
+            <%= link_to "Organisations", organisations_path, class: "nav-link" %>
           <% end %>
         </li>
         <li class="nav-item">
           <% if policy(Organisation).create? %>
-            <%= link_to "Add Organisation", new_organisation_path, class: "nav-link" %>
+            <%= link_to "✚ Organisation", new_organisation_path, class: "nav-link" %>
           <% end %>
         </li>
           <% if policy(Campaign).my_campaigns? %>
-            <%= link_to "My Campaigns", my_campaigns_campaigns_path, class: "nav-link" %>
+            <%= link_to "Campagnes", my_campaigns_campaigns_path, class: "nav-link" %>
           <% end %>
         </li>
         <li class="nav-item">
           <% if policy(Campaign).create? %>
-            <%= link_to "Add Campaign", organisations_path, class: "nav-link" %>
+            <%= link_to "✚ Campagne", organisations_path, class: "nav-link" %>
           <% end %>
         </li>
         <li class="nav-item">
           <% if policy(Material).index? %>
-            <%= link_to "All materials", materials_path, class: "nav-link" %>
+            <%= link_to "Matériaux", materials_path, class: "nav-link" %>
           <% end %>
         </li>
         <li class="nav-item dropdown">
