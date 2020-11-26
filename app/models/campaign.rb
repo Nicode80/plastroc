@@ -18,4 +18,8 @@ class Campaign < ApplicationRecord
   validates :target, presence: true, numericality: { only_integer: true }
   validates :unit, presence: true, inclusion: { in: UNITS }
 
+
+  def number_of_days
+    (end_date - Date.today).to_i
+  end
 end
