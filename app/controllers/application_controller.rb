@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+
   include Pundit
 
   # Pundit: white-list approach.
@@ -7,6 +8,14 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+    def after_sign_in_path_for(user)
+      if user.missions.where(status: 'ongoing') == []
+        campaigns_path
+      else
+        missions_path
+      end
+    end
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb

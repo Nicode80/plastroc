@@ -1,0 +1,44 @@
+<div class="container" style='margin-bottom: 75px'>
+  <div class="d-flex align-items-center">
+      <% if @user.photo.attached? %>
+        <%= cl_image_tag @user.photo.key, class: "avatar mr-3" %>
+      <% else %>
+        <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" class="avatar mr-3">
+      <% end %>
+    <h2 class="mb-0"><%= @user.first_name %></h2>
+  </div>
+
+  <!-- Profiles info -->
+  <h4 class="mt-3">Profile</h4>
+  <hr class="mb-3">
+  <p><i class="far fa-user"></i> <%= @user.first_name %> <%= @user.last_name %></p>
+  <p><i class="fas fa-envelope"></i> <%= @user.email %></p>
+  <p><i class="fas fa-trophy"></i> <%= @user.xp %></p>
+  <div class="d-flex justify-content-between">
+    <%= link_to "Edit profile",  edit_user_registration_path, class: "flex-fill mr-3 btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "flex-fill btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+  </div>
+
+  <!-- only for admin users -->
+  <% if policy(User).index? %>
+    <h4 class="mt-3">Admin</h4>
+    <hr class="mb-3">
+    <%= link_to "All users", users_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+    <%= link_to "All materials", materials_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+  <% end %>
+</div>
+
+<!-- nav bar -->
+<div class="bottom-nav">
+    <div class="d-flex justify-content-between">
+      <%= link_to missions_path, class: 'text-decoration-none flex-fill' do %>
+        <p class=""><i class="fas fa-home"></i></p>
+      <% end %>
+      <%= link_to campaigns_path, class: 'text-decoration-none flex-fill' do %>
+        <p class=""><i class="fas fa-search"></i></p>
+      <% end %>
+      <%= link_to user_path(current_user), class: 'text-decoration-none flex-fill' do %>
+        <p class="active-tab"><i class=" fas fa-user"></i></p>
+      <% end %>
+    </div>
+</div>
