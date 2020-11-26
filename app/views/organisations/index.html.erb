@@ -12,9 +12,14 @@
           <p><i class="fas fa-clock mr-2"></i><%= org.opening_hours %></p>
           <p><i class="fas fa-envelope mr-2"></i><%= org.contact %></p>
           <% if policy(org).update? %>
+            <%= link_to 'Add Campaign',
+                        new_organisation_campaign_path(org),
+                        class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
+          <% end %>
+          <% if policy(org).update? %>
             <%= link_to 'Edit',
                         edit_organisation_path(org),
-                        class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
+                        class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button' %>
           <% end %>
           <% if policy(org).destroy? %>
             <button data-id="<%= org.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-button">Delete</button>
