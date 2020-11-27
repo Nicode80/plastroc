@@ -10,6 +10,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   </div>
 
   <div class="container">
+    <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
     <h5 class="mb-0"><%= @campaign.name %></h5>
     <h6>by <%= @campaign.organisation.name %></h6>
   </div>
@@ -249,5 +250,3 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 </div>
-
-
