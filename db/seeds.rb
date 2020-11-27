@@ -126,6 +126,44 @@ puts 'Creating ABS material...'
       )
   @instruction3.save!
 
+################################################################################
+
+# Third Material
+puts 'Creating Organic material...'
+@compost = Material.new
+  @compost.name = "Composte ménager"
+  @compost.description = "Epluchures de légumes et de fruits"
+  @compost.category  = "Composte"
+  @compost.photo.attach(
+    io: File.open(Rails.root.join('db/fixtures/compost.jpeg')),
+    filename: 'compost.jpeg',
+    )
+@compost.save!
+
+  # Second Material Instructions
+  puts 'Creating Organic instructions...'
+  @instruction1 = Instruction.new
+    @instruction1.title = "Récupérez vos épluchures"
+    @instruction1.rich_content = "Ne choisissez que les épluchures de légumes et de fruits hors agrumes et kiwi (trop acides)."
+    @instruction1.step_order = 1
+    @instruction1.material = @compost
+    @instruction1.media.attach(
+      io: File.open(Rails.root.join('db/fixtures/compost.jpeg')),
+      filename: 'compost.jpeg',
+      )
+  @instruction1.save!
+
+  @instruction2 = Instruction.new
+    @instruction2.title = "Démontez le clavier"
+    @instruction2.rich_content = "Retirez les éventuels résidus de plastique"
+    @instruction2.step_order = 2
+    @instruction2.material = @compost
+    @instruction2.media.attach(
+      io: File.open(Rails.root.join('db/fixtures/compost.jpeg')),
+      filename: 'elec.jpeg',
+      )
+  @instruction2.save!
+
 ########################################################################
 ########################################################################
 
@@ -272,69 +310,69 @@ puts 'Deleting all Users...'
     @organisation.save!
   end
 
-# count on seed
-x= 0
+# # count on seed
+# x= 0
 
-# 50 random accounts
-puts "Creating 20 fake user accounts..."
-  20.times do
-    x += 1
-    puts "#{x}/25"
-    @user = User.new
-    @user.first_name = Faker::Name.name
-    @user.last_name = Faker::Name.last_name
-    @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
-    @user.password = "123456"
-    @user.xp = rand(0..800)
-    file = URI.open('https://i.pravatar.cc/200')
-    @user.photo.attach(
-      io: file,
-      filename: "user#{x}.jpg",
-      )
-    @user.save!
-  end
+# # 50 random accounts
+# puts "Creating 20 fake user accounts..."
+#   20.times do
+#     x += 1
+#     puts "#{x}/25"
+#     @user = User.new
+#     @user.first_name = Faker::Name.name
+#     @user.last_name = Faker::Name.last_name
+#     @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
+#     @user.password = "123456"
+#     @user.xp = rand(0..800)
+#     file = URI.open('https://i.pravatar.cc/200')
+#     @user.photo.attach(
+#       io: file,
+#       filename: "user#{x}.jpg",
+#       )
+#     @user.save!
+#   end
 
-# 5 random accounts with 1 organisation
-puts "Creating 5 more fake user accounts with organisation..."
-  5.times do
-    x += 1
-    puts "#{x}/25"
-    @user = User.new
-    @user.first_name = Faker::Name.name
-    @user.last_name = Faker::Name.last_name
-    @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
-    @user.password = "123456"
-    @user.xp = rand(0..800)
-    file = URI.open('https://i.pravatar.cc/200')
-    @user.photo.attach(
-      io: file,
-      filename: "user#{x}.jpg",
-      )
-    @user.save!
+# # 5 random accounts with 1 organisation
+# puts "Creating 5 more fake user accounts with organisation..."
+#   5.times do
+#     x += 1
+#     puts "#{x}/25"
+#     @user = User.new
+#     @user.first_name = Faker::Name.name
+#     @user.last_name = Faker::Name.last_name
+#     @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
+#     @user.password = "123456"
+#     @user.xp = rand(0..800)
+#     file = URI.open('https://i.pravatar.cc/200')
+#     @user.photo.attach(
+#       io: file,
+#       filename: "user#{x}.jpg",
+#       )
+#     @user.save!
 
-    # organisation
-    @organisation = Organisation.new
-    @organisation.user = @user
-    @organisation.name = Faker::Company.name
-    @organisation.about = "Lorem ipsum dolor sit amet,
-      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-    @organisation.address = "Paris 750#{rand(10..20)}"
-    @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
-    @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
-    file = URI.open("https://fakeimg.pl/200x200/?text=#{@organisation.name}")
-    @organisation.photo.attach(
-      io: file,
-      filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
-      )
-    @organisation.save!
-  end
+#     # organisation
+#     @organisation = Organisation.new
+#     @organisation.user = @user
+#     @organisation.name = Faker::Company.name
+#     @organisation.about = "Lorem ipsum dolor sit amet,
+#       consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+#       Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+#     @organisation.address = "Paris 750#{rand(10..20)}"
+#     @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
+#     @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+#     file = URI.open("https://fakeimg.pl/200x200/?text=#{@organisation.name}")
+#     @organisation.photo.attach(
+#       io: file,
+#       filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
+#       )
+#     @organisation.save!
+#   end
 
-# 2 random Admin accounts with 2 organisations
-puts "Creating 2 more fake user accounts with 2 organisations each..."
+# 3 random Admin accounts with 2 organisations
+puts "Creating 3 more fake user accounts with 2 organisations each..."
 
   # Premier user
-  puts "1/2"
+  puts "1/3 - with 2 campaigns"
   @user1 = User.new
     @user1.first_name = "Michel"
     @user1.last_name = "Flantier"
@@ -372,6 +410,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @campaign3.min_package = 20
     @campaign3.start_date = Date.today
     @campaign3.end_date = Date.today + 4.weeks
+    @campaign3.status = 'ongoing'
     @campaign3.organisation = @organisation1
     @campaign3.material = @pet
     @campaign3.published = true
@@ -416,6 +455,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @campaign4.min_package = 20
     @campaign4.start_date = Date.today
     @campaign4.end_date = Date.today + 4.weeks
+    @campaign4.status = 'ongoing'
     @campaign4.organisation = @organisation2
     @campaign4.material = @abs
     @campaign4.published = true
@@ -438,7 +478,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     end
 
   # Second user
-  puts "2/2 - including 2 campaigns for yann@goodplanet.com (pwd: 123456)"
+  puts "2/3 - including 2 campaigns for yann@goodplanet.com (pwd: 123456)"
   @user2 = User.new
     @user2.first_name = "Yann"
     @user2.last_name = "A. Bertrand"
@@ -477,6 +517,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @campaign1.start_date = Date.today
     @campaign1.end_date = Date.today + 4.weeks
     @campaign1.organisation = @organisation3
+    @campaign1.status = 'ongoing'
     @campaign1.material = @pet
     @campaign1.published = true
     file = URI.open('https://images.unsplash.com/photo-1572964734607-0051976fac79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80')
@@ -522,6 +563,7 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
     @campaign2.end_date = Date.today + 3.weeks
     @campaign2.organisation = @organisation4
     @campaign2.material = @abs
+    @campaign2.status = 'ongoing'
     @campaign2.published = true
     file = URI.open('https://images.unsplash.com/photo-1569372069325-270201150e3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80')
     @campaign2.photo.attach(
@@ -537,6 +579,112 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       @quantity = (x + 1) * @campaign2.min_package
       @reward = (x + 1) * @campaign2.min_package / 2
       @campaign2.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      x += 1
+    end
+
+  # Third user
+  puts "3/3 - including 2 campaigns for aram@oucompost.com (pwd: 123456)"
+  @user3 = User.new
+    @user3.first_name = "Aram"
+    @user3.last_name = "Sulukdjian"
+    @user3.email = "aram@oucompost.com"
+    @user3.password = "123456"
+    @user3.admin = true
+    @user3.xp = rand(800..900)
+    file = URI.open('https://i.pravatar.cc/200')
+    @user3.photo.attach(
+      io: file,
+      filename: "aram.jpg",
+      )
+    @user3.save!
+
+    # organisation5
+    @organisation5 = Organisation.new
+    @organisation5.user = @user3
+    @organisation5.name = "Ou compost Madeleine"
+    @organisation5.about = "Platform to find local compost bins, privates willing to collect organic waste for their gardens and businesses in need of organic waste."
+    @organisation5.address = "Place de la Madeleine, Paris"
+    @organisation5.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
+    @organisation5.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+    @organisation5.photo.attach(
+      io: File.open(Rails.root.join('db/fixtures/oucompost.png')),
+      filename: 'oucompost.png',
+      )
+    @organisation5.save!
+
+    # campaign6
+    @campaign6 = Campaign.new
+    @campaign6.name = "Recyclage Composte"
+    @campaign6.description = "Recyclage de composte ménager"
+    @campaign6.target = 2000
+    @campaign6.unit = "kg"
+    @campaign6.min_package = 10
+    @campaign6.start_date = Date.today
+    @campaign6.end_date = Date.today + 4.weeks
+    @campaign6.organisation = @organisation5
+    @campaign6.material = @compost
+    @campaign6.published = true
+    @campaign6.status = 'ongoing'
+    file = URI.open('https://images.unsplash.com/photo-1516711345667-ebafb3ebea12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80')
+    @campaign6.photo.attach(
+      io: file,
+      filename: "campagne6.jpg",
+      )
+    @campaign6.save!
+
+    iterators = [(@campaign6.target / @campaign6.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    x = 0
+    iterators.times do
+      @name = names[x]
+      @quantity = (x + 1) * @campaign6.min_package
+      @reward = (x + 1) * @campaign6.min_package / 2
+      @campaign6.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      x += 1
+    end
+
+    # organisation6
+    @organisation6 = Organisation.new
+    @organisation6.user = @user3
+    @organisation6.name = "Ou compost Nation"
+    @organisation6.about = "Platform to find local compost bins, privates willing to collect organic waste for their gardens and businesses in need of organic waste."
+    @organisation6.address = "Place de la Nation, Paris"
+    @organisation6.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
+    @organisation6.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+    @organisation6.photo.attach(
+      io: File.open(Rails.root.join('db/fixtures/oucompost.png')),
+      filename: 'oucompost.png',
+      )
+    @organisation6.save!
+
+    # campaign7
+    @campaign7 = Campaign.new
+    @campaign7.name = "Recyclage Composte"
+    @campaign7.description = "Recyclage de composte ménager"
+    @campaign7.target = 2000
+    @campaign7.unit = "kg"
+    @campaign7.min_package = 10
+    @campaign7.start_date = Date.today
+    @campaign7.end_date = Date.today + 4.weeks
+    @campaign7.organisation = @organisation6
+    @campaign7.material = @compost
+    @campaign7.published = true
+    @campaign7.status = 'ongoing'
+    file = URI.open('https://images.unsplash.com/photo-1516711345667-ebafb3ebea12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80')
+    @campaign7.photo.attach(
+      io: file,
+      filename: "campagne6.jpg",
+      )
+    @campaign7.save!
+
+    iterators = [(@campaign7.target / @campaign7.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    x = 0
+    iterators.times do
+      @name = names[x]
+      @quantity = (x + 1) * @campaign7.min_package
+      @reward = (x + 1) * @campaign7.min_package / 2
+      @campaign7.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
       x += 1
     end
 
