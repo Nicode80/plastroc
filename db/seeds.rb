@@ -363,6 +363,36 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       )
     @organisation1.save!
 
+    # campaign3
+    @campaign3 = Campaign.new
+    @campaign3.name = "Recyclage PET local"
+    @campaign3.description = "Recyclage de materiaux PET verts"
+    @campaign3.target = 4000
+    @campaign3.unit = "kg"
+    @campaign3.min_package = 20
+    @campaign3.start_date = Date.today
+    @campaign3.end_date = Date.today + 4.weeks
+    @campaign3.organisation = @organisation1
+    @campaign3.material = @pet
+    @campaign3.published = true
+    file = URI.open('https://images.unsplash.com/photo-1572964782790-92b2dccabe68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80')
+    @campaign3.photo.attach(
+      io: file,
+      filename: "campagne1.jpg",
+      )
+    @campaign3.save!
+
+    iterators = [(@campaign3.target / @campaign3.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    x = 0
+    iterators.times do
+      @name = names[x]
+      @quantity = (x + 1) * @campaign3.min_package
+      @reward = (x + 1) * @campaign3.min_package / 2
+      @campaign3.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      x += 1
+    end
+
     # organisation2
     @organisation2 = Organisation.new
     @organisation2.user = @user1
@@ -376,6 +406,36 @@ puts "Creating 2 more fake user accounts with 2 organisations each..."
       filename: 'paprec.jpg',
       )
     @organisation2.save!
+
+    # campaign4
+    @campaign4 = Campaign.new
+    @campaign4.name = "Recyclage ABS local"
+    @campaign4.description = "Recyclage de ABS noir et gris foncé"
+    @campaign4.target = 4000
+    @campaign4.unit = "kg"
+    @campaign4.min_package = 20
+    @campaign4.start_date = Date.today
+    @campaign4.end_date = Date.today + 4.weeks
+    @campaign4.organisation = @organisation2
+    @campaign4.material = @abs
+    @campaign4.published = true
+    file = URI.open('https://images.unsplash.com/photo-1572964782790-92b2dccabe68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80')
+    @campaign4.photo.attach(
+      io: file,
+      filename: "campagne1.jpg",
+      )
+    @campaign4.save!
+
+    iterators = [(@campaign4.target / @campaign4.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    x = 0
+    iterators.times do
+      @name = names[x]
+      @quantity = (x + 1) * @campaign4.min_package
+      @reward = (x + 1) * @campaign4.min_package / 2
+      @campaign4.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      x += 1
+    end
 
   # Second user
   puts "2/2 - including 2 campaigns for yann@goodplanet.com (pwd: 123456)"
