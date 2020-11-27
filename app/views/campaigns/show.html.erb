@@ -3,7 +3,11 @@
 <div class="banner d-flex flex-column justify-content-between"
 
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-                          url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
+                          <% if @campaign.photo.attached? %>
+                            url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')"
+                          <% else %>
+                            url('https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')"
+                          <% end %>>
   <div class="container">
     <!-- add if statement depending on sorter or recycler -->
     <h4><%= link_to :back, class: "position-absolute" do %>
@@ -14,7 +18,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="container">
     <div class="d-flex flex-column align-items-center">
-      <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+      <% if @campaign.organisation.photo.attached? %>
+        <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+      <% else %>
+        <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+      <% end %>
       <h5 class="mb-0"><%= @campaign.name %></h5>
       <h6>by <%= @campaign.organisation.name %></h6>
     </div>
@@ -31,7 +39,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 <!-- Tabs-content -->
 
-<div class="tab-content position-relative">
+<div class="tab-content position-relative" style="margin-bottom: 75px;">
 
   <!-- Info-Tab -->
 
@@ -51,7 +59,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       <h5>Infos</h5>
       <div class="d-flex justify-content-between">
         <div class="d-flex flex-column align-items-center">
-          <%= cl_image_tag @campaign.material.photo.key, class: "avatar m-2"%>
+          <% if @campaign.material.photo.attached? %>
+            <%= cl_image_tag @campaign.material.photo.key, class: "avatar m-2"%>
+          <% else %>
+            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+          <% end %>
           <p class="mb-2"><%= @campaign.material.name %></p>
         </div>
 
@@ -85,7 +97,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       </div>
 
       <% if current_user != @campaign.user %>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
+        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
           Poser une question
         </button>
       <% end %>
@@ -109,9 +121,13 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
               </div>
           </div>
       <% end %>
-      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
-        Poser une question
-      </button>
+
+      <% if current_user != @campaign.user %>
+        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+          Poser une question
+        </button>
+      <% end %>
+
     </div>
   </div>
 
@@ -151,8 +167,13 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           </section>
         </div>
       </div>
-    <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
-        Poser une question</button>
+
+    <% if current_user != @campaign.user %>
+      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+        Poser une question
+      </button>
+    <% end %>
+
     </div>
   </div>
 
