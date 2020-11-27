@@ -71,14 +71,14 @@ class CampaignsController < ApplicationController
     #   organisation.campaigns.status == 'ongoing'
     # end
     @organisations = []
-    Organisation.all.each do |organisation|
+    Organisation.all.geocoded.each do |organisation|
       ongoing_campaigns = 0
       organisation.campaigns.each do |campaign|
         if campaign.status == 'ongoing'
           ongoing_campaigns += 1
         end
       end
-      if ongoing_campaigns.positive? && organisation.latitude.present? && organisation.longitude.present?
+      if ongoing_campaigns.positive?
         @organisations << organisation
       end
     end
