@@ -2,6 +2,15 @@ class CampaignsController < ApplicationController
 
   def index # for the moment show all campaigns but will need to sort if on organisation view
     @campaigns = policy_scope(Campaign)
+    # @organisations = Organisation.all
+    @organisations = organisations_with_active_campaigns
+    # raise
+    @markers = @organisations.map do |orga|
+      {
+        lat: orga.latitude,
+        lng: orga.longitude
+      }
+    end
   end
 
   def show
@@ -56,6 +65,25 @@ class CampaignsController < ApplicationController
   end
 
   private
+
+  def organisations_with_active_campaigns
+    # Organisation.includes(:campaigns).select do |organisation|
+    #   organisation.campaigns.status == 'ongoing'
+    # end
+    @organisations = []
+    Organisation.all.each do |organisation|
+      ongoing_campaigns = 0
+      organisation.campaigns.each do |campaign|
+        if campaign.status == 'ongoing'
+          ongoing_campaigns += 1
+        end
+      end
+      if ongoing_campaigns.positive? && organisation.latitude.present? && organisation.longitude.present?
+        @organisations << organisation
+      end
+    end
+    return @organisations
+  end
 
   def create_packages
     iterators = [(@campaign.target / @campaign.min_package).floor, 4].min

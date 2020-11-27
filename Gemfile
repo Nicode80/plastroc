@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
 gem 'pundit'
+gem 'geocoder'
 
 # for user and organisation seed
 gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'

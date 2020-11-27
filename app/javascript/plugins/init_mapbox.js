@@ -5,6 +5,7 @@ const initMapbox = async () => {
   if (!mapElement) return; // only build a map if there's a div#map to inject into
 
 
+
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
   const map = new mapboxgl.Map({
     container: 'map',
@@ -16,6 +17,21 @@ const initMapbox = async () => {
   const userPosition = navigator.geolocation.getCurrentPosition((position) => {
     locateUser(map, position);
   });
+
+  const markers = JSON.parse(mapElement.dataset.markers);
+  markers.forEach((marker) => {
+    new mapboxgl.Marker()
+      .setLngLat([ marker.lng, marker.lat ])
+      .addTo(map);
+  });
+  // fitMapToMarkers(map, markers);
+
+};
+
+const fitMapToMarkers = (map, markers) => {
+  const bounds = new mapboxgl.LngLatBounds();
+  markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
+  map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
 };
 
 const locateUser = (map, position) => {
@@ -24,10 +40,11 @@ const locateUser = (map, position) => {
   if (!mapElement) return; // only build a map if there's a div#map to inject into
 
   map.flyTo({center: [position.coords.longitude, position.coords.latitude],
-    zoom: 14,
+    zoom: 11,
     speed: 0.8, // make the flying slow
     curve: 1, // change the speed at which it zooms out
   });
-}
+};
+
 
 export { initMapbox };
