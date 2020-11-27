@@ -17,3 +17,9 @@
 .package-badge-fluid {
   height: 90px;
 }
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}

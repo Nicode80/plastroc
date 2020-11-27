@@ -1,6 +1,7 @@
 <!-- Banner -->
 
 <div class="banner d-flex flex-column justify-content-between position-relative"
+
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
   <div class="container">
@@ -84,7 +85,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       </div>
 
       <% if current_user != @campaign.user %>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
           Poser une question
         </button>
       <% end %>
@@ -108,7 +109,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
               </div>
           </div>
       <% end %>
-      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
         Poser une question
       </button>
     </div>
@@ -150,10 +151,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           </section>
         </div>
       </div>
-    <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+    <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
         Poser une question</button>
     </div>
   </div>
+
+<!-- Bottom-CTA -->
 
   <% if current_user == @campaign.user %>
     <div class="bottom-nav">
@@ -172,6 +175,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 
 <!-- Modal Packages -->
+
 <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -181,20 +185,24 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <% @campaign.packages.each do |package| %>
-          <div class="d-flex flex-row card card-s">
-            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-              alt="">
-            <section class="w-100">
-              <div class="w-100 d-flex align-items-center justify-content-between">
-                <h6>Pack <%= package.name %></h6>
-                <span class="text-decoration-none badge badge-primary badge-pill mb-2"><i class="fas fa-trophy"></i> <%= package.xp_reward %></span>
+      <div class="modal-body package-grid">
+          <% @campaign.packages.each do |package| %>
+            <div class="package-badge package-badge-square my-2">
+              <div class="container p-3">
+                  <h6><%= package.name %></h6>
+                  <div class="d-flex justify-content-between align-items-center text-center mt-3">
+                      <div>
+                          <i class="fas fa-weight-hanging text-primary mb-2"></i>
+                          <p><strong><%= package.quantity %> <%= @campaign.unit %></strong></p>
+                      </div>
+                      <div>
+                          <i class="fas fa-angle-double-up text-primary mb-2"></i>
+                          <p><%= package.quantity %></p>
+                      </div>
+                  </div>
               </div>
-              <p><strong><%=  package.quantity %> <%= @campaign.unit %></strong> de <%= @campaign.material.name %></p>
-            </section>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
       </div>
     </div>
   </div>
@@ -202,6 +210,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 
 <!-- Modal Edit  -->
+
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
