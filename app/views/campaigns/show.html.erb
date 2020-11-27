@@ -1,188 +1,188 @@
-<div class="banner d-flex flex-column justify-content-between"
-style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+<div class="banner d-flex flex-column justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
-  <div class="container">
-    <!-- add if statement depending on sorter or recycler -->
-    <h4><%= link_to organisation_path(@campaign.organisation) do %>
-      <i class="fas fa-arrow-left"></i>
-      <% end %>
-    </h4>
-  </div>
+   <div class="container">
+      <!-- add if statement depending on sorter or recycler -->
+      <h4><%= link_to organisation_path(@campaign.organisation) do %>
+         <i class="fas fa-arrow-left"></i>
+         <% end %>
+      </h4>
+   </div>
 
-  <div class="container">
-    <h5 class="mb-0"><%= @campaign.name %></h5>
-    <h6>by <%= @campaign.organisation.name %></h6>
-  </div>
+   <div class="container">
+      <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+      <h5 class="mb-0"><%= @campaign.name %></h5>
+      <h6>by <%= @campaign.organisation.name %></h6>
+   </div>
 </div>
 
 <nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
-  <a class="active" href="#tab-info" data-toggle="tab">Info</a>
-  <a class="" href="#tab-how-to" data-toggle="tab">Tuto</a>
-  <a class="" href="#tab-contact" data-toggle="tab">Contact</a>
+   <a class="active" href="#tab-info" data-toggle="tab">Info</a>
+   <a class="" href="#tab-how-to" data-toggle="tab">Tuto</a>
+   <a class="" href="#tab-contact" data-toggle="tab">Contact</a>
 </nav>
 <div class="tab-content position-relative">
-  <div class="tab-pane active" id="tab-info">
-    <div class="container" id="campaign-infos">
-      <div class="d-flex justify-content-between align-items-center">
-          <h5 class="mb-0 mt-2">Progression</h5>
-          <!-- calcul from missions to add -->
-          <%#= @campaign.mission.where(:status :done) %>
-          <p class="mb-0">200/<%= @campaign.target %><%= @campaign.unit %></p>
+   <div class="tab-pane active" id="tab-info">
+      <div class="container" id="campaign-infos">
+         <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 mt-2">Progression</h5>
+            <!-- calcul from missions to add -->
+            <%#= @campaign.mission.where(:status :done) %>
+            <p class="mb-0">200/<%= @campaign.target %><%= @campaign.unit %></p>
+         </div>
+
+         <div class="plastroc-progress-bar mt-2 mb-4">
+            <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+         </div>
+
+         <h5>Infos</h5>
+         <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column align-items-center">
+               <%= cl_image_tag @campaign.material.photo.key, class: "avatar m-2"%>
+               <p class="mb-2"><%= @campaign.material.name %></p>
+            </div>
+
+            <div class="d-flex flex-column align-items-center">
+               <%= image_tag "https://images.unsplash.com/photo-1580227974546-fbd48825d991?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80", class: "avatar m-2"%>
+
+               <% if (@campaign.number_of_days) > 1 %>
+               <p><%= (@campaign.number_of_days) %> jours</p>
+               <% elsif (@campaign.number_of_days) == 1 %>
+               <p>1 jour</p>
+               <% else %>
+               <p>Terminé</p>
+               <% end %>
+            </div>
+
+            <div class="d-flex flex-column align-items-center">
+               <%= image_tag "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80", class: "avatar m-2"%>
+               <p>1</p> <!-- turn it dynamic when possible -->
+            </div>
+         </div>
+
+         <h5>Détails</h5>
+         <p><%= @campaign.description %></p>
+
+         <h5>Membres</h5>
+         <div class="d-flex">
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+         </div>
+
+         <% if current_user != @campaign.user %>
+         <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+            Poser une question
+         </button>
+         <% end %>
+
       </div>
-
-      <div class="plastroc-progress-bar mt-2 mb-4">
-        <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+   </div>
+   <div class="tab-pane" id="tab-how-to">
+      <div class="container" id="campaign-how-to">
+         <% @campaign.material.instructions.each do |instruction| %>
+         <div class="card card-m mt-3">
+            <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
+            <div class="card-body">
+               <span class="badge badge-pill badge-success">Etape <%= instruction.step_order %></span>
+               <section>
+                  <h6><%= instruction.title %></h6>
+                  <p><%= instruction.rich_content %></p>
+               </section>
+            </div>
+         </div>
+         <% end %>
+         <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+            Poser une question
+         </button>
       </div>
+   </div>
 
-      <h5>Infos</h5>
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column align-items-center">
-          <%= cl_image_tag @campaign.material.photo.key, class: "avatar m-2"%>
-          <p class="mb-2"><%= @campaign.material.name %></p>
-        </div>
-
-        <div class="d-flex flex-column align-items-center">
-          <%= image_tag "https://images.unsplash.com/photo-1580227974546-fbd48825d991?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80", class: "avatar m-2"%>
-
-          <% if (@campaign.number_of_days) > 1 %>
-            <p><%= (@campaign.number_of_days) %> jours</p>
-          <% elsif (@campaign.number_of_days) == 1 %>
-            <p>1 jour</p>
-          <% else %>
-            <p>Terminé</p>
-          <% end %>
-        </div>
-
-        <div class="d-flex flex-column align-items-center">
-          <%= image_tag "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80", class: "avatar m-2"%>
-          <p>1</p> <!-- turn it dynamic when possible -->
-        </div>
+   <div class="tab-pane" id="tab-contact">
+      <div class="container" id="campaign-contact">
+         <div class="card mt-3">
+            <div class="card-body">
+               <section>
+                  <h6>Que faisons nous ?</h6>
+                  <p><%= @campaign.organisation.about %></p>
+               </section>
+            </div>
+         </div>
+         <div class="card mt-3">
+            <div class="card-body">
+               <section>
+                  <h6><span class="icon address">Notre Adresse</h6></span>
+                  <p><%= @campaign.organisation.address %></p>
+               </section>
+            </div>
+         </div>
+         <div class="card mt-3">
+            <div class="card-body">
+               <section>
+                  <h6><span class="icon clock">Horaires d'ouverture</h6></span>
+                  <p><%= @campaign.organisation.opening_hours %></p>
+               </section>
+            </div>
+         </div>
+         <div class="card mt-3">
+            <div class="card-body">
+               <section>
+                  <h6><span class="icon mail">Contact</h6></span>
+                  <p><%= @campaign.organisation.contact %></p>
+               </section>
+            </div>
+         </div>
+         <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+            Poser une question</button>
       </div>
+   </div>
 
-      <h5>Détails</h5>
-      <p><%= @campaign.description %></p>
-
-      <h5>Membres</h5>
-      <div class="d-flex">
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+   <% if current_user == @campaign.user %>
+   <div class="bottom-nav">
+      <div class="d-flex justify-content-around">
+         <p><%= link_to 'Editer', edit_campaign_path(@campaign)  %></p>
+         <p><a href="#" style="color: red;">Stopper</a></p>
       </div>
+   </div>
 
-      <% if current_user != @campaign.user %>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-          Poser une question
-        </button>
-      <% end %>
-
-    </div>
-  </div>
-  <div class="tab-pane" id="tab-how-to">
-    <div class="container" id="campaign-how-to">
-      <% @campaign.material.instructions.each do |instruction| %>
-        <div class="card card-m mt-3">
-          <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
-              <div class="card-body">
-                  <span class="badge badge-pill badge-success">Etape <%= instruction.step_order %></span>
-                  <section>
-                      <h6><%= instruction.title %></h6>
-                      <p><%= instruction.rich_content %></p>
-                  </section>
-              </div>
-          </div>
-      <% end %>
-      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-        Poser une question
-      </button>
-    </div>
-  </div>
-
-  <div class="tab-pane" id="tab-contact">
-    <div class="container" id="campaign-contact">
-      <div class="card mt-3">
-        <div class="card-body">
-          <section>
-            <h6>Que faisons nous ?</h6>
-            <p><%= @campaign.organisation.about %></p>
-          </section>
-        </div>
-      </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <section>
-            <h6><span class="icon address">Notre Adresse</h6></span>
-            <p><%= @campaign.organisation.address %></p>
-          </section>
-        </div>
-      </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <section>
-            <h6><span class="icon clock">Horaires d'ouverture</h6></span>
-            <p><%= @campaign.organisation.opening_hours %></p>
-          </section>
-        </div>
-      </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <section>
-            <h6><span class="icon mail">Contact</h6></span>
-            <p><%= @campaign.organisation.contact %></p>
-          </section>
-        </div>
-      </div>
-    <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-        Poser une question</button>
-    </div>
-  </div>
-
-  <% if current_user == @campaign.user %>
-    <div class="bottom-nav">
-        <div class="d-flex justify-content-around">
-            <p><%= link_to 'Editer', edit_campaign_path(@campaign)  %></p>
-            <p><a href="#" style="color: red;">Stopper</a></p>
-        </div>
-    </div>
-
-  <% else %>
-    <button href="#" style="border-radius: 12px 12px 0px 0px" class='plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3' data-toggle="modal" data-target="#joinModal">
-    Rejoindre la campagne
-    </button>
-  <% end %>
+   <% else %>
+   <button href="#" style="border-radius: 12px 12px 0px 0px"
+      class='plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3'
+      data-toggle="modal" data-target="#joinModal">
+      Rejoindre la campagne
+   </button>
+   <% end %>
 </div>
 
 
 <!-- Modal -->
 <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Choisissez la mission</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Choisissez la mission</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <% @campaign.packages.each do |package| %>
+            <div class="d-flex flex-row card card-s">
+               <img
+                  src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                  alt="">
+               <section class="w-100">
+                  <div class="w-100 d-flex align-items-center justify-content-between">
+                     <h6>Pack <%= package.name %></h6>
+                     <span class="text-decoration-none badge badge-primary badge-pill mb-2"><i
+                           class="fas fa-trophy"></i> <%= package.xp_reward %></span>
+                  </div>
+                  <p><strong><%=  package.quantity %> <%= @campaign.unit %></strong> de <%= @campaign.material.name %>
+                  </p>
+               </section>
+            </div>
+            <% end %>
+         </div>
       </div>
-      <div class="modal-body">
-        <% @campaign.packages.each do |package| %>
-          <div class="d-flex flex-row card card-s">
-            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-              alt="">
-            <section class="w-100">
-              <div class="w-100 d-flex align-items-center justify-content-between">
-                <h6>Pack <%= package.name %></h6>
-                <span class="text-decoration-none badge badge-primary badge-pill mb-2"><i class="fas fa-trophy"></i> <%= package.xp_reward %></span>
-              </div>
-              <p><strong><%=  package.quantity %> <%= @campaign.unit %></strong> de <%= @campaign.material.name %></p>
-            </section>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+   </div>
 </div>
-
-
-
-
-
