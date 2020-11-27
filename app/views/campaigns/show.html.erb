@@ -1,26 +1,37 @@
+<!-- Banner -->
+
 <div class="banner d-flex flex-column justify-content-between"
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
   <div class="container">
     <!-- add if statement depending on sorter or recycler -->
-    <h4><%= link_to organisation_path(@campaign.organisation) do %>
+    <h4><%= link_to :back do %>
       <i class="fas fa-arrow-left"></i>
       <% end %>
     </h4>
   </div>
 
   <div class="container">
+    <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
     <h5 class="mb-0"><%= @campaign.name %></h5>
     <h6>by <%= @campaign.organisation.name %></h6>
   </div>
 </div>
+
+<!-- Tabs -->
 
 <nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
   <a class="active" href="#tab-info" data-toggle="tab">Info</a>
   <a class="" href="#tab-how-to" data-toggle="tab">Tuto</a>
   <a class="" href="#tab-contact" data-toggle="tab">Contact</a>
 </nav>
+
+<!-- Tabs-content -->
+
 <div class="tab-content position-relative">
+
+<!-- Info-Tab -->
+
   <div class="tab-pane active" id="tab-info">
     <div class="container" id="campaign-infos">
       <div class="d-flex justify-content-between align-items-center">
@@ -54,8 +65,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         </div>
 
         <div class="d-flex flex-column align-items-center">
-          <%= image_tag "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80", class: "avatar m-2"%>
-          <p>1</p> <!-- turn it dynamic when possible -->
+          <%= image_tag "https://tse3.mm.bing.net/th?id=OIP.Y0MT13_5LWvEps196W0blAHaGi&pid=Api", class: "avatar m-2"%>
+          <p>Level: 1</p> <!-- turn it dynamic when possible -->
         </div>
       </div>
 
@@ -78,6 +89,9 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
     </div>
   </div>
+
+<!-- How-to-Tab -->
+
   <div class="tab-pane" id="tab-how-to">
     <div class="container" id="campaign-how-to">
       <% @campaign.material.instructions.each do |instruction| %>
@@ -97,6 +111,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       </button>
     </div>
   </div>
+
+<!-- Contact-Tab -->
 
   <div class="tab-pane" id="tab-contact">
     <div class="container" id="campaign-contact">
@@ -137,10 +153,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 
+<!-- Bottom-CTA -->
+
   <% if current_user == @campaign.user %>
     <div class="bottom-nav">
         <div class="d-flex justify-content-around">
-            <p><%= link_to 'Editer', edit_campaign_path(@campaign)  %></p>
+            <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
             <p><a href="#" style="color: red;">Stopper</a></p>
         </div>
     </div>
@@ -153,7 +171,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 </div>
 
 
-<!-- Modal -->
+<!-- Modal Packages -->
+
 <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -163,26 +182,93 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <% @campaign.packages.each do |package| %>
-          <div class="d-flex flex-row card card-s">
-            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-              alt="">
-            <section class="w-100">
-              <div class="w-100 d-flex align-items-center justify-content-between">
-                <h6>Pack <%= package.name %></h6>
-                <span class="text-decoration-none badge badge-primary badge-pill mb-2"><i class="fas fa-trophy"></i> <%= package.xp_reward %></span>
+      <div class="modal-body package-grid">
+          <% @campaign.packages.each do |package| %>
+            <div class="package-badge package-badge-square my-2">
+              <div class="container p-3">
+                  <h6><%= package.name %></h6>
+                  <div class="d-flex justify-content-between align-items-center text-center mt-3">
+                      <div>
+                          <i class="fas fa-weight-hanging text-primary mb-2"></i>
+                          <p><strong><%= package.quantity %> <%= @campaign.unit %></strong></p>
+                      </div>
+                      <div>
+                          <i class="fas fa-angle-double-up text-primary mb-2"></i>
+                          <p><%= package.quantity %></p>
+                      </div>
+                  </div>
               </div>
-              <p><strong><%=  package.quantity %> <%= @campaign.unit %></strong> de <%= @campaign.material.name %></p>
-            </section>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
       </div>
     </div>
   </div>
 </div>
 
 
+<!-- Modal Edit  -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editer la campagne</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container" style="margin-bottom: 75px;">
+          <div id="materials" data-materials="<%= @materials.to_json %>"></div>
+          <%= simple_form_for @campaign do |f| %>
+            <%= f.input :name,
+                        label: "Nom",
+                        placeholder: "Nom*",
+                        input_html: { class: "col-12 mb-3" } %>
 
+            <%= f.input :description,
+                        label: "Description",
+                        placeholder: "Description*",
+                        input_html: { class: "col-12 mb-3" } %>
 
+            <%= f.input :end_date,
+                        as: :string,
+                        required: false,
+                        input_html: { class: "date-picker col-12 mb-3" } %>
 
+            <%= f.input :target,
+                        label: "Quantité totale",
+                        placeholder: "Quantité totale*",
+                        input_html: { class: "input col-12 mb-3" } %>
+
+            <%= f.input :min_package,
+                        label: "Quantité minimum par mission",
+                        placeholder: "Quantité minimum par mission*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :unit,
+                        label: false,
+                        as: :radio_buttons,
+                        collection: Campaign::UNITS,
+                        boolean_style: :inline,
+                        collection_wrapper_tag: 'div',
+                        collection_wrapper_class: 'unit-wrapper',
+                        item_wrapper_class: 'unit-item',
+                        input_html: {class: 'unit-selector'} %>
+
+            <%= f.input :min_package,
+                        label: "Quantité minimum par mission",
+                        placeholder: "Quantité minimum par mission*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :photo,
+                        as: :file,
+                        input_html: { class: "input col-12 mb-3" } %>
+
+            <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
+          <% end %>
+          <%= link_to 'Annuler', campaign_path(@campaign), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
