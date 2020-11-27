@@ -54,7 +54,7 @@
   <% if current_user.organisations.empty? %>
   <hr class="mb-3">
   <p class='text-center'>♻️ Vous êtes recycleur?</p>
-    <%= link_to 'Créer une première campagne de recyclage', campaigns_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+    <%= link_to 'Créer une première campagne de recyclage', new_organisation_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
   <% end %>
 
 </div>
