@@ -211,7 +211,7 @@ puts 'Deleting all Users...'
     @tom = User.new
     @tom.first_name = "Thomas"
     @tom.last_name = "Le Bihan"
-    @tom.email = "thomas.66days@gmail"
+    @tom.email = "thomas.66days@gmail.com"
     @tom.password = "123456"
     @tom.xp = 1000
     @tom.admin = true

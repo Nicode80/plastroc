@@ -141,7 +141,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <% if current_user == @campaign.user %>
     <div class="bottom-nav">
         <div class="d-flex justify-content-around">
-            <p><%= link_to 'Editer', edit_campaign_path(@campaign)  %></p>
+            <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
             <p><a href="#" style="color: red;">Stopper</a></p>
         </div>
     </div>
@@ -154,7 +154,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 </div>
 
 
-<!-- Modal -->
+<!-- Modal Packages -->
 <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -178,6 +178,74 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
             </section>
           </div>
         <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Edit  -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editer la campagne</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container" style="margin-bottom: 75px;">
+          <div id="materials" data-materials="<%= @materials.to_json %>"></div>
+          <%= simple_form_for @campaign do |f| %>
+            <%= f.input :name,
+                        label: "Nom",
+                        placeholder: "Nom*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :description,
+                        label: "Description",
+                        placeholder: "Description*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :end_date,
+                        as: :string,
+                        required: false,
+                        input_html: { class: "date-picker col-12 mb-3" } %>
+
+            <%= f.input :target,
+                        label: "Quantité totale",
+                        placeholder: "Quantité totale*",
+                        input_html: { class: "input col-12 mb-3" } %>
+
+            <%= f.input :min_package,
+                        label: "Quantité minimum par mission",
+                        placeholder: "Quantité minimum par mission*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :unit,
+                        label: false,
+                        as: :radio_buttons,
+                        collection: Campaign::UNITS,
+                        boolean_style: :inline,
+                        collection_wrapper_tag: 'div',
+                        collection_wrapper_class: 'unit-wrapper',
+                        item_wrapper_class: 'unit-item',
+                        input_html: {class: 'unit-selector'} %>
+
+            <%= f.input :min_package,
+                        label: "Quantité minimum par mission",
+                        placeholder: "Quantité minimum par mission*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :photo,
+                        as: :file,
+                        input_html: { class: "input col-12 mb-3" } %>
+
+            <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
+          <% end %>
+          <%= link_to 'Annuler', campaign_path(@campaign), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+        </div>
       </div>
     </div>
   </div>
