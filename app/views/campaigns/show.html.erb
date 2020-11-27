@@ -3,7 +3,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
   <div class="container">
     <!-- add if statement depending on sorter or recycler -->
-    <h4><%= link_to :back do %>
+    <h4><%= link_to organisation_path(@campaign.organisation) do %>
       <i class="fas fa-arrow-left"></i>
       <% end %>
     </h4>
