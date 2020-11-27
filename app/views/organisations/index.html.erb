@@ -4,8 +4,11 @@
   <% @organisations.each do |org| %>
     <div class="container">
       <div class="card card-m mb-3">
-        <%= cl_image_tag org.photo.key %>
-        <section>
+        <% if org.photo.attached? %>
+          <%= cl_image_tag org.photo.key, crop: :fill %>
+        <% else %>
+          <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+        <% end %>
           <div class="d-flex justify-content-between">
             <h6><%= org.name %></h6>
               <% if policy(org).update? %>
