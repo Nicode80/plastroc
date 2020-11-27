@@ -14,7 +14,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="container">
     <div class="d-flex flex-column align-items-center">
-      <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+      <% if @campaign.organisation.photo.attached? %>
+        <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+      <% else %>
+        <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+      <% end %>
       <h5 class="mb-0"><%= @campaign.name %></h5>
       <h6>by <%= @campaign.organisation.name %></h6>
     </div>
@@ -51,7 +55,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       <h5>Infos</h5>
       <div class="d-flex justify-content-between">
         <div class="d-flex flex-column align-items-center">
-          <%= cl_image_tag @campaign.material.photo.key, class: "avatar m-2"%>
+          <% if @campaign.material.photo.attached? %>
+            <%= cl_image_tag @campaign.material.photo.key, class: "avatar m-2"%>
+          <% else %>
+            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+          <% end %>
           <p class="mb-2"><%= @campaign.material.name %></p>
         </div>
 
