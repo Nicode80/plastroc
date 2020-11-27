@@ -111,7 +111,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <div class="container" id="campaign-how-to">
       <% @campaign.material.instructions.each do |instruction| %>
         <div class="card card-m mt-3">
-          <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
+          <% if instruction.media.attached? %>
+            <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
+          <% else %>
+            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+          <% end %>
+
               <div class="card-body">
                   <span class="badge badge-pill badge-success">Etape <%= instruction.step_order %></span>
                   <section>
