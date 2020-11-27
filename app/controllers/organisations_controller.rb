@@ -36,7 +36,7 @@ class OrganisationsController < ApplicationController
     @organisation.update(organisation_params)
     if @organisation.save
       flash[:notice] = "Organisation mise à jour"
-      redirect_to organisations_path
+      redirect_to organisation_path(@organisation)
     else
       render :edit
     end
@@ -47,7 +47,7 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.find(params[:id])
     @organisation.destroy
     flash[:notice] = "Organisation supprimée"
-    redirect_to organisations_path
+    redirect_to missions_path
     authorize @organisation
   end
 

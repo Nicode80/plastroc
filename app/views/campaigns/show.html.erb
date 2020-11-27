@@ -1,20 +1,23 @@
 <!-- Banner -->
 
 <div class="banner d-flex flex-column justify-content-between"
+
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')">
   <div class="container">
     <!-- add if statement depending on sorter or recycler -->
-    <h4><%= link_to :back do %>
+    <h4><%= link_to :back, class: "position-absolute" do %>
       <i class="fas fa-arrow-left"></i>
       <% end %>
     </h4>
   </div>
 
   <div class="container">
-    <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
-    <h5 class="mb-0"><%= @campaign.name %></h5>
-    <h6>by <%= @campaign.organisation.name %></h6>
+    <div class="d-flex flex-column align-items-center">
+      <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+      <h5 class="mb-0"><%= @campaign.name %></h5>
+      <h6>by <%= @campaign.organisation.name %></h6>
+    </div>
   </div>
 </div>
 
@@ -30,7 +33,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 <div class="tab-content position-relative">
 
-<!-- Info-Tab -->
+  <!-- Info-Tab -->
 
   <div class="tab-pane active" id="tab-info">
     <div class="container" id="campaign-infos">
@@ -75,14 +78,14 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
       <h5>Membres</h5>
       <div class="d-flex">
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar mx-2"%>
+        <%= image_tag "https://i.pravatar.cc/200?u=14", class: "avatar mx-2"%>
+        <%= image_tag "https://i.pravatar.cc/200?u=10", class: "avatar mx-2"%>
+        <%= image_tag "https://i.pravatar.cc/200?u=20", class: "avatar mx-2"%>
+        <%= image_tag "https://i.pravatar.cc/200?u=4", class: "avatar mx-2"%>
       </div>
 
       <% if current_user != @campaign.user %>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
           Poser une question
         </button>
       <% end %>
@@ -90,7 +93,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 
-<!-- How-to-Tab -->
+  <!-- How-to-Tab -->
 
   <div class="tab-pane" id="tab-how-to">
     <div class="container" id="campaign-how-to">
@@ -106,13 +109,13 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
               </div>
           </div>
       <% end %>
-      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
         Poser une question
       </button>
     </div>
   </div>
 
-<!-- Contact-Tab -->
+  <!-- Contact-Tab -->
 
   <div class="tab-pane" id="tab-contact">
     <div class="container" id="campaign-contact">
@@ -148,7 +151,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           </section>
         </div>
       </div>
-    <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
+    <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' style="margin-bottom: 75px;">
         Poser une question</button>
     </div>
   </div>
@@ -207,6 +210,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 
 <!-- Modal Edit  -->
+
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
