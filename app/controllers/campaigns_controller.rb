@@ -86,6 +86,9 @@ class CampaignsController < ApplicationController
   end
 
   def create_packages
+    if @campaign.min_package.nil?
+      @campaign.min_package = 1
+    end
     iterators = [(@campaign.target / @campaign.min_package).floor, 4].min
     names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
     x = 0
