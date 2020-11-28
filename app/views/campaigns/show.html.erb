@@ -212,7 +212,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         </button>
       </div>
       <div class="modal-body package-grid">
-          <% @campaign.packages.each do |package| %>
+          <% @packages.each do |package| %>
             <div class="package-badge package-badge-square my-2">
               <div class="container p-3">
                   <h6><%= package.name %></h6>
