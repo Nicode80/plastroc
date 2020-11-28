@@ -29,6 +29,19 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   </div>
 </div>
 
+<div class="d-flex justify-content-between align-items-center">
+    <h5 class="mb-0 mt-2">Progression</h5>
+    <!-- calcul from missions to add -->
+    <%= @missions.where(:status :done) %>
+    <p class="mb-0">200/<%= @campaign.target %><%= @campaign.unit %></p>
+</div>
+
+<div class="plastroc-progress-bar mt-2 mb-4">
+  <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+</div>
+
+
+
 <!-- Tabs -->
 
 <nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
@@ -45,17 +58,6 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="tab-pane active" id="tab-info">
     <div class="container" id="campaign-infos">
-      <div class="d-flex justify-content-between align-items-center">
-          <h5 class="mb-0 mt-2">Progression</h5>
-          <!-- calcul from missions to add -->
-          <%#= @campaign.mission.where(:status :done) %>
-          <p class="mb-0">200/<%= @campaign.target %><%= @campaign.unit %></p>
-      </div>
-
-      <div class="plastroc-progress-bar mt-2 mb-4">
-        <div class="rounded-pill plastroc-bg-primary-gradient"></div>
-      </div>
-
       <h5>Infos</h5>
       <div class="d-flex justify-content-between">
         <div class="d-flex flex-column align-items-center">
@@ -304,3 +306,4 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 </div>
+
