@@ -3,7 +3,11 @@
     <i class="fas fa-arrow-left"></i>
   <% end %>
   <div class="card card-m mb-3">
-    <%= cl_image_tag @organisation.photo.key %>
+    <% if @organisation.photo.attached? %>
+      <%= cl_image_tag @organisation.photo.key %>
+    <% else %>
+      <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+    <% end %>
     <section>
       <div class="d-flex justify-content-between">
         <h6><%= @organisation.name %></h6>
