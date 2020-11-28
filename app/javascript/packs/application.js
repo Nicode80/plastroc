@@ -27,6 +27,7 @@ import "bootstrap";
 
 // Internal imports, e.g:
 import { initSelect2 } from '../components/init_select2';
+import { slidingCard } from '../components/sliding_card';
 import { initAutocomplete } from "../plugins/init_autocomplete";
 import { initAutoFadeAlert } from "../plugins/auto_fade_alert";
 import { initFlatpickr} from "../plugins/init_flatpickr";
@@ -45,5 +46,6 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initSweetalert();
   deleteAlert();
+  slidingCard();
 });
 

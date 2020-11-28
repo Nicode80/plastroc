@@ -79,3 +79,20 @@ body::-webkit-scrollbar {
     display: flex;
     flex: 1 1 auto;
 }
+
+#sliding-card {
+  width: 100vw;
+  position: absolute;
+  top: 85vh; // trouver un calcul pour que ça s'adapte bien
+  transition-duration: 2s;
+    &.text-open {
+      top: 30vh;
+    }
+}
+
+#bottom-text {
+  background-color: $plastroc-background;
+  &.text-open {
+    display: none;
+  }
+}
