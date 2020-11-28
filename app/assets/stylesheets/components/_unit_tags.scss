@@ -66,3 +66,13 @@
   background-color: $plastroc-main;
   border-color: $plastroc-main;
 }
+
+.collection_radio_buttons{
+  color: $plastroc-main;
+}
+
+.collection_radio_buttons:checked {
+  color: white !important;
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
