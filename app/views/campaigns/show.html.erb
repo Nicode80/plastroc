@@ -52,8 +52,10 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
       <!-- calcul from missions to add in wigth and aria-now -->
       <div class="progress plastroc-progress-bar mt-2 mb-4">
-        <div class="progress-bar rounded-pill plastroc-bg-primary-gradient" role="progressbar" style="width: <%= @volume_done / @campaign.target %>" aria-valuenow="<%= @volume_done / @campaign.target %>" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar rounded-pill plastroc-bg-primary-gradient" role="progressbar" style="width: <% @volume_done / @campaign.target %>" aria-valuenow="<%= @volume_done / @campaign.target %>" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
+
+      <%= @volume_done / @campaign.target %>
 
       <h5>Infos</h5>
       <div class="d-flex justify-content-between">
