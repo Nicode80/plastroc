@@ -11,9 +11,13 @@ class MissionsController < ApplicationController
     @campaign = @package.campaign
 
     #calcul of done missions
-    @missions = @campaign.missions
-    # @result = @missions.select { |mission| mission.satus == done }
-
+    missions = @campaign.missions
+    missions_done = missions.select { |mission| mission.status == "done" }
+    volumes_done = []
+    missions_done.each do |mission_done|
+      volumes_done << mission_done.package.quantity
+    end
+    @volume_done = volumes_done.sum
 
     authorize @mission
   end
