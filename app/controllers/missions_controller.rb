@@ -37,5 +37,4 @@ class MissionsController < ApplicationController
     end
     authorize @mission
   end
-
 end
