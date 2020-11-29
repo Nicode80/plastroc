@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     collection do
       get :my_campaigns
     end
+    member do
+      get :dashboard
+    end
   end
 
   resources :instructions, only: [ :edit, :destroy, :update ]

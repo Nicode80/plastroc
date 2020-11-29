@@ -34,7 +34,7 @@ class CampaignsController < ApplicationController
       # => Crétation automatique des packages
       create_packages
       flash[:alert] = 'campagne ajoutée'
-      redirect_to campaign_path(@campaign) #redirect to campaign show
+      redirect_to dashboard_campaign_path(@campaign) #redirect to campaign show
     else
       render :new
     end
@@ -61,7 +61,12 @@ class CampaignsController < ApplicationController
 
   def my_campaigns
     @campaigns = current_user_campaigns
-    authorize Campaign
+    authorize Campaign  #erreur???
+  end
+
+  def dashboard
+    @campaign = Campaign.find(params[:id])
+    authorize @campaign
   end
 
   private
