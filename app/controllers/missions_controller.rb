@@ -5,6 +5,26 @@ class MissionsController < ApplicationController
     @organisations = current_user.organisations
   end
 
+  def show
+    @mission = Mission.find(params[:id])
+    @package = @mission.package
+    @campaign = @package.campaign
+
+    #calcul of done missions
+    @missions = @campaign.missions
+    # @result = @missions.select { |mission| mission.satus == done }
+
+
+    authorize @mission
+  end
+
+  def new
+    @mission = Mission.new
+    @package = Package.find(params[:package_id])
+    @campaign = Campaign.find(params[:campaign_id])
+    authorize @mission
+  end
+
   def create
     @mission = Mission.new
     @mission.user = current_user
@@ -17,4 +37,5 @@ class MissionsController < ApplicationController
     end
     authorize @mission
   end
+
 end

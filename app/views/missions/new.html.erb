@@ -1,0 +1,13 @@
+<h1>New mission</h1>
+
+<p>recap</p>
+
+<p>nom <%= @package.name %></p>
+<p>quantité <%= @package.quantity %> <%= @campaign.unit %></p>
+<p>xp <%= @package.xp_reward %></p>
+
+<%= simple_form_for [@campaign, @package, @mission] do |f| %>
+  <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
+<% end %>
+
+modal thank you puis redirect vers la show
