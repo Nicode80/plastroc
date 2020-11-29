@@ -36,7 +36,7 @@
     <div class="package-badge">
       <div class="p-3" id="confirmation">
         <p class="mb-3">Vous vous engagez à :</p>
-        <label class="checkbox">respecter les quantités
+        <!-- <label class="checkbox">respecter les quantités
             <input type="checkbox" id="check-quantity">
             <span class="checkmark"></span>
         </label>
@@ -54,6 +54,17 @@
         <label class="checkbox">mettre à jour le status de votre mission en cas d'abandon
             <input type="checkbox" id="check-status">
             <span class="checkmark"></span>
+        </label> -->
+        <ul>
+          <li>respecter les quantités</li>
+          <li>respecter le type de matériaux</li>
+          <li>respecter les délais</li>
+          <li>mettre à jour le status de votre mission en cas d'abandon</li>
+        </ul>
+
+        <label class="checkbox">Je m'engage
+            <input type="checkbox" id="confirm">
+            <span class="checkmark"></span>
         </label>
     </div>
     </div>
@@ -61,8 +72,13 @@
 </div>
 
 <%= simple_form_for [@campaign, @package, @mission] do |f| %>
-  <%= f.submit "Let's go", id: "confirm-btn", class: 'plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3 disabled'%>
+  <%= f.submit "Let's go", id: "btn-confirm", class: 'plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3 disabled'%>
 <% end %>
+
+
+
+
+
 
 
 
