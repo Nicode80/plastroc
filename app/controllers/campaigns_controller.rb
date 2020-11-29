@@ -16,6 +16,7 @@ class CampaignsController < ApplicationController
   def show
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
+    @mission = Mission.new
     authorize @campaign
   end
 
