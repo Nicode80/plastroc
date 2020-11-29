@@ -14,6 +14,9 @@
       <div class="campaigns-wrapper">
          <% @campaigns.each do |campaign| %>
             <div class="col-11 col-md-4 mt-3">
+              <% if campaign.user == current_user %>
+               <%= link_to dashboard_campaign_path(campaign) do %>
+              <% end %>
                <%= link_to campaign_path(campaign) do %>
                   <div class="card campaign-card">
                      <div class="card-horizontal">
@@ -52,3 +55,5 @@
       <% end %>
    </div>
 </div>
+
+
