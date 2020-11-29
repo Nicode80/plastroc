@@ -110,7 +110,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="tab-pane" id="tab-how-to">
     <div class="container" id="campaign-how-to">
-      <% @campaign.material.instructions.each do |instruction| %>
+      <% @campaign.material.instructions.sort_by { |instruction| instruction.step_order }
+.each do |instruction| %>
         <div class="card card-m mt-3">
           <% if instruction.media.attached? %>
             <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
