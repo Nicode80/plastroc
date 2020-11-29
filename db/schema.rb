@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_104100) do
+ActiveRecord::Schema.define(version: 2020_11_29_144041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_11_27_104100) do
     t.integer "target"
     t.string "unit"
     t.boolean "published", default: false, null: false
-    t.integer "min_package"
+    t.integer "min_package", default: 1
     t.bigint "material_id", null: false
     t.bigint "organisation_id", null: false
     t.datetime "created_at", precision: 6, null: false

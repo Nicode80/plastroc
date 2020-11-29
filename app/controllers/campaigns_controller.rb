@@ -15,6 +15,8 @@ class CampaignsController < ApplicationController
 
   def show
     @campaign = Campaign.find(params[:id])
+    @packages = @campaign.packages
+    @mission = Mission.new
     authorize @campaign
   end
 
@@ -61,7 +63,7 @@ class CampaignsController < ApplicationController
 
   def my_campaigns
     @campaigns = current_user_campaigns
-    authorize Campaign  #erreur???
+    authorize Campaign
   end
 
   def dashboard
@@ -72,22 +74,23 @@ class CampaignsController < ApplicationController
   private
 
   def organisations_with_active_campaigns
-    # Organisation.includes(:campaigns).select do |organisation|
-    #   organisation.campaigns.status == 'ongoing'
+    Organisation.joins(:campaigns).where(campaigns: { 'status' =>  'ongoing'  })
+
+    # Refactored line 71
+
+    # @organisations = []
+    # Organisation.all.geocoded.each do |organisation|
+    #   ongoing_campaigns = 0
+    #   organisation.campaigns.each do |campaign|
+    #     if campaign.status == 'ongoing'
+    #       ongoing_campaigns += 1
+    #     end
+    #   end
+    #   if ongoing_campaigns.positive?
+    #     @organisations << organisation
+    #   end
     # end
-    @organisations = []
-    Organisation.all.geocoded.each do |organisation|
-      ongoing_campaigns = 0
-      organisation.campaigns.each do |campaign|
-        if campaign.status == 'ongoing'
-          ongoing_campaigns += 1
-        end
-      end
-      if ongoing_campaigns.positive?
-        @organisations << organisation
-      end
-    end
-    return @organisations
+    # return @organisations
   end
 
   def create_packages
@@ -118,9 +121,11 @@ class CampaignsController < ApplicationController
       :published)
   end
 
-  def current_user_campaigns
-    Campaign.all.select do |c|
-      c.user == current_user
-    end
-  end
+  # Refactored line 63
+
+  # def current_user_campaigns
+  #   Campaign.all.select do |c|
+  #     c.user == current_user
+  #   end
+  # end
 end
