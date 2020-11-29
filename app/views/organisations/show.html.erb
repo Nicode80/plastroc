@@ -41,7 +41,7 @@
     <h4 class="mt-3">Mes campagnes</h4>
     <hr class="mb-3">
     <% @campaigns.each do |campaign| %>
-      <%= link_to campaign_path(campaign), class: 'text-decoration-none' do %>
+      <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
         <div class="d-flex flex-row card card-s">
           <% if campaign.photo.attached? %>
             <%= cl_image_tag campaign.photo.key, crop: :fill %>

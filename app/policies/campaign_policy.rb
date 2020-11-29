@@ -13,6 +13,10 @@ class CampaignPolicy < ApplicationPolicy
     true
   end
 
+  def dashboard?
+    true
+  end
+
   def create?
     return true
   end

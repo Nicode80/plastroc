@@ -32,28 +32,56 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 <!-- Tabs -->
 
 <nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
-  <a class="active" href="#tab-info" data-toggle="tab">Info</a>
-  <a class="" href="#tab-how-to" data-toggle="tab">Tuto</a>
-  <a class="" href="#tab-contact" data-toggle="tab">Contact</a>
+  <a class="active" href="#tab-dashboard" data-toggle="tab">Tableau de bord</a>
+  <a class="" href="#tab-mission-details" data-toggle="tab">Ma campagne</a>
+  <a class="" href="#tab-about-me" data-toggle="tab">Mes infos</a>
 </nav>
 
 <!-- Tabs-content -->
 
-<div class="tab-content" style="margin-bottom: 75px;">
+<div class="tab-content position-relative" style="margin-bottom: 75px;">
 
-  <!-- Info-Tab -->
+  <!-- Dashboard-Tab -->
 
-  <div class="tab-pane active" id="tab-info">
+  <div class="tab-pane active" id="tab-dashboard">
     <div class="container">
-      <div class="d-flex justify-content-between align-items-center">
-          <h5 class="mb-0 mt-2">Progression</h5>
-          <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
+      <h5 class="mt-2">Progression</h5>
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Complété</h6>
+            <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
+        </div>
+        <!-- cf new show for dynamic progress bar -->
+        <div class="plastroc-progress-bar mt-2 mb-4">
+          <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Engagé</h6>
+            <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
+        </div>
+        <!-- cf new show for dynamic progress bar -->
+        <div class="plastroc-progress-bar mt-2 mb-4">
+          <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+        </div>
       </div>
 
-      <!-- calcul from missions to add in wigth and aria-now -->
-      <div class="progress plastroc-progress-bar mt-2 mb-4">
-        <div class="progress-bar rounded-pill plastroc-bg-primary-gradient" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      <h5>Questions</h5>
+      <div class="container">
+        <h6>De Laura 27/07/2020</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+        <div class="container">
+         <h6>John a répondu le 28/07/2020</h6>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Mission-details-Tab -->
+
+  <div class="tab-pane" id="tab-mission-details">
+    <div class="container">
 
       <h5>Infos</h5>
       <div class="d-flex justify-content-between">
@@ -95,21 +123,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         <%= image_tag "https://i.pravatar.cc/200?u=4", class: "avatar mx-2"%>
       </div>
 
-      <% if current_user != @campaign.user %>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-          Poser une question
-        </button>
-      <% end %>
-
-    </div>
-  </div>
-
-  <!-- How-to-Tab -->
-
-  <div class="tab-pane" id="tab-how-to">
-    <div class="container" id="campaign-how-to">
-      <% @campaign.material.instructions.sort_by { |instruction| instruction.step_order }
-.each do |instruction| %>
+      <h5>Tuto</h5>
+      <% @campaign.material.instructions.each do |instruction| %>
         <div class="card card-m mt-3">
           <% if instruction.media.attached? %>
             <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
@@ -126,19 +141,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
               </div>
           </div>
       <% end %>
-
-      <% if current_user != @campaign.user %>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-          Poser une question
-        </button>
-      <% end %>
-
     </div>
   </div>
 
-  <!-- Contact-Tab -->
+  <!-- About-me-Tab -->
 
-  <div class="tab-pane" id="tab-contact">
+  <div class="tab-pane" id="tab-about-me">
     <div class="container">
       <div class="card mt-3">
         <div class="card-body">
@@ -182,45 +190,82 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 
-<!-- Bottom-CTA -->
+<!-- Edit & stop buttons -->
 
-  <% if current_user == @campaign.user %>
-    <div class="bottom-nav">
-        <div class="d-flex justify-content-around">
-            <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
-            <p><a href="#" style="color: red;">Stopper</a></p>
-        </div>
-    </div>
+  <div class="bottom-nav">
+      <div class="d-flex justify-content-around">
+          <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
+          <p><a href="#" style="color: red;">Stopper</a></p>
+      </div>
+  </div>
 
-  <% else %>
-    <div id="sliding-card">
-      <button href="#" id="CTA" style="border-radius: 12px 12px 0px 0px" class='plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3' data-toggle="modal" data-target="#joinModal">
-      Rejoindre la campagne
-      </button>
-
-      <div id="bottom-text" class="text-open">
-        <h5 class="pt-3">Choisissez la mission</h5>
-        <hr>
-
-        <div class="package-grid">
-          <% @campaign.packages.each do |package| %>
-            <div class="package-badge package-badge-square my-2">
-              <div class="container p-3">
-                  <h6><%= package.name %></h6>
-                  <div class="d-flex justify-content-between align-items-center text-center mt-3">
-                      <div>
-                          <i class="fas fa-weight-hanging text-primary mb-2"></i>
-                          <p><strong><%= package.quantity %> <%= @campaign.unit %></strong></p>
-                      </div>
-                      <div>
-                          <i class="fas fa-angle-double-up text-primary mb-2"></i>
-                          <p><%= package.quantity %></p>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          <% end %>
-        </div>s
-    </div>
-  <% end %>
 </div>
+
+<!-- Modal Edit  -->
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editer la campagne</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container" style="margin-bottom: 75px;">
+          <div id="materials" data-materials="<%= @materials.to_json %>"></div>
+          <%= simple_form_for @campaign do |f| %>
+            <%= f.input :name,
+                        label: "Nom",
+                        placeholder: "Nom*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :description,
+                        label: "Description",
+                        placeholder: "Description*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :end_date,
+                        as: :string,
+                        required: false,
+                        input_html: { class: "date-picker col-12 mb-3" } %>
+
+            <%= f.input :target,
+                        label: "Quantité totale",
+                        placeholder: "Quantité totale*",
+                        input_html: { class: "input col-12 mb-3" } %>
+
+            <%= f.input :min_package,
+                        label: "Quantité minimum par mission",
+                        placeholder: "Quantité minimum par mission*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :unit,
+                        label: false,
+                        as: :radio_buttons,
+                        collection: Campaign::UNITS,
+                        boolean_style: :inline,
+                        collection_wrapper_tag: 'div',
+                        collection_wrapper_class: 'unit-wrapper',
+                        item_wrapper_class: 'unit-item',
+                        input_html: {class: 'unit-selector'} %>
+
+            <%= f.input :min_package,
+                        label: "Quantité minimum par mission",
+                        placeholder: "Quantité minimum par mission*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :photo,
+                        as: :file,
+                        input_html: { class: "input col-12 mb-3" } %>
+
+            <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
+          <% end %>
+          <%= link_to 'Annuler', dashboard_campaign_path(@campaign), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
