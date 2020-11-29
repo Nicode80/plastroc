@@ -47,9 +47,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
           <h5 class="mb-0 mt-2">Progression</h5>
-          <!-- calcul from missions to add -->
-          <%#= @campaign.mission.where(:status :done) %>
-          <p class="mb-0">200/<%= @campaign.target %><%= @campaign.unit %></p>
+          <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
       </div>
 
       <div class="plastroc-progress-bar mt-2 mb-4">

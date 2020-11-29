@@ -17,6 +17,9 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
     @mission = Mission.new
+
+    done_mission_calcul
+
     authorize @campaign
   end
 
@@ -68,6 +71,7 @@ class CampaignsController < ApplicationController
 
   def dashboard
     @campaign = Campaign.find(params[:id])
+    done_mission_calcul
     authorize @campaign
   end
 
@@ -104,6 +108,16 @@ class CampaignsController < ApplicationController
       @campaign.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
       x += 1
     end
+  end
+
+  def done_mission_calcul
+    missions = @campaign.missions
+    missions_done = missions.select { |mission| mission.status == "done" }
+    volumes_done = []
+    missions_done.each do |mission_done|
+      volumes_done << mission_done.package.quantity
+    end
+    @volume_done = volumes_done.sum
   end
 
   def campaign_params
