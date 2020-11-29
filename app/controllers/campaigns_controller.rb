@@ -63,7 +63,6 @@ class CampaignsController < ApplicationController
 
   def my_campaigns
     @campaigns = current_user.campaigns
-    raise
     authorize Campaign
   end
 
