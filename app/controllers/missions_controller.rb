@@ -12,7 +12,7 @@ class MissionsController < ApplicationController
 
     #calcul of done missions
     @missions = @campaign.missions
-    @result = @missions.select { |mission| mission.satus == done }.sum
+    # @result = @missions.select { |mission| mission.satus == done }
 
 
     authorize @mission
