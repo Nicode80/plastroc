@@ -52,7 +52,7 @@ class CampaignsController < ApplicationController
     @campaign.update(campaign_params)
     if @campaign.save
       flash[:notice] = "campagne mise à jour"
-      redirect_to campaign_path(@campaign)
+      redirect_to dashboard_campaign_path(@campaign)
     else
       render :edit
     end
