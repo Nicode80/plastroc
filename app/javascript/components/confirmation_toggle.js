@@ -1,37 +1,60 @@
 const toggleConfirmation = () => {
-  const button = document.querySelector('#confirm-btn');
-  const checkQuantity = document.querySelector('#check-quantity');
-  const checkMaterial = document.querySelector('#check-material');
-  const checkDeadline = document.querySelector('#check-deadline');
-  const checkStatus = document.querySelector('#check-status');
+  const checkbox = document.querySelector('#confirm');
+  const checkList = document.querySelector('#engagements');
+  const chekItems = document.querySelectorAll('#engagements li');
+  const btn = document.querySelector('#btn-confirm');
+  btn.disabled = true;
+  // const checkQuantity = document.querySelector('#check-quantity');
+  // const checkMaterial = document.querySelector('#check-material');
+  // const checkDeadline = document.querySelector('#check-deadline');
+  // const checkStatus = document.querySelector('#check-status');
 
-  if(!button) return;
+  if(!checkbox) return;
 
-  checkQuantity.addEventListener('change', (e) => {
+
+  checkbox.addEventListener('change', (e) => {
     if(e.target.checked) {
-      checkMaterial.addEventListener('change', (e) => {
-          if(e.target.checked) {
-            checkDeadline.addEventListener('change', (e) => {
-                if(e.target.checked) {
-                  checkStatus.addEventListener('change', (e) => {
-                      if(e.target.checked) {
-                        button.classList.remove('disabled');
-                      } else {
-                          button.classList.add('disabled');
-                        }
-                    });
-                } else {
-                    button.classList.add('disabled');
-                  }
-              });
-          } else {
-            button.classList.add('disabled');
-          }
-        });
+      btn.classList.toggle('disabled');
+      btn.disabled = false;
+      checkList.style.listStyle = 'none';
+      chekItems.forEach(item => {
+        item.classList.add('icon', 'check-green');
+      });
     } else {
-      button.classList.add('disabled');
+      btn.classList.toggle('disabled');
+      btn.disabled = true;
+      checkList.style.listStyle = '';
+      chekItems.forEach(item => {
+        item.classList.remove('icon', 'check-green');
+      });
     }
   });
+
+  // checkQuantity.addEventListener('change', (e) => {
+  //   if(e.target.checked) {
+  //     checkMaterial.addEventListener('change', (e) => {
+  //         if(e.target.checked) {
+  //           checkDeadline.addEventListener('change', (e) => {
+  //               if(e.target.checked) {
+  //                 checkStatus.addEventListener('change', (e) => {
+  //                     if(e.target.checked) {
+  //                       button.classList.remove('disabled');
+  //                     } else {
+  //                         button.classList.add('disabled');
+  //                       }
+  //                   });
+  //               } else {
+  //                   button.classList.add('disabled');
+  //                 }
+  //             });
+  //         } else {
+  //           button.classList.add('disabled');
+  //         }
+  //       });
+  //   } else {
+  //     button.classList.add('disabled');
+  //   }
+  // });
 
 
 
@@ -49,6 +72,6 @@ const toggleConfirmation = () => {
   // console.log(confirms);
 };
 
-// button.classList.toggle('disabled')
+//
 
 export { toggleConfirmation }
