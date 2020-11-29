@@ -20,8 +20,22 @@ const initMapbox = async () => {
 
   const markers = JSON.parse(mapElement.dataset.markers);
   markers.forEach((marker) => {
-    new mapboxgl.Marker()
+    const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
+
+  // Create a HTML element for your custom marker
+  const organisationPic = document.createElement('div');
+        organisationPic.className = 'marker';
+        organisationPic.style.backgroundImage = `url('${marker.image_url}')`;
+        organisationPic.style.backgroundSize = 'contain';
+        organisationPic.style.width = '50px';
+        organisationPic.style.height = '50px';
+        organisationPic.style.borderRadius = '50%';
+        organisationPic.style.border = '1px solid white';
+        organisationPic.style.boxShadow = "0px 0px 20px grey";
+
+    new mapboxgl.Marker(organisationPic)
       .setLngLat([ marker.lng, marker.lat ])
+      .setPopup(popup)
       .addTo(map);
   });
   // fitMapToMarkers(map, markers);
