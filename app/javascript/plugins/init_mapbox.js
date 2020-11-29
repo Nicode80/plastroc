@@ -26,9 +26,9 @@ const initMapbox = async () => {
   const organisationPic = document.createElement('div');
         organisationPic.className = 'marker';
         organisationPic.style.backgroundImage = `url('${marker.image_url}')`;
-        organisationPic.style.backgroundSize = 'contain';
-        organisationPic.style.width = '50px';
-        organisationPic.style.height = '50px';
+        organisationPic.style.backgroundSize = 'cover';
+        organisationPic.style.width = '30px';
+        organisationPic.style.height = '30px';
         organisationPic.style.borderRadius = '50%';
         organisationPic.style.border = '1px solid white';
         organisationPic.style.boxShadow = "0px 0px 20px grey";
