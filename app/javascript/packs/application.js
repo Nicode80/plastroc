@@ -33,6 +33,7 @@ import { initFlatpickr} from "../plugins/init_flatpickr";
 import { materialSelect } from "../components/material_select";
 import { initSweetalert, deleteAlert } from '../plugins/init_sweetalert';
 import { initMapbox } from "../plugins/init_mapbox";
+import { toggleConfirmation } from "../components/confirmation_toggle";
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -45,5 +46,6 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initSweetalert();
   deleteAlert();
+  toggleConfirmation();
 });
 
