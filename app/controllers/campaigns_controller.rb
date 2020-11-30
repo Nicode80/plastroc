@@ -6,6 +6,8 @@ class CampaignsController < ApplicationController
     @organisations = organisations_with_active_campaigns
     # raise
     @markers = @organisations.map do |organisation|
+      @campaigns_number = number_of_active_campaign(organisation)
+      @organistion_active_campaigns = active_campaigns(organisation)
       url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
       {
         lat: organisation.latitude,
@@ -82,23 +84,15 @@ class CampaignsController < ApplicationController
   private
 
   def organisations_with_active_campaigns
-    Organisation.joins(:campaigns).where(campaigns: { 'status' =>  'ongoing'  })
+    Organisation.joins(:campaigns).where(campaigns: { status: 'ongoing' })
+  end
 
-    # Refactored line 71
+  def number_of_active_campaign(organisation)
+    Campaign.where(organisation: organisation).where(status: 'ongoing').count
+  end
 
-    # @organisations = []
-    # Organisation.all.geocoded.each do |organisation|
-    #   ongoing_campaigns = 0
-    #   organisation.campaigns.each do |campaign|
-    #     if campaign.status == 'ongoing'
-    #       ongoing_campaigns += 1
-    #     end
-    #   end
-    #   if ongoing_campaigns.positive?
-    #     @organisations << organisation
-    #   end
-    # end
-    # return @organisations
+  def active_campaigns(organisation)
+    Campaign.where(organisation: organisation).where(status: 'ongoing')
   end
 
   def create_packages
