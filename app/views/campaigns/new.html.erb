@@ -11,18 +11,24 @@
                 label: false,
                 placeholder: "Description*",
                 input_html: { class: "col-12 mb-3" } %>
+    <div class="d-flex">
+      <%= f.input :start_date,
+                  label: "Date de début",
+                  placeholder: "jj/mm/aaaa",
+                  as: :string,
+                  required: false,
+                  input_html: { class: "date-picker col-12 mb-3" } %>
 
-    <%= f.input :start_date,
-                as: :string,
-                required: false,
-                input_html: { class: "date-picker col-12 mb-3" } %>
-
-    <%= f.input :end_date,
-                as: :string,
-                required: false,
-                input_html: { class: "date-picker col-12 mb-3" } %>
+      <%= f.input :end_date,
+                  label: "Date de fin",
+                  placeholder: "jj/mm/aaaa",
+                  as: :string,
+                  required: false,
+                  input_html: { class: "date-picker col-12 mb-3", id: "secondRangeInput" } %>
+    </div>
 
     <%= f.input :material_category,
+                placeholder: "Type de matière*",
                 as: :select,
                 collection: Material::CATEGORIES,
                 input_html: { class: "col-12" } %>
@@ -37,25 +43,26 @@
                       input_html: { class: 'material-selector' },
                       boolean_style: :inline %>
 
-    <%= f.input :target,
-                label: false,
-                placeholder: "Quantité totale*",
-                input_html: { class: "input col-12 mb-3" } %>
+    <div class="d-flex">
+      <%= f.input :target,
+                  label: "Objectif de la mission*",
+                  placeholder: "500",
+                  input_html: { min: '0', class: "input col-12 mb-3" } %>
 
-    <%= f.input :unit,
-                label: false,
-                as: :radio_buttons,
-                collection: Campaign::UNITS,
-                boolean_style: :inline,
-                collection_wrapper_tag: 'div',
-                collection_wrapper_class: 'unit-wrapper',
-                item_wrapper_class: 'unit-item',
-                input_html: {class: 'unit-selector'} %>
+      <%= f.input :min_package,
+                  label: "Quantité minimum par mission",
+                  input_html: { min: '0', class: "input col-12 mb-3" } %>
+    </div>
 
-    <%= f.input :min_package,
-                label: false,
-                placeholder: "Quantité minimum par mission*",
-                input_html: { class: "col-12 mb-3" } %>
+      <%= f.input :unit,
+                  label: false,
+                  as: :radio_buttons,
+                  collection: Campaign::UNITS,
+                  boolean_style: :inline,
+                  collection_wrapper_tag: 'div',
+                  collection_wrapper_class: 'flex-nowrap d-flex',
+                  item_wrapper_class: 'unit-item flex-grow-1 align-self-stretch',
+                  input_html: {class: 'unit-selector'} %>
 
     <%= f.input :photo,
                 as: :file,
