@@ -5,12 +5,20 @@ class MissionPolicy < ApplicationPolicy
     end
   end
 
+  def new?
+    true
+  end
+
   def index?
     return true
   end
 
   def create?
     return true
+  end
+
+  def show?
+    record.user == user
   end
 
 end

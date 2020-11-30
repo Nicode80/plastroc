@@ -5,16 +5,24 @@ class CampaignsController < ApplicationController
     # @organisations = Organisation.all
     @organisations = organisations_with_active_campaigns
     # raise
-    @markers = @organisations.map do |orga|
+    @markers = @organisations.map do |organisation|
+      url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
       {
-        lat: orga.latitude,
-        lng: orga.longitude
+        lat: organisation.latitude,
+        lng: organisation.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
+        image_url: url
       }
     end
   end
 
   def show
     @campaign = Campaign.find(params[:id])
+    @packages = @campaign.packages
+    @mission = Mission.new
+
+    done_missions_calcul
+
     authorize @campaign
   end
 
@@ -35,7 +43,7 @@ class CampaignsController < ApplicationController
       # => Crétation automatique des packages
       create_packages
       flash[:alert] = 'campagne ajoutée'
-      redirect_to campaign_path(@campaign) #redirect to campaign show
+      redirect_to dashboard_campaign_path(@campaign) #redirect to campaign show
     else
       render :new
     end
@@ -53,7 +61,7 @@ class CampaignsController < ApplicationController
     @campaign.update(campaign_params)
     if @campaign.save
       flash[:notice] = "campagne mise à jour"
-      redirect_to campaign_path(@campaign)
+      redirect_to dashboard_campaign_path(@campaign)
     else
       render :edit
     end
@@ -65,25 +73,33 @@ class CampaignsController < ApplicationController
     authorize Campaign
   end
 
+  def dashboard
+    @campaign = Campaign.find(params[:id])
+    done_missions_calcul
+
+    authorize @campaign
+  end
+
   private
 
   def organisations_with_active_campaigns
-    # Organisation.includes(:campaigns).select do |organisation|
-    #   organisation.campaigns.status == 'ongoing'
+    Organisation.joins(:campaigns).where(campaigns: { 'status' =>  'ongoing'  })
+
+    # Refactored line 71
+
+    # @organisations = []
+    # Organisation.all.geocoded.each do |organisation|
+    #   ongoing_campaigns = 0
+    #   organisation.campaigns.each do |campaign|
+    #     if campaign.status == 'ongoing'
+    #       ongoing_campaigns += 1
+    #     end
+    #   end
+    #   if ongoing_campaigns.positive?
+    #     @organisations << organisation
+    #   end
     # end
-    @organisations = []
-    Organisation.all.geocoded.each do |organisation|
-      ongoing_campaigns = 0
-      organisation.campaigns.each do |campaign|
-        if campaign.status == 'ongoing'
-          ongoing_campaigns += 1
-        end
-      end
-      if ongoing_campaigns.positive?
-        @organisations << organisation
-      end
-    end
-    return @organisations
+    # return @organisations
   end
 
   def create_packages
@@ -102,6 +118,25 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def done_missions_calcul
+    missions = @campaign.missions
+    missions_done = missions.select { |mission| mission.status == "done" }
+    volumes_done = []
+    missions_done.each do |mission_done|
+      volumes_done << mission_done.package.quantity
+    end
+    @volume_done = volumes_done.sum
+  end
+
+  def total_missions_calcul
+    missions = @campaign.missions
+    volumes_total = []
+    missions.each do |mission|
+      volumes_total << mission.package.quantity
+    end
+    @volume_total = volumes_total.sum
+  end
+
   def campaign_params
     params.require(:campaign).permit(
       :name,
@@ -117,9 +152,11 @@ class CampaignsController < ApplicationController
       :published)
   end
 
-  def current_user_campaigns
-    Campaign.all.select do |c|
-      c.user == current_user
-    end
-  end
+  # Refactored line 63
+
+  # def current_user_campaigns
+  #   Campaign.all.select do |c|
+  #     c.user == current_user
+  #   end
+  # end
 end

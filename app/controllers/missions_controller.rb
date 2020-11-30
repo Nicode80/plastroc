@@ -5,6 +5,30 @@ class MissionsController < ApplicationController
     @organisations = current_user.organisations
   end
 
+  def show
+    @mission = Mission.find(params[:id])
+    @package = @mission.package
+    @campaign = @package.campaign
+
+    #calcul of done missions
+    missions = @campaign.missions
+    missions_done = missions.select { |mission| mission.status == "done" }
+    volumes_done = []
+    missions_done.each do |mission_done|
+      volumes_done << mission_done.package.quantity
+    end
+    @volume_done = volumes_done.sum
+
+    authorize @mission
+  end
+
+  def new
+    @mission = Mission.new
+    @package = Package.find(params[:package_id])
+    @campaign = Campaign.find(params[:campaign_id])
+    authorize @mission
+  end
+
   def create
     @mission = Mission.new
     @mission.user = current_user
