@@ -26,8 +26,9 @@
       <meta name="twitter:creator" content="<%= DEFAULT_META["twitter_account"] %>">
       <meta name="twitter:image:src" content="<%= meta_image %>">
 
-
-
+      <!-- This is for MapBox to avoid display bugs -->
+      <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+      <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet'/>
 
       <%= favicon_link_tag asset_path('favicon.png') %>
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
