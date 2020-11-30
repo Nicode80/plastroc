@@ -70,6 +70,7 @@ class CampaignsController < ApplicationController
 
   def dashboard
     @campaign = Campaign.find(params[:id])
+    @volume_done = done_missions_calcul
     @volume_total = total_missions_calcul
     authorize @campaign
   end
@@ -107,20 +108,16 @@ class CampaignsController < ApplicationController
   def done_missions_calcul
     missions = @campaign.missions
     missions_done = missions.select { |mission| mission.status == "done" }
-    volumes_done = []
-    missions_done.each do |mission_done|
-      volumes_done << mission_done.package.quantity
-    end
+    volumes_done = missions_done.map { |mission_done| mission_done.package.quantity }
     return volumes_done.sum
   end
 
   def total_missions_calcul
     missions = @campaign.missions
-    volumes_total = []
-    missions.each do |mission|
-      volumes_total << mission.package.quantity
-    end
+    volumes_total = missions.map { |mission| mission.package.quantity }
+    # @volume_total = @campaign.missions.packages.sum(:quantity)
     return volumes_total.sum
+
   end
 
   def campaign_params

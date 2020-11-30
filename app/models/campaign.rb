@@ -22,4 +22,8 @@ class Campaign < ApplicationRecord
   def number_of_days
     (end_date - Date.today).to_i
   end
+
+  def sort_by_step_order
+    material.instructions.order(step_order: :asc)
+  end
 end

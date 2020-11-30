@@ -2,7 +2,7 @@ const animatedBar = () => {
   const progressBar = document.getElementById("myBar");
 
   if(progressBar) {
-    const volume = Number.parseInt(document.querySelector('#volume').dataset.total, 10);
+    const volume = parseInt(document.querySelector('#volume').dataset.total, 10);
 
     let width = 0;
 

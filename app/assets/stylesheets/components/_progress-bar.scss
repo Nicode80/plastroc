@@ -4,30 +4,28 @@
 }
 
 .plastroc-progress-bar {
-  height: 15px;
+  height: auto;
   border-radius: 20px;
   display: grid;
   box-shadow: $plastroc-shadow;
   background: $plastroc-text-light;
 }
 .plastroc-progress-bar div {
-  height: 15px;
+  height: auto;
   width: 40%;
   box-shadow: $plastroc-shadow
 }
 // .plastroc-progress-bar div:last-child {
 //   background: grey;
 // }
-#myProgress {
-  width: 100%;
-  background: $plastroc-text-light;
-}
 
 #myBar {
   width: 10%;
-  // height: 15px;
+  height: auto;
   background-color: #4CAF50;
   text-align: center; /* To center it horizontally (if you want) */
   line-height: 30px; /* To center it vertically */
   color: white;
+  font-size: 12px;
+  font-weight: bold;
 }
