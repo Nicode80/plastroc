@@ -13,14 +13,14 @@
                 input_html: { class: "col-12 mb-3" } %>
 
     <%= f.input :start_date,
-                label: "Dates de la campagne",
-                placeholder: "2020-12-15 to 2021-01-12",
+                label: "Dates de début",
+                placeholder: "date de début",
                 as: :string,
                 required: false,
                 input_html: { class: "date-picker col-12 mb-3" } %>
 
     <%= f.input :end_date,
-                placeholder: "Fin*",
+                placeholder: "date de fin",
                 as: :string,
                 required: false,
                 input_html: { class: "date-picker col-12 mb-3", id: "secondRangeInput" } %>
