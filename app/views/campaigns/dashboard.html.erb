@@ -49,6 +49,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <h6 class="mb-0">Complété</h6>
+            <p><%= @volume_done %> </p>
             <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
         </div>
         <!-- cf new show for dynamic progress bar -->
@@ -58,6 +59,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
         <div class="d-flex justify-content-between align-items-center">
             <h6 class="mb-0">Engagé</h6>
+            <p><%= @volume_total %> </p>
             <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
         </div>
         <!-- cf new show for dynamic progress bar -->
