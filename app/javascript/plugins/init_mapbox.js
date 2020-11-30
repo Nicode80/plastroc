@@ -67,8 +67,6 @@ const initMapbox = async () => {
     newMarker.getElement().dataset.markerId = marker.id;
     // Put a microphone on the new marker listening for a mouseenter event
     newMarker.getElement().addEventListener('click', (e) => toggleCardHighlighting(e) );
-    // newMarker.getElement().addEventListener('close', (e) => toggleCardHighlighting(e) );
-
   });
 };
 
