@@ -32,8 +32,11 @@
 
 <h5>Membres</h5>
 <div class="d-flex">
-  <%= image_tag "https://i.pravatar.cc/200?u=14", class: "avatar mx-2"%>
-  <%= image_tag "https://i.pravatar.cc/200?u=10", class: "avatar mx-2"%>
-  <%= image_tag "https://i.pravatar.cc/200?u=20", class: "avatar mx-2"%>
-  <%= image_tag "https://i.pravatar.cc/200?u=4", class: "avatar mx-2"%>
+  <% if @campaign.members.empty? %>
+    <p>Pas encore de membre. Soyez le premier 😊.</p>
+  <% end %>
+  <% @campaign.members.uniq.each do |member| %> <%# uniq to avoid showing several times the same pic in case a member has several missions for this campaign %>
+    <%= cl_image_tag member.photo.key, class: "avatar mx-2"%>
+  <% end %>
+
 </div>
