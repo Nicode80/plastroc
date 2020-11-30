@@ -1,9 +1,10 @@
 const slidingCard = () => {
 
-  const ctaButton = document.getElementById('CTA');
+  const ctaButton = document.getElementById('CTA-join-campaign');
   const arrow = ctaButton.querySelector('.fa-angle-double-up');
   const slidingCard = document.getElementById('sliding-card');
   const bottomText = document.getElementById('bottom-text');
+  if(!ctaButton) return;
 
   ctaButton.addEventListener("click", (event) => {
     slidingCard.classList.toggle("text-open");
