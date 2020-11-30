@@ -40,28 +40,29 @@
                       item_wrapper_class: 'material-item',
                       input_html: { class: 'material-selector' },
                       boolean_style: :inline %>
-    <div class="d-flex justify-content-between align-items-center">
-      <div class="col-6 p-0">
-        <%= f.input :target,
-                    label: false,
-                    placeholder: "Objectif*",
-                    input_html: { min: '0', class: "input col-12 mb-3" } %>
+      <div class="row">
+        <div class="col-6 p-0">
+          <%= f.input :target,
+                      label: false,
+                      placeholder: "Objectif*",
+                      input_html: { min: '0', class: "input col-12 mb-3" } %>
 
-        <%= f.input :min_package,
-                    label: false,
-                    placeholder: "Quantité minimum par mission",
-                    input_html: { min: '0', class: "input col-12 mb-3" } %>
+          <%= f.input :min_package,
+                      label: false,
+                      placeholder: "Quantité minimum par mission",
+                      input_html: { min: '0', class: "input col-12 mb-3" } %>
+        </div>
+      <div class="col-6">
+          <%= f.input :unit,
+                      label: false,
+                      as: :radio_buttons,
+                      collection: Campaign::UNITS,
+                      boolean_style: :inline,
+                      collection_wrapper_tag: 'div',
+                      collection_wrapper_class: 'flex-nowrap d-flex',
+                      item_wrapper_class: 'unit-item flex-grow-1 align-self-stretch',
+                      input_html: {class: 'unit-selector'} %>
       </div>
-
-      <%= f.input :unit,
-                  label: false,
-                  as: :radio_buttons,
-                  collection: Campaign::UNITS,
-                  boolean_style: :inline,
-                  collection_wrapper_tag: 'div',
-                  collection_wrapper_class: 'unit-wrapper flex-nowrap w-100',
-                  item_wrapper_class: 'unit-item',
-                  input_html: {class: 'unit-selector'} %>
     </div>
 
 
