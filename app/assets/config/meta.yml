@@ -1,0 +1,5 @@
+meta_product_name: "Plastroc"
+meta_title: "Plastroc - Better recycling for a better world"
+meta_description: "A new way to link recyclers and peolples who cares."
+meta_image: "cover.png" # should exist in `app/assets/images/`
+twitter_account: "@Lewagonparis"   # required for Twitter Cards
