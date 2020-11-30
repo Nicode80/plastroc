@@ -17,7 +17,6 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
     @mission = Mission.new
-
     done_missions_calcul
 
     authorize @campaign
