@@ -71,6 +71,7 @@ body::-webkit-scrollbar {
 .campaign-card-img {
     overflow: hidden;
     width: 100px;
+    min-width: 100px;
     height: 100px;
     margin-left: auto;
     margin-right: auto;
@@ -112,4 +113,13 @@ body::-webkit-scrollbar {
 .rotate-180 {
   transition-duration: 0.5s;
   transform: rotate(180deg);
+}
+
+.card-content {
+    max-width: 187px;
+}
+
+.max-w-160 {
+    max-width: 160px;
+    /* display: block; */
 }
