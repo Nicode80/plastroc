@@ -36,8 +36,8 @@ const initMapbox = async () => {
 
   const pill = document.createElement('div');
        pill.className = 'pill_number';
-       pill.style.width = '12px';
-       pill.style.height = '12px';
+       pill.style.width = '14px';
+       pill.style.height = '14px';
        pill.style.marginLeft = '10px';
        pill.style.marginTop = '-10px';
        pill.style.borderRadius = '50%';
