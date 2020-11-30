@@ -2,7 +2,7 @@ class MissionsController < ApplicationController
 
   def index
     @missions = policy_scope(Mission)
-    @organisations = current_user.organisations
+    @campaigns = current_user.campaigns
   end
 
   def show
