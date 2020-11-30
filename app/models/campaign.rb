@@ -23,7 +23,7 @@ class Campaign < ApplicationRecord
     (end_date - Date.today).to_i
   end
 
-  def sort_by_step_orders
+  def sort_by_step_order
     material.instructions.order(step_order: :asc)
   end
 end

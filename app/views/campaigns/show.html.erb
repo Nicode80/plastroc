@@ -50,8 +50,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <p class="mb-0" id="volume" data-total='<%= @ratio %>'><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
       </div>
 
-      <div class="plastroc-progress-bar mt-2 mb-4" id="myProgress">
-        <div class="rounded-pill plastroc-bg-primary-gradient" id="myBar"></div>
+      <div class="plastroc-progress-bar mt-2 mb-4">
+        <div class="rounded-pill plastroc-bg-primary-gradient" id="myBar">0%</div>
       </div>
 
       <h5>Infos</h5>
@@ -107,7 +107,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="tab-pane" id="tab-how-to">
     <div class="container" id="campaign-how-to">
-      <% @campaign.sort_by_step_orders.each do |instruction| %>
+      <% @campaign.sort_by_step_order.each do |instruction| %>
         <div class="card card-m mt-3">
           <% if instruction.media.attached? %>
             <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
@@ -184,12 +184,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 <div id="sliding-card">
   <button href="#" id="CTA" style="border-radius: 12px 12px 0px 0px" class='plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3' data-toggle="modal" data-target="#joinModal">
-  Rejoindre la campagne <i class="fas fa-angle-double-up text-primary mb-2"></i>
+  Rejoindre la campagne  <i class="fas fa-angle-double-up text-light-gray mb-2"></i>
 
   </button>
 
   <div id="bottom-text">
-    <h5 class="pt-3">Choisissez la mission</h5>
+    <h5 class="pt-3 text-center">Choisissez la mission</h5>
     <hr>
 
     <div class="package-grid">

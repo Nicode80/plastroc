@@ -83,25 +83,26 @@ body::-webkit-scrollbar {
 #sliding-card {
   width: 100vw;
   position: absolute;
-  // top: 85vh; // trouver un calcul pour que ça s'adapte bien
-  bottom: 0;
-  transition-duration: 2s;
+  top: 85vh; // trouver un calcul pour que ça s'adapte bien
+  transition-duration: 0.7s;
     &.text-open {
-      height: auto !important;
-      // bottom: 85vh;
+      top: 20vh;
     }
 }
 
 #bottom-text {
   background-color: $plastroc-background;
-  height: 0px;
+  height: 80vh;
+  display: none;
   overflow: hidden;
   &.text-open {
-    height: auto !important;
+    display: block;
+    // height: auto;
+    transition-duration: 0.7s;
   }
 }
 
 .rotate-180 {
-  transition-duration: 2s;
+  transition-duration: 0.5s;
   transform: rotate(180deg);
 }
