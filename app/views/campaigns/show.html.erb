@@ -54,45 +54,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         <div class="rounded-pill plastroc-bg-primary-gradient" id="myBar">0%</div>
       </div>
 
-      <h5>Infos</h5>
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column align-items-center">
-          <% if @campaign.material.photo.attached? %>
-            <%= cl_image_tag @campaign.material.photo.key, class: "avatar m-2"%>
-          <% else %>
-            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-          <% end %>
-          <p class="mb-2"><%= @campaign.material.name %></p>
-        </div>
-
-        <div class="d-flex flex-column align-items-center">
-          <%= image_tag "https://images.unsplash.com/photo-1580227974546-fbd48825d991?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80", class: "avatar m-2"%>
-
-          <% if (@campaign.number_of_days) > 1 %>
-            <p><%= (@campaign.number_of_days) %> jours</p>
-          <% elsif (@campaign.number_of_days) == 1 %>
-            <p>1 jour</p>
-          <% else %>
-            <p>Terminé</p>
-          <% end %>
-        </div>
-
-        <div class="d-flex flex-column align-items-center">
-          <%= image_tag "https://tse3.mm.bing.net/th?id=OIP.Y0MT13_5LWvEps196W0blAHaGi&pid=Api", class: "avatar m-2"%>
-          <p>Level: 1</p> <!-- turn it dynamic when possible -->
-        </div>
-      </div>
-
-      <h5>Détails</h5>
-      <p><%= @campaign.description %></p>
-
-      <h5>Membres</h5>
-      <div class="d-flex">
-        <%= image_tag "https://i.pravatar.cc/200?u=14", class: "avatar mx-2"%>
-        <%= image_tag "https://i.pravatar.cc/200?u=10", class: "avatar mx-2"%>
-        <%= image_tag "https://i.pravatar.cc/200?u=20", class: "avatar mx-2"%>
-        <%= image_tag "https://i.pravatar.cc/200?u=4", class: "avatar mx-2"%>
-      </div>
+      <%= render 'shared/info_content' %>
 
       <% if current_user != @campaign.user %>
         <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
@@ -107,23 +69,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="tab-pane" id="tab-how-to">
     <div class="container" id="campaign-how-to">
-      <% @campaign.sort_by_step_order.each do |instruction| %>
-        <div class="card card-m mt-3">
-          <% if instruction.media.attached? %>
-            <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
-          <% else %>
-            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-          <% end %>
 
-              <div class="card-body">
-                  <span class="badge badge-pill badge-success">Etape <%= instruction.step_order %></span>
-                  <section>
-                      <h6><%= instruction.title %></h6>
-                      <p><%= instruction.rich_content %></p>
-                  </section>
-              </div>
-          </div>
-      <% end %>
+      <%= render 'shared/how_to_content' %>
 
       <% if current_user != @campaign.user %>
         <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
@@ -138,38 +85,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="tab-pane" id="tab-contact">
     <div class="container">
-      <div class="card mt-3">
-        <div class="card-body">
-          <section>
-            <h6>Que faisons nous ?</h6>
-            <p><%= @campaign.organisation.about %></p>
-          </section>
-        </div>
-      </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <section>
-            <h6><span class="icon address">Notre Adresse</h6></span>
-            <p><%= @campaign.organisation.address %></p>
-          </section>
-        </div>
-      </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <section>
-            <h6><span class="icon clock">Horaires d'ouverture</h6></span>
-            <p><%= @campaign.organisation.opening_hours %></p>
-          </section>
-        </div>
-      </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <section>
-            <h6><span class="icon mail">Contact</h6></span>
-            <p><%= @campaign.organisation.contact %></p>
-          </section>
-        </div>
-      </div>
+
+      <%= render 'shared/contact_content' %>
 
     <% if current_user != @campaign.user %>
       <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>

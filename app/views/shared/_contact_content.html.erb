@@ -1,0 +1,32 @@
+<div class="card mt-3">
+  <div class="card-body">
+    <section>
+      <h6>Que faisons nous ?</h6>
+      <p><%= @campaign.organisation.about %></p>
+    </section>
+  </div>
+</div>
+<div class="card mt-3">
+  <div class="card-body">
+    <section>
+      <h6><span class="icon address">Notre Adresse</h6></span>
+      <p><%= @campaign.organisation.address %></p>
+    </section>
+  </div>
+</div>
+<div class="card mt-3">
+  <div class="card-body">
+    <section>
+      <h6><span class="icon clock">Horaires d'ouverture</h6></span>
+      <p><%= @campaign.organisation.opening_hours %></p>
+    </section>
+  </div>
+</div>
+<div class="card mt-3">
+  <div class="card-body">
+    <section>
+      <h6><span class="icon mail">Contact</h6></span>
+      <p><%= @campaign.organisation.contact %></p>
+    </section>
+  </div>
+</div>
