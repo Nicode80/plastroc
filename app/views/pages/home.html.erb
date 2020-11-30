@@ -1,9 +1,19 @@
-<div class='container'>
-  <h1>Plastroc</h1>
-  <% if user_signed_in? %>
-    <%= link_to "Vous êtes connecté, retournez au recyclage", campaigns_path, class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
-  <% else %>
-    <%= link_to "Je veux changer le monde", new_user_session_path, class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
-    <%= link_to "Je change déjà le monde", new_user_session_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
-  <% end %>
+<div class="homewraper" style="height: 100vh; overflow: hidden;">
+   <div class='container'>
+      <h1 class="text-center plastroc-text-shadow" id="logo">Plas<span>troc</span></h1>
+      <div class="text-center">
+         <% if user_signed_in? %>
+            <h6 class="text-primary">Vous êtes déjà connecté</h6>
+            <div class="row">
+               <div class="col-3"></div>
+               <%= link_to "Accueil", campaigns_path, class: 'col-6 align-self-center btn btn-primary rounded-pill d-block mt-5 plastroc-button plastroc-light-shadow' %>
+            </div>
+         <% else %>
+            <%= link_to "Je veux changer le monde", new_user_session_path, class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
+            <%= link_to "Je change déjà le monde", new_user_session_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+         <% end %>
+      </div>
+   </div>
+   <div class="girl-image"></div>
+   <div class="green"></div>
 </div>
