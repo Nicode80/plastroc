@@ -33,25 +33,6 @@
                    </div>
                 </div>
               <% end %>
-            <% elsif %>
-             <%= link_to campaign_path(campaign) do %>
-                <div class="card campaign-card">
-                  <div class="card-horizontal">
-                    <div class="img-square-wrapper campaign-card-img">
-                       <%= cl_image_tag campaign.photo.key, height: 100, width: 100, crop: :fill %>
-                    </div>
-                      <div class="p-3 d-flex flex-column justify-content-between align-items-start">
-                        <p class="m-0">
-                          <span class="badge badge-primary rounded-pill mb-2 d-inline-block"><%= campaign.material.category %></span>
-                          <span class="badge badge-primary rounded-pill mb-2 d-inline-block"><%= campaign.material.name %></span>
-                        </p>
-                        <h6 class="card-title">
-                          <%= campaign.name %>
-                        </h6>
-                      </div>
-                     </div>
-                  </div>
-                <% end %>
               <% else %>
                <%= link_to campaign_path(campaign),class: 'text-decoration-none' do %>
                   <div class="card campaign-card">
