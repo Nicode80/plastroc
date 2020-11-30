@@ -23,18 +23,12 @@ class CampaignsController < ApplicationController
 
   def new
     @campaign = Campaign.new
-    if params[:id].present?
-      @organisation = Organisation.find(params[:id])
-    end
     @materials = Material.all.select(:id, :name, :category).group_by(&:category)
     authorize @campaign
   end
 
   def create
-    # @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new(campaign_params)
-    # @campaign.organisation = @organisation
-
     if @campaign.save
       # => Crétation automatique des packages
       create_packages

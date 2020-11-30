@@ -4,6 +4,7 @@
   <%= simple_form_for [@campaign] do |f| %>
     <%= f.association :organisation,
                       label: 'organisation',
+                      include_blank: true,
                       collection: current_user.organisations,
                       selected: params[:id],
                       input_html: { class: "col-12 mb-3" }
