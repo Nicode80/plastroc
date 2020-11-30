@@ -30,7 +30,9 @@
          color: $plastroc-main;
       }
    }
-
+   a {
+      z-index: 999;
+   }
    .green {
       height: 100px;
       background: $plastroc-main;
@@ -52,5 +54,4 @@
       width: 120%;
 
    }
-
 }
