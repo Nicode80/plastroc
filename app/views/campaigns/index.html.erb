@@ -11,9 +11,9 @@
 
    <div>
       <h4 class="text-center page-title">Missions</h4>
-      <div class="campaigns-wrapper">
+      <div id='wrapper' class="campaigns-wrapper">
          <% @campaigns.each do |campaign| %>
-            <div class="col-11 col-md-4 mt-3">
+            <div class="col-11 col-md-4 mt-3" id="campaign-<%= campaign.organisation.id %>">
               <% if campaign.user == current_user %>
                <%= link_to dashboard_campaign_path(campaign),class: 'text-decoration-none' do %>
                 <div class="card campaign-card" data-organisation-id="<%= campaign.organisation.id %>">

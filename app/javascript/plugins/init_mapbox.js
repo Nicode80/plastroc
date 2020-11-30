@@ -73,19 +73,26 @@ const initMapbox = async () => {
 };
 
 const toggleCardHighlighting = (event) => {
-  // We select the card corresponding to the marker's id
-  const cards = document.querySelectorAll(".campaign-card")
+  // We remove highlight form all cards
+  const cards = document.querySelectorAll(".campaign-card");
   cards.forEach((card) => {
     card.classList.remove('highlight');
   });
+  // We select the card corresponding to the marker's id
   const card = document.querySelector(`[data-organisation-id="${event.currentTarget.dataset.markerId}"]`);
   // Then we toggle the class "highlight github" to the card
   card.classList.toggle('highlight');
-  scrollTo(event.currentTarget.dataset.markerId);
-}
-
-function scrollTo(hash) {
-  location.hash = "#" + hash;
+  // console.log(card.offsetWidth);
+  // const cardPosition = card.getBoundingClientRect();
+  // console.log(card.offsetLeft);
+  // const wrapperPosition = wrapper.getBoundingClientRect();
+  // console.log(wrapperPosition.left);
+  // wrapper.scrollLeft = cardPosition.left;
+  // const wrapper = document.querySelector(".campaigns-wrapper");
+  const cardParent = document.getElementById(`campaign-${event.currentTarget.dataset.markerId}`);
+  cardParent.scrollIntoView();
+  // document.getElementById(`${event.currentTarget.dataset.markerId}`).scrollIntoView();
+  // $('#wrapper').scrollTo(`#${event.currentTarget.dataset.markerId}`);
 }
 
 const locateUser = (map, position) => {
