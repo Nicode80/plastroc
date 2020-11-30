@@ -82,17 +82,9 @@ const toggleCardHighlighting = (event) => {
   const card = document.querySelector(`[data-organisation-id="${event.currentTarget.dataset.markerId}"]`);
   // Then we toggle the class "highlight github" to the card
   card.classList.toggle('highlight');
-  // console.log(card.offsetWidth);
-  // const cardPosition = card.getBoundingClientRect();
-  // console.log(card.offsetLeft);
-  // const wrapperPosition = wrapper.getBoundingClientRect();
-  // console.log(wrapperPosition.left);
-  // wrapper.scrollLeft = cardPosition.left;
-  // const wrapper = document.querySelector(".campaigns-wrapper");
+  // Then we scroll the wrapper to the select card
   const cardParent = document.getElementById(`campaign-${event.currentTarget.dataset.markerId}`);
   cardParent.scrollIntoView();
-  // document.getElementById(`${event.currentTarget.dataset.markerId}`).scrollIntoView();
-  // $('#wrapper').scrollTo(`#${event.currentTarget.dataset.markerId}`);
 }
 
 const locateUser = (map, position) => {

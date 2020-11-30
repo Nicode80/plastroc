@@ -7,7 +7,7 @@ const materialSelect = () => {
 
     select.addEventListener('change', (e) => {
       const selectedMaterial = e.currentTarget.value;
-      let html = "<p>No material for this category yet</p>";
+      let html = "<p style='color: red;'>Il n'y a pas encore de matériaux pour cette catégorie</p>";
       if(materials[selectedMaterial]) {
        html = materials[selectedMaterial].map(material => {
           return `

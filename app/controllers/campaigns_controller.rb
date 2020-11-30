@@ -2,9 +2,7 @@ class CampaignsController < ApplicationController
 
   def index # for the moment show all campaigns but will need to sort if on organisation view
     @campaigns = policy_scope(Campaign)
-    # @organisations = Organisation.all
     @organisations = organisations_with_active_campaigns
-    # raise
     @markers = @organisations.map do |organisation|
       @organistion_active_campaigns = active_campaigns(organisation)
       url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
@@ -30,17 +28,13 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new
     @materials = Material.all.select(:id, :name, :category).group_by(&:category)
     authorize @campaign
   end
 
   def create
-    @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new(campaign_params)
-    @campaign.organisation = @organisation
-
     if @campaign.save
       # => Crétation automatique des packages
       create_packages
@@ -77,6 +71,7 @@ class CampaignsController < ApplicationController
 
   def dashboard
     @campaign = Campaign.find(params[:id])
+    @volume_done = done_missions_calcul
     @volume_total = total_missions_calcul
     authorize @campaign
   end
@@ -96,6 +91,9 @@ class CampaignsController < ApplicationController
   end
 
   def create_packages
+    # if @campaign.min_package.nil?
+    #   @campaign.min_package = 1
+    # end
     iterators = [(@campaign.target / @campaign.min_package).floor, 4].min
     names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
     x = 0
@@ -111,24 +109,21 @@ class CampaignsController < ApplicationController
   def done_missions_calcul
     missions = @campaign.missions
     missions_done = missions.select { |mission| mission.status == "done" }
-    volumes_done = []
-    missions_done.each do |mission_done|
-      volumes_done << mission_done.package.quantity
-    end
+    volumes_done = missions_done.map { |mission_done| mission_done.package.quantity }
     return volumes_done.sum
   end
 
   def total_missions_calcul
     missions = @campaign.missions
-    volumes_total = []
-    missions.each do |mission|
-      volumes_total << mission.package.quantity
-    end
+    volumes_total = missions.map { |mission| mission.package.quantity }
+    # @volume_total = @campaign.missions.packages.sum(:quantity)
     return volumes_total.sum
+
   end
 
   def campaign_params
     params.require(:campaign).permit(
+      :organisation_id,
       :name,
       :description,
       :start_date,
@@ -141,12 +136,4 @@ class CampaignsController < ApplicationController
       :min_package,
       :published)
   end
-
-  # Refactored line 63
-
-  # def current_user_campaigns
-  #   Campaign.all.select do |c|
-  #     c.user == current_user
-  #   end
-  # end
 end

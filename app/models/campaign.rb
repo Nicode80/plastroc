@@ -8,7 +8,7 @@ class Campaign < ApplicationRecord
   has_one :user, through: :organisation
   has_one_attached :photo
 
-  UNITS = ['g', 'kg', 'l', 'cbm']
+  UNITS = ['g', 'kg', 'l', 'unité']
 
   validates :name, presence: true
   validates :description, presence: true
@@ -21,5 +21,9 @@ class Campaign < ApplicationRecord
 
   def number_of_days
     (end_date - Date.today).to_i
+  end
+
+  def sort_by_step_order
+    material.instructions.order(step_order: :asc)
   end
 end

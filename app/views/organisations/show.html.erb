@@ -23,7 +23,7 @@
       <p><i class="icon mail"></i><%= @organisation.contact %></p>
       <% if policy(Campaign).create? %>
         <%= link_to '✚ Campagne',
-                    new_organisation_campaign_path(@organisation),
+                    new_campaign_path(id: @organisation.id),
                     class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
       <% end %>
       <% if policy(@organisation).destroy? %>
