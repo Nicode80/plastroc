@@ -18,7 +18,7 @@ class CampaignsController < ApplicationController
     @packages = @campaign.packages
     @mission = Mission.new
     @volume_done = done_missions_calcul
-    @ratio = @volume_done.fdiv(@campaign.target) * 100
+    @ratio = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
 
     authorize @campaign
   end
@@ -71,8 +71,7 @@ class CampaignsController < ApplicationController
 
   def dashboard
     @campaign = Campaign.find(params[:id])
-    done_missions_calcul
-
+    @volume_total = total_missions_calcul
     authorize @campaign
   end
 
@@ -127,7 +126,7 @@ class CampaignsController < ApplicationController
     missions.each do |mission|
       volumes_total << mission.package.quantity
     end
-    @volume_total = volumes_total.sum
+    return volumes_total.sum
   end
 
   def campaign_params
