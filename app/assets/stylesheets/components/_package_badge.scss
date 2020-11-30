@@ -13,6 +13,11 @@
 .package-badge-square {
   height: 120px;
   width: 120px;
+  overflow: hidden;
+  h6 {
+    color: white;
+    margin: 0;
+  }
 }
 
 .package-badge-fluid {
@@ -23,4 +28,28 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
+}
+
+.package-header {
+  width: 100%
+}
+
+.corail {
+  background: rgb(242,75,136);
+  background: linear-gradient(90deg, rgba(242,75,136,1) 45%, rgba(242,75,136,0.515284) 100%);
+}
+
+.tortue {
+  background: rgb(99,174,191);
+background: linear-gradient(90deg, rgba(99,174,191,1) 55%, rgba(99,174,191,0.639653) 100%);
+}
+
+.dauphin {
+  background: rgb(242,194,48);
+  background: linear-gradient(90deg, rgba(242,194,48,1) 53%, rgba(242,194,48,0.41360294117647056) 100%);
+}
+
+.baleine {
+  background: rgb(242,149,68);
+  background: linear-gradient(90deg, rgba(242,149,68,1) 55%, rgba(242,149,68,0.586432) 100%);
 }
