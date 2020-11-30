@@ -46,5 +46,4 @@ const locateUser = (map, position) => {
   });
 };
 
-
 export { initMapbox };
