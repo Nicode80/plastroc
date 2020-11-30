@@ -18,3 +18,16 @@
 // .plastroc-progress-bar div:last-child {
 //   background: grey;
 // }
+#myProgress {
+  width: 100%;
+  background: $plastroc-text-light;
+}
+
+#myBar {
+  width: 10%;
+  // height: 15px;
+  background-color: #4CAF50;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+}
