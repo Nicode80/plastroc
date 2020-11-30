@@ -17,8 +17,8 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
     @mission = Mission.new
-
-    done_missions_calcul
+    @volume_done = done_missions_calcul
+    @ratio = @volume_done.fdiv(@campaign.target) * 100
 
     authorize @campaign
   end
@@ -118,7 +118,7 @@ class CampaignsController < ApplicationController
     missions_done.each do |mission_done|
       volumes_done << mission_done.package.quantity
     end
-    @volume_done = volumes_done.sum
+    return volumes_done.sum
   end
 
   def total_missions_calcul
