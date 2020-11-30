@@ -13,8 +13,6 @@ const slidingCard = () => {
     arrow.classList.toggle('rotate-180');
   });
 
-
-
 }
 
 export { slidingCard }
