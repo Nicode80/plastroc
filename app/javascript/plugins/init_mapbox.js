@@ -38,10 +38,10 @@ const initMapbox = async () => {
        pill.className = 'pill_number';
        pill.style.width = '14px';
        pill.style.height = '14px';
-       pill.style.marginLeft = '10px';
-       pill.style.marginTop = '-10px';
+       pill.style.marginLeft = '12px';
+       pill.style.marginTop = '-12px';
        pill.style.borderRadius = '50%';
-       pill.style.backgroundColor = 'green';
+       pill.style.backgroundColor = '#00CD60';
        pill.style.color = 'white';
        pill.style.textAlign = 'center';
        pill.style.display = 'flex';
