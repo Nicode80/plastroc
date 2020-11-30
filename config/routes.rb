@@ -12,14 +12,17 @@ Rails.application.routes.draw do
 
   resources :campaigns, only: [ :index, :show, :edit, :update ] do
     resources :package, only: :create do
-      resources :missions, only: [ :create ]
+      resources :missions, only: [ :new, :create ]
     end
     collection do
       get :my_campaigns
+    end
+    member do
+      get :dashboard
     end
   end
 
   resources :instructions, only: [ :edit, :destroy, :update ]
   resources :users, only: [ :index, :show ]
-  resources :missions, only: [ :index ]
+  resources :missions, only: [ :index, :show ]
 end

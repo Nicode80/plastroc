@@ -1,0 +1,100 @@
+<div class=" d-flex flex-column justify-content-between my-4" style="margin-bottom: 75px;">
+
+  <div class="container">
+    <div class="d-flex flex-column align-items-center mission-confirmation">
+      <% if @campaign.organisation.photo.attached? %>
+        <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2"%>
+      <% else %>
+        <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+      <% end %>
+      <h5 class="mb-0"><%= @campaign.name %></h5>
+      <h6>by <%= @campaign.organisation.name %></h6>
+    </div>
+  </div>
+  <span class="green-separator"></span>
+  <div class="d-flex flex-column align-items-center mb-4">
+      <h5>Confirmez</h5>
+      <h5>votre participation</h5>
+  </div>
+  <div class="container mb-4">
+      <div class="package-badge package-badge-fluid mt-3 d-flex align-items-center">
+          <div class="container p-3">
+              <div class="d-flex justify-content-between align-items-center text-left">
+                  <div>
+                      <p class="mb-1">Votre mission</p>
+                      <h6 class="mb-0"><%= @package.name %></h6>
+                  </div>
+                  <p class="mb-0"><i class="fas fa-weight-hanging text-primary"></i> <%= @package.quantity %><%= @campaign.unit %></p>
+                  <p class="mb-0"><i class="fas fa-angle-double-up text-primary"></i> <%= @package.xp_reward %>xp</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container mb-4">
+    <div class="package-badge">
+      <div class="p-3" id="confirmation">
+        <p class="mb-3">Vous vous engagez à :</p>
+        <!-- <label class="checkbox">respecter les quantités
+            <input type="checkbox" id="check-quantity">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="checkbox">respecter le type de matériaux
+            <input type="checkbox" id="check-material">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="checkbox">respecter les délais
+            <input type="checkbox" id="check-deadline">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="checkbox">mettre à jour le status de votre mission en cas d'abandon
+            <input type="checkbox" id="check-status">
+            <span class="checkmark"></span>
+        </label> -->
+        <ul id="engagements">
+          <li class=""><span class="ml-2">respecter les quantités</span></li>
+          <li class=""><span class="ml-2">respecter le type de matériaux</span></li>
+          <li class=""><span class="ml-2">respecter les délais</span></li>
+          <li class=""><span class="ml-2">mettre à jour le status de votre mission en cas d'abandon</span></li>
+        </ul>
+
+        <label class="checkbox">Je m'engage
+            <input type="checkbox" id="confirm">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+    </div>
+  </div>
+</div>
+
+<%= simple_form_for [@campaign, @package, @mission] do |f| %>
+  <%= f.submit "Let's go", id: "btn-confirm", class: 'plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3 disabled'%>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
