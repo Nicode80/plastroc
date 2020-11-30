@@ -11,3 +11,12 @@
   left: 0px;
   background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 75%);
 }
+
+// app/assets/stylesheets/components/_map.scss
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+}

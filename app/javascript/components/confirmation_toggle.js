@@ -3,14 +3,13 @@ const toggleConfirmation = () => {
   const checkList = document.querySelector('#engagements');
   const chekItems = document.querySelectorAll('#engagements li');
   const btn = document.querySelector('#btn-confirm');
-  btn.disabled = true;
   // const checkQuantity = document.querySelector('#check-quantity');
   // const checkMaterial = document.querySelector('#check-material');
   // const checkDeadline = document.querySelector('#check-deadline');
   // const checkStatus = document.querySelector('#check-status');
 
   if(!checkbox) return;
-
+  btn.disabled = true;
 
   checkbox.addEventListener('change', (e) => {
     if(e.target.checked) {

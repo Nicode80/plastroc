@@ -4,8 +4,6 @@ const initMapbox = async () => {
   const mapElement = document.getElementById('map');
   if (!mapElement) return; // only build a map if there's a div#map to inject into
 
-
-
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
   const map = new mapboxgl.Map({
     container: 'map',
@@ -20,12 +18,28 @@ const initMapbox = async () => {
 
   const markers = JSON.parse(mapElement.dataset.markers);
   markers.forEach((marker) => {
-    new mapboxgl.Marker()
+    const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
+
+  // Create a HTML element for your custom marker
+  const organisationPic = document.createElement('div');
+        organisationPic.className = 'marker';
+        // organisationPic.content = `${@campaigns_number}`;
+        organisationPic.style.backgroundImage = `url('${marker.image_url}')`;
+        organisationPic.style.backgroundSize = 'cover';
+        // organisationPic.style.backgroundSize = '150%';
+        organisationPic.style.backgroundPosition = 'center';
+        organisationPic.style.width = '30px';
+        organisationPic.style.height = '30px';
+        organisationPic.style.borderRadius = '50%';
+        organisationPic.style.border = '1px solid white';
+        organisationPic.style.boxShadow = "0px 0px 20px grey";
+
+    new mapboxgl.Marker(organisationPic)
       .setLngLat([ marker.lng, marker.lat ])
+      .setPopup(popup)
       .addTo(map);
   });
   // fitMapToMarkers(map, markers);
-
 };
 
 const fitMapToMarkers = (map, markers) => {
@@ -45,6 +59,5 @@ const locateUser = (map, position) => {
     curve: 1, // change the speed at which it zooms out
   });
 };
-
 
 export { initMapbox };

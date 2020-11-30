@@ -5,10 +5,15 @@ class CampaignsController < ApplicationController
     # @organisations = Organisation.all
     @organisations = organisations_with_active_campaigns
     # raise
-    @markers = @organisations.map do |orga|
+    @markers = @organisations.map do |organisation|
+      @campaigns_number = number_of_active_campaign(organisation)
+      @organistion_active_campaigns = active_campaigns(organisation)
+      url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
       {
-        lat: orga.latitude,
-        lng: orga.longitude
+        lat: organisation.latitude,
+        lng: organisation.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
+        image_url: url
       }
     end
   end
@@ -17,7 +22,8 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
     @mission = Mission.new
-    done_missions_calcul
+    @volume_done = done_missions_calcul
+    @ratio = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
 
     authorize @campaign
   end
@@ -70,31 +76,23 @@ class CampaignsController < ApplicationController
 
   def dashboard
     @campaign = Campaign.find(params[:id])
-    done_missions_calcul
-
+    @volume_done = done_missions_calcul
+    @volume_total = total_missions_calcul
     authorize @campaign
   end
 
   private
 
   def organisations_with_active_campaigns
-    Organisation.joins(:campaigns).where(campaigns: { 'status' =>  'ongoing'  })
+    Organisation.joins(:campaigns).where(campaigns: { status: 'ongoing' })
+  end
 
-    # Refactored line 71
+  def number_of_active_campaign(organisation)
+    Campaign.where(organisation: organisation).where(status: 'ongoing').count
+  end
 
-    # @organisations = []
-    # Organisation.all.geocoded.each do |organisation|
-    #   ongoing_campaigns = 0
-    #   organisation.campaigns.each do |campaign|
-    #     if campaign.status == 'ongoing'
-    #       ongoing_campaigns += 1
-    #     end
-    #   end
-    #   if ongoing_campaigns.positive?
-    #     @organisations << organisation
-    #   end
-    # end
-    # return @organisations
+  def active_campaigns(organisation)
+    Campaign.where(organisation: organisation).where(status: 'ongoing')
   end
 
   def create_packages
@@ -113,20 +111,16 @@ class CampaignsController < ApplicationController
   def done_missions_calcul
     missions = @campaign.missions
     missions_done = missions.select { |mission| mission.status == "done" }
-    volumes_done = []
-    missions_done.each do |mission_done|
-      volumes_done << mission_done.package.quantity
-    end
-    @volume_done = volumes_done.sum
+    volumes_done = missions_done.map { |mission_done| mission_done.package.quantity }
+    return volumes_done.sum
   end
 
   def total_missions_calcul
     missions = @campaign.missions
-    volumes_total = []
-    missions.each do |mission|
-      volumes_total << mission.package.quantity
-    end
-    @volume_total = volumes_total.sum
+    volumes_total = missions.map { |mission| mission.package.quantity }
+    # @volume_total = @campaign.missions.packages.sum(:quantity)
+    return volumes_total.sum
+
   end
 
   def campaign_params
