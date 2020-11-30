@@ -9,7 +9,8 @@ const initFlatpickr = () => {
     flatpickr(".date-picker", {
       minDate: "today",
       // mode: "range",
-      dateFormat: "d/m/Y"
+      dateFormat: "d/m/Y",
+      "plugins": [new rangePlugin({ input: "#secondRangeInput"})]
     })
   }
 }

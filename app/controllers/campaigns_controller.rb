@@ -26,7 +26,7 @@ class CampaignsController < ApplicationController
   end
 
   def create
-    # raise
+    raise
     @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new(campaign_params)
     @campaign.organisation = @organisation
