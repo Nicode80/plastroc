@@ -6,10 +6,10 @@ class CampaignsController < ApplicationController
     @organisations = organisations_with_active_campaigns
     # raise
     @markers = @organisations.map do |organisation|
-      @campaigns_number = number_of_active_campaign(organisation)
       @organistion_active_campaigns = active_campaigns(organisation)
       url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
       {
+        campaigns_number: number_of_active_campaign(organisation),
         lat: organisation.latitude,
         lng: organisation.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),

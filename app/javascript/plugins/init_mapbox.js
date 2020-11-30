@@ -34,9 +34,29 @@ const initMapbox = async () => {
         organisationPic.style.border = '1px solid white';
         organisationPic.style.boxShadow = "0px 0px 20px grey";
 
+  const pill = document.createElement('div');
+       pill.className = 'pill_number';
+       pill.style.width = '12px';
+       pill.style.height = '12px';
+       pill.style.marginLeft = '10px';
+       pill.style.marginTop = '-10px';
+       pill.style.borderRadius = '50%';
+       pill.style.backgroundColor = 'green';
+       pill.style.color = 'white';
+       pill.style.textAlign = 'center';
+       pill.style.display = 'flex';
+       pill.style.alignItems = 'center';
+       pill.style.justifyContent = 'center';
+       pill.style.border = '1px solid white';
+       pill.insertAdjacentHTML('afterbegin', `<small class='mb-0'>${marker.campaigns_number}</small>`);
+
     new mapboxgl.Marker(organisationPic)
       .setLngLat([ marker.lng, marker.lat ])
       .setPopup(popup)
+      .addTo(map);
+
+    new mapboxgl.Marker(pill)
+      .setLngLat([ marker.lng, marker.lat ])
       .addTo(map);
   });
   // fitMapToMarkers(map, markers);
