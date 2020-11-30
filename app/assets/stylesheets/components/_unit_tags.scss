@@ -67,6 +67,15 @@
   border-color: $plastroc-main;
 }
 
+#campaign_unit_unité + label {
+  color: $plastroc-main;
+}
+
+#campaign_unit_unité:checked + label {
+  background-color: $plastroc-main;
+  border-color: $plastroc-main;
+}
+
 .collection_radio_buttons{
   color: $plastroc-main;
 }
