@@ -1,0 +1,17 @@
+<% @campaign.sort_by_step_order.each do |instruction| %>
+  <div class="card card-m mt-3">
+    <% if instruction.media.attached? %>
+      <%= cl_image_tag instruction.media.key, height: 500, crop: :fill %>
+    <% else %>
+      <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+    <% end %>
+
+        <div class="card-body">
+            <span class="badge badge-pill badge-success">Etape <%= instruction.step_order %></span>
+            <section>
+                <h6><%= instruction.title %></h6>
+                <p><%= instruction.rich_content %></p>
+            </section>
+        </div>
+    </div>
+<% end %>
