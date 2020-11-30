@@ -3,10 +3,15 @@ class CampaignsController < ApplicationController
   def index # for the moment show all campaigns but will need to sort if on organisation view
     @campaigns = policy_scope(Campaign)
     @organisations = organisations_with_active_campaigns
-    @markers = @organisations.map do |orga|
+    @markers = @organisations.map do |organisation|
+      @organistion_active_campaigns = active_campaigns(organisation)
+      url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
       {
-        lat: orga.latitude,
-        lng: orga.longitude
+        campaigns_number: number_of_active_campaign(organisation),
+        lat: organisation.latitude,
+        lng: organisation.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
+        image_url: url
       }
     end
   end
@@ -15,8 +20,8 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
     @mission = Mission.new
-
-    done_missions_calcul
+    @volume_done = done_missions_calcul
+    @ratio = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
 
     authorize @campaign
   end
@@ -65,18 +70,32 @@ class CampaignsController < ApplicationController
 
   def dashboard
     @campaign = Campaign.find(params[:id])
-    done_missions_calcul
-
+    @volume_total = total_missions_calcul
     authorize @campaign
   end
 
   private
 
   def organisations_with_active_campaigns
+<<<<<<< HEAD
     Organisation.joins(:campaigns).where(campaigns: { 'status' =>  'ongoing'  })
+=======
+    Organisation.joins(:campaigns).where(campaigns: { status: 'ongoing' })
+  end
+
+  def number_of_active_campaign(organisation)
+    Campaign.where(organisation: organisation).where(status: 'ongoing').count
+  end
+
+  def active_campaigns(organisation)
+    Campaign.where(organisation: organisation).where(status: 'ongoing')
+>>>>>>> master
   end
 
   def create_packages
+    # if @campaign.min_package.nil?
+    #   @campaign.min_package = 1
+    # end
     iterators = [(@campaign.target / @campaign.min_package).floor, 4].min
     names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
     x = 0
@@ -96,7 +115,7 @@ class CampaignsController < ApplicationController
     missions_done.each do |mission_done|
       volumes_done << mission_done.package.quantity
     end
-    @volume_done = volumes_done.sum
+    return volumes_done.sum
   end
 
   def total_missions_calcul
@@ -105,7 +124,7 @@ class CampaignsController < ApplicationController
     missions.each do |mission|
       volumes_total << mission.package.quantity
     end
-    @volume_total = volumes_total.sum
+    return volumes_total.sum
   end
 
   def campaign_params

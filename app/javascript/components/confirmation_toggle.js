@@ -26,6 +26,4 @@ const toggleConfirmation = () => {
   });
 };
 
-
-
 export { toggleConfirmation }
