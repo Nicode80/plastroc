@@ -16,7 +16,7 @@
             <div class="col-11 col-md-4 mt-3">
               <% if campaign.user == current_user %>
                <%= link_to dashboard_campaign_path(campaign),class: 'text-decoration-none' do %>
-                <div class="card campaign-card">
+                <div class="card campaign-card" data-organisation-id="<%= campaign.organisation.id %>">
                   <div class="card-horizontal">
                     <div class="img-square-wrapper campaign-card-img">
                       <%= cl_image_tag campaign.photo.key, height: 100, width: 100, crop: :fill %>
@@ -35,7 +35,7 @@
                 <% end %>
               <% else %>
                <%= link_to campaign_path(campaign),class: 'text-decoration-none' do %>
-                  <div class="card campaign-card">
+                  <div class="card campaign-card" data-organisation-id="<%= campaign.organisation.id %>">
                     <div class="card-horizontal">
                       <div class="img-square-wrapper campaign-card-img">
                          <%= cl_image_tag campaign.photo.key, height: 100, width: 100, crop: :fill %>

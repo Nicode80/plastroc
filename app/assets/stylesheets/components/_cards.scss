@@ -79,3 +79,7 @@ body::-webkit-scrollbar {
     display: flex;
     flex: 1 1 auto;
 }
+
+.highlight {
+  border: solid 3px $green;
+}

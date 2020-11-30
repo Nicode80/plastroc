@@ -13,7 +13,8 @@ class CampaignsController < ApplicationController
         lat: organisation.latitude,
         lng: organisation.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
-        image_url: url
+        image_url: url,
+        id: organisation.id
       }
     end
   end
