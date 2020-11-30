@@ -77,9 +77,6 @@ class CampaignsController < ApplicationController
   private
 
   def organisations_with_active_campaigns
-<<<<<<< HEAD
-    Organisation.joins(:campaigns).where(campaigns: { 'status' =>  'ongoing'  })
-=======
     Organisation.joins(:campaigns).where(campaigns: { status: 'ongoing' })
   end
 
@@ -89,7 +86,6 @@ class CampaignsController < ApplicationController
 
   def active_campaigns(organisation)
     Campaign.where(organisation: organisation).where(status: 'ongoing')
->>>>>>> master
   end
 
   def create_packages
