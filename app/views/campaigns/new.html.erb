@@ -1,7 +1,14 @@
 <div class="container" style="margin-bottom: 75px;">
   <div id="materials" data-materials="<%= @materials.to_json %>"></div>
   <h4 class="mt-3">Nouvelle Campagne</h4>
-  <%= simple_form_for [@organisation, @campaign] do |f| %>
+  <%= simple_form_for [@campaign] do |f| %>
+    <%= f.association :organisation,
+                      label: 'organisation',
+                      include_blank: true,
+                      collection: current_user.organisations,
+                      selected: params[:id],
+                      input_html: { class: "col-12 mb-3" }
+                       %>
     <%= f.input :name,
                 label: false,
                 placeholder: "Nom*",
@@ -72,5 +79,5 @@
   <% end %>
 
 
-  <%= link_to 'Annuler', organisation_path(@organisation), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+  <%= link_to 'Annuler', :back, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
 </div>

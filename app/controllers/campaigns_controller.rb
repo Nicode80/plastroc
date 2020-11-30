@@ -2,9 +2,7 @@ class CampaignsController < ApplicationController
 
   def index # for the moment show all campaigns but will need to sort if on organisation view
     @campaigns = policy_scope(Campaign)
-    # @organisations = Organisation.all
     @organisations = organisations_with_active_campaigns
-    # raise
     @markers = @organisations.map do |organisation|
       @organistion_active_campaigns = active_campaigns(organisation)
       url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
@@ -29,17 +27,13 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new
     @materials = Material.all.select(:id, :name, :category).group_by(&:category)
     authorize @campaign
   end
 
   def create
-    @organisation = Organisation.find(params[:organisation_id])
     @campaign = Campaign.new(campaign_params)
-    @campaign.organisation = @organisation
-
     if @campaign.save
       # => Crétation automatique des packages
       create_packages
@@ -131,6 +125,7 @@ class CampaignsController < ApplicationController
 
   def campaign_params
     params.require(:campaign).permit(
+      :organisation_id,
       :name,
       :description,
       :start_date,
@@ -143,12 +138,4 @@ class CampaignsController < ApplicationController
       :min_package,
       :published)
   end
-
-  # Refactored line 63
-
-  # def current_user_campaigns
-  #   Campaign.all.select do |c|
-  #     c.user == current_user
-  #   end
-  # end
 end

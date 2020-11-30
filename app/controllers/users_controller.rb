@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @organisations = current_user.organisations
     authorize @user
   end
 end
