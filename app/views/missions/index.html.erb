@@ -1,37 +1,31 @@
 <div class='container'>
   <h3>Accueil</h3>
 
-  <!-- My organisations -->
-  <% if !current_user.organisations.empty? %>
-    <div class='d-flex align-items-center justify-content-between'>
-      <h4 class="mt-3">Mes Organisations</h4>
+  <!-- My campaigns -->
+  <% if !current_user.campaigns.empty? %>
+    <div class='d-flex align-items-center justify-content-between mb-2'>
+      <h4 class="mt-3">Mes campagnes</h4>
       <h4 class='mt-3'>
-        <%= link_to new_organisation_path, class: 'mt-3 mb-1 mr-1' do %>
+        <%= link_to new_campaign_path, class: 'mt-3 mb-1 mr-1' do %>
           <i class="fas fa-plus"></i>
         <% end %>
       </h4>
     </div>
     <hr class="mb-3">
-    <% @organisations.each do |org| %>
-      <%= link_to organisation_path(org), class: 'text-decoration-none' do %>
+    <% @campaigns.each do |campaign| %>
+      <%= link_to campaign_path(campaign), class: 'text-decoration-none' do %>
         <div class="d-flex flex-row card card-s">
-          <% if org.photo.attached? %>
-            <%= cl_image_tag org.photo.key, crop: :fill %>
+          <% if campaign.photo.attached? %>
+            <%= cl_image_tag campaign.photo.key, crop: :fill %>
           <% else %>
             <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
           <% end %>
           <section class="w-100">
             <div class="d-flex justify-content-between align-items-center">
-              <h6 style='color: grey'><%= org.name %></h6>
-              <% if org.campaigns.count == 0 %>
-                <span class="text-decoration-none badge badge-secondary badge-pill mb-2"><%= "#{org.campaigns.count} campagne" %></span>
-              <% elsif org.campaigns.count == 1 %>
-                <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{org.campaigns.count} campagne" %></span>
-              <% else %>
-                <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{org.campaigns.count} campagnes" %></span>
-              <% end %>
+              <h6 style='color: grey'><%= campaign.name %></h6>
+              <span class="text-decoration-none badge badge-secondary badge-pill mb-2"><%= "#{campaign.status} campagne" %></span>
             </div>
-            <p class='text-truncate' style='max-width: 215px'><%= org.address %></p>
+            <p class='text-truncate' style='max-width: 215px'><%= campaign.organisation.address %></p>
           </section>
         </div>
       <% end %>
@@ -50,11 +44,11 @@
     <% end %>
   <% end %>
 
-  <!-- Si pas d'organisation, possibilité d'en créer une première -->
-  <% if current_user.organisations.empty? %>
+  <!-- Si pas d'campaigns, possibilité d'en créer une première -->
+  <% if current_user.campaigns.empty? %>
   <hr class="mb-3">
   <p class='text-center'>♻️ Vous êtes recycleur?</p>
-    <%= link_to 'Créer une première campagne de recyclage', new_organisation_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+    <%= link_to 'Créer une première campagne de recyclage', new_campaign_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
   <% end %>
 
 </div>
