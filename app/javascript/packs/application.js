@@ -48,8 +48,8 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initSweetalert();
   deleteAlert();
-  slidingCard();
   toggleConfirmation();
+  slidingCard();
   animatedBar();
 });
 
