@@ -83,7 +83,6 @@ const toggleCardHighlighting = (event) => {
   // Then we scroll the wrapper to the select card
   const cardParent = document.getElementById(`campaign-${event.currentTarget.dataset.markerId}`);
   cardParent.scrollIntoView();
-  console.log(cardParent)
 }
 
 const locateUser = (map, position) => {
