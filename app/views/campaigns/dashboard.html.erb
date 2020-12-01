@@ -54,9 +54,13 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
             <div class="rounded-pill plastroc-bg-primary-gradient" id="myBar">0%</div>
          </div>
 
-        <div class="d-flex justify-content-between align-items-center">
-            <p class="mb-0"><strong>Engagé</strong></p>
-            <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
+        <div class="card">
+           <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                  <p class="mb-0"><strong>Engagé</strong></p>
+                  <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
+              </div>
+           </div>
         </div>
         <!-- cf new show for dynamic progress bar -->
         <div class="plastroc-progress-bar mt-2 mb-4">
@@ -72,26 +76,10 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
             	<footer class="blockquote-footer mt-2 mb-0">Le 27/07/2020<cite title="Source Title"> par Laura</cite></footer>
             </div>
             <div class="col-12 mt-3">
-               <p class="text-right p-0 m-0"><a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Answer of the owner <i class="fas fa-chevron-down"></i></a></p>
+               <p class="text-right p-0 m-0"><a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Answer of the owner  <i class="fas fa-chevron-down"></i></a></p>
                <div class="collapse" id="collapseExample">
                   <blockquote class="blockquote">
-                     <p class="mb-0 mt-2 text-right">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                     <footer class="blockquote-footer mt-2 mb-0 text-right">le 28/07/2020</footer>
-               </div>
-            </div>
-         </div>
-      </blockquote>
-      <blockquote class="blockquote card mt-3">
-         <div class="card-body">
-            <div class="col-11">
-            	<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante ?</p>
-            	<footer class="blockquote-footer mt-2 mb-0">Le 27/07/2020<cite title="Source Title"> par Laura</cite></footer>
-            </div>
-            <div class="col-12 mt-3">
-               <p class="text-right p-0 m-0"><a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Answer of the owner <i class="fas fa-chevron-down"></i></a></p>
-               <div class="collapse" id="collapseExample">
-                  <blockquote class="blockquote">
-                     <p class="mb-0 mt-2 text-right">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                     <p class="mb-0 mt-2 text-right"><em>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</em></p>
                      <footer class="blockquote-footer mt-2 mb-0 text-right">le 28/07/2020</footer>
                </div>
             </div>
@@ -132,12 +120,13 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 <!-- Edit & stop buttons -->
 
-  <div class="bottom-nav">
-      <div class="d-flex justify-content-around">
-          <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
-          <p><a href="#" style="color: red;">Stopper</a></p>
+
+      <div class="container">
+         <div class="d-flex justify-content-between mt-5">
+             <a href="#" class="btn btn-primary rounded-pill flex-grow-1 plastroc-light-shadow col-7 mr-2" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a>
+             <a href="#" class="btn btn-danger rounded-pill plastroc-light-shadow col-4 disabled" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Stopper</a>
+         </div>
       </div>
-  </div>
 
 </div>
 
@@ -153,7 +142,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         </button>
       </div>
       <div class="modal-body">
-        <div class="container" style="margin-bottom: 75px;">
+        <div class="container">
           <div id="materials" data-materials="<%= @materials.to_json %>"></div>
           <%= simple_form_for @campaign do |f| %>
             <%= f.input :name,
