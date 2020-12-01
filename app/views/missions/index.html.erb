@@ -1,15 +1,17 @@
+<div class="home-banner">
+   <h3 class="text-center py-4">Dashboard</h3>
+</div>
 <div class='container'>
-  <h3>Accueil</h3>
 
   <!-- My campaigns -->
   <% if !current_user.campaigns.empty? %>
     <div class='d-flex align-items-center justify-content-between mb-2'>
       <h4 class="mt-3">Mes campagnes</h4>
-      <h4 class='mt-3'>
+      <h6 class='mt-3'>
         <%= link_to new_campaign_path, class: 'mt-3 mb-1 mr-1' do %>
           <i class="fas fa-plus"></i>
         <% end %>
-      </h4>
+      </h6>
     </div>
     <hr class="mb-3">
     <% @campaigns.each do |campaign| %>
@@ -23,7 +25,7 @@
           <section class="w-100">
             <div class="d-flex justify-content-between align-items-center">
               <h6 style='color: grey'><%= campaign.name %></h6>
-              <span class="text-decoration-none badge badge-secondary badge-pill mb-2"><%= "#{campaign.status} campagne" %></span>
+              <span class="text-decoration-none badge badge-primary badge-pill"><%= "#{campaign.status}" %></span>
             </div>
             <p class='text-truncate' style='max-width: 215px'><%= campaign.organisation.address %></p>
           </section>
@@ -33,11 +35,17 @@
   <% end %>
 
   <!-- Ongoing missions -->
-  <h4 class="mt-3">Mes Missions</h4>
+   <div class='d-flex align-items-center justify-content-between mb-2'>
+      <h4 class="mt-3">Mes missions</h4>
+      <h6 class='mt-3'>
+        <%= link_to campaigns_path, class: 'mt-3 mb-1 mr-1' do %>
+          <i class="fas fa-search"></i>
+        <% end %>
+      </h6>
+   </div>
   <hr class="mb-3">
   <% if current_user.missions.empty? %>
     <p class='text-center'>🧐 Pas encore de mission en cours...</p>
-    <%= link_to 'Trouver une mission', campaigns_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
   <% else %>
     <% current_user.missions.each do |mission| %>
       <%= link_to mission_path(mission), class: 'text-decoration-none' do %>
