@@ -69,6 +69,20 @@
         </div>
       <% end %>
     <% end %>
+   <% else %>
+
+    <div class="card pb-0">
+       <div class="card-body pt-2 pb-0">
+         <div class="d-flex">
+            <h6 class="flex-grow-1">Organisations</h6>
+            <%= link_to new_organisation_path, class: 'mr-1' do %>
+               <i class="fas fa-plus"></i>
+            <% end %>
+         </div>
+         <p class="">Vous n'avez pas d'organisation. Créez la première ⭐️</p>
+       </div>
+    </div>
+
   <% end %>
 
   <!-- only for admin users -->
