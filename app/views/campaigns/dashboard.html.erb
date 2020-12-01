@@ -32,9 +32,9 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 <!-- Tabs -->
 
 <nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
-  <a class="active" href="#tab-dashboard" data-toggle="tab">Tableau de bord</a>
-  <a class="" href="#tab-mission-details" data-toggle="tab">Ma campagne</a>
-  <a class="" href="#tab-about-me" data-toggle="tab">Mes infos</a>
+  <a class="active" href="#tab-dashboard" data-toggle="tab">Dashboard</a>
+  <a class="" href="#tab-mission-details" data-toggle="tab">Campagne</a>
+  <a class="" href="#tab-about-me" data-toggle="tab">Infos</a>
 </nav>
 
 <!-- Tabs-content -->
@@ -46,25 +46,22 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <div class="tab-pane active" id="tab-dashboard">
     <div class="container">
       <h5 class="mt-2">Progression</h5>
-      <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <h6 class="mb-0">Complété</h6>
+            <p class="mb-0"><strong>Complété</strong></p>
             <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
         </div>
-        <!-- cf new show for dynamic progress bar -->
-        <div class="plastroc-progress-bar mt-2 mb-4">
-          <div class="rounded-pill plastroc-bg-primary-gradient"></div>
-        </div>
+         <div class="plastroc-progress-bar mt-2 mb-4">
+            <div class="rounded-pill plastroc-bg-primary-gradient" id="myBar">0%</div>
+         </div>
 
         <div class="d-flex justify-content-between align-items-center">
-            <h6 class="mb-0">Engagé</h6>
+            <p class="mb-0"><strong>Engagé</strong></p>
             <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
         </div>
         <!-- cf new show for dynamic progress bar -->
         <div class="plastroc-progress-bar mt-2 mb-4">
           <div class="rounded-pill plastroc-bg-primary-gradient"></div>
         </div>
-      </div>
 
 
       <h5>Questions</h5>
