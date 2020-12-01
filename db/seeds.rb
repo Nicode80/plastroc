@@ -13,6 +13,10 @@ require ('faker')
 require "open-uri"
 
 # clear DB before seed
+puts 'Deleting all citations'
+  Citation.destroy_all if Rails.env.development?
+puts 'Deleting all missions'
+  Mission.destroy_all if Rails.env.development?
 puts 'Deleting all packages...'
   Package.destroy_all if Rails.env.development?
 puts 'Deleting all campaigns...'
@@ -21,6 +25,24 @@ puts 'Deleting all instructions...'
   Instruction.destroy_all if Rails.env.development?
 puts 'Deleting all materials...'
   Material.destroy_all if Rails.env.development?
+
+# All 4 Citations
+puts '1/4 citation...'
+@quote1 = Citation.create(
+  author: 'Y. Arthus-Bertran',
+  quote: "Il est trop tard pour être pessimiste.")
+puts '2/4 citation...'
+@quote2 = Citation.create(
+  author: 'A. Amritanzndamayi',
+  quote: "Maintenant est le moment favorable pour accomplir de bonnes action. L'instant présent")
+puts '3/4 citation...'
+@quote3 = Citation.create(
+  author: 'W. Maathai',
+  quote: "Ce n'est le courage qui permet de gagner une bataille mais la persévérance.")
+puts '4/4 citation...'
+@quote4 = Citation.create(
+  author: 'M. Fontenoy',
+  quote: "Ne laissz personne vous dire que c'est impossible !!")
 
 # First Material
 puts 'Creating PET material...'
