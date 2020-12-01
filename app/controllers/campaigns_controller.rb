@@ -105,8 +105,7 @@ class CampaignsController < ApplicationController
 
   def done_missions_calcul
     missions = @campaign.missions
-    missions_done = missions.select { |mission| mission.status == "done" }
-    volumes_done = missions_done.map { |mission_done| mission_done.package.quantity }
+    volumes_done = missions.done.map { |mission| mission.package.quantity }
     return volumes_done.sum
   end
 
