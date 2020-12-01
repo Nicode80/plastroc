@@ -149,10 +149,13 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <% end %>
         <% end %>
       </div>
-      <div class="text-center p-4">
+      <% if !Citation.exists?(@citation.id) %>
+      <% else %>
+        <div class="text-center p-4">
           <h6>"<%= @citation.quote %>"</h6>
           <em><%= @citation.author %></em>
         </div>
+      <% end %>
     </div>
   <% end %>
 </div>
