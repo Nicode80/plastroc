@@ -17,6 +17,10 @@ class MissionPolicy < ApplicationPolicy
     return true
   end
 
+  def update?
+    show?
+  end
+
   def show?
     record.user == user
   end
