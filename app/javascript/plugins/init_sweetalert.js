@@ -58,4 +58,26 @@ const completeMissionAlert = () => {
   })
 };
 
+const impossibleToDeleteAlert = () => {
+  const elements = document.querySelectorAll(".impossible-to-delete-organisation");
+  elements.forEach((swalButton) => {
+    if (swalButton) {
+      swalButton.addEventListener('click', () => {
+        const organisationId = event.target.dataset.id
+
+        swal({
+            title: "Supprimer Organisation",
+            text: "Désolé vous ne pouvez pas supprimer une organisation qui a des campagnes en cours.",
+            icon: "erreur",
+            buttons: ["OK"],
+        }).then((value) => {
+          // if (value) {
+          //     document.getElementById(`del-org-${organisationId}`).click()
+          // };
+        });
+      })
+    }
+  })
+};
+
 export { initSweetalert, deleteAlert, completeMissionAlert };
