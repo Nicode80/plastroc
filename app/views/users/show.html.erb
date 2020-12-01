@@ -2,7 +2,7 @@
    <div class="container">
       <div class="d-flex align-items-center py-3">
          <% if @user.photo.attached? %>
-            <%= cl_image_tag @user.photo.key, class: "avatar mr-3" %>
+            <%= cl_image_tag @user.photo.key, height: 40, width: 40, crop: :fill, class: "avatar mr-3" %>
          <% else %>
             <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" class="avatar mr-3">
          <% end %>
@@ -93,6 +93,7 @@
        <%= link_to "Utilisateurs", users_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
     </div>
     <%= link_to "Materiaux", materials_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+    <%= link_to "Organisations", organisations_path, class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
   <% end %>
 </div>
 
