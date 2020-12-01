@@ -23,14 +23,16 @@
 <div>
 
   <div>
-    <%= form_tag campaigns_path, method: :get, class: "filter_search" do %>
+    <%= form_tag campaigns_path, method: :get, class: "filter_search", id: "filter-form" do %>
       <% Material::CATEGORIES.each do |category| %>
         <%= check_box_tag "category[#{category}]", category, params[:category]&.include?(category) %>
         <%= label_tag "category[#{category}]", category %>
       <% end %>
-      <%= submit_tag "Apply filters", class: 'btn btn-primary' %>
+      <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
     <% end %>
   </div>
+
+<!-- , onchange: "this.form.submit(); this.disabled = false;" -->
 
    <h4 class="text-center page-title">Missions</h4>
    <div class="campaigns-wrapper">

@@ -1,15 +1,20 @@
 class CampaignsController < ApplicationController
 
   def index # for the moment show all campaigns but will need to sort if on organisation view
-    if params[:category] && params[:category].keys.any?
-      ids = params[:category].keys.map { |category| Material.where(category: category).pluck(:id) }.flatten
-      @campaigns = policy_scope(Campaign).where(status: 'ongoing').includes(:material).where(material_id: ids)
+
+    # if params[:category] && params[:category].keys.any?
+    if params[:category_filter]&.split(',')&.any?
+      @campaigns = policy_scope(Campaign).where(status: 'ongoing').includes(:material).where(materials: { category: params[:category_filter].split(',') })
       @organisations = @campaigns.map { |campaign| campaign.organisation }
       @markers = create_markers(@organisations)
     else
       @campaigns = policy_scope(Campaign).where(status: 'ongoing')
       @organisations = organisations_with_active_campaigns
       @markers = create_markers(@organisations)
+    end
+    respond_to do |format|
+      format.html
+      format.json { @campaings.to_json }
     end
   end
 
@@ -117,17 +122,17 @@ class CampaignsController < ApplicationController
 
   def create_markers(organisations)
     @organisations.map do |organisation|
-        @organistion_active_campaigns = active_campaigns(organisation)
-        url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
-        {
-          campaigns_number: number_of_active_campaign(organisation),
-          lat: organisation.latitude,
-          lng: organisation.longitude,
-          infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
-          image_url: url,
-          id: organisation.id
-        }
-      end
+      @organistion_active_campaigns = active_campaigns(organisation)
+      url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
+      {
+        campaigns_number: number_of_active_campaign(organisation),
+        lat: organisation.latitude,
+        lng: organisation.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
+        image_url: url,
+        id: organisation.id
+      }
+    end
   end
 
   def campaign_params

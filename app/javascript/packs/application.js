@@ -36,6 +36,7 @@ import { initSweetalert, deleteAlert } from '../plugins/init_sweetalert';
 import { initMapbox } from "../plugins/init_mapbox";
 import { toggleConfirmation } from "../components/confirmation_toggle";
 import { animatedBar } from "../components/progress_bar"
+import { ajaxFilter } from "../components/ajax_filter"
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -51,5 +52,6 @@ document.addEventListener('turbolinks:load', () => {
   toggleConfirmation();
   slidingCard();
   animatedBar();
+  // ajaxFilter();
 });
 
