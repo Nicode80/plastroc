@@ -22,6 +22,11 @@
 
 .package-badge-fluid {
   height: 90px;
+  overflow: hidden;
+  h6 {
+    color: white;
+    margin: 0;
+  }
 }
 
 .package-grid {
@@ -32,6 +37,11 @@
 
 .package-header {
   width: 100%
+}
+
+.package-header-fluid {
+  height: 100%;
+  width: 50%;
 }
 
 .corail {
