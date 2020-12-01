@@ -8,6 +8,8 @@ class Campaign < ApplicationRecord
   has_one :user, through: :organisation
   has_one_attached :photo
 
+  scope :ongoing, -> { where(status: 'ongoing') }
+
   UNITS = ['g', 'kg', 'l', 'unité']
 
   validates :name, presence: true
