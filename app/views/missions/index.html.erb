@@ -7,15 +7,15 @@
   <% if !current_user.organisations.empty? %>
     <div class='d-flex align-items-center justify-content-between mb-2'>
       <h4 class="mt-3">Mes campagnes</h4>
-      <h4 class='mt-3'>
+      <h6 class='mt-3'>
         <% if current_user.organisations.count == 1 %>
-        <%= link_to new_campaign_path(id: current_user.organisations.all[0].id), class: 'mt-3 mb-1 mr-1' do %>
-          <i class="fas fa-plus"></i>
-        <% end %>
+         <%= link_to new_campaign_path(id: current_user.organisations.all[0].id), class: 'mt-3 mb-1 mr-1' do %>
+            <i class="fas fa-plus"></i>
+         <% end %>
         <% else %>
-        <%= link_to new_campaign_path, class: 'mt-3 mb-1 mr-1' do %>
-          <i class="fas fa-plus"></i>
-        <% end %>
+         <%= link_to new_campaign_path, class: 'mt-3 mb-1 mr-1' do %>
+            <i class="fas fa-plus"></i>
+         <% end %>
         <% end %>
       </h4>
     </div>
@@ -29,12 +29,12 @@
             <% else %>
               <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
             <% end %>
-            <section class="w-100">
-              <div class="d-flex justify-content-between align-items-center">
-                <h6 style='color: grey'><%= campaign.name %></h6>
-                <span class="text-decoration-none badge badge-secondary badge-pill mb-2"><%= "#{campaign.status} campagne" %></span>
+            <section class="w-100" style="padding: 15px 20px 20px 20px;">
+              <div class="d-flex justify-content-between align-items-start">
+                <h6 style='color: grey' class="mb-0"><%= campaign.name %></h6>
+                <span class="text-decoration-none badge badge-secondary badge-pill"><%= "#{campaign.status}" %></span>
               </div>
-              <p class='text-truncate' style='max-width: 215px'><%= campaign.organisation.address %></p>
+              <small class=' max-w-160 text-truncate'><%= campaign.organisation.address %></small>
             </section>
           </div>
         <% end %>
