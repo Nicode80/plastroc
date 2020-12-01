@@ -125,17 +125,18 @@ body::-webkit-scrollbar {
   width: 240px;
 }
 
+.max-w-100 {
+    max-width: 100px;
+    display: block;
+}
+
 .max-w-160 {
     max-width: 160px;
-    /* display: block; */
+    display: block;
 }
 
 .max-w-220 {
     max-width: 220px;
-    /* display: block; */
+    display: block;
 }
 
-.max-w-100 {
-    max-width: 220px;
-    /* display: block; */
-}

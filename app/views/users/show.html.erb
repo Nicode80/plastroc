@@ -55,7 +55,7 @@
           <% end %>
           <section class="w-100">
             <div class="d-flex justify-content-between align-items-center">
-              <h6 style='color: grey'><%= org.name %></h6>
+              <h6 class = "max-w-100 text-truncate" style='color: grey'><%= org.name %></h6>
               <% if org.campaigns.count == 0 || org.campaigns.count == 1 %>
                 <span class="text-decoration-none badge badge-secondary badge-pill mb-2"><%= "#{org.campaigns.count} campagne" %></span>
              <!--  <#% elsif org.campaigns.count == 1 %>
@@ -64,7 +64,7 @@
                 <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{org.campaigns.count} campagnes" %></span>
               <% end %>
             </div>
-            <small class='mt-1 max-w-220 p-0 text-truncate'><%= org.address %></small>
+            <small class='mt-1 max-w-160 p-0 text-truncate'><%= org.address %></small>
 
           </section>
         </div>
