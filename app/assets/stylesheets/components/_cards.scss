@@ -58,6 +58,8 @@ body::-webkit-scrollbar {
 
 .campaign-card {
     overflow: hidden;
+    border: solid 3px transparent;
+
     h6 { color: #737373; }
 
 }
@@ -69,6 +71,7 @@ body::-webkit-scrollbar {
 .campaign-card-img {
     overflow: hidden;
     width: 100px;
+    min-width: 100px;
     height: 100px;
     margin-left: auto;
     margin-right: auto;
@@ -78,6 +81,11 @@ body::-webkit-scrollbar {
 .card-horizontal {
     display: flex;
     flex: 1 1 auto;
+}
+
+
+.highlight {
+  border: solid 3px $green;
 }
 
 #sliding-card {
@@ -105,4 +113,13 @@ body::-webkit-scrollbar {
 .rotate-180 {
   transition-duration: 0.5s;
   transform: rotate(180deg);
+}
+
+.card-content {
+    max-width: 187px;
+}
+
+.max-w-160 {
+    max-width: 160px;
+    /* display: block; */
 }
