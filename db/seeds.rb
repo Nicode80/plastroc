@@ -14,17 +14,17 @@ require "open-uri"
 
 # clear DB before seed
 puts 'Deleting all citations'
-  Citation.destroy_all if Rails.env.development?
+  Citation.destroy_all #if Rails.env.development?
 puts 'Deleting all missions'
-  Mission.destroy_all if Rails.env.development?
+  Mission.destroy_all #if Rails.env.development?
 puts 'Deleting all packages...'
-  Package.destroy_all if Rails.env.development?
+  Package.destroy_all #if Rails.env.development?
 puts 'Deleting all campaigns...'
-  Campaign.destroy_all if Rails.env.development?
+  Campaign.destroy_all #if Rails.env.development?
 puts 'Deleting all instructions...'
-  Instruction.destroy_all if Rails.env.development?
+  Instruction.destroy_all #if Rails.env.development?
 puts 'Deleting all materials...'
-  Material.destroy_all if Rails.env.development?
+  Material.destroy_all #if Rails.env.development?
 
 # All 4 Citations
 puts '1/4 citation...'
