@@ -42,7 +42,7 @@
     <% else %>
     <p class='text-center'>🤨 Pas de campagne en cours...</p>
     <% if current_user.organisations.count == 1 %>
-      <%= link_to 'Créer une nouvelle campagne', new_campaign_path(id: current_user.organisations.all[0].id), class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+      <%= link_to 'Créer une nouvelle campagne', new_campaign_path(id: current_user.organisations.first.id), class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
     <% else %>
       <%= link_to 'Créer une nouvelle campagne', new_campaign_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
     <% end %>
@@ -76,7 +76,7 @@
             <div class="card-content-m p-3 d-flex flex-column justify-content-between align-items-start">
               <div class="m-0 d-flex w-100">
                 <span class="mr-1 max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate <%= mission.package.name.downcase %>"><%= mission.package.name %>: <%= mission.package.quantity %><%= mission.package.campaign.unit %></span>
-                <span class="mr-1 badge badge-info rounded-pill mb-1 d-inline-block text-white"><i class="fas fa-angle-double-up text-white mb-0"></i> <%= mission.package.xp_reward %></span>
+                <span class="mr-1 badge badge-secondary rounded-pill mb-1 d-inline-block text-white"><i class="fas fa-angle-double-up text-white mb-0"></i> <%= mission.package.xp_reward %></span>
                 <span class="max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate"><%= mission.package.campaign.material.name %></span>
               </div>
               <h6 class="mb-0 max-w-220 text-truncate"><%= mission.package.campaign.organisation.name %></h6>
