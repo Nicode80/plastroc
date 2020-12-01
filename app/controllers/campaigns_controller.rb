@@ -1,19 +1,15 @@
 class CampaignsController < ApplicationController
 
   def index # for the moment show all campaigns but will need to sort if on organisation view
-    @campaigns = policy_scope(Campaign)
-    @organisations = organisations_with_active_campaigns
-    @markers = @organisations.map do |organisation|
-      @organistion_active_campaigns = active_campaigns(organisation)
-      url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
-      {
-        campaigns_number: number_of_active_campaign(organisation),
-        lat: organisation.latitude,
-        lng: organisation.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
-        image_url: url,
-        id: organisation.id
-      }
+    if params[:category] && params[:category].keys.any?
+      ids = params[:category].keys.map { |category| Material.where(category: category).pluck(:id) }.flatten
+      @campaigns = policy_scope(Campaign).where(status: 'ongoing').includes(:material).where(material_id: ids)
+      @organisations = @campaigns.map { |campaign| campaign.organisation }
+      @markers = create_markers(@organisations)
+    else
+      @campaigns = policy_scope(Campaign).where(status: 'ongoing')
+      @organisations = organisations_with_active_campaigns
+      @markers = create_markers(@organisations)
     end
   end
 
@@ -92,9 +88,6 @@ class CampaignsController < ApplicationController
   end
 
   def create_packages
-    # if @campaign.min_package.nil?
-    #   @campaign.min_package = 1
-    # end
     iterators = [(@campaign.target / @campaign.min_package).floor, 4].min
     names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
     x = 0
@@ -117,9 +110,23 @@ class CampaignsController < ApplicationController
   def total_missions_calcul
     missions = @campaign.missions
     volumes_total = missions.map { |mission| mission.package.quantity }
-    # @volume_total = @campaign.missions.packages.sum(:quantity)
     return volumes_total.sum
 
+  end
+
+  def create_markers(organisations)
+    @organisations.map do |organisation|
+        @organistion_active_campaigns = active_campaigns(organisation)
+        url = organisation.photo.attached? ? url_for(organisation.photo) : helpers.asset_url('placeholder.png')
+        {
+          campaigns_number: number_of_active_campaign(organisation),
+          lat: organisation.latitude,
+          lng: organisation.longitude,
+          infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
+          image_url: url,
+          id: organisation.id
+        }
+      end
   end
 
   def campaign_params
