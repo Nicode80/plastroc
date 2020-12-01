@@ -45,7 +45,7 @@ class MissionsController < ApplicationController
   def update
     @mission = Mission.find(params[:id])
     authorize @mission
-    @mission.update(status: 'done', completed_at: Date.current)
+    @mission.update(status: 'done', completed_at: DateTime.now)
     redirect_to missions_path
   end
 end
