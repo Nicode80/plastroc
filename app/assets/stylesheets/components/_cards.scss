@@ -115,11 +115,25 @@ body::-webkit-scrollbar {
   transform: rotate(180deg);
 }
 
-.card-content {
-    max-width: 187px;
+.card-content-s {
+  max-width: 187px;
+}
+
+.card-content-m {
+  width: 240px;
 }
 
 .max-w-160 {
     max-width: 160px;
+    /* display: block; */
+}
+
+.max-w-220 {
+    max-width: 220px;
+    /* display: block; */
+}
+
+.max-w-100 {
+    max-width: 220px;
     /* display: block; */
 }

@@ -29,7 +29,7 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @campaign = Campaign.new
+    @campaign = Campaign.new()
     @materials = Material.all.select(:id, :name, :category).group_by(&:category)
     authorize @campaign
   end

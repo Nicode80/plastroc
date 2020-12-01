@@ -19,7 +19,7 @@ class OrganisationsController < ApplicationController
     @organisation = current_user.organisations.new(organisation_params)
     if @organisation.save
       flash[:notice] = "Organisation ajoutée"
-      redirect_to organisation_path(@organisation)
+      redirect_to new_campaign_path(id: @organisation.id)
     else
       render :new
     end
