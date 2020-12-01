@@ -3,7 +3,7 @@
   <div class="container">
     <div class="d-flex flex-column align-items-center mission-confirmation">
       <% if @campaign.organisation.photo.attached? %>
-        <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2"%>
+        <%= cl_image_tag @campaign.organisation.photo.key, height: 56, width: 56, crop: :fill, class: "avatar-large mb-2"%>
       <% else %>
         <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
       <% end %>
