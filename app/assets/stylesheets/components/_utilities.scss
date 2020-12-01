@@ -54,3 +54,25 @@
 
    }
 }
+#logout {
+   opacity: 0.6;
+   transition-duration: .5s;
+   &::after {
+      content: 'Logout';
+      font-family: "Nunito";
+      color: #FFF;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-left: -18px;
+      display: none;
+   }
+   &:hover {
+      margin-top: 8px;
+      opacity: 0.9;
+      &::after {
+         opacity: 0.75;
+         display: block;
+      }
+   }
+}
