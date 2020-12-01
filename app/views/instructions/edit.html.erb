@@ -2,9 +2,10 @@
   <div class="d-flex align-items-center justify-content-between">
     <h3>Editer Instruction</h3>
   </div>
-  <%= simple_form_for @instruction do |f| %>
+  <%= simple_form_for(@instruction) do |f| %>
     <p>Editer le titre et l'illustration</p>
     <%= f.input :title, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Title" %>
+    <p>Changer la photo si besoin</p>
     <%= f.input :media, as: :file, label: false, input_html: { class: "input col-12 mb-3" } %>
     <br>
     <p>Editer les détails de l'instruction</p>

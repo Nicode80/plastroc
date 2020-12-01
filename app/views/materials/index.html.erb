@@ -16,7 +16,7 @@
   <ul class="list-group">
     <% @materials.each do |material| %>
       <%= link_to material_path(material), class: 'text-decoration-none' do %>
-        <div class="d-flex flex-row card card-s">
+        <div class="d-flex flex-row card card-s mb-0 mt-2">
           <% if material.photo.attached? %>
             <%= cl_image_tag material.photo.key, crop: :fill %>
           <% else %>
@@ -24,7 +24,7 @@
           <% end %>
           <section class="w-100">
             <div class="d-flex justify-content-between align-items-center">
-              <h6 style='color: grey'><%= material.name %></h6>
+              <h6 style='color: grey; max-width: 150px' class='text-truncate'><%= material.name %></h6>
               <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= material.category %></span>
             </div>
             <div style='color: grey; max-width: 230px' class='d-inline-block text-truncate'>

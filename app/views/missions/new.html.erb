@@ -16,13 +16,14 @@
       <h5>Confirmez</h5>
       <h5>votre participation</h5>
   </div>
+  <%= link_to 'annuler', campaign_path(@campaign), class: 'm-auto btn btn-outline-primary rounded-pill plastroc-outline-button'%>
   <div class="container mb-4">
       <div class="package-badge package-badge-fluid mt-3 d-flex align-items-center">
           <div class="container p-3">
               <div class="d-flex justify-content-between align-items-center text-left">
                   <div>
                       <p class="mb-1">Votre mission</p>
-                      <h6 class="mb-0"><%= @package.name %></h6>
+                      <h6 class="mb-0 badge-pill <%= @package.name.downcase %>"><%= @package.name %></h6>
                   </div>
                   <p class="mb-0"><i class="fas fa-weight-hanging text-primary"></i> <%= @package.quantity %><%= @campaign.unit %></p>
                   <p class="mb-0"><i class="fas fa-angle-double-up text-primary"></i> <%= @package.xp_reward %>xp</p>
@@ -53,6 +54,7 @@
 <%= simple_form_for [@campaign, @package, @mission] do |f| %>
   <%= f.submit "Let's go", id: "btn-confirm", class: 'plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3 disabled'%>
 <% end %>
+
 
 
 

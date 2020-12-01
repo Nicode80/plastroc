@@ -10,7 +10,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           <% end %>>
   <div class="container">
     <!-- add if statement depending on sorter or recycler -->
-    <h4><%= link_to :back, class: "position-absolute" do %>
+    <h4><%= link_to missions_path, class: "position-absolute" do %>
       <i class="fas fa-arrow-left"></i>
       <% end %>
     </h4>
@@ -47,8 +47,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <!-- Package -->
     <div class="container mb-4">
           <div class="package-badge package-badge-fluid mt-3 d-flex align-items-center">
-            <div class="d-flex justify-content-center align-items-center package-header-fluid text-center <%= @package.name.downcase %>">
-              <h6 class="text-center"><%= @package.name %></h6>
+            <div class="d-flex justify-content-center align-items-center package-header-fluid text-center">
+              <h6 class="text-center badge-pill <%= @package.name.downcase %>"><%= @package.name %></h6>
             </div>
               <div class="container p-3">
                   <div class="d-flex justify-content-around align-items-center text-left">
