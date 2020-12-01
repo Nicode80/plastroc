@@ -26,4 +26,8 @@ class Campaign < ApplicationRecord
   def sort_by_step_order
     material.instructions.order(step_order: :asc)
   end
+
+  def members
+    missions.map { |mission| mission.user }
+  end
 end

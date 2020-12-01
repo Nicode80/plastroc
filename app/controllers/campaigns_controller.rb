@@ -11,7 +11,8 @@ class CampaignsController < ApplicationController
         lat: organisation.latitude,
         lng: organisation.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { organisation: organisation }),
-        image_url: url
+        image_url: url,
+        id: organisation.id
       }
     end
   end
@@ -22,6 +23,7 @@ class CampaignsController < ApplicationController
     @mission = Mission.new
     @volume_done = done_missions_calcul
     @ratio = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
+    @citation = Citation.all.sample
 
     authorize @campaign
   end
