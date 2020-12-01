@@ -32,9 +32,9 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 <!-- Tabs -->
 
 <nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
-  <a class="active" href="#tab-dashboard" data-toggle="tab">Tableau de bord</a>
-  <a class="" href="#tab-mission-details" data-toggle="tab">Ma campagne</a>
-  <a class="" href="#tab-about-me" data-toggle="tab">Mes infos</a>
+  <a class="active" href="#tab-dashboard" data-toggle="tab">Dashboard</a>
+  <a class="" href="#tab-mission-details" data-toggle="tab">Campagne</a>
+  <a class="" href="#tab-about-me" data-toggle="tab">Infos</a>
 </nav>
 
 <!-- Tabs-content -->
@@ -45,39 +45,62 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="tab-pane active" id="tab-dashboard">
     <div class="container">
-      <div class="d-flex mt-2">
-         <h5 class="flex-grow-1">Progression</h5>
-         <h6><span class="text-decoration-none badge badge-primary badge-pill mb-1 mr-3"><%= "#{@campaign.status}" %></span></h6>
-      </div>
-      <div class="container">
+      <h5 class="mt-2">Progression</h5>
         <div class="d-flex justify-content-between align-items-center">
-            <h6 class="mb-0">Complété</h6>
+            <p class="mb-0"><strong>Complété</strong></p>
             <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
         </div>
+         <div class="plastroc-progress-bar mt-2 mb-4">
+            <div class="rounded-pill plastroc-bg-primary-gradient" id="myBar">0%</div>
+         </div>
+
+        <div class="card">
+           <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                  <p class="mb-0"><strong>Engagé</strong></p>
+                  <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
+              </div>
+           </div>
+        </div>
         <!-- cf new show for dynamic progress bar -->
         <div class="plastroc-progress-bar mt-2 mb-4">
           <div class="rounded-pill plastroc-bg-primary-gradient"></div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center">
-            <h6 class="mb-0">Engagé</h6>
-            <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
-        </div>
-        <!-- cf new show for dynamic progress bar -->
-        <div class="plastroc-progress-bar mt-2 mb-4">
-          <div class="rounded-pill plastroc-bg-primary-gradient"></div>
-        </div>
-      </div>
 
       <h5>Questions</h5>
-      <div class="container">
-        <h6>De Laura 27/07/2020</h6>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-        <div class="container">
-         <h6>John a répondu le 28/07/2020</h6>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-        </div>
-      </div>
+      <blockquote class="blockquote card mt-3">
+         <div class="card-body">
+            <div class="col-11">
+            	<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante ?</p>
+            	<footer class="blockquote-footer mt-2 mb-0">Le 27/07/2020<cite title="Source Title"> par Laura</cite></footer>
+            </div>
+            <div class="col-12 mt-3">
+               <p class="text-right p-0 m-0"><a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Answer of the owner <i class="fas fa-chevron-down"></i></a></p>
+               <div class="collapse" id="collapseExample">
+                  <blockquote class="blockquote">
+                     <p class="mb-0 mt-2 text-right">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                     <footer class="blockquote-footer mt-2 mb-0 text-right">le 28/07/2020</footer>
+               </div>
+            </div>
+         </div>
+      </blockquote>
+      <blockquote class="blockquote card mt-3">
+         <div class="card-body">
+            <div class="col-11">
+            	<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante ?</p>
+            	<footer class="blockquote-footer mt-2 mb-0">Le 27/07/2020<cite title="Source Title"> par Laura</cite></footer>
+            </div>
+            <div class="col-12 mt-3">
+               <p class="text-right p-0 m-0"><a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Answer of the owner <i class="fas fa-chevron-down"></i></a></p>
+               <div class="collapse" id="collapseExample">
+                  <blockquote class="blockquote">
+                     <p class="mb-0 mt-2 text-right">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                     <footer class="blockquote-footer mt-2 mb-0 text-right">le 28/07/2020</footer>
+               </div>
+            </div>
+         </div>
+      </blockquote>
     </div>
   </div>
 
