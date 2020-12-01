@@ -11,6 +11,7 @@ const slidingCard = () => {
     bottomText.classList.toggle("text-open");
     ctaButton.classList.toggle("plastroc-button-sticky-bottom");
     arrow.classList.toggle('rotate-180');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
 }
