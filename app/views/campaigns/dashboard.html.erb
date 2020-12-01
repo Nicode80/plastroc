@@ -45,7 +45,10 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <div class="tab-pane active" id="tab-dashboard">
     <div class="container">
-      <h5 class="mt-2">Progression</h5>
+      <div class="d-flex mt-2">
+         <h5 class="flex-grow-1">Progression</h5>
+         <h6><span class="text-decoration-none badge badge-secondary badge-pill mb-4"><%= "#{@campaign.status}" %></span></h6>
+      </div>
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <h6 class="mb-0">Complété</h6>
@@ -186,4 +189,3 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 </div>
-
