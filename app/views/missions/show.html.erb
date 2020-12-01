@@ -124,7 +124,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         </div>
         <h6>Avertisseez le recycleur afin qu'il puissse prendre en compte votre contribution et terminer votre mission.</h6>
       </div>
-      <%= link_to 'terminer la mission', mission_path(@mission), method: :patch, class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
+      <button class="complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow">terminer la mission</button>
+      <%= link_to 'terminer la mission', mission_path(@mission), method: :patch, style: 'display: none;', id: 'complete-cta' %>
     </div>
 
   </div>
