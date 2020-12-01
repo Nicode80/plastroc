@@ -3,111 +3,112 @@
 </div>
 <div class='container'>
 
-  <!-- My campaigns -->
-  <% if !current_user.organisations.empty? %>
-    <div class='d-flex align-items-center justify-content-between mb-2'>
-      <h4 class="mt-3">Mes campagnes</h4>
-      <h4 class='mt-3'>
-        <% if current_user.organisations.count == 1 %>
-        <%= link_to new_campaign_path(id: current_user.organisations.all[0].id), class: 'mt-3 mb-1 mr-1' do %>
-          <i class="fas fa-plus"></i>
-        <% end %>
-        <% else %>
-        <%= link_to new_campaign_path, class: 'mt-3 mb-1 mr-1' do %>
-          <i class="fas fa-plus"></i>
-        <% end %>
-        <% end %>
-      </h4>
-    </div>
-    <hr class="mb-3">
-    <% if !current_user.campaigns.empty? %>
-      <% @campaigns.each do |campaign| %>
-        <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
-          <div class="d-flex flex-row card card-s">
-            <% if campaign.photo.attached? %>
-              <%= cl_image_tag campaign.photo.key, crop: :fill %>
-            <% else %>
-              <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-            <% end %>
-            <section class="w-100">
-              <div class="d-flex justify-content-between align-items-center">
-                <h6 style='color: grey'><%= campaign.name %></h6>
-                <span class="text-decoration-none badge badge-secondary badge-pill mb-2"><%= "#{campaign.status} campagne" %></span>
-              </div>
-              <p class='text-truncate' style='max-width: 215px'><%= campaign.organisation.address %></p>
-            </section>
-          </div>
-        <% end %>
+<!-- My campaigns -->
+<% if !current_user.organisations.empty? %>
+  <div class='d-flex align-items-center justify-content-between mb-2'>
+    <h4 class="mt-3">Mes campagnes</h4>
+    <h4 class='mt-3'>
+      <% if current_user.organisations.count == 1 %>
+				<%= link_to new_campaign_path(id: current_user.organisations.all[0].id), class: 'mt-3 mb-1 mr-1' do %>
+					<i class="fas fa-plus"></i>
+				<% end %>
+      <% else %>
+				<%= link_to new_campaign_path, class: 'mt-3 mb-1 mr-1' do %>
+					<i class="fas fa-plus"></i>
+				<% end %>
       <% end %>
-    <% else %>
-    <p class='text-center'>🤨 Pas de campagne en cours...</p>
-    <% if current_user.organisations.count == 1 %>
-      <%= link_to 'Créer une nouvelle campagne', new_campaign_path(id: current_user.organisations.first.id), class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
-    <% else %>
-      <%= link_to 'Créer une nouvelle campagne', new_campaign_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
-    <% end %>
-    <% end %>
-  <% end %>
-
-  <!-- Ongoing missions -->
-   <div class='d-flex align-items-center justify-content-between mb-2'>
-      <h4 class="mt-3">Mes missions</h4>
-      <h6 class='mt-3'>
-        <%= link_to campaigns_path, class: 'mt-3 mb-1 mr-1' do %>
-          <i class="fas fa-search"></i>
-        <% end %>
-      </h6>
-   </div>
+    </h4>
+  </div>
   <hr class="mb-3">
-  <% if current_user.missions.empty? %>
-    <p class='text-center'>🧐 Pas encore de mission en cours...</p>
-  <% else %>
-    <% @missions.each do |mission| %>
-      <%= link_to mission_path(mission), class: 'text-decoration-none' do %>
-        <div class="card campaign-card">
-          <div class="card-horizontal">
-            <div class="img-square-wrapper campaign-card-img">
-              <% if mission.package.campaign.photo.attached? %>
-                <%= cl_image_tag mission.package.campaign.photo.key, height: 100, width: 100, crop: :fill %>
-              <% else %>
-                <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-              <% end %>
-            </div>
-            <div class="card-content-m p-3 d-flex flex-column justify-content-between align-items-start">
-              <div class="m-0 d-flex w-100">
-                <span class="mr-1 max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate <%= mission.package.name.downcase %>"><%= mission.package.name %>: <%= mission.package.quantity %><%= mission.package.campaign.unit %></span>
-                <span class="mr-1 badge badge-secondary rounded-pill mb-1 d-inline-block text-white"><i class="fas fa-angle-double-up text-white mb-0"></i> <%= mission.package.xp_reward %></span>
-                <span class="max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate"><%= mission.package.campaign.material.name %></span>
-              </div>
-              <h6 class="mb-0 max-w-220 text-truncate"><%= mission.package.campaign.organisation.name %></h6>
-              <small class='mt-1 max-w-220 p-0 text-truncate'><%= mission.package.campaign.name %></small>
-            </div>
-          </div>
+  <% if !current_user.campaigns.empty? %>
+    <% @campaigns.each do |campaign| %>
+      <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
+        <div class="d-flex flex-row card card-s">
+          <% if campaign.photo.attached? %>
+            <%= cl_image_tag campaign.photo.key, crop: :fill %>
+          <% else %>
+            <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+          <% end %>
+            <div class="card-body">
+							<div class="d-flex justify-content-between align-items-start">
+								<div>
+									<h6 style='color: grey' class="mb-0"><%= campaign.name %></h6>
+									<small class='text-truncate' style='max-width: 215px'><%= campaign.organisation.address %></small>
+								</div>
+								<span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{campaign.status}" %></span>
+							</div>
+						</div>
         </div>
       <% end %>
     <% end %>
-    <%= link_to 'Trouver une nouvelle mission', campaigns_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+  <% else %>
+  <p class='text-center'>🤨 Pas de campagne en cours...</p>
+  <% if current_user.organisations.count == 1 %>
+    <%= link_to 'Créer une nouvelle campagne', new_campaign_path(id: current_user.organisations.all[0].id), class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+  <% else %>
+    <%= link_to 'Créer une nouvelle campagne', new_campaign_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
   <% end %>
+  <% end %>
+<% end %>
 
-  <!-- Si pas d'organisation, possibilité d'en créer une première pour pouvoir créer des campagnes -->
-  <% if current_user.organisations.empty? %>
-  <hr class="mb-3">
-  <p class='text-center'>♻️ Vous êtes recycleur?</p>
-    <%= link_to 'Créer une première campagne de recyclage', new_organisation_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+<!-- Ongoing missions -->
+  <div class='d-flex align-items-center justify-content-between mb-2'>
+    <h4 class="mt-3">Mes missions</h4>
+    <h6 class='mt-3'>
+      <%= link_to campaigns_path, class: 'mt-3 mb-1 mr-1' do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+    </h6>
+  </div>
+<hr class="mb-3">
+<% if current_user.missions.empty? %>
+  <p class='text-center'>🧐 Pas encore de mission en cours...</p>
+<% else %>
+  <% @missions.each do |mission| %>
+    <%= link_to mission_path(mission), class: 'text-decoration-none' do %>
+      <div class="card campaign-card">
+        <div class="card-horizontal">
+          <div class="img-square-wrapper campaign-card-img">
+            <% if mission.package.campaign.photo.attached? %>
+              <%= cl_image_tag mission.package.campaign.photo.key, height: 100, width: 100, crop: :fill %>
+            <% else %>
+              <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+            <% end %>
+          </div>
+          <div class="card-content-m p-3 d-flex flex-column justify-content-between align-items-start">
+            <div class="m-0 d-flex w-100">
+              <span class="mr-1 max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate <%= mission.package.name.downcase %>"><%= mission.package.name %>: <%= mission.package.quantity %><%= mission.package.campaign.unit %></span>
+              <span class="mr-1 badge badge-info rounded-pill mb-1 d-inline-block text-white"><i class="fas fa-angle-double-up text-white mb-0"></i> <%= mission.package.xp_reward %></span>
+              <span class="max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate"><%= mission.package.campaign.material.name %></span>
+            </div>
+            <h6 class="mb-0 max-w-220 text-truncate"><%= mission.package.campaign.organisation.name %></h6>
+            <small class='mt-1 max-w-220 p-0 text-truncate'><%= mission.package.campaign.name %></small>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
+<% end %>
+
+<!-- Si pas d'organisation, possibilité d'en créer une première pour pouvoir créer des campagnes -->
+<% if current_user.organisations.empty? %>
+<hr class="mb-3">
+<p class='text-center'>♻️ Vous êtes recycleur?</p>
+  <%= link_to 'Créer une première campagne de recyclage', new_organisation_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+<% end %>
 </div>
 
 <!-- nav bar -->
 <div class="bottom-nav">
-    <div class="d-flex justify-content-between">
-      <%= link_to missions_path, class: 'text-decoration-none flex-fill' do %>
-        <p class="active-tab"><i class="fas fa-home"></i></p>
-      <% end %>
-      <%= link_to campaigns_path, class: 'text-decoration-none flex-fill' do %>
-        <p class=""><i class="fas fa-search"></i></p>
-      <% end %>
-      <%= link_to user_path(current_user), class: 'text-decoration-none flex-fill' do %>
-        <p class=""><i class=" fas fa-user"></i></p>
-      <% end %>
-    </div>
+  <div class="d-flex justify-content-between">
+    <%= link_to missions_path, class: 'text-decoration-none flex-fill' do %>
+      <p class="active-tab"><i class="fas fa-home"></i></p>
+    <% end %>
+    <%= link_to campaigns_path, class: 'text-decoration-none flex-fill' do %>
+      <p class=""><i class="fas fa-search"></i></p>
+    <% end %>
+    <%= link_to user_path(current_user), class: 'text-decoration-none flex-fill' do %>
+      <p class=""><i class=" fas fa-user"></i></p>
+    <% end %>
+  </div>
 </div>

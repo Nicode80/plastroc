@@ -2,9 +2,9 @@
    <div class="card-body pt-3 pb-1">
       <h6 class="text-center text-secondary">Infos</h6>
       <div class="d-flex justify-content-around">
-         <div class="d-flex flex-column align-items-center">
+         <div style="max-width: 100px" class="d-flex flex-column align-items-center">
             <%= image_tag "picto-plastics.png", class: "m-2", style: "object-fit:cover; height: 30px"%>
-            <p class="mb-2"><%= @campaign.material.name %></p>
+            <p class="w-100 mb-2 text-truncate"><%= @campaign.material.name %></p>
          </div>
 
          <div class="d-flex flex-column align-items-center">
