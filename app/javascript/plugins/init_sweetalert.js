@@ -26,7 +26,7 @@ const deleteAlert = () => {
         swal({
             title: "Supprimer Organisation",
             text: "Êtes-vous sûr ?",
-            icon: "erreur",
+            icon: "warning",
             buttons: ["Oh nooon!", "Ooh ouiii!"],
         }).then((value) => {
           if (value) {
@@ -58,4 +58,13 @@ const completeMissionAlert = () => {
   })
 };
 
-export { initSweetalert, deleteAlert, completeMissionAlert };
+
+const impossibleToDeleteAlert = initSweetalert('.impossible-to-delete-organisation', {
+  title: "Oooops",
+  text: "Désolé vous ne pouvez pas supprimer une organisation qui a des campagnes en cours.",
+  icon: "warning"
+}, (value) => {
+  nil;
+});
+
+export { initSweetalert, deleteAlert, completeMissionAlert, impossibleToDeleteAlert };
