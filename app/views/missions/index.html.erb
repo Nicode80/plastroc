@@ -64,7 +64,7 @@
 <% if current_user.missions.empty? %>
   <p class='text-center'>🧐 Pas encore de mission en cours...</p>
 <% else %>
-  <% current_user.missions.each do |mission| %>
+  <% @missions.each do |mission| %>
     <%= link_to mission_path(mission), class: 'text-decoration-none' do %>
       <div class="card campaign-card">
         <div class="card-horizontal">
