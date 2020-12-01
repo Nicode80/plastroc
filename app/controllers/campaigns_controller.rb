@@ -23,6 +23,7 @@ class CampaignsController < ApplicationController
     @mission = Mission.new
     @volume_done = done_missions_calcul
     @ratio = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
+    @citation = Citation.all.sample
 
     authorize @campaign
   end
