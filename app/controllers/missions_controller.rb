@@ -1,7 +1,7 @@
 class MissionsController < ApplicationController
 
   def index
-    @missions = policy_scope(Mission)
+    @missions = policy_scope(Mission).ongoing
     @campaigns = current_user.campaigns
   end
 
@@ -40,5 +40,12 @@ class MissionsController < ApplicationController
       redirect_to campaign_path(@package.mission)
     end
     authorize @mission
+  end
+
+  def update
+    @mission = Mission.find(params[:id])
+    authorize @mission
+    @mission.update(status: 'done')
+    redirect_to missions_path
   end
 end
