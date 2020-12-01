@@ -17,11 +17,11 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
     @mission = Mission.new
+    @question = Question.new
     @volume_done = done_missions_calcul
     @ratio = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
     @citation = Citation.all.sample
     @sorter_campaigns = current_user.packages.map { |pack| pack.campaign }
-
     authorize @campaign
   end
 
