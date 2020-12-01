@@ -1,3 +1,6 @@
+<H6 class="text-center"><%= @campaign.material.name %></H6>
+<p class="text-center"><%= @campaign.material.description %></p>
+
 <% @campaign.sort_by_step_order.each do |instruction| %>
   <div class="card card-m mt-3">
     <% if instruction.media.attached? %>
