@@ -27,7 +27,7 @@
                     class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
       <% end %>
       <% if policy(@organisation).destroy? %>
-        <button data-id="<%= @organisation.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-button">Supprimer</button>
+        <button data-id="<%= @organisation.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-delete-button">Supprimer</button>
         <%= link_to "",
                     organisation_path(@organisation),
                     method: :delete,

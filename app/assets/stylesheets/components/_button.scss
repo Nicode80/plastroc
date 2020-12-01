@@ -3,7 +3,17 @@
   text-transform: uppercase;
   font-weight: 200;
   letter-spacing: .05em;
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 99.17%), #00CD60;
 }
+
+.plastroc-delete-button {
+  border: none;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: .05em;
+  border: 1px solid red;
+}
+
 .plastroc-outline-button {
   background: $plastroc-card-background;
   box-shadow: $plastroc-shadow;

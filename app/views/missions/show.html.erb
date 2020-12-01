@@ -1,10 +1,10 @@
 <!-- Banner -->
 
-<div class="banner d-flex flex-column justify-content-between">
+<div class="banner d-flex flex-column justify-content-between"
 
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           <% if @campaign.photo.attached? %>
-                            url('<%= cl_image_path @campaign.photo.key, height: 500, crop: :fill %>')"
+                            url('<%= cl_image_path @campaign.photo.key, height: 56, width: 56, crop: :fill %>')"
                           <% else %>
                             url('https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')"
                           <% end %>>
@@ -19,7 +19,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <div class="container">
     <div class="d-flex flex-column align-items-center">
       <% if @campaign.organisation.photo.attached? %>
-        <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+        <%= cl_image_tag @campaign.organisation.photo.key, height: 56, width: 56, crop: :fill, class: "avatar-large mb-2 plastroc-light-shadow"%>
       <% else %>
         <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
       <% end %>
@@ -28,29 +28,6 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 </div>
-
-<div class="d-flex justify-content-between align-items-center">
-    <h5 class="mb-0 mt-2">Progression</h5>
-    <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
-</div>
-
-<div class="plastroc-progress-bar mt-2 mb-4">
-  <div class="rounded-pill plastroc-bg-primary-gradient"></div>
-</div>
-
-<div class="container mb-4">
-      <div class="package-badge package-badge-fluid mt-3 d-flex align-items-center">
-          <div class="container p-3">
-              <div class="d-flex justify-content-between align-items-center text-left">
-                  <div>
-                      <h6 class="mb-0"><%= @package.name %></h6>
-                  </div>
-                  <p class="mb-0"><i class="fas fa-weight-hanging text-primary"></i> <%= @package.quantity %><%= @campaign.unit %></p>
-                  <p class="mb-0"><i class="fas fa-angle-double-up text-primary"></i> <%= @package.xp_reward %>xp</p>
-              </div>
-          </div>
-      </div>
-  </div>
 
 <!-- Tabs -->
 
@@ -62,15 +39,28 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 <!-- Tabs-content -->
 
-<div class="tab-content position-relative" style="margin-bottom: 75px;">
+<div class="tab-content" style="margin-bottom: 75px;">
 
   <!-- Info-Tab -->
 
   <div class="tab-pane active" id="tab-info">
+    <!-- Package -->
+    <div class="container mb-4">
+          <div class="package-badge package-badge-fluid mt-3 d-flex align-items-center">
+            <div class="d-flex justify-content-center align-items-center package-header-fluid text-center <%= @package.name.downcase %>">
+              <h6 class="text-center"><%= @package.name %></h6>
+            </div>
+              <div class="container p-3">
+                  <div class="d-flex justify-content-around align-items-center text-left">
+                      <p class="mb-0"><i class="fas fa-weight-hanging text-primary"></i> <%= @package.quantity %><%= @campaign.unit %></p>
+                      <p class="mb-0"><i class="fas fa-angle-double-up text-primary"></i> <%= @package.xp_reward %>xp</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
     <div class="container">
-
       <%= render 'shared/info_content' %>
-
       <% if current_user != @campaign.user %>
         <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
           Poser une question
@@ -83,7 +73,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <!-- How-to-Tab -->
 
   <div class="tab-pane" id="tab-how-to">
-    <div class="container">
+    <div class="container" id="campaign-how-to">
 
       <%= render 'shared/how_to_content' %>
 
@@ -138,3 +128,4 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
 
   </div>
+</div>

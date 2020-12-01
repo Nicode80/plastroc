@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_one_attached :photo
   has_many :missions
+  has_many :packages, through: :missions
   has_many :organisations
   has_many :campaigns, through: :organisations
 
