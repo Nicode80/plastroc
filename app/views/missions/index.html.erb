@@ -59,9 +59,13 @@
 							<div class="d-flex justify-content-between align-items-start">
 								<div>
 									<h6 style='color: grey' class="mb-0"><%= campaign.name %></h6>
-									<small class='text-truncate' style='max-width: 215px'><%= campaign.organisation.address %></small>
+									<small class='text-truncate' style='max-width: 215px'><%= campaign.organisation.name %></small>
 								</div>
-                <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                <% if campaign.status == "ongoing" %>
+                  <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                <% else %>
+                  <span class="text-decoration-none badge badge-dark badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                <% end %>
 							</div>
 						</div>
         </div>

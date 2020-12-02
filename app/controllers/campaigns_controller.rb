@@ -76,6 +76,25 @@ class CampaignsController < ApplicationController
     authorize @campaign
   end
 
+  def publish
+    @campaign = Campaign.find(params[:id])
+    if @campaign.published == true
+      @campaign.published = false
+      @campaign.status = "paused"
+    else
+      @campaign.published = true
+      @campaign.status = "ongoing"
+    end
+    if @campaign.save && @campaign.published == true
+      flash[:notice] = "campagne publiée"
+      redirect_to dashboard_campaign_path(@campaign)
+    else
+      flash[:notice] = "campagne en pause"
+      redirect_to dashboard_campaign_path(@campaign)
+    end
+    authorize @campaign
+  end
+
   private
 
   def organisations_with_active_campaigns
