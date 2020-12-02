@@ -1,8 +1,7 @@
 const closeModal = () => {
-  const closeButton = document.querySelector('#close-modal')
-  if(!closeButton) return
-
   const modalBody = document.querySelector('.achivement-modal');
+  if(!modalBody) return
+  const closeButton = document.querySelectorAll('.close-modal')
   const modalContainer = document.querySelector('#modal-container');
 
   // modalBody.onclick = function(e) {
@@ -13,10 +12,12 @@ const closeModal = () => {
   //   }
   // }
 
-  closeButton.addEventListener('click', (e) => {
-    modalBody.classList.remove('achivement-modal');
-    modalBody.style.display = 'none';
-    modalContainer.style.display = 'none';
+  closeButton.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      modalBody.classList.remove('achivement-modal');
+      modalBody.style.display = 'none';
+      modalContainer.style.display = 'none';
+    })
   })
 };
 
