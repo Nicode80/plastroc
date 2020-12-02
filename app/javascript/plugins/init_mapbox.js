@@ -9,12 +9,12 @@ const initMapbox = async () => {
     container: 'map',
     style: 'mapbox://styles/nicode80/ckhwgqtuw0xvk1aoe3yvx7g9k',
     center: [2.34, 48.85], // starting position
-    zoom: 8
+    zoom: 9
   });
   // locateUser(map);
-  const userPosition = navigator.geolocation.getCurrentPosition((position) => {
-    locateUser(map, position);
-  });
+  // const userPosition = navigator.geolocation.getCurrentPosition((position) => {
+  //   locateUser(map, position);
+  // });
 
   const mapMarkers = [];
   const markers = JSON.parse(mapElement.dataset.markers);
@@ -67,6 +67,9 @@ const initMapbox = async () => {
     newMarker.getElement().dataset.markerId = marker.id;
     // Put a microphone on the new marker listening for a mouseenter event
     newMarker.getElement().addEventListener('click', (e) => toggleCardHighlighting(e) );
+
+    //fit map to markers
+    fitMapToMarkers(map, markers)
   });
 };
 
@@ -85,16 +88,24 @@ const toggleCardHighlighting = (event) => {
   cardParent.scrollIntoView();
 }
 
-const locateUser = (map, position) => {
-  const mapElement = document.getElementById('map');
-  console.log(position)
-  if (!mapElement) return; // only build a map if there's a div#map to inject into
+// const locateUser = (map, position) => {
+//   const mapElement = document.getElementById('map');
+//   console.log(position)
+//   if (!mapElement) return; // only build a map if there's a div#map to inject into
 
-  map.flyTo({center: [position.coords.longitude, position.coords.latitude],
-    zoom: 9,
-    speed: 0.8, // make the flying slow
-    curve: 1, // change the speed at which it zooms out
-  });
+//   map.flyTo({center: [position.coords.longitude, position.coords.latitude],
+//     zoom: 9,
+//     speed: 0.8, // make the flying slow
+//     curve: 1, // change the speed at which it zooms out
+//   });
+// };
+
+const fitMapToMarkers = (map, markers) => {
+  const bounds = new mapboxgl.LngLatBounds();
+  markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
+  console.log(bounds);
+  map.fitBounds(bounds, {padding: 70, duration: 0});
 };
+
 
 export { initMapbox };

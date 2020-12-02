@@ -22,15 +22,18 @@
 </div>
 <div>
 
-  <div class="d-flex justify-content-center">
-    <%= form_tag campaigns_path, method: :get, class: "filter_search" do %>
-      <% Material::CATEGORIES.each do |category| %>
-        <%= check_box_tag "category[#{category}]", category, params[:category]&.include?(category) %>
-        <%= label_tag "category[#{category}]", category, style: '', class: "rounded-pill px-2" %>
-      <% end %>
-      <%= submit_tag "Apply filters", class: 'btn btn-primary btn-sm rounded-pill' %>
+
+<div class="d-flex justify-content-center">
+  <%= form_tag campaigns_path, method: :get, class: "filter_search", id: "filter-form" do %>
+    <% Material::CATEGORIES.each do |category| %>
+      <%= check_box_tag "category[#{category}]", category, params[:category]&.include?(category) %>
+      <%= label_tag "category[#{category}]", category, style: '', class: "rounded-pill px-2" %>
     <% end %>
-  </div>
+    <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
+  <% end %>
+</div>
+
+<!-- , onchange: "this.form.submit(); this.disabled = false;" -->
 
    <h4 class="text-center page-title">Missions</h4>
    <div class="campaigns-wrapper">
