@@ -155,7 +155,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
       <div class="package-grid">
         <% @campaign.packages.each do |package| %>
-          <%= link_to new_campaign_package_mission_path(@campaign, package) do %>
+          <%= link_to new_campaign_package_mission_path(@campaign, package), class: "text-decoration-none" do %>
             <div class="package-badge package-badge-square my-2">
               <div class="d-flex justify-content-center align-item-center package-header py-2 text-center <%= package.name.downcase %>">
                 <h6 class="text-center"><%= package.name %></h6>
