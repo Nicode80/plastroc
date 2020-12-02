@@ -150,11 +150,6 @@
   <div class="achivement-modal d-flex align-items-center">
     <div class="container" id="modal-container">
       <div class="modal-content">
-        <div class="modal-header" style="border: none;">
-          <button type="button" class="close close-modal">
-            <span>x</span>
-          </button>
-        </div>
         <div class="modal-body text-center">
         <h4>Fellications !</h4>
         <% if current_user.missions != [] %>
@@ -163,50 +158,16 @@
         <img class="mb-3" src="assets/trophy.png" alt="Trophy" style="width: 100px; height: 100px;">
         <h6>1ère mission terminée.</h6>
         <p>Aidez nous nous à recruter plus de trieurs en partageant l'application.</p>
-        <div class="cannon">
-          <div class="cannon__path cannon__path--sm cannon__path--angle-2">
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-3"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-1"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-2"></div>
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-1"></div>
-            <div class="cannon__confetti-spacer"></div>
-          </div>
-          <div class="cannon__path cannon__path--md cannon__path--angle-1">
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-2"></div>
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-2"></div>
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-3"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-1"></div>
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-4"></div>
-            <div class="cannon__confetti-spacer"></div>
-          </div>
-          <div class="cannon__path cannon__path--lg cannon__path--angle0">
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-1"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-4"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-2"></div>
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-3"></div>
-            <div class="cannon__confetti-spacer"></div>
-          </div>
-          <div class="cannon__path cannon__path--md cannon__path--angle1">
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-3"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-1"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-4"></div>
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-3"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-2"></div>
-            <div class="cannon__confetti-spacer"></div>
-          </div>
-          <div class="cannon__path cannon__path--sm cannon__path--angle2">
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-2"></div>
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-3"></div>
-            <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-4"></div>
-            <div class="cannon__confetti cannon__confetti--ribbon cannon__confetti--color-1"></div>
-            <div class="cannon__confetti-spacer"></div>
-          </div>
 
+       <%= render '/shared/pop_party' %>
 
         </div>
-        <div class="d-flex justify-content-center">
-          <button type="button" id="share-achivement" class="btn btn-primary rounded-pill d-block mt-2 plastroc-button plastroc-light-shadow mb-3">
+        <div class="d-flex justify-content-center mb-2">
+          <button type="button" id="share-achivement" class="btn btn-primary rounded-pill d-block mt-2 plastroc-button plastroc-light-shadow mr-3">
             <i class="fas fa-share-alt mr-2"></i>Partager
+          </button>
+          <button type="button" id="share-achivement" class="btn btn-outline-primary rounded-pill d-block mt-2 plastroc-outline-button close-modal">
+            </i>Plus tard
           </button>
         </div>
       </div>
