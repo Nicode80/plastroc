@@ -3,6 +3,29 @@
 </div>
 <div style="margin-bottom: 72px" class='container'>
 
+<!-- My question's answers if any -->
+<% if @questions.count > 0 %>
+<p>
+  <button class="btn btn-outline-warning rounded-pill d-block mt-2 plastroc-outline-button w-100" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    📣 <%= @questions.count %> réponse(s) à vos questions
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <ul class="list-group">
+      <% @questions.each do |question| %>
+        <%= link_to seen_question_path(question), method: :patch do %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="text-truncate col-9 px-1" > <%=  question.title  %> </div>
+          <span class="badge badge-warning badge-pill col-3"><%=  question.updated_at.strftime("%d/%m/%y")  %></span>
+        </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+
 <!-- My campaigns -->
 <% if !current_user.organisations.empty? %>
   <div class='d-flex align-items-center justify-content-between mb-2'>
@@ -24,6 +47,9 @@
     <% @campaigns.each do |campaign| %>
       <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
         <div class="d-flex flex-row card card-s">
+          <% if campaign.questions.where(answer: nil).count > 0 %>
+                  <span style= "position: absolute" class="mt-2 ml-2 text-decoration-none badge badge-danger badge-pill mb-2"><%= "#{campaign.questions.where(answer: nil).count}" %></span>
+                <% end %>
           <% if campaign.photo.attached? %>
             <%= cl_image_tag campaign.photo.key, crop: :fill %>
           <% else %>
@@ -35,7 +61,7 @@
 									<h6 style='color: grey' class="mb-0"><%= campaign.name %></h6>
 									<small class='text-truncate' style='max-width: 215px'><%= campaign.organisation.address %></small>
 								</div>
-								<span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{campaign.status}" %></span>
 							</div>
 						</div>
         </div>
@@ -116,11 +142,11 @@
 <% if @first_mission_done %>
   <!-- Achivement modal -->
   <div class="achivement-modal d-flex align-items-center">
-    <div class="container">
+    <div class="container" id="modal-container">
       <div class="modal-content">
         <div class="modal-header" style="border: none;">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="close" id="close-modal">
+            <span>x</span>
           </button>
         </div>
         <div class="modal-body text-center">
@@ -129,7 +155,8 @@
           <h5><i class="fas fa-plus"></i> <%= current_user.missions.first.package.xp_reward %> xp</h5>
         <% end %>
         <img class="mb-3" src="assets/trophy.png" alt="Trophy" style="width: 100px; height: 100px;">
-        <h6>Vous venez de remplir votre première mission.</h6>
+        <h6>1ère mission terminée.</h6>
+        <p>Aidez nous nous à recruter plus de trieur en partageant l'application.</p>
         <div class="cannon">
           <div class="cannon__path cannon__path--sm cannon__path--angle-2">
             <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-3"></div>
@@ -172,7 +199,9 @@
 
         </div>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-primary rounded-pill d-block mt-2 plastroc-button plastroc-light-shadow mb-3">Partager</button>
+          <button type="button" class="btn btn-primary rounded-pill d-block mt-2 plastroc-button plastroc-light-shadow mb-3">
+          <span class="icon share-white">Partager</span>
+        </button>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ class MissionsController < ApplicationController
     @missions = policy_scope(Mission).ongoing
     @campaigns = current_user.campaigns
     @first_mission_done = first_mission_done_achivement?
+    @questions = current_user.questions.where(seen: false)
   end
 
   def show
@@ -11,7 +12,7 @@ class MissionsController < ApplicationController
     @package = @mission.package
     @campaign = @package.campaign
     @first_mission_subscription = first_mission_subscription_achivement?
-
+    @question = Question.new
     #calcul of done missions
     missions = @campaign.missions
     missions_done = missions.select { |mission| mission.status == "done" }

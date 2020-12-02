@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns, only: [ :index, :show, :edit, :update ] do
+    resources :questions, only: [ :create ]
     resources :package, only: :create do
       resources :missions, only: [ :new, :create ]
     end
@@ -19,6 +20,12 @@ Rails.application.routes.draw do
     end
     member do
       get :dashboard
+    end
+  end
+
+  resources :questions, only: [ :update, :destroy ] do
+    member do
+      patch :seen
     end
   end
 
