@@ -173,7 +173,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <div class="bottom-nav">
       <div class="d-flex justify-content-around">
           <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
-          <p><a href="#" style="color: red;">Stopper</a></p>
+          <% if @campaign.status == "ongoing" %>
+            <p><%= link_to "Stopper", publish_campaign_path(@campaign), method: :patch, style: "color: red" %></p>
+          <% else %>
+            <p><%= link_to "Reprendre", publish_campaign_path(@campaign), method: :patch %></p>
+          <% end %>
       </div>
   </div>
 

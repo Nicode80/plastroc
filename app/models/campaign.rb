@@ -13,7 +13,7 @@ class Campaign < ApplicationRecord
 
   UNITS = ['g', 'kg', 'l', 'unité']
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 26 }
   validates :description, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
