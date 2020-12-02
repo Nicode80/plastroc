@@ -3,13 +3,14 @@ class MissionsController < ApplicationController
   def index
     @missions = policy_scope(Mission).ongoing
     @campaigns = current_user.campaigns
-    @achivement = first_achivement?
+    @first_mission_done = first_mission_done_achivement?
   end
 
   def show
     @mission = Mission.find(params[:id])
     @package = @mission.package
     @campaign = @package.campaign
+    @first_mission_subscription = first_mission_subscription_achivement?
 
     #calcul of done missions
     missions = @campaign.missions
@@ -52,9 +53,16 @@ class MissionsController < ApplicationController
 
   private
 
-  def first_achivement?
+  def first_mission_subscription_achivement?
     if current_user.missions != []
-      bolean = current_user.missions.last.recently_done? && current_user.missions.done.count == 1
+      bolean = current_user.missions.ongoing.count == 1 && current_user.missions.last.recently_created?
+    end
+    return bolean
+  end
+
+  def first_mission_done_achivement?
+    if current_user.missions != []
+      bolean = current_user.missions.done.count == 1 && current_user.missions.last.recently_done?
     end
     return bolean
   end

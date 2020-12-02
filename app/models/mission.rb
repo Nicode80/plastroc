@@ -8,4 +8,8 @@ class Mission < ApplicationRecord
   def recently_done?
     (DateTime.now.to_i - completed_at.to_i) < 10
   end
+
+  def recently_created?
+    (DateTime.now.to_i - created_at.to_i) < 10
+  end
 end
