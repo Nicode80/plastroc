@@ -222,7 +222,7 @@ puts 'Creating Paper material...'
 # Fifth Material
 puts 'Creating Bouhcon material...'
 @bouchon = Material.new
-  @bouchon.name = "Boucon de liège"
+  @bouchon.name = "Bouchon de liège"
   @bouchon.description = "Bouchon en véritable liège"
   @bouchon.category  = "Bois"
   @bouchon.photo.attach(
