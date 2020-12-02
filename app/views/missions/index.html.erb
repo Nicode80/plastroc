@@ -19,7 +19,7 @@
         <%= link_to seen_question_path(question), method: :patch do %>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <div class="text-truncate col-9 px-1" > <%=  question.title  %> </div>
-          <span class="badge badge-warning badge-pill col-3"><%=  question.updated_at.strftime("%d/%m/%y")  %></span>
+          <span class="badge badge-warning badge-pill col-3"><%=  question.updated_at.strftime("%d/%m/%y")  %> <i class="far fa-envelope"></i></span>
         </li>
         <% end %>
       <% end %>
@@ -50,7 +50,7 @@
       <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
         <div class="d-flex flex-row card card-s">
           <% if campaign.questions.where(answer: nil).count > 0 %>
-                  <span style= "position: absolute" class="mt-2 ml-2 text-decoration-none badge badge-danger badge-pill mb-2"><%= "#{campaign.questions.where(answer: nil).count}" %></span>
+                  <span style= "position: absolute" class="mt-2 ml-2 text-decoration-none badge badge-danger badge-pill mb-2"><%= "#{campaign.questions.where(answer: nil).count}" %> <i class="fas fa-envelope"></i></span>
                 <% end %>
           <% if campaign.photo.attached? %>
             <%= cl_image_tag campaign.photo.key, crop: :fill %>
