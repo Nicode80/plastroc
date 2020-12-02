@@ -105,10 +105,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                      </div>
                   <% else %>
                     <div class='d-flex justify-content-end'>
-                      <button href="#" class='mr-2 btn btn-outline-primary rounded-pill d-block plastroc-outline-button' data-toggle="modal" data-target="#answer-<%= question.id %>">
-                        repondre
+                      <%= link_to question_path(question), method: :delete, class: 'btn btn-outline-danger rounded-pill d-block plastroc-outline-button mr-3' do %>
+                        <i class="fas fa-trash-alt"></i>
+                      <% end %>
+                      <button href="#" class='btn btn-primary flex-grow-1 rounded-pill plastroc-button' data-toggle="modal" data-target="#answer-<%= question.id %>">
+                        Répondre <i class="pl-2 fas fa-reply"></i>
                       </button>
-                      <%= link_to 'supprimer', question_path(question), method: :delete, class: 'btn btn-outline-danger rounded-pill d-block plastroc-outline-button'  %>
                     </div>
                    <% end %>
                 </div>
@@ -129,11 +131,13 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                     <%= f.input :answer,
                             label: false,
                             placeholder: "Réponse*",
-                            input_html: { class: "col-12 mb-3" } %>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-primary rounded-pill plastroc-outline-button" data-dismiss="modal">Annuler</button>
-                      <%= f.submit 'Répondre', class: "btn btn-primary rounded-pill plastroc-button" %>
-                    </div>
+                            input_html: { class: "col-12 mb-3 h100" } %>
+                        <%#= f.submit 'envoyer', class: "btn btn-primary rounded-pill plastroc-button" do %>
+                          <!-- <i class="fas fa-paper-plane"></i> -->
+                        <%# end %>
+                        <%= button_tag type: 'submit', class: "btn col-12 btn-primary rounded-pill plastroc-button" do %>
+                          <i class="fas fa-paper-plane"></i>
+                        <% end %>
                   <% end %>
                 </div>
               </div>
