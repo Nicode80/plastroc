@@ -19,6 +19,8 @@ puts 'Deleting all missions'
   Mission.destroy_all #if Rails.env.development?
 puts 'Deleting all packages...'
   Package.destroy_all #if Rails.env.development?
+puts 'Deleting all questions...'
+  Question.destroy_all #if Rails.env.development?
 puts 'Deleting all campaigns...'
   Campaign.destroy_all #if Rails.env.development?
 puts 'Deleting all instructions...'
@@ -29,20 +31,22 @@ puts 'Deleting all materials...'
 # All 4 Citations
 puts '1/4 citation...'
 @quote1 = Citation.create(
-  author: 'Y. Arthus-Bertran',
+  author: 'Y. Arthus-Bertrand',
   quote: "Il est trop tard pour être pessimiste.")
 puts '2/4 citation...'
 @quote2 = Citation.create(
   author: 'A. Amritanzndamayi',
-  quote: "Maintenant est le moment favorable pour accomplir de bonnes action. L'instant présent")
+  quote: "Maintenant est le moment favorable pour accomplir de bonnes actions. L'instant présent.")
 puts '3/4 citation...'
 @quote3 = Citation.create(
   author: 'W. Maathai',
-  quote: "Ce n'est le courage qui permet de gagner une bataille mais la persévérance.")
+  quote: "Ce n'est pas le courage qui permet de gagner une bataille mais la persévérance.")
 puts '4/4 citation...'
 @quote4 = Citation.create(
   author: 'M. Fontenoy',
-  quote: "Ne laissz personne vous dire que c'est impossible !!")
+  quote: "Ne laissez personne vous dire que c'est impossible !!")
+
+################################################################################
 
 # First Material
 puts 'Creating PET material...'
@@ -56,7 +60,7 @@ puts 'Creating PET material...'
     )
 @pet.save!
 
-  # Fist Material Instructions
+  # Material Instructions
   puts 'Creating PET instructions...'
   @instruction1 = Instruction.new
     @instruction1.title = "Selectionnez les bouteilles"
@@ -109,7 +113,7 @@ puts 'Creating ABS material...'
     )
 @abs.save!
 
-  # Second Material Instructions
+  # Material Instructions
   puts 'Creating ABS instructions...'
   @instruction1 = Instruction.new
     @instruction1.title = "Trouvez des claviers d'ordinateurs"
@@ -162,7 +166,7 @@ puts 'Creating Organic material...'
     )
 @compost.save!
 
-  # Second Material Instructions
+  # Material Instructions
   puts 'Creating Organic instructions...'
   @instruction1 = Instruction.new
     @instruction1.title = "Récupérez vos épluchures"
@@ -186,21 +190,129 @@ puts 'Creating Organic material...'
       )
   @instruction2.save!
 
+################################################################################
+
+# Fourth Material
+puts 'Creating Paper material...'
+@paper = Material.new
+  @paper.name = "Papier Blanc"
+  @paper.description = "Papier blanc propre"
+  @paper.category = "Papier"
+  @paper.photo.attach(
+    io: File.open(Rails.root.join('db/fixtures/paper.jpeg')),
+    filename: 'paper.jpeg',
+    )
+@paper.save!
+
+  # Material Instructions
+  puts 'Creating Paper instructions...'
+  @instruction1 = Instruction.new
+    @instruction1.title = "Récupérez du papier blanc"
+    @instruction1.rich_content = "Ne choisissez que le papier blanc sans écriture ni taches."
+    @instruction1.step_order = 1
+    @instruction1.material = @paper
+    @instruction1.media.attach(
+      io: File.open(Rails.root.join('db/fixtures/paper.jpeg')),
+      filename: 'paper.jpeg',
+      )
+  @instruction1.save!
+
+################################################################################
+
+# Fifth Material
+puts 'Creating Bouhcon material...'
+@bouchon = Material.new
+  @bouchon.name = "Boucon de liège"
+  @bouchon.description = "Bouchon en véritable liège"
+  @bouchon.category  = "Bois"
+  @bouchon.photo.attach(
+    io: File.open(Rails.root.join('db/fixtures/bouchon.jpeg')),
+    filename: 'bouchon.jpeg',
+    )
+@bouchon.save!
+
+  # Material Instructions
+  puts 'Creating Bouchon instructions...'
+  @instruction1 = Instruction.new
+    @instruction1.title = "Récupérez des bouchons en liège"
+    @instruction1.rich_content = "Ne choisissez que les bouchons en véritables liège (bons vin et champagne)."
+    @instruction1.step_order = 1
+    @instruction1.material = @bouchon
+    @instruction1.media.attach(
+      io: File.open(Rails.root.join('db/fixtures/bouchon.jpeg')),
+      filename: 'bouchon.jpeg',
+      )
+  @instruction1.save!
+
+################################################################################
+
+# Sixth Material
+puts 'Creating Cuivre material...'
+@copper = Material.new
+  @copper.name = "Fils de cuivre"
+  @copper.description = "Fils électriques en cuivre"
+  @copper.category  = "Métal"
+  @copper.photo.attach(
+    io: File.open(Rails.root.join('db/fixtures/copper.jpeg')),
+    filename: 'copper.jpeg',
+    )
+@copper.save!
+
+  # Material Instructions
+  puts 'Creating Cuivre instructions...'
+  @instruction1 = Instruction.new
+    @instruction1.title = "Récupérez des fils électriques en cuivre"
+    @instruction1.rich_content = "Ne choisissez que les fils couleur cuivre et retirez la gaine."
+    @instruction1.step_order = 1
+    @instruction1.material = @copper
+    @instruction1.media.attach(
+      io: File.open(Rails.root.join('db/fixtures/copper.jpeg')),
+      filename: 'copper.jpeg',
+      )
+  @instruction1.save!
+
+################################################################################
+
+# Seventh Material
+puts 'Creating Fabric material...'
+@fabric = Material.new
+  @fabric.name = "Coton blanc"
+  @fabric.description = "Coton blanc propre"
+  @fabric.category  = "Tissu"
+  @fabric.photo.attach(
+    io: File.open(Rails.root.join('db/fixtures/fabric.jpeg')),
+    filename: 'fabric.jpeg',
+    )
+@fabric.save!
+
+  # Material Instructions
+  puts 'Creating Coton instructions...'
+  @instruction1 = Instruction.new
+    @instruction1.title = "Récupérez du tissu blanc"
+    @instruction1.rich_content = "Ne choisissez que du tissu en coton blanc ou très clair et propre."
+    @instruction1.step_order = 1
+    @instruction1.material = @fabric
+    @instruction1.media.attach(
+      io: File.open(Rails.root.join('db/fixtures/fabric.jpeg')),
+      filename: 'fabric.jpeg',
+      )
+  @instruction1.save!
+
 ########################################################################
 ########################################################################
 
 # Delete Current Organisations and Users
 puts 'Deleting all Orgnanisations...'
-  Organisation.destroy_all if Rails.env.development?
+  Organisation.destroy_all # if Rails.env.development?
 puts 'Deleting all Users...'
-  User.destroy_all if Rails.env.development?
+  User.destroy_all # if Rails.env.development?
 
 #####################################################################
 # Users Seed
 #####################################################################
 
 # Platroc Admin Team's accrounts
-  if Rails.env.development?
+  #if Rails.env.development?
     puts "Creating Maximin's Admin account..."
     @max = User.new
     @max.first_name = "Maximin"
@@ -231,9 +343,9 @@ puts 'Deleting all Users...'
       filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
       )
     @organisation.save!
-  end
+  #end
 
-  if Rails.env.development?
+  #if Rails.env.development?
     puts "Creating Nicolas' Admin account..."
     @nico = User.new
     @nico.first_name = "Nicolas"
@@ -264,9 +376,9 @@ puts 'Deleting all Users...'
       filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
       )
     @organisation.save!
-  end
+  #end
 
-  if Rails.env.development?
+  #if Rails.env.development?
     puts "Creating Thomas' Admin account..."
     @tom = User.new
     @tom.first_name = "Thomas"
@@ -297,9 +409,9 @@ puts 'Deleting all Users...'
       filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
       )
     @organisation.save!
-  end
+  #end
 
-  if Rails.env.development?
+  #if Rails.env.development?
     puts "Creating JR's Admin account..."
     @jr = User.new
     @jr.first_name = "JR"
@@ -330,68 +442,12 @@ puts 'Deleting all Users...'
       filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
       )
     @organisation.save!
-  end
+  #end
 
-# # count on seed
-# x= 0
-
-# # 50 random accounts
-# puts "Creating 20 fake user accounts..."
-#   20.times do
-#     x += 1
-#     puts "#{x}/25"
-#     @user = User.new
-#     @user.first_name = Faker::Name.name
-#     @user.last_name = Faker::Name.last_name
-#     @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
-#     @user.password = "123456"
-#     @user.xp = rand(0..800)
-#     file = URI.open('https://i.pravatar.cc/200')
-#     @user.photo.attach(
-#       io: file,
-#       filename: "user#{x}.jpg",
-#       )
-#     @user.save!
-#   end
-
-# # 5 random accounts with 1 organisation
-# puts "Creating 5 more fake user accounts with organisation..."
-#   5.times do
-#     x += 1
-#     puts "#{x}/25"
-#     @user = User.new
-#     @user.first_name = Faker::Name.name
-#     @user.last_name = Faker::Name.last_name
-#     @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
-#     @user.password = "123456"
-#     @user.xp = rand(0..800)
-#     file = URI.open('https://i.pravatar.cc/200')
-#     @user.photo.attach(
-#       io: file,
-#       filename: "user#{x}.jpg",
-#       )
-#     @user.save!
-
-#     # organisation
-#     @organisation = Organisation.new
-#     @organisation.user = @user
-#     @organisation.name = Faker::Company.name
-#     @organisation.about = "Lorem ipsum dolor sit amet,
-#       consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-#       Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-#     @organisation.address = "Paris 750#{rand(10..20)}"
-#     @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
-#     @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
-#     file = URI.open("https://fakeimg.pl/200x200/?text=#{@organisation.name}")
-#     @organisation.photo.attach(
-#       io: file,
-#       filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
-#       )
-#     @organisation.save!
-#   end
+# count on seed
 
 # 3 random Admin accounts with 2 organisations
-puts "Creating 3 more fake user accounts with 2 organisations each..."
+puts "Creating 3 fake user accounts with 2 organisations each..."
 
   # Premier user
   puts "1/3 - with 2 campaigns"
@@ -416,10 +472,10 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @organisation1.about = "Paprec Group est le leader indépendant français du recyclage avec 210 sites et plus de 12 000 000 de tonnes de déchets recyclés."
     @organisation1.address = "15 rue Edouard Vaillant 93200 Saint Denis"
     @organisation1.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
-    @organisation1.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+    @organisation1.opening_hours = "Du lundi au vendredi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation1.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/paprec.jpg')),
-      filename: 'paprec.jpg',
+      filename: 'paprec1.jpg',
       )
     @organisation1.save!
 
@@ -427,7 +483,7 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @campaign3 = Campaign.new
     @campaign3.name = "Recyclage PET local"
     @campaign3.description = "Recyclage de materiaux PET verts"
-    @campaign3.target = 4000
+    @campaign3.target = 400
     @campaign3.unit = "kg"
     @campaign3.min_package = 20
     @campaign3.start_date = Date.today
@@ -461,10 +517,10 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @organisation2.about = "Paprec Group est le leader indépendant français du recyclage avec 210 sites et plus de 12 000 000 de tonnes de déchets recyclés."
     @organisation2.address = "5 avenue de la Marne 92600 Asnières sur Seine"
     @organisation2.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
-    @organisation2.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+    @organisation2.opening_hours = "Du lundi au vendredi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation2.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/paprec.jpg')),
-      filename: 'paprec.jpg',
+      filename: 'paprec2.jpg',
       )
     @organisation2.save!
 
@@ -472,7 +528,7 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @campaign4 = Campaign.new
     @campaign4.name = "Recyclage ABS local"
     @campaign4.description = "Recyclage de ABS noir et gris foncé"
-    @campaign4.target = 4000
+    @campaign4.target = 400
     @campaign4.unit = "kg"
     @campaign4.min_package = 20
     @campaign4.start_date = Date.today
@@ -525,7 +581,7 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @organisation3.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation3.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/goodplanet.png')),
-      filename: 'goodplanet.jpeg',
+      filename: 'goodplanet1.jpeg',
       )
     @organisation3.save!
 
@@ -533,7 +589,7 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @campaign1 = Campaign.new
     @campaign1.name = "Recyclage PET Automn 2020"
     @campaign1.description = "Recyclage de materiaux PET transparents"
-    @campaign1.target = 2000
+    @campaign1.target = 200
     @campaign1.unit = "kg"
     @campaign1.min_package = 10
     @campaign1.start_date = Date.today
@@ -570,7 +626,7 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @organisation4.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation4.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/goodplanet.png')),
-      filename: 'goodplanet.jpeg',
+      filename: 'goodplanet2.jpeg',
       )
     @organisation4.save!
 
@@ -578,7 +634,7 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @campaign2 = Campaign.new
     @campaign2.name = "Recyclage ABS Automn 2020"
     @campaign2.description = "Recyclage de materiaux ABS blancs"
-    @campaign2.target = 1000
+    @campaign2.target = 100
     @campaign2.unit = "kg"
     @campaign2.min_package = 5
     @campaign2.start_date = Date.today
@@ -629,8 +685,8 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @organisation5.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
     @organisation5.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation5.photo.attach(
-      io: File.open(Rails.root.join('db/fixtures/oucompost.png')),
-      filename: 'oucompost.png',
+      io: File.open(Rails.root.join('db/fixtures/oucompost.jpg')),
+      filename: 'oucompost1.jpg',
       )
     @organisation5.save!
 
@@ -638,7 +694,7 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @campaign6 = Campaign.new
     @campaign6.name = "Recyclage Composte"
     @campaign6.description = "Recyclage de composte ménager"
-    @campaign6.target = 2000
+    @campaign6.target = 200
     @campaign6.unit = "kg"
     @campaign6.min_package = 10
     @campaign6.start_date = Date.today
@@ -674,8 +730,8 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @organisation6.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
     @organisation6.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation6.photo.attach(
-      io: File.open(Rails.root.join('db/fixtures/oucompost.png')),
-      filename: 'oucompost.png',
+      io: File.open(Rails.root.join('db/fixtures/oucompost.jpg')),
+      filename: 'oucompost2.jpg',
       )
     @organisation6.save!
 
@@ -683,7 +739,7 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
     @campaign7 = Campaign.new
     @campaign7.name = "Recyclage Composte"
     @campaign7.description = "Recyclage de composte ménager"
-    @campaign7.target = 2000
+    @campaign7.target = 200
     @campaign7.unit = "kg"
     @campaign7.min_package = 10
     @campaign7.start_date = Date.today
@@ -710,6 +766,123 @@ puts "Creating 3 more fake user accounts with 2 organisations each..."
       x += 1
     end
 
+
+# 5 random accounts with 1 organisation
+x= 0
+
+puts "Creating 5 more fake user accounts with organisation..."
+  5.times do
+    x += 1
+    puts "#{x}/25"
+    @user = User.new
+    @user.first_name = Faker::Name.name
+    @user.last_name = Faker::Name.last_name
+    @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
+    @user.password = "123456"
+    @user.xp = rand(0..800)
+    file = URI.open('https://i.pravatar.cc/200')
+    @user.photo.attach(
+      io: file,
+      filename: "user#{x}.jpg",
+      )
+    @user.save!
+
+    # organisation
+    puts "#{x}/25 - Orga"
+    @organisation = Organisation.new
+    @organisation.user = @user
+    @organisation.address = "Mairie du #{x + 10}e, Paris 750#{x + 10}"
+    @organisation.name = "Mairie du #{x + 10}e"
+    @organisation.about = "Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
+    @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+    @organisation.photo.attach(
+      io: File.open(Rails.root.join('db/fixtures/mairie.png')),
+      filename: 'mairie.png',
+      )
+    @organisation.save!
+
+    #campaign
+    puts "#{x}/25 - Campaign"
+    @campaign = Campaign.new
+    @campaign.material = @fabric
+    @campaign.name = "Recyclage Coton Blanc"
+    @campaign.description = "Recyclage #{@campaign.material.name} près de chez vous"
+    @campaign.target = 400
+    @campaign.unit = "kg"
+    @campaign.min_package = 20
+    @campaign.start_date = Date.today
+    @campaign.end_date = Date.today + 4.weeks
+    @campaign.status = 'ongoing'
+    @campaign.organisation = @organisation
+    @campaign.published = true
+    @campaign.photo.attach(
+      io: File.open(Rails.root.join('db/fixtures/fabric.jpeg')),
+      filename: 'fabric.jpeg',
+      )
+    @campaign.save!
+
+    #packages
+    puts "#{x}/25 - Packages"
+    iterators = [(@campaign6.target / @campaign6.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    z = 0
+    iterators.times do
+      @name = names[z]
+      @quantity = (z + 1) * @campaign.min_package
+      @reward = (z + 1) * @campaign.min_package / 2
+      @campaign.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      z += 1
+    end
+  end
+
+# 20 random accounts
+puts "Creating 20 fake user accounts..."
+  20.times do
+    x += 1
+    puts "#{x}/25"
+    @user = User.new
+    @user.first_name = Faker::Name.name
+    @user.last_name = Faker::Name.last_name
+    @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
+    @user.password = "123456"
+    @user.xp = rand(0..800)
+    file = URI.open('https://i.pravatar.cc/200')
+    @user.photo.attach(
+      io: file,
+      filename: "user#{x}.jpg",
+      )
+    @user.save!
+  end
+
+# missions and messages
+puts "Creating 1 mission and question per user..."
+# Création des missions pour chaque user
+    # Selection des campagnes au hasard
+  w = 0
+  y = User.count
+  User.all.each do |user|
+    w += 1
+    puts "#{w}/#{y} - mission"
+    @campaign = Campaign.all[rand(0..10)]
+    @mission = Mission.new
+    @mission.user = user
+    @mission.package = @campaign.packages.sample
+    @mission.save
+
+    #ajout d'une question
+    if w.odd?
+      puts "#{w}/#{y} - message"
+      @question = Question.new
+      @question.user = user
+      @question.campaign = @campaign
+      @question.title = "#{@campaign.material.name}?"
+      @question.content = "Bonjour #{@campaign.organisation.name} Qu'est-ce que le #{@campaign.material.name}?"
+      @question.save
+    end
+  end
 # End of users seed
 
 
