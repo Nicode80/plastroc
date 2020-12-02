@@ -3,8 +3,8 @@ class Campaign < ApplicationRecord
 
   belongs_to :organisation
   belongs_to :material
-  has_many :packages
-  has_many :questions
+  has_many :packages, dependent: :destroy
+  has_many :questions, dependent: :destroy
   has_many :missions, through: :packages
   has_one :user, through: :organisation
   has_one_attached :photo

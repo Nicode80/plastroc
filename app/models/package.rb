@@ -1,6 +1,6 @@
 class Package < ApplicationRecord
   belongs_to :campaign
-  has_many :missions
+  has_many :missions, dependent: :destroy
 
   PACKAGES = ["Hawksbill Turtle", "Amur Leopard", "Black Rhino", "Sumatran Elephant"]
 
