@@ -35,14 +35,10 @@ import { materialSelect } from "../components/material_select";
 import { initSweetalert, deleteAlert, completeMissionAlert, impossibleToDeleteAlert } from '../plugins/init_sweetalert';
 import { initMapbox } from "../plugins/init_mapbox";
 import { toggleConfirmation } from "../components/confirmation_toggle";
-<<<<<<< HEAD
-import { animatedBar } from "../components/progress_bar"
-import { ajaxFilter } from "../components/ajax_filter"
-=======
+import { ajaxFilter } from "../components/ajax_filter";
 import { animatedBar } from "../components/progress_bar";
 import { closeModal } from "../components/close_achivement_modal";
 
->>>>>>> master
 
 
 document.addEventListener('turbolinks:load', () => {
