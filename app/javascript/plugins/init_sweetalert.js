@@ -63,7 +63,7 @@ const impossibleToDeleteAlert = () => {
   initSweetalert('.impossible-to-delete-organisation', {
     title: "Oooops",
     text: "Désolé vous ne pouvez pas supprimer une organisation qui a des campagnes en cours.",
-    icon: "warning"
+    icon: "error"
   }, (value) => {
     nil;
   });
