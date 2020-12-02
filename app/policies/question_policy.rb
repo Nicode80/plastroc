@@ -18,6 +18,6 @@ class QuestionPolicy < ApplicationPolicy
   end
 
   def seen?
-    record.user == user
+    true
   end
 end

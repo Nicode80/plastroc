@@ -47,7 +47,7 @@ class QuestionsController < ApplicationController
       @mission = current_user.missions.joins(:package).where(packages: { campaign_id: @question.campaign.id })[0]
       redirect_to mission_path(@mission) #redirect to mission show
     else
-      redirect_to campaign_path(@campaign) #redirect to campaign show
+      redirect_to campaign_path(@question.campaign) #redirect to campaign show
     end
     authorize @question
   end
