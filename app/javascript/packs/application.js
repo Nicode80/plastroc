@@ -37,6 +37,7 @@ import { initMapbox } from "../plugins/init_mapbox";
 import { toggleConfirmation } from "../components/confirmation_toggle";
 import { animatedBar } from "../components/progress_bar";
 import { closeModal } from "../components/close_achivement_modal";
+import { share } from "../components/share";
 
 
 
@@ -56,5 +57,6 @@ document.addEventListener('turbolinks:load', () => {
   completeMissionAlert();
   impossibleToDeleteAlert();
   closeModal();
+  share();
 });
 
