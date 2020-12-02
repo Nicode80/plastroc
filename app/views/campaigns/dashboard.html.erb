@@ -19,7 +19,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <div class="container">
     <div class="d-flex flex-column align-items-center">
       <% if @campaign.organisation.photo.attached? %>
-        <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+        <%= cl_image_tag @campaign.organisation.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large mb-2 plastroc-light-shadow"%>
       <% else %>
         <img style='height: 56px; width: 56px', class='avatar-large mb-2 plastroc-light-shadow' src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
       <% end %>
@@ -68,39 +68,73 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         </div>
 
 
-      <h5>Questions</h5>
-      <blockquote class="blockquote card mt-3">
-         <div class="card-body">
-            <div class="col-11">
-            	<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante ?</p>
-            	<footer class="blockquote-footer mt-2 mb-0">Le 27/07/2020<cite title="Source Title"> par Laura</cite></footer>
+      <h5 id="question_title">Questions</h5>
+      <% if @campaign.questions.empty? %>
+      <p>Pas encore de questions 😅</p>
+      <% else %>
+      <% @campaign.questions.reverse.each do |question|%>
+          <blockquote class="blockquote card mt-3">
+             <div class="card-body">
+                <div class="col-11">
+                  <h6 class="mb-0"><%= question.title %></h6>
+                  <p class="mb-0"><%= question.content %></p>
+                  <footer class="blockquote-footer mt-2 mb-0"><%= question.created_at.strftime("le %m/%d/%Y") %><cite title="Source Title"> par <%= question.user.first_name %></cite></footer>
+                </div>
+                <div class="col-12 mt-3">
+                  <% if question.answer %>
+                    <p class="text-right p-0 m-0">
+                      <a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#question-<%= question.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">📣 Répondu <%= question.updated_at.strftime("le %m/%d/%Y") %> <i class="fas fa-chevron-down"></i></a>
+                    </p>
+                     <div class="collapse" id="question-<%= question.id %>">
+                        <blockquote class="blockquote">
+                          <p class="mb-0 mt-2 text-right"><%= question.answer %></p>
+                          <footer class="blockquote-footer mt-2 mb-0 text-right"><%= question.campaign.organisation.user.first_name %> de <%= question.campaign.organisation.name %></footer>
+                          <div class='d-flex justify-content-end mt-1'>
+                            <button href="#" class='mr-2 btn btn-outline-primary rounded-pill d-block plastroc-outline-button' data-toggle="modal" data-target="#answer-<%= question.id %>">
+                              modifier
+                            </button>
+                            <%= link_to 'supprimer', question_path(question), method: :delete, class: 'btn btn-outline-danger rounded-pill d-block plastroc-outline-button'  %>
+                          </div>
+                     </div>
+                  <% else %>
+                    <div class='d-flex justify-content-end'>
+                      <button href="#" class='mr-2 btn btn-outline-primary rounded-pill d-block plastroc-outline-button' data-toggle="modal" data-target="#answer-<%= question.id %>">
+                        repondre
+                      </button>
+                      <%= link_to 'supprimer', question_path(question), method: :delete, class: 'btn btn-outline-danger rounded-pill d-block plastroc-outline-button'  %>
+                    </div>
+                   <% end %>
+                </div>
+             </div>
+          </blockquote>
+          <!-- Question Edit Modal to give answer-->
+          <div class="modal fade" id="answer-<%= question.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Répondre à la question</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <%= simple_form_for(question, remote: true) do |f| %>
+                    <%= f.input :answer,
+                            label: false,
+                            placeholder: "Réponse*",
+                            input_html: { class: "col-12 mb-3" } %>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-primary rounded-pill plastroc-outline-button" data-dismiss="modal">Annuler</button>
+                      <%= f.submit 'Répondre', class: "btn btn-primary rounded-pill plastroc-button" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
             </div>
-            <div class="col-12 mt-3">
-               <p class="text-right p-0 m-0"><a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Answer of the owner <i class="fas fa-chevron-down"></i></a></p>
-               <div class="collapse" id="collapseExample">
-                  <blockquote class="blockquote">
-                     <p class="mb-0 mt-2 text-right">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                     <footer class="blockquote-footer mt-2 mb-0 text-right">le 28/07/2020</footer>
-               </div>
-            </div>
-         </div>
-      </blockquote>
-      <blockquote class="blockquote card mt-3">
-         <div class="card-body">
-            <div class="col-11">
-            	<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante ?</p>
-            	<footer class="blockquote-footer mt-2 mb-0">Le 27/07/2020<cite title="Source Title"> par Laura</cite></footer>
-            </div>
-            <div class="col-12 mt-3">
-               <p class="text-right p-0 m-0"><a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Answer of the owner <i class="fas fa-chevron-down"></i></a></p>
-               <div class="collapse" id="collapseExample">
-                  <blockquote class="blockquote">
-                     <p class="mb-0 mt-2 text-right">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                     <footer class="blockquote-footer mt-2 mb-0 text-right">le 28/07/2020</footer>
-               </div>
-            </div>
-         </div>
-      </blockquote>
+          </div>
+          <!-- End of Question Edit Modal to give answer-->
+        <% end %>
+      <% end %>
     </div>
   </div>
 

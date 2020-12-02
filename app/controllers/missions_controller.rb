@@ -3,6 +3,7 @@ class MissionsController < ApplicationController
   def index
     @missions = policy_scope(Mission).ongoing
     @campaigns = current_user.campaigns
+    @questions = current_user.questions.where(seen: false)
     @achivement = first_achivement?
   end
 
@@ -10,7 +11,7 @@ class MissionsController < ApplicationController
     @mission = Mission.find(params[:id])
     @package = @mission.package
     @campaign = @package.campaign
-
+    @question = Question.new
     #calcul of done missions
     missions = @campaign.missions
     missions_done = missions.select { |mission| mission.status == "done" }

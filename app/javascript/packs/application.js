@@ -35,7 +35,8 @@ import { materialSelect } from "../components/material_select";
 import { initSweetalert, deleteAlert, completeMissionAlert, impossibleToDeleteAlert } from '../plugins/init_sweetalert';
 import { initMapbox } from "../plugins/init_mapbox";
 import { toggleConfirmation } from "../components/confirmation_toggle";
-import { animatedBar } from "../components/progress_bar"
+import { animatedBar } from "../components/progress_bar";
+import { closeModal } from "../components/close_achivement_modal";
 
 
 
@@ -54,5 +55,6 @@ document.addEventListener('turbolinks:load', () => {
   animatedBar();
   completeMissionAlert();
   impossibleToDeleteAlert();
+  closeModal();
 });
 
