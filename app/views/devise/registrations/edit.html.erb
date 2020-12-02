@@ -23,6 +23,9 @@
                 hint: "nous avons besoin de votre mot de passe actuelle pour valider les changements",
                 required: true,
                 input_html: { autocomplete: "ancien-mot-de-passe" } %>
+    <%= f.input :photo,
+                as: :file,
+                input_html: { class: "input col-12 mb-3" } %>
   </div>
 
   <div class="form-actions">
