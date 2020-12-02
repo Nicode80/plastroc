@@ -1,15 +1,17 @@
 class MissionsController < ApplicationController
 
   def index
-    @missions = policy_scope(Mission)
+    @missions = policy_scope(Mission).ongoing
     @campaigns = current_user.campaigns
+    @questions = current_user.questions.where(seen: false)
+    @achivement = first_achivement?
   end
 
   def show
     @mission = Mission.find(params[:id])
     @package = @mission.package
     @campaign = @package.campaign
-
+    @question = Question.new
     #calcul of done missions
     missions = @campaign.missions
     missions_done = missions.select { |mission| mission.status == "done" }
@@ -41,4 +43,21 @@ class MissionsController < ApplicationController
     end
     authorize @mission
   end
+
+  def update
+    @mission = Mission.find(params[:id])
+    authorize @mission
+    @mission.update(status: 'done', completed_at: DateTime.now)
+    redirect_to missions_path
+  end
+
+  private
+
+  def first_achivement?
+    if current_user.missions != []
+      bolean = current_user.missions.last.recently_done? && current_user.missions.done.count == 1
+    end
+    return bolean
+  end
+
 end

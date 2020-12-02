@@ -22,15 +22,17 @@
 </div>
 <div>
 
-  <div>
-    <%= form_tag campaigns_path, method: :get, class: "filter_search", id: "filter-form" do %>
-      <% Material::CATEGORIES.each do |category| %>
-        <%= check_box_tag "category[#{category}]", category, params[:category]&.include?(category) %>
-        <%= label_tag "category[#{category}]", category %>
-      <% end %>
-      <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
+
+<div class="d-flex justify-content-center">
+  <%= form_tag campaigns_path, method: :get, class: "filter_search", id: "filter-form" do %>
+    <% Material::CATEGORIES.each do |category| %>
+      <%= check_box_tag "category[#{category}]", category, params[:category]&.include?(category) %>
+      <%= label_tag "category[#{category}]", category, style: '', class: "rounded-pill px-2" %>
     <% end %>
-  </div>
+    <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
+
+  <% end %>
+</div>
 
 <!-- , onchange: "this.form.submit(); this.disabled = false;" -->
 
@@ -46,14 +48,14 @@
                            <% if campaign.photo.attached? %>
                               <%= cl_image_tag campaign.photo.key, height: 100, width: 100, crop: :fill %>
                            <% else %>
-                              <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+                              <img style="height: 100px; width: 100px; object-fit: cover" src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
                            <% end %>
                         </div>
-                        <div class="card-content p-3 d-flex flex-column justify-content-between align-items-start">
+                        <div class="card-content-s p-3 d-flex flex-column justify-content-between align-items-start">
                           <div class="m-0 d-flex w-100">
                             <span class="max-w-160 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate"><%= campaign.material.name %></span>
                           </div>
-                          <h6 class="max-w-160 text-truncate"><%= campaign.organisation.name %></h6>
+                          <h6 class="max-w-160 mb-0 text-truncate"><%= campaign.organisation.name %></h6>
                           <small class='mt-1 max-w-160 p-0 text-truncate'><%= campaign.name %></small>
                         </div>
                      </div>
@@ -67,10 +69,10 @@
                            <% if campaign.photo.attached? %>
                               <%= cl_image_tag campaign.photo.key, height: 100, width: 100, crop: :fill %>
                            <% else %>
-                              <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+                              <img style="height: 100px; width: 100px; object-fit: cover" src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
                            <% end %>
                         </div>
-                        <div class="card-content p-3 d-flex flex-column justify-content-between align-items-start">
+                        <div class="card-content-s p-3 d-flex flex-column justify-content-between align-items-start">
                           <div class="m-0 d-flex w-100">
                             <span class="max-w-160 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate"><%= campaign.material.name %></span>
                           </div>

@@ -1,5 +1,5 @@
 <div class="container">
-  <h4><%= link_to missions_path do %>
+  <h4><%= link_to user_path(current_user) do %>
     <i class="fas fa-arrow-left"></i>
   <% end %>
   <div class="card card-m mb-3">
@@ -26,7 +26,7 @@
                     new_campaign_path(id: @organisation.id),
                     class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
       <% end %>
-      <% if policy(@organisation).destroy? %>
+      <% if policy(@organisation).destroy? && @organisation.campaigns.ongoing.empty? %>
         <button data-id="<%= @organisation.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-delete-button">Supprimer</button>
         <%= link_to "",
                     organisation_path(@organisation),
@@ -34,6 +34,8 @@
                     # data: { confirm: "Are you sure?" },
                     class: 'delete-orga hidden',
                     id: "del-org-#{@organisation.id}" %>
+      <% elsif policy(@organisation).destroy? && @organisation.campaigns.ongoing.any? %>
+        <button data-id="<%= @organisation.id %>" class="impossible-to-delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-delete-button">Supprimer</button>
       <% end %>
     </section>
   </div>

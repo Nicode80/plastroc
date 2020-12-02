@@ -8,10 +8,9 @@ class InstructionsController < ApplicationController
   def create
     @instruction = Instruction.new(instruction_params)
     @material = Material.find(params[:material_id])
-    @instruction.media = params[:media]
     @instruction.rich_content = params[:instruction][:rich_content]
     @instruction.material = @material
-    if @instruction.save!
+    if @instruction.save
       redirect_to material_path(@material)
     else
       render :new
@@ -28,7 +27,6 @@ class InstructionsController < ApplicationController
   def update
     @instruction = Instruction.find(params[:id])
     @material = Material.find(@instruction.material_id)
-    @instruction.media = params[:media]
     @instruction.rich_content = params[:instruction][:rich_content]
     @instruction.material = @material
     if @instruction.update(instruction_params)

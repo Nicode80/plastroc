@@ -20,7 +20,7 @@
   </div>
 
 <!-- Main Action -->
-  <div class="d-flex justify-content-between mb-3">
+  <div class="d-flex justify-content-between mb-0">
     <%= link_to 'retour', materials_path, class: "btn btn-secondary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
     <%= link_to '✚ instruction', new_material_instruction_path(@material), class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
   </div>
@@ -28,7 +28,7 @@
   <ul class="list-group mb-3">
     <% @material.instructions.order(:step_order).each do |instruction| %>
       <%= link_to edit_instruction_path(instruction), class: 'text-decoration-none' do %>
-        <div class="d-flex flex-row card card-s">
+        <div class="d-flex flex-row card card-s mb-0 mt-2">
           <% if instruction.media.attached? %>
             <%= cl_image_tag instruction.media.key %>
           <% else %>

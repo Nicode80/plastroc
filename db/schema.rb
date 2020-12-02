@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_01_072323) do
+ActiveRecord::Schema.define(version: 2020_12_01_214857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2020_12_01_072323) do
     t.bigint "package_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "completed_at"
     t.index ["package_id"], name: "index_missions_on_package_id"
     t.index ["user_id"], name: "index_missions_on_user_id"
   end
@@ -126,6 +127,19 @@ ActiveRecord::Schema.define(version: 2020_12_01_072323) do
     t.index ["campaign_id"], name: "index_packages_on_campaign_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "campaign_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "answer"
+    t.boolean "seen"
+    t.index ["campaign_id"], name: "index_questions_on_campaign_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -149,4 +163,6 @@ ActiveRecord::Schema.define(version: 2020_12_01_072323) do
   add_foreign_key "missions", "packages"
   add_foreign_key "missions", "users"
   add_foreign_key "packages", "campaigns"
+  add_foreign_key "questions", "campaigns"
+  add_foreign_key "questions", "users"
 end

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :missions
   has_many :packages, through: :missions
   has_many :organisations
+  has_many :questions
   has_many :campaigns, through: :organisations
 
   validates :first_name, presence: true

@@ -1,42 +1,28 @@
 <div class="container" style="margin-bottom: 75px;">
-  <h3 class="mt-3 mb-3">Organisations</h3>
+  <div class="d-flex align-items-center justify-content-left">
+    <h4 class='mt-3 mr-3'>
+      <%= link_to user_path(current_user) do %>
+        <i class="fas fa-arrow-left"></i>
+      <% end %>
+    </h4>
+    <h4 class="mt-3">Toutes les organisations</h4>
+  </div>
 
-  <% @organisations.each do |org| %>
-    <div class="container">
-      <div class="card card-m mb-3">
-        <% if org.photo.attached? %>
-          <%= cl_image_tag org.photo.key, crop: :fill %>
-        <% else %>
-          <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-        <% end %>
-          <div class="d-flex justify-content-between">
-            <h6><%= org.name %></h6>
-              <% if policy(org).update? %>
-                <%= link_to ' ',
-                            edit_organisation_path(org),
-                            class: 'icon edit ml-3' %>
-              <% end %>
-          </div>
-          <p><%= org.about %></p>
-          <p><span class="icon address"><%= org.address %>, <%= org.city %>, <%= org.postcode %></p></span>
-          <p><i class="icon clock"></i><%= org.opening_hours %></p>
-          <p><i class="icon mail"></i><%= org.contact %></p>
-          <% if policy(Campaign).create? %>
-            <%= link_to '✚ Campagne',
-                        new_organisation_campaign_path(org),
-                        class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
+  <ul class="list-group">
+    <% @organisations.each do |organisation| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <%=  organisation.name  %>
+          <% if organisation.user == current_user %>
+            <i class="fas fa-star"></i>
           <% end %>
-          <% if policy(org).destroy? %>
-            <button data-id="<%= org.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-button">Supprimer</button>
-            <%= link_to "",
-                        organisation_path(org),
-                        method: :delete,
-                        # data: { confirm: "Are you sure?" },
-                        class: 'delete-orga hidden',
-                        id: "del-org-#{org.id}" %>
-          <% end %>
-        </section>
-      </div>
-    </div>
-  <% end %>
+        </div>
+        <div class= "d-flex">
+          <span class="badge badge-primary badge-pill mr-1"><%=  organisation.user.first_name  %></span>
+          <span class="badge badge-secondary badge-pill"><%=  organisation.campaigns.count  %> cpn</span>
+        </div>
+      </li>
+
+    <% end %>
+  </ul>
 </div>

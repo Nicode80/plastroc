@@ -10,7 +10,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                           <% end %>>
   <div class="container">
     <!-- add if statement depending on sorter or recycler -->
-    <h4><%= link_to :back, class: "position-absolute" do %>
+    <h4><%= link_to campaigns_path, class: "position-absolute" do %>
       <i class="fas fa-arrow-left"></i>
       <% end %>
     </h4>
@@ -19,9 +19,9 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <div class="container">
     <div class="d-flex flex-column align-items-center">
       <% if @campaign.organisation.photo.attached? %>
-        <%= cl_image_tag @campaign.organisation.photo.key, class: "avatar-large mb-2 plastroc-light-shadow"%>
+        <%= cl_image_tag @campaign.organisation.photo.key, height: 56, width: 56, crop: :fill, class: "avatar-large mb-2 plastroc-light-shadow"%>
       <% else %>
-        <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+        <img style='height: 56px; width: 56px', class='avatar-large mb-2 plastroc-light-shadow' src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
       <% end %>
       <h5 class="mb-0"><%= @campaign.name %></h5>
       <h6>by <%= @campaign.organisation.name %></h6>
@@ -57,9 +57,37 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       <%= render 'shared/info_content' %>
 
       <% if current_user != @campaign.user %>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-          Poser une question
+        <h5 class="mt-2" id="question_title">Questions</h5>
+        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' data-toggle="modal" data-target="#NewQuestion">
+          Ajouter une question
         </button>
+        <% @campaign.questions.reverse.each do |question|%>
+          <blockquote class="blockquote card mt-3" id="questiontitle-<%= question.id %>">
+             <div class="card-body">
+                <div class="col-11">
+                  <h6 class="mb-0"><%= question.title %></h6>
+                  <p class="mb-0"><%= question.content %></p>
+                  <footer class="blockquote-footer mt-2 mb-0"><%= question.created_at.strftime("le %m/%d/%Y") %><cite title="Source Title"> par <%= question.user.first_name %></cite></footer>
+                </div>
+                <div class="col-12 mt-3">
+                  <% if question.answer.nil? %>
+                    <p class="text-right p-0 m-0">
+                      <a class="btn btn-sm btn-link-secondary rounded-pill" >🤨 Pas encore de réponse</a>
+                    </p>
+                  <% else %>
+                    <p class="text-right p-0 m-0">
+                      <a class="btn btn-sm btn-link-secondary rounded-pill" data-toggle="collapse" href="#question-<%= question.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">📣 Répondu <%= question.updated_at.strftime("le %m/%d/%Y") %> <i class="fas fa-chevron-down"></i></a>
+                    </p>
+                     <div class="collapse" id="question-<%= question.id %>">
+                        <blockquote class="blockquote">
+                           <p class="mb-0 mt-2 text-right"><%= question.answer %></p>
+                           <footer class="blockquote-footer mt-2 mb-0 text-right"><%= question.campaign.organisation.user.first_name %> de <%= question.campaign.organisation.name %></footer>
+                     </div>
+                   <% end %>
+                </div>
+             </div>
+          </blockquote>
+        <% end %>
       <% end %>
 
     </div>
@@ -73,8 +101,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       <%= render 'shared/how_to_content' %>
 
       <% if current_user != @campaign.user %>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-          Poser une question
+        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' data-toggle="modal" data-target="#NewQuestion">
+          Ajouter une question
         </button>
       <% end %>
 
@@ -88,12 +116,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
       <%= render 'shared/contact_content' %>
 
-    <% if current_user != @campaign.user %>
-      <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100'>
-        Poser une question
-      </button>
-    <% end %>
-
+      <% if current_user != @campaign.user %>
+        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' data-toggle="modal" data-target="#NewQuestion">
+          Ajouter une question
+        </button>
+      <% end %>
     </div>
   </div>
 
@@ -112,7 +139,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
       <div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-5">
         <div class='text-center'>
-          <h5>Vous avez déjà une mission en cours pour cette campaigne.</h5>
+          <h5>Vous avez déjà une mission en cours pour cette campagne.</h5>
         </div>
         <%= link_to 'Voir la misson', mission_path(mission), class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button' %>
       </div>
@@ -140,7 +167,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                     <p><strong><%= package.quantity %><%= @campaign.unit %></strong></p>
                   </div>
                   <div>
-                    <i class="fas fa-angle-double-up text-primary mb-1"></i>
+                    <i class="fas fa-angle-double-up text-primary"></i>
                     <p><%= package.xp_reward %>xp</p>
                   </div>
                 </div>
@@ -159,3 +186,34 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   <% end %>
 </div>
+
+<!-- Question Create Modal -->
+<div class="modal fade" id="NewQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une question</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for([@campaign, @question], remote: true) do |f| %>
+          <%= f.input :title,
+                label: false,
+                placeholder: "Titre*",
+                input_html: { class: "col-12 mb-3" }  %>
+          <%= f.input :content,
+                label: false,
+                placeholder: "Contenu*",
+                input_html: { class: "col-12 mb-3" }  %>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary rounded-pill plastroc-outline-button" data-dismiss="modal">Annuler</button>
+            <%= f.submit 'Ajouter', class: "btn btn-primary rounded-pill plastroc-button" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

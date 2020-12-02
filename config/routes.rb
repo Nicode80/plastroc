@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns, only: [ :index, :show, :edit, :update ] do
+    resources :questions, only: [ :create ]
     resources :package, only: :create do
       resources :missions, only: [ :new, :create ]
     end
@@ -22,7 +23,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :questions, only: [ :update, :destroy ] do
+    member do
+      patch :seen
+    end
+  end
+
   resources :instructions, only: [ :edit, :destroy, :update ]
   resources :users, only: [ :index, :show ]
-  resources :missions, only: [ :index, :show ]
+  resources :missions, only: [ :index, :show, :update ]
 end

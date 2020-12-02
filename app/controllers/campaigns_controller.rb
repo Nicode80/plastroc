@@ -22,11 +22,11 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
     @mission = Mission.new
+    @question = Question.new
     @volume_done = done_missions_calcul
     @ratio = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
     @citation = Citation.all.sample
-    @sorter_campaigns = current_user.packages.map { |pack| pack.campaign }
-
+    @sorter_campaigns = current_user.missions.ongoing.map { |mission| mission.package.campaign }
     authorize @campaign
   end
 
@@ -38,6 +38,8 @@ class CampaignsController < ApplicationController
 
   def create
     @campaign = Campaign.new(campaign_params)
+    @campaign.published = true
+    @campaign.status = "ongoing"
     if @campaign.save
       # => Crétation automatique des packages
       create_packages
@@ -108,8 +110,7 @@ class CampaignsController < ApplicationController
 
   def done_missions_calcul
     missions = @campaign.missions
-    missions_done = missions.select { |mission| mission.status == "done" }
-    volumes_done = missions_done.map { |mission_done| mission_done.package.quantity }
+    volumes_done = missions.done.map { |mission| mission.package.quantity }
     return volumes_done.sum
   end
 
