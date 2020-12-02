@@ -59,12 +59,15 @@ const completeMissionAlert = () => {
 };
 
 
-const impossibleToDeleteAlert = initSweetalert('.impossible-to-delete-organisation', {
-  title: "Oooops",
-  text: "Désolé vous ne pouvez pas supprimer une organisation qui a des campagnes en cours.",
-  icon: "warning"
-}, (value) => {
-  nil;
-});
+const impossibleToDeleteAlert = () => {
+  initSweetalert('.impossible-to-delete-organisation', {
+    title: "Oooops",
+    text: "Désolé vous ne pouvez pas supprimer une organisation qui a des campagnes en cours.",
+    icon: "error"
+  }, (value) => {
+    nil;
+  });
+}
+
 
 export { initSweetalert, deleteAlert, completeMissionAlert, impossibleToDeleteAlert };

@@ -142,11 +142,11 @@
 <% if @achivement %>
   <!-- Achivement modal -->
   <div class="achivement-modal d-flex align-items-center">
-    <div class="container">
+    <div class="container" id="modal-container">
       <div class="modal-content">
         <div class="modal-header" style="border: none;">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="close" id="close-modal">
+            <span>x</span>
           </button>
         </div>
         <div class="modal-body text-center">
@@ -155,7 +155,8 @@
           <h5><i class="fas fa-plus"></i> <%= current_user.missions.first.package.xp_reward %> xp</h5>
         <% end %>
         <img class="mb-3" src="assets/trophy.png" alt="Trophy" style="width: 100px; height: 100px;">
-        <h6>Vous venez de remplir votre première mission.</h6>
+        <h6>1ère mission terminée.</h6>
+        <p>Aidez nous nous à recruter plus de trieur en partageant l'application.</p>
         <div class="cannon">
           <div class="cannon__path cannon__path--sm cannon__path--angle-2">
             <div class="cannon__confetti cannon__confetti--flake cannon__confetti--color-3"></div>
@@ -198,7 +199,9 @@
 
         </div>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-primary rounded-pill d-block mt-2 plastroc-button plastroc-light-shadow mb-3">Partager</button>
+          <button type="button" class="btn btn-primary rounded-pill d-block mt-2 plastroc-button plastroc-light-shadow mb-3">
+          <span class="icon share-white">Partager</span>
+        </button>
         </div>
       </div>
     </div>
