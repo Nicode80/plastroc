@@ -2,20 +2,21 @@ class CampaignsController < ApplicationController
 
   def index # for the moment show all campaigns but will need to sort if on organisation view
 
-    # if params[:category] && params[:category].keys.any?
-    if params[:category_filter]&.split(',')&.any?
-      @campaigns = policy_scope(Campaign).where(status: 'ongoing').includes(:material).where(materials: { category: params[:category_filter].split(',') })
+    if params[:category] && params[:category].keys.any?
+    # if params[:category_filter]&.split(',')&.any?  params[:category_filter].split(',')
+      @campaigns = policy_scope(Campaign).where(status: 'ongoing').includes(:material).where(materials: { category: params[:category].keys })
       @organisations = @campaigns.map { |campaign| campaign.organisation }
       @markers = create_markers(@organisations)
+      # redirect_to campaigns_path
     else
       @campaigns = policy_scope(Campaign).where(status: 'ongoing')
       @organisations = organisations_with_active_campaigns
       @markers = create_markers(@organisations)
     end
-    respond_to do |format|
-      format.html
-      format.json { @campaings.to_json }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json { @campaings.to_json }
+    # end
   end
 
   def show
