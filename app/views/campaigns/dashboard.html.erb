@@ -160,7 +160,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 <!-- Edit & stop buttons -->
 
   <% if @campaign.status == "finished" %>
-    <%= link_to "Dupliquer", new_campaign(@campaign.dup), class: "plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3" %>
+    <%= link_to "Dupliquer", duplicate_campaign_path(@campaign), class: "plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3" %>
   <% else %>
     <div class="bottom-nav">
         <div class="d-flex justify-content-around">

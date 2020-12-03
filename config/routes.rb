@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       patch :publish
       patch :pause
       patch :finish
+      get :duplicate
     end
   end
 

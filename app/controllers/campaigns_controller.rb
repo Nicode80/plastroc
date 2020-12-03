@@ -60,6 +60,20 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def duplicate
+    campaign_to_dupilcate = Campaign.find(params[:id])
+    @campaign = campaign_to_dupilcate.dup
+    authorize @campaign
+    if @campaign.save
+      # => Crétation automatique des packages
+      create_packages
+      redirect_to edit_campaign_path(@campaign) #redirect to edit
+    else
+      render :new
+    end
+
+  end
+
   def edit
     @campaign = Campaign.find(params[:id])
     authorize @campaign
@@ -97,6 +111,15 @@ class CampaignsController < ApplicationController
     flash[:notice] = "campagne en pause"
     redirect_to dashboard_campaign_path(@campaign)
   end
+
+  def finish
+    @campaign = Campaign.find(params[:id])
+    authorize @campaign
+    @campaign.update(status: "finished")
+    flash[:notice] = "campagne terminée"
+    redirect_to my_campaigns_campaigns_path
+  end
+
 
   def publish
     @campaign = Campaign.find(params[:id])

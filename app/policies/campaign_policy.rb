@@ -25,6 +25,14 @@ class CampaignPolicy < ApplicationPolicy
     update?
   end
 
+  def finish?
+    update?
+  end
+
+  def duplicate?
+    update?
+  end
+
   def create?
     return true
   end
