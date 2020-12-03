@@ -32,5 +32,9 @@ Rails.application.routes.draw do
 
   resources :instructions, only: [ :edit, :destroy, :update ]
   resources :users, only: [ :index, :show ]
-  resources :missions, only: [ :index, :show, :update ]
+  resources :missions, only: [ :index, :show, :update ] do
+    collection do
+      get :my_missions
+    end
+  end
 end

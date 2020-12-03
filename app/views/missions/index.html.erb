@@ -135,8 +135,8 @@
   <div class='d-flex align-items-center justify-content-between mb-2'>
     <h4 class="mt-3">Mes missions</h4>
     <h6 class='mt-3 mr-2'>
-      <%= link_to campaigns_path, class: 'mt-3 mb-1 mr-1' do %>
-        <i class="fas fa-search"></i>
+      <%= link_to my_missions_missions_path, class: 'mt-3 mb-1 mr-1' do %>
+        <i class="fas fa-arrow-right"></i>
       <% end %>
     </h6>
   </div>
@@ -169,6 +169,14 @@
     <% end %>
   <% end %>
 <% end %>
+<div class="text-center">
+    <%= link_to campaigns_path do %>
+      <h6 class='mt-4 mr-2' style="font-weight: 400;">
+        Chercher une misison <i class="fas fa-search"></i>
+      </h6>
+
+    <% end %>
+</div>
 
 <!-- Si pas d'organisation, possibilité d'en créer une première pour pouvoir créer des campagnes -->
 <% if current_user.organisations.empty? %>

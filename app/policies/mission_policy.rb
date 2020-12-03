@@ -9,12 +9,16 @@ class MissionPolicy < ApplicationPolicy
     true
   end
 
+  def my_missions?
+    true
+  end
+
   def index?
-    return true
+    true
   end
 
   def create?
-    return true
+    true
   end
 
   def update?
