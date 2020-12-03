@@ -380,7 +380,7 @@ puts 'Deleting all Users...'
     @campaignLeWagon.description = "Au FabLab du wagon nous fabriquons nous même notre fil pour imprimante 3D à partir de déchets plastiques. Aidez-nous en nous apportant vos déchets 😇."
     @campaignLeWagon.target = 400
     @campaignLeWagon.unit = "g"
-    @campaignLeWagon.min_package = 20
+    @campaignLeWagon.min_package = 40
     @campaignLeWagon.start_date = Date.today
     @campaignLeWagon.end_date = Date.today + 4.weeks
     @campaignLeWagon.status = 'ongoing'
