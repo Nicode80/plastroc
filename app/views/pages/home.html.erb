@@ -7,7 +7,7 @@
             <div class="row mt-5">
                <div class="col-3"></div>
                <% if current_user.missions.where(status: 'ongoing') == [] %>
-               <%= link_to "Campagnes", campaigns_path, class: 'col-6 btn btn-primary rounded-pill d-block mt-5 plastroc-button plastroc-light-shadow' %>
+               <%= link_to "Accueil", campaigns_path, class: 'col-6 btn btn-primary rounded-pill d-block mt-5 plastroc-button plastroc-light-shadow' %>
                <% else %>
                <%= link_to "Accueil", missions_path, class: 'col-6 btn btn-primary rounded-pill d-block mt-5 plastroc-button plastroc-light-shadow' %>
                <% end %>
