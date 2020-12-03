@@ -159,16 +159,29 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 <!-- Edit & stop buttons -->
 
-  <div class="bottom-nav">
-      <div class="d-flex justify-content-around">
-          <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
-          <% if @campaign.status == "ongoing" %>
-            <p><%= link_to "Stopper", pause_campaign_path(@campaign), method: :patch, style: "color: red", remote: true %></p>
-          <% else %>
-            <p><%= link_to "Reprendre", publish_campaign_path(@campaign), method: :patch, remote: true %></p>
-          <% end %>
-      </div>
-  </div>
+  <% if @campaign.status == "finished" %>
+    <%= link_to "Dupliquer", new_campaign(@campaign.dup), class: "plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3" %>
+  <% else %>
+    <div class="bottom-nav">
+        <div class="d-flex justify-content-around">
+            <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
+            <% if @campaign.status == "ongoing" %>
+              <p><%= link_to "Stopper", pause_campaign_path(@campaign), method: :patch, style: "color: red", remote: true %></p>
+            <% else %>
+              <button data-id="<%= @campaign.id %>" class="finish-campaign">Terminer la campagne</button>
+      <%= link_to "",
+                  finish_campaign_path(@campaign),
+                  method: :patch,
+                  # data: { confirm: "Are you sure?" },
+                  class: 'hidden',
+                  id: "fin-camp-#{@campaign.id}" %>
+              <p><%= link_to "Reprendre", publish_campaign_path(@campaign), method: :patch, remote: true %></p>
+            <% end %>
+        </div>
+    </div>
+
+  <% end %>
+
 
 </div>
 

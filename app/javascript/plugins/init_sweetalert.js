@@ -58,6 +58,29 @@ const completeMissionAlert = () => {
   })
 };
 
+const finishCampaignAlert = () => {
+  const elements = document.querySelectorAll(".finish-campaign");
+  console.log(elements);
+  elements.forEach((swalButton) => {
+    if (swalButton) {
+      swalButton.addEventListener('click', () => {
+        const campaignId = event.target.dataset.id
+
+        swal({
+            title: "Terminer la campagne",
+            text: "Êtes-vous sûr ?",
+            icon: "warning",
+            buttons: ["Oh nooon!", "Ooh ouiii!"],
+        }).then((value) => {
+          if (value) {
+              document.getElementById(`fin-camp-${campaignId}`).click()
+          };
+        });
+      })
+    }
+  })
+};
+
 
 const impossibleToDeleteAlert = () => {
   initSweetalert('.impossible-to-delete-organisation', {
@@ -70,4 +93,4 @@ const impossibleToDeleteAlert = () => {
 }
 
 
-export { initSweetalert, deleteAlert, completeMissionAlert, impossibleToDeleteAlert };
+export { initSweetalert, deleteAlert, completeMissionAlert, impossibleToDeleteAlert, finishCampaignAlert };
