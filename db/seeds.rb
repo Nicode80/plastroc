@@ -385,7 +385,7 @@ puts 'Deleting all Users...'
     @campaignLeWagon.end_date = Date.today + 4.weeks
     @campaignLeWagon.status = 'ongoing'
     @campaignLeWagon.organisation = @organisation
-    @campaignLeWagon.material = @pet
+    @campaignLeWagon.material = @abs
     @campaignLeWagon.published = true
     @campaignLeWagon.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/fil.jpeg')),
