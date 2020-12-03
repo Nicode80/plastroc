@@ -21,6 +21,10 @@ class CampaignPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def pause?
+    update?
+  end
+
   def create?
     return true
   end

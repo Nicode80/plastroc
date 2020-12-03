@@ -52,9 +52,14 @@
     <% @campaigns.each do |campaign| %>
       <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
         <div class="d-flex flex-row card card-s">
-          <% if campaign.questions.where(answer: nil).count > 0 %>
-                  <span style="position: absolute" class="text-light mt-2 ml-2 text-decoration-none badge badge-danger badge-pill mb-2"><%= "#{campaign.questions.where(answer: nil).count}" %> <i class="fas fa-envelope"></i></span>
-                <% end %>
+            <div style="position: absolute" class="d-flex flex-column mt-1 ml-2">
+            <% if campaign.questions.where(answer: nil).count > 0 %>
+              <span class="text-light mb-0 mt-1 text-decoration-none badge badge-danger badge-pill"><%= "#{campaign.questions.where(answer: nil).count}" %> <i class="fas fa-envelope"></i></span>
+            <% end %>
+            <% if campaign.end_date <= Date.today %>
+              <span class="text-light mb-0 mt-1 text-decoration-none badge badge-info badge-pill">Date <i class="fas fa-exclamation-circle"></i></span>
+            <% end %>
+            </div>
           <% if campaign.photo.attached? %>
             <%= cl_image_tag campaign.photo.key, crop: :fill %>
           <% else %>
@@ -135,8 +140,8 @@
   <div class='d-flex align-items-center justify-content-between mb-2'>
     <h4 class="mt-3">Mes missions</h4>
     <h6 class='mt-3 mr-2'>
-      <%= link_to campaigns_path, class: 'mt-3 mb-1 mr-1' do %>
-        <i class="fas fa-search"></i>
+      <%= link_to my_missions_missions_path, class: 'mt-3 mb-1 mr-1' do %>
+        <i class="fas fa-arrow-right"></i>
       <% end %>
     </h6>
   </div>
@@ -169,6 +174,14 @@
     <% end %>
   <% end %>
 <% end %>
+<div class="text-center">
+    <%= link_to campaigns_path do %>
+      <h6 class='mt-4 mr-2' style="font-weight: 400;">
+        Chercher une misison <i class="fas fa-search"></i>
+      </h6>
+
+    <% end %>
+</div>
 
 <!-- Si pas d'organisation, possibilité d'en créer une première pour pouvoir créer des campagnes -->
 <% if current_user.organisations.empty? %>

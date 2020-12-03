@@ -1,11 +1,18 @@
 class MissionsController < ApplicationController
 
   def index
-    @missions = policy_scope(Mission).ongoing
+    @missions = policy_scope(Mission).ongoing.first(3)
     @campaigns = current_user.campaigns
     @first_mission_done = first_mission_done_achivement?
     @questions = current_user.questions.where(seen: false)
     @top_3 = User.order(xp: :desc).first(3)
+  end
+
+  def my_missions
+    @ongoing_missions = current_user.missions.ongoing
+    @done_missions = current_user.missions.done
+    @questions = current_user.questions.where(seen: false)
+    authorize Mission
   end
 
   def show
@@ -39,6 +46,9 @@ class MissionsController < ApplicationController
     @package = Package.find(params[:package_id])
     @mission.package = @package
     if @mission.save!
+      if total_missions_calcul >= @mission.campaign.target
+        @mission.campaign.update(status: "paused", published: false)
+      end
       redirect_to mission_path(@mission)
     else
       redirect_to campaign_path(@package.mission)
@@ -53,6 +63,12 @@ class MissionsController < ApplicationController
   end
 
   private
+
+  def total_missions_calcul
+    missions = @mission.campaign.missions
+    volumes_total = missions.map { |mission| mission.package.quantity }
+    return volumes_total.sum
+  end
 
   def first_mission_subscription_achivement?
     if current_user.missions != []
