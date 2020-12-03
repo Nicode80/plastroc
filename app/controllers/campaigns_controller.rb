@@ -75,6 +75,7 @@ class CampaignsController < ApplicationController
 
   def dashboard
     @campaign = Campaign.find(params[:id])
+    @ongoing_missions = @campaign.missions.ongoing
     @volume_done = done_missions_calcul
     @volume_total = total_missions_calcul
     @ratio_done = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
