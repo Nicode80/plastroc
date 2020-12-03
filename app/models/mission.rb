@@ -1,6 +1,7 @@
 class Mission < ApplicationRecord
   belongs_to :user
   belongs_to :package
+  has_one :campaign, through: :package
 
   scope :ongoing, -> { where(status: 'ongoing') }
   scope :done, -> { where(status: 'done') }

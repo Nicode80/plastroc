@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     member do
       get :dashboard
       patch :publish
+      patch :pause
     end
   end
 
