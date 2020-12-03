@@ -1,0 +1,121 @@
+<div class="home-banner" style="background-image: url(<%= image_path('leaf-illus.png') %>);">
+   <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="circle d-flex justify-content-center align-items-center plastroc-text-shadow">
+        <%= link_to :back, class: 'mt-1' do %>
+          <i class="fas fa-arrow-left"></i>
+        <% end %>
+      </div>
+      <h3 class="text-left py-4">Missions</h3>
+      <div class="circle d-flex justify-content-center align-items-center plastroc-text-shadow">
+        <%= link_to campaigns_path, class: 'mt-1' do %>
+          <h6 class="m-0"><i class="fas fa-map-marker-alt"></i></h6>
+        <% end %>
+      </div>
+    </div>
+   </div>
+</div>
+<div style="margin-bottom: 72px" class='container'>
+
+<!-- My question's answers if any -->
+<% if @questions.count > 0 %>
+<p>
+  <button class="card d-block mt-2 w-100 border border-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <div class="d-flex align-items-center justify-content-center">
+      <h4 class="m-0 pr-3">📣</h4>
+      <p class="mt-3"><strong><%= @questions.count %> réponse(s) à vos questions</strong></p>
+    </div>
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <ul class="list-group">
+      <% @questions.each do |question| %>
+        <%= link_to seen_question_path(question), method: :patch do %>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-decoration-none">
+          <div class="text-truncate col-9 px-1" > <%=  question.title  %> </div>
+          <span class="badge badge-warning badge-pill col-3"><%=  question.updated_at.strftime("%d/%m/%y")  %></span>
+        </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+<!-- Ongoing missions -->
+
+<!-- Tabs -->
+<nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
+  <a class="active" href="#tab-ongoing" data-toggle="tab">En cours</a>
+  <a class="" href="#tab-done" data-toggle="tab">Terminées</a>
+</nav>
+<hr class="mb-3">
+
+<div class="tab-content" style="margin-bottom: 75px;">
+
+  <!-- Tab Ongoing -->
+  <div class="tab-pane active" id="tab-ongoing">
+    <% if current_user.missions.empty? %>
+      <p class='text-center'>🧐 Pas encore de mission en cours...</p>
+    <% else %>
+      <% @ongoing_missions.each do |mission| %>
+        <%= link_to mission_path(mission), class: 'text-decoration-none' do %>
+          <div class="card campaign-card">
+            <div class="card-horizontal">
+              <div class="img-square-wrapper campaign-card-img">
+                <% if mission.package.campaign.photo.attached? %>
+                  <%= cl_image_tag mission.package.campaign.photo.key, height: 100, width: 100, crop: :fill %>
+                <% else %>
+                  <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+                <% end %>
+              </div>
+              <div class="card-content-m p-3 d-flex flex-column justify-content-between align-items-start">
+                <div class="m-0 d-flex w-100">
+                  <span class="mr-1 max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate <%= mission.package.name.downcase %>"><%= mission.package.name %>: <%= mission.package.quantity %><%= mission.package.campaign.unit %></span>
+                  <span class="mr-1 badge badge-info rounded-pill mb-1 d-inline-block text-white"><i class="fas fa-angle-double-up text-white mb-0"></i> <%= mission.package.xp_reward %></span>
+                  <span class="max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate"><%= mission.package.campaign.material.name %></span>
+                </div>
+                <h6 class="mb-0 max-w-220 text-truncate"><%= mission.package.campaign.organisation.name %></h6>
+                <small class='mt-1 max-w-220 p-0 text-truncate'><%= mission.package.campaign.name %></small>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+
+    <!-- Tab Done -->
+  <div class="tab-pane active" id="tab-done">
+    <% if current_user.missions.done.empty? %>
+      <p class='text-center'>🧐 Pas encore de mission terminée...</p>
+    <% else %>
+      <% @done_missions.each do |mission| %>
+        <%= link_to mission_path(mission), class: 'text-decoration-none' do %>
+          <div class="card campaign-card">
+            <div class="card-horizontal">
+              <div class="img-square-wrapper campaign-card-img">
+                <% if mission.package.campaign.photo.attached? %>
+                  <%= cl_image_tag mission.package.campaign.photo.key, height: 100, width: 100, crop: :fill %>
+                <% else %>
+                  <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+                <% end %>
+              </div>
+              <div class="card-content-m p-3 d-flex flex-column justify-content-between align-items-start">
+                <div class="m-0 d-flex w-100">
+                  <span class="mr-1 max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate <%= mission.package.name.downcase %>"><%= mission.package.name %>: <%= mission.package.quantity %><%= mission.package.campaign.unit %></span>
+                  <span class="mr-1 badge badge-info rounded-pill mb-1 d-inline-block text-white"><i class="fas fa-angle-double-up text-white mb-0"></i> <%= mission.package.xp_reward %></span>
+                  <span class="max-w-100 badge badge-primary rounded-pill mb-1 d-inline-block text-truncate"><%= mission.package.campaign.material.name %></span>
+                </div>
+                <h6 class="mb-0 max-w-220 text-truncate"><%= mission.package.campaign.organisation.name %></h6>
+                <small class='mt-1 max-w-220 p-0 text-truncate'><%= mission.package.campaign.name %></small>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
