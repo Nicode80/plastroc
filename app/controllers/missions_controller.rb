@@ -38,6 +38,7 @@ class MissionsController < ApplicationController
     @package = Package.find(params[:package_id])
     @mission.package = @package
     if @mission.save!
+      @mission.campaign.
       redirect_to mission_path(@mission)
     else
       redirect_to campaign_path(@package.mission)
