@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get :dashboard
       patch :publish
       patch :pause
+      patch :finish
     end
   end
 
