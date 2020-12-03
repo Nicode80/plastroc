@@ -82,23 +82,28 @@ class CampaignsController < ApplicationController
     authorize @campaign
   end
 
+  def pause
+    @campaign = Campaign.find(params[:id])
+    authorize @campaign
+    @campaign.published = false
+    @campaign.status = "paused"
+    @campaign.save
+    flash[:notice] = "campagne en pause"
+    redirect_to dashboard_campaign_path(@campaign)
+  end
+
   def publish
     @campaign = Campaign.find(params[:id])
     authorize @campaign
-    if @campaign.published == true
-      @campaign.published = false
-      @campaign.status = "paused"
+    if total_missions_calcul >= @campaign.target
+      flash[:notice] = "Vous ne pouvez pas publier sans changer la quantité total"
     else
       @campaign.published = true
       @campaign.status = "ongoing"
-    end
-    if @campaign.save && @campaign.published == true
       flash[:notice] = "campagne publiée"
-      redirect_to dashboard_campaign_path(@campaign)
-    else
-      flash[:notice] = "campagne en pause"
-      redirect_to dashboard_campaign_path(@campaign)
     end
+    @campaign.save
+    redirect_to dashboard_campaign_path(@campaign)
   end
 
   private
@@ -138,7 +143,6 @@ class CampaignsController < ApplicationController
     missions = @campaign.missions
     volumes_total = missions.map { |mission| mission.package.quantity }
     return volumes_total.sum
-
   end
 
   def create_markers(organisations)
