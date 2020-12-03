@@ -1,10 +1,16 @@
 
 <div class="d-flex flex-column min-vh-100" style="padding-bottom: 60px;">
    <div class="map-container flex-grow-1" style="height: 65vh;">
-      <div id="map" style="width: 100%; height: 100%;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-        <!-- Placer le filtre ici? -->
+      <div id="map" style="width: 100%; height: 100%;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      <div class="map-transition">
+        <%= form_tag campaigns_path, method: :get, class: "filter_search", id: "filter-form" do %>
+          <% Material::CATEGORIES.each do |category| %>
+            <%= check_box_tag "category[#{category}]", category, params[:category]&.include?(category) %>
+            <%= label_tag "category[#{category}]", category, style: '', class: "rounded-pill px-2" %>
+          <% end %>
+          <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
+        <% end %>
       </div>
-      <div class="map-transition"></div>
    </div>
 <!-- nav bar -->
 <div class="bottom-nav">
@@ -23,15 +29,8 @@
 <div>
 
 
-<div class="d-flex justify-content-center">
-  <%= form_tag campaigns_path, method: :get, class: "filter_search", id: "filter-form" do %>
-    <% Material::CATEGORIES.each do |category| %>
-      <%= check_box_tag "category[#{category}]", category, params[:category]&.include?(category) %>
-      <%= label_tag "category[#{category}]", category, style: '', class: "rounded-pill px-2" %>
-    <% end %>
-    <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
-  <% end %>
-</div>
+
+
 
 <!-- , onchange: "this.form.submit(); this.disabled = false;" -->
 
