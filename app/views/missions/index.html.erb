@@ -52,9 +52,14 @@
     <% @campaigns.each do |campaign| %>
       <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
         <div class="d-flex flex-row card card-s">
-          <% if campaign.questions.where(answer: nil).count > 0 %>
-                  <span style="position: absolute" class="text-light mt-2 ml-2 text-decoration-none badge badge-danger badge-pill mb-2"><%= "#{campaign.questions.where(answer: nil).count}" %> <i class="fas fa-envelope"></i></span>
-                <% end %>
+            <div style="position: absolute" class="d-flex flex-column mt-1 ml-2">
+            <% if campaign.questions.where(answer: nil).count > 0 %>
+              <span class="text-light mb-0 mt-1 text-decoration-none badge badge-danger badge-pill"><%= "#{campaign.questions.where(answer: nil).count}" %> <i class="fas fa-envelope"></i></span>
+            <% end %>
+            <% if campaign.end_date <= Date.today %>
+              <span class="text-light mb-0 mt-1 text-decoration-none badge badge-info badge-pill">Date <i class="fas fa-exclamation-circle"></i></span>
+            <% end %>
+            </div>
           <% if campaign.photo.attached? %>
             <%= cl_image_tag campaign.photo.key, crop: :fill %>
           <% else %>
