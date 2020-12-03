@@ -5,6 +5,7 @@ class MissionsController < ApplicationController
     @campaigns = current_user.campaigns
     @first_mission_done = first_mission_done_achivement?
     @questions = current_user.questions.where(seen: false)
+    @top_3 = User.order(xp: :desc).first(3)
   end
 
   def show
@@ -13,7 +14,7 @@ class MissionsController < ApplicationController
     @campaign = @package.campaign
     @first_mission_subscription = first_mission_subscription_achivement?
     @question = Question.new
-    #calcul of done missions
+    # calcul of done missions
     missions = @campaign.missions
     missions_done = missions.select { |mission| mission.status == "done" }
     volumes_done = []
@@ -21,7 +22,6 @@ class MissionsController < ApplicationController
       volumes_done << mission_done.package.quantity
     end
     @volume_done = volumes_done.sum
-
     authorize @mission
   end
 
@@ -34,6 +34,7 @@ class MissionsController < ApplicationController
 
   def create
     @mission = Mission.new
+    authorize @mission
     @mission.user = current_user
     @package = Package.find(params[:package_id])
     @mission.package = @package
@@ -43,7 +44,6 @@ class MissionsController < ApplicationController
     else
       redirect_to campaign_path(@package.mission)
     end
-    authorize @mission
   end
 
   def update
@@ -68,5 +68,4 @@ class MissionsController < ApplicationController
     end
     return bolean
   end
-
 end

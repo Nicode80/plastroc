@@ -39,6 +39,7 @@ class CampaignsController < ApplicationController
 
   def create
     @campaign = Campaign.new(campaign_params)
+    authorize @campaign
     @campaign.published = true
     @campaign.status = "ongoing"
     if @campaign.save
@@ -49,8 +50,6 @@ class CampaignsController < ApplicationController
     else
       render :new
     end
-
-    authorize @campaign
   end
 
   def edit
@@ -61,29 +60,31 @@ class CampaignsController < ApplicationController
   def update
     @campaign = Campaign.find(params[:id])
     @campaign.update(campaign_params)
+    authorize @campaign
     if @campaign.save
       flash[:notice] = "campagne mise à jour"
       redirect_to dashboard_campaign_path(@campaign)
     else
       render :edit
     end
-    authorize @campaign
   end
 
   def my_campaigns
     @campaigns = current_user_campaigns
-    authorize Campaign
   end
 
   def dashboard
     @campaign = Campaign.find(params[:id])
     @volume_done = done_missions_calcul
     @volume_total = total_missions_calcul
+    @ratio_done = @volume_done.fdiv(@campaign.target) * 100 # used in dataset for animated bar
+    @ratio_engaged = @volume_total.fdiv(@campaign.target) * 100 # used in dataset for animated bar
     authorize @campaign
   end
 
   def publish
     @campaign = Campaign.find(params[:id])
+    authorize @campaign
     if @campaign.published == true
       @campaign.published = false
       @campaign.status = "paused"
@@ -98,7 +99,6 @@ class CampaignsController < ApplicationController
       flash[:notice] = "campagne en pause"
       redirect_to dashboard_campaign_path(@campaign)
     end
-    authorize @campaign
   end
 
   private

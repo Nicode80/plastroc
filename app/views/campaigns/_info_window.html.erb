@@ -2,11 +2,20 @@
 <p><%= organisation.address %></p>
   <ul class="list-group">
   <% @organistion_active_campaigns.each do |campaign| %>
-    <%= link_to campaign_path(campaign), class: 'text-decoration-none', style: 'outline: none' do %>
-      <li style="outline: none" class="pt-1 pb-1 pl-2 pr-2 list-group-item d-flex justify-content-between align-items-center rounded-pill mb-1">
-        <p class="p-0 mb-0 text-left col-9 text-truncate"><%= campaign.name %></p>
-        <span class="col-3 badge badge-primary badge-pill text-truncate"><%= campaign.material.name %></span>
-      </li>
+    <% if campaign.user == current_user %>
+      <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none', style: 'outline: none' do %>
+        <li style="outline: none" class="pt-1 pb-1 pl-2 pr-2 list-group-item d-flex justify-content-between align-items-center rounded-pill mb-1">
+          <p class="p-0 mb-0 text-left col-9 text-truncate"><%= campaign.name %></p>
+          <span class="col-3 badge badge-primary badge-pill text-truncate"><%= campaign.material.name %></span>
+        </li>
+      <% end %>
+    <% else %>
+      <%= link_to campaign_path(campaign), class: 'text-decoration-none', style: 'outline: none' do %>
+        <li style="outline: none" class="pt-1 pb-1 pl-2 pr-2 list-group-item d-flex justify-content-between align-items-center rounded-pill mb-1">
+          <p class="p-0 mb-0 text-left col-9 text-truncate"><%= campaign.name %></p>
+          <span class="col-3 badge badge-primary badge-pill text-truncate"><%= campaign.material.name %></span>
+        </li>
+      <% end %>
     <% end %>
   <% end %>
 </ul>

@@ -17,13 +17,13 @@ class OrganisationsController < ApplicationController
 
   def create
     @organisation = current_user.organisations.new(organisation_params)
+    authorize @organisation
     if @organisation.save
       flash[:notice] = "Organisation ajoutée"
       redirect_to new_campaign_path(id: @organisation.id)
     else
       render :new
     end
-    authorize @organisation
   end
 
   def edit
@@ -33,6 +33,7 @@ class OrganisationsController < ApplicationController
 
   def update
     @organisation = Organisation.find(params[:id])
+    authorize @organisation
     @organisation.update(organisation_params)
     if @organisation.save
       flash[:notice] = "Organisation mise à jour"
@@ -40,15 +41,14 @@ class OrganisationsController < ApplicationController
     else
       render :edit
     end
-    authorize @organisation
   end
 
   def destroy
     @organisation = Organisation.find(params[:id])
+    authorize @organisation
     @organisation.destroy
     flash[:notice] = "Organisation supprimée"
     redirect_to missions_path
-    authorize @organisation
   end
 
   private

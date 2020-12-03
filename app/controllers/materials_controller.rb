@@ -16,12 +16,12 @@ class MaterialsController < ApplicationController
 
   def create
     @material = Material.new(material_params)
+    authorize @material
     if @material.save
       redirect_to materials_path
     else
       render :new
     end
-    authorize @material
   end
 
   def edit
@@ -31,13 +31,14 @@ class MaterialsController < ApplicationController
 
   def update
     @material = Material.find(params[:id])
-    @material.update(material_params)
     authorize @material
+    @material.update(material_params)
     redirect_to material_path(@material)
   end
 
   def destroy
     @material = Material.find(params[:id])
+    authorize @material
     if @material.instructions == []
       @material.photo.purge
       @material.destroy
@@ -46,7 +47,6 @@ class MaterialsController < ApplicationController
       redirect_to edit_material_path(@material)
       flash[:notice] = "Vous ne pouvez pas supprimer un matériaux qui a des instructions"
     end
-    authorize @material
   end
 
   private

@@ -18,8 +18,13 @@
     <%= f.input :name, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Name" %>
     <%= f.input :description, label: false, input_html: { class: "col-12 mb-3" }, placeholder: "Description" %>
     <br>
-    <p>Changer la photo si besoin</p>
-    <%= f.input :photo, as: :file, label: false, input_html: { class: "input col-12 mb-3" } %>
+    <%= f.input :photo,
+                as: :file,
+                input_html: { class: "d-none", id: 'photo-input' },
+                label_html: { class: 'upload-photo col-12 text-center'},
+                label: '📷 Changez la photo si besoin' %>
+    <%= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
+
     <div class='d-flex justify-content-end mb-3'>
       <%= link_to 'Cancel', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3 mb-3" %>
       <%= link_to 'Delete', material_path(@material), method: :delete, class: "btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button mr-3 mb-3" %>
