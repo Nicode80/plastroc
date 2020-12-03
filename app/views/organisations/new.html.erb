@@ -1,37 +1,44 @@
-<div class="container">
-  <h4 class="mt-3">Nouvelle Organisation</h4>
-  <% if current_user.organisations == [] %>
-    <p>♻️ Créez votre <strong>première organiastion</strong></p>
-  <% else %>
-    <p>♻️ Créez une nouvelle organiastion</p>
-  <% end %>
-  <%= simple_form_for @organisation do |f| %>
-    <%= f.input :name,
-                label: false,
-                placeholder: "Nom*",
-                input_html: { class: "col-12 mb-3" } %>
-    <%= f.input :address,
-                label: false,
-                placeholder: "Addresse*",
-                input_html: { class: "input col-12 mb-3",
-                id: "address-for-autocomplete" } %>
-    <%= f.input :opening_hours,
-                label: false,
-                placeholder: "Horaires d'ouvertures: 8h à 18h",
-                input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :contact,
-                label: false, placeholder: "contact*",
-                input_html: { class: "input col-12 mb-3" } %>
-    <%= f.input :about,
-                label: false,
-                placeholder: "Présentez vous aux trieur qui effectueront vos missions...",
-                input_html: { class: "col-12 mb-3" } %>
-    <%= f.input :photo,
-                label: "Logo",
-                as: :file,
-                input_html: { class: "col-12 mb-3" } %>
-    <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
-<% end %>
+<div class="home-banner mb-4" style="background-image: url(<%= image_path('leaf-illus.png') %>);">
+  <div class="container">
+    <h3 class="text-center py-4">Nouvelle Organisation</h3>
+  </div>
+</div>
 
-  <%= link_to 'Annuler', missions_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+<div class="container">
+  <div class="col-12 col-md-6 offset-md-3">
+    <% if current_user.organisations == [] %>
+      <p class="text-center mb-4">♻️ Créez votre <strong>première organiastion</strong></p>
+    <% else %>
+      <p class="text-center mb-4">♻️ Créez une nouvelle organisation</p>
+    <% end %>
+    <%= simple_form_for @organisation do |f| %>
+      <%= f.input :name,
+                  label: false,
+                  placeholder: "Nom*",
+                  input_html: { class: "col-12 mb-3" } %>
+      <%= f.input :address,
+                  label: false,
+                  placeholder: "Addresse*",
+                  input_html: { class: "input col-12 mb-3",
+                  id: "address-for-autocomplete" } %>
+      <%= f.input :opening_hours,
+                  label: false,
+                  placeholder: "Horaires d'ouvertures: 8h à 18h",
+                  input_html: { class: "input col-12 mb-3" } %>
+      <%= f.input :contact,
+                  label: false, placeholder: "Contact*",
+                  input_html: { class: "input col-12 mb-3" } %>
+      <%= f.input :about,
+                  label: false,
+                  placeholder: "Présentez vous aux trieur qui effectueront vos missions...",
+                  input_html: { class: "col-12 mb-3" } %>
+      <%= f.input :photo,
+                  label: "Logo",
+                  as: :file,
+                  input_html: { class: "col-12 mb-3" } %>
+      <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
+  <% end %>
+
+    <%= link_to 'Annuler', missions_path, class: "btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button" %>
+  </div>
 </div>

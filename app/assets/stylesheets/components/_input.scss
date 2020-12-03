@@ -34,3 +34,9 @@ textarea {
     box-shadow: $plastroc-shadow;
     padding: 8px 16px;
 }
+.form-control {
+  border-radius: 20px;
+  background: $plastroc-card-background;
+  box-shadow: $plastroc-shadow;
+  border: none;
+}

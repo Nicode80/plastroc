@@ -1,40 +1,43 @@
-<div class="container">
-  <div class="d-flex align-items-center justify-content-between">
-    <h3>Nouveau Matériau</h3>
+<div class="home-banner mb-4" style="background-image: url(<%= image_path('leaf-illus.png') %>);">
+  <div class="container">
+    <h3 class="text-center py-4">Nouveau Matériau</h3>
   </div>
-  <%= simple_form_for(@material) do |f| %>
-  <p>Selectionner une catégorie</p>
-    <%= f.input :category,
-            label: false,
-            as: :radio_buttons,
-            collection_wrapper_tag: 'div',
-            collection_wrapper_class: 'category-wrapper',
-            item_wrapper_class: 'category-item',
-            input_html: {class: 'category-selector'},
-            boolean_style: :inline,
-            collection: Material::CATEGORIES %>
-    <br>
-    <p>Donner un nom et une description</p>
-    <%= f.input :name,
-                label: false,
-                input_html: { class: "col-12 mb-3" },
-                placeholder: "Nom" %>
+</div>
 
-    <%= f.input :description,
-                label:
-                false,
-                input_html: { class: "col-12 mb-3" },
-                placeholder: "Description" %>
-    <br>
-    <p>Select a picture</p>
-    <%= f.input :photo,
-                as: :file,
-                label: false,
-                input_html: { class: "input col-12 mb-3" } %>
+<div class="container">
+  <div class="col-12 col-md-6 offset-md-3">
+    <%= simple_form_for(@material) do |f| %>
+    <p>Selectionner une catégorie</p>
+      <%= f.input :category,
+              label: false,
+              as: :radio_buttons,
+              collection_wrapper_tag: 'div',
+              collection_wrapper_class: 'category-wrapper',
+              item_wrapper_class: 'category-item',
+              input_html: {class: 'category-selector'},
+              boolean_style: :inline,
+              collection: Material::CATEGORIES %>
+      <br>
+      <p>Donner un nom et une description</p>
+      <%= f.input :name,
+                  label: false,
+                  input_html: { class: "col-12 mb-3" },
+                  placeholder: "Nom" %>
 
-    <div class='d-flex justify-content-end'>
-      <%= link_to 'Annuler', materials_path, class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
-      <%= f.submit "Valider", class: "btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
-    </div>
-  <% end %>
+      <%= f.input :description,
+                  label:
+                  false,
+                  input_html: { class: "col-12 mb-3" },
+                  placeholder: "Description" %>
+      <br>
+      <p>Choissisez une image</p>
+      <%= f.input :photo,
+                  as: :file,
+                  label: false,
+                  input_html: { class: "input col-12 mb-3" } %>
+
+        <%= f.submit "Valider", class: "col-12 btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+        <%= link_to 'Annuler', materials_path, class: "col-12 btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
+    <% end %>
+  </div>
 </div>
