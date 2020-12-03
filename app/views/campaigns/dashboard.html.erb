@@ -53,22 +53,32 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <span class="text-decoration-none badge badge-dark badge-pill mb-0"><%= "#{@campaign.status}" %></span>
         <% end %>
       </div>
+      <!-- Engagement des membres -->
       <div class="d-flex justify-content-between align-items-center">
-          <p class="mb-0"><strong>Complété</strong></p>
-          <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
+          <p class="mb-0"><strong>Engagé</strong></p>
+          <p class="mb-0" id="volume_engaged" data-total='<%= @ratio_engaged %>'><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit == "unité" ? "unités" : @campaign.unit %></p>
       </div>
        <div class="plastroc-progress-bar mt-2 mb-4">
-          <div class="rounded-pill plastroc-bg-primary-gradient" id="myBar">0%</div>
+        <% if @volume_total == 0 %>
+          <p class='m-2'>🤔 Pas encore de mission commencée</p>
+        <% else %>
+          <div class="rounded-pill plastroc-bg-primary-gradient" id="myEngagedBar">...</div>
+        <% end %>
        </div>
 
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center">
-            <p class="mb-0"><strong>Engagé</strong></p>
-            <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
-          </div>
-        </div>
+       <!-- Completion par les membres -->
+       <div class="d-flex justify-content-between align-items-center">
+          <p class="mb-0"><strong>Complété</strong></p>
+          <p class="mb-0" id="volume_done" data-total='<%= @ratio_done %>'><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit == "unité" ? "unités" : @campaign.unit %></p>
       </div>
+       <div class="plastroc-progress-bar mt-2 mb-4">
+        <% if @volume_done == 0 %>
+          <p class='m-2'>☺️ Pas encore de mission terminée</p>
+        <% else %>
+          <div class="rounded-pill plastroc-bg-primary-gradient" id="myDoneBar"></div>
+        <% end %>
+       </div>
+
       <!-- cf new show for dynamic progress bar -->
       <div class="plastroc-progress-bar mt-2 mb-4">
         <div class="rounded-pill plastroc-bg-primary-gradient"></div>
