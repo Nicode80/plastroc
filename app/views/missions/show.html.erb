@@ -62,39 +62,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <div class="container">
       <%= render 'shared/info_content' %>
 
-      <% if current_user != @campaign.user %>
-        <h5 class="mt-2" id="question_title">Questions</h5>
-        <button href="#" class='btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' data-toggle="modal" data-target="#NewQuestion">
-          Ajouter une question
-        </button>
-        <% @campaign.questions.reverse.each do |question|%>
-          <blockquote class="blockquote card mt-3" id="questiontitle-<%= question.id %>">
-             <div class="card-body">
-                <div class="col-11">
-                  <h6 class="mb-0"><%= question.title %></h6>
-                  <p class="mb-0"><%= question.content %></p>
-                  <footer class="blockquote-footer mt-2 mb-0"><%= question.created_at.strftime("le %m/%d/%Y") %><cite title="Source Title"> par <%= question.user.first_name %></cite></footer>
-                </div>
-                <div class="col-12 mt-3">
-                  <% if question.answer.nil? %>
-                    <p class="text-right p-0 m-0">
-                      <a class="btn btn-sm btn-link-secondary rounded-pill " >🤨 Pas encore de réponse</a>
-                    </p>
-                  <% else %>
-                    <p class="text-right p-0 m-0">
-                      <a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#question-<%= question.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">📣 Répondu <%= question.updated_at.strftime("le %m/%d/%Y") %> <i class="fas fa-chevron-down"></i></a>
-                    </p>
-                     <div class="collapse" id="question-<%= question.id %>">
-                        <blockquote class="blockquote">
-                           <p class="mb-0 mt-2 text-right"><%= question.answer %></p>
-                           <footer class="blockquote-footer mt-2 mb-0 text-right"><%= question.campaign.organisation.user.first_name %> de <%= question.campaign.organisation.name %></footer>
-                     </div>
-                   <% end %>
-                </div>
-             </div>
-          </blockquote>
-        <% end %>
-      <% end %>
+      <%= render 'shared/questions_display' %>
 
     </div>
   </div>
@@ -202,7 +170,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
            <h5><i class="fas fa-plus"></i> <%= current_user.missions.first.package.xp_reward %> xp</h5>
          <% end %>
          <%= image_tag("star.png", width: 100, height: 100, class: 'mb-3') %>
-         <h6>Vous avez souscri à votre première mission</h6>
+         <h6>Vous avez souscrit à votre première mission</h6>
          </div>
          <div class="d-flex justify-content-center">
            <button type="button" class="btn btn-primary rounded-pill d-block mt-2 plastroc-button plastroc-light-shadow mb-3 close-modal">

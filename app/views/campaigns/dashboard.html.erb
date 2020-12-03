@@ -53,99 +53,39 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <span class="text-decoration-none badge badge-dark badge-pill mb-0"><%= "#{@campaign.status}" %></span>
         <% end %>
       </div>
-        <div class="d-flex justify-content-between align-items-center">
-            <p class="mb-0"><strong>Complété</strong></p>
-            <p class="mb-0"><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit %></p>
-        </div>
-         <div class="plastroc-progress-bar mt-2 mb-4">
-            <div class="rounded-pill plastroc-bg-primary-gradient" id="myBar">0%</div>
-         </div>
-
-        <div class="card">
-           <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
-                  <p class="mb-0"><strong>Engagé</strong></p>
-                  <p class="mb-0"><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit %></p>
-              </div>
-           </div>
-        </div>
-        <!-- cf new show for dynamic progress bar -->
-        <div class="plastroc-progress-bar mt-2 mb-4">
-          <div class="rounded-pill plastroc-bg-primary-gradient"></div>
-        </div>
-
-
-      <h5 id="question_title">Questions</h5>
-      <% if @campaign.questions.empty? %>
-      <p>Pas encore de questions 😅</p>
-      <% else %>
-      <% @campaign.questions.reverse.each do |question|%>
-          <blockquote class="blockquote card mt-3">
-             <div class="card-body">
-                <div class="col-11">
-                  <h6 class="mb-0"><%= question.title %></h6>
-                  <p class="mb-0"><%= question.content %></p>
-                  <footer class="blockquote-footer mt-2 mb-0"><%= question.created_at.strftime("le %m/%d/%Y") %><cite title="Source Title"> par <%= question.user.first_name %></cite></footer>
-                </div>
-                <div class="col-12 mt-3">
-                  <% if question.answer %>
-                    <p class="text-right p-0 m-0">
-                      <a class="btn btn-sm btn-link-secondary rounded-pill " data-toggle="collapse" href="#question-<%= question.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">📣 Répondu <%= question.updated_at.strftime("le %m/%d/%Y") %> <i class="fas fa-chevron-down"></i></a>
-                    </p>
-                     <div class="collapse" id="question-<%= question.id %>">
-                        <blockquote class="blockquote">
-                          <p class="mb-0 mt-2 text-right"><%= question.answer %></p>
-                          <footer class="blockquote-footer mt-2 mb-0 text-right"><%= question.campaign.organisation.user.first_name %> de <%= question.campaign.organisation.name %></footer>
-                          <div class='d-flex justify-content-end mt-1'>
-                            <button href="#" class='mr-2 btn btn-outline-primary rounded-pill d-block plastroc-outline-button' data-toggle="modal" data-target="#answer-<%= question.id %>">
-                              modifier
-                            </button>
-                            <%= link_to 'supprimer', question_path(question), method: :delete, class: 'btn btn-outline-danger rounded-pill d-block plastroc-outline-button'  %>
-                          </div>
-                     </div>
-                  <% else %>
-                    <div class='d-flex justify-content-end'>
-                      <%= link_to question_path(question), method: :delete, class: 'btn btn-outline-danger rounded-pill d-block plastroc-outline-button mr-3' do %>
-                        <i class="fas fa-trash-alt"></i>
-                      <% end %>
-                      <button href="#" class='btn btn-primary flex-grow-1 rounded-pill plastroc-button' data-toggle="modal" data-target="#answer-<%= question.id %>">
-                        Répondre <i class="pl-2 fas fa-reply"></i>
-                      </button>
-                    </div>
-                   <% end %>
-                </div>
-             </div>
-          </blockquote>
-          <!-- Question Edit Modal to give answer-->
-          <div class="modal fade" id="answer-<%= question.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Répondre à la question</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <%= simple_form_for(question, remote: true) do |f| %>
-                    <%= f.input :answer,
-                            label: false,
-                            placeholder: "Réponse*",
-                            input_html: { class: "col-12 mb-3 h100" } %>
-                        <%#= f.submit 'envoyer', class: "btn btn-primary rounded-pill plastroc-button" do %>
-                          <!-- <i class="fas fa-paper-plane"></i> -->
-                        <%# end %>
-                        <%= button_tag type: 'submit', class: "btn col-12 btn-primary rounded-pill plastroc-button" do %>
-                          <i class="fas fa-paper-plane"></i>
-                        <% end %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End of Question Edit Modal to give answer-->
+      <!-- Engagement des membres -->
+      <div class="d-flex justify-content-between align-items-center">
+          <p class="mb-0"><strong>Engagé</strong></p>
+          <p class="mb-0" id="volume_engaged" data-total='<%= @ratio_engaged %>'><%= @volume_total %>/<%= @campaign.target %><%= @campaign.unit == "unité" ? "unités" : @campaign.unit %></p>
+      </div>
+       <div class="plastroc-progress-bar mt-2 mb-4">
+        <% if @volume_total == 0 %>
+          <p class='m-2'>🤔 Pas encore de mission commencée</p>
+        <% else %>
+          <div class="rounded-pill plastroc-bg-primary-gradient" id="myEngagedBar">...</div>
         <% end %>
-      <% end %>
+       </div>
+
+       <!-- Completion par les membres -->
+       <div class="d-flex justify-content-between align-items-center">
+          <p class="mb-0"><strong>Complété</strong></p>
+          <p class="mb-0" id="volume_done" data-total='<%= @ratio_done %>'><%= @volume_done %>/<%= @campaign.target %><%= @campaign.unit == "unité" ? "unités" : @campaign.unit %></p>
+      </div>
+       <div class="plastroc-progress-bar mt-2 mb-4">
+        <% if @volume_done == 0 %>
+          <p class='m-2'>☺️ Pas encore de mission terminée</p>
+        <% else %>
+          <div class="rounded-pill plastroc-bg-primary-gradient" id="myDoneBar"></div>
+        <% end %>
+       </div>
+
+      <!-- cf new show for dynamic progress bar -->
+      <div class="plastroc-progress-bar mt-2 mb-4">
+        <div class="rounded-pill plastroc-bg-primary-gradient"></div>
+      </div>
+
+      <%= render 'shared/questions_display' %>
+
     </div>
   </div>
 
@@ -250,12 +190,15 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         input_html: { class: "col-12 mb-3" } %>
 
             <%= f.input :photo,
-                        as: :file,
-                        input_html: { class: "input col-12 mb-3" } %>
+                    as: :file,
+                    input_html: { class: "d-none", id: 'photo-input' },
+                    label_html: { class: 'upload-photo col-12 text-center'},
+                    label: '📷 Choisissez une photo' %>
+            <%= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
 
-            <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
+            <%= f.submit 'Valider', class: "mt-2 btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
           <% end %>
-          <%= link_to 'Annuler', dashboard_campaign_path(@campaign), class: "btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button" %>
+          <%= link_to 'Annuler', dashboard_campaign_path(@campaign), class: "btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button" %>
         </div>
       </div>
     </div>

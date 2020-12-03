@@ -356,26 +356,42 @@ puts 'Deleting all Users...'
     @nico.admin = true
     file = URI.open('https://i.pravatar.cc/200')
     @nico.photo.attach(
-      io: file,
-      filename: "nico.jpg",
+      io: File.open(Rails.root.join('db/fixtures/goodplanet.png')),
+      filename: 'goodplanet1.jpeg',
       )
     @nico.save!
 
     @organisation = Organisation.new
     @organisation.user = @nico
-    @organisation.name = "NicoTri"
-    @organisation.about = "Lorem ipsum dolor sit amet,
-      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    @organisation.name = "FabLab du Wagon"
+    @organisation.about = "FabLab situé dans l’école de code Le Wagon à Paris où les makers côtoient les web developers."
     @organisation.address = "Paris 750#{rand(10..20)}"
     @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
     @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
-    file = URI.open("https://fakeimg.pl/200x200/?text=#{@organisation.name}")
     @organisation.photo.attach(
-      io: file,
-      filename: "#{@organisation.name.downcase.gsub(/\s+/, "")}.jpg",
+      io: File.open(Rails.root.join('db/fixtures/lewagon.png')),
+      filename: 'lewagon.png',
       )
     @organisation.save!
+
+    # campaignNico
+    @campaignLeWagon = Campaign.new
+    @campaignLeWagon.name = "Fil imprimante 3D"
+    @campaignLeWagon.description = "Au FabLab du wagon nous fabriquons nous même notre fil pour imprimante 3D à partir de déchets plastiques. Aidez-nous en nous apportant vos déchets 😇."
+    @campaignLeWagon.target = 400
+    @campaignLeWagon.unit = "g"
+    @campaignLeWagon.min_package = 40
+    @campaignLeWagon.start_date = Date.today
+    @campaignLeWagon.end_date = Date.today + 4.weeks
+    @campaignLeWagon.status = 'ongoing'
+    @campaignLeWagon.organisation = @organisation
+    @campaignLeWagon.material = @abs
+    @campaignLeWagon.published = true
+    @campaignLeWagon.photo.attach(
+      io: File.open(Rails.root.join('db/fixtures/fil.jpeg')),
+      filename: 'fil.jpeg',
+      )
+    @campaignLeWagon.save!
   #end
 
   #if Rails.env.development?
@@ -685,8 +701,8 @@ puts "Creating 3 fake user accounts with 2 organisations each..."
     @organisation5.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
     @organisation5.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation5.photo.attach(
-      io: File.open(Rails.root.join('db/fixtures/oucompost.jpg')),
-      filename: 'oucompost1.jpg',
+      io: File.open(Rails.root.join('db/fixtures/oucompost.png')),
+      filename: 'oucompost1.png',
       )
     @organisation5.save!
 
@@ -730,8 +746,8 @@ puts "Creating 3 fake user accounts with 2 organisations each..."
     @organisation6.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
     @organisation6.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation6.photo.attach(
-      io: File.open(Rails.root.join('db/fixtures/oucompost.jpg')),
-      filename: 'oucompost2.jpg',
+      io: File.open(Rails.root.join('db/fixtures/oucompost.png')),
+      filename: 'oucompost2.png',
       )
     @organisation6.save!
 
@@ -869,6 +885,12 @@ puts "Creating 1 mission and question per user..."
     @campaign = Campaign.all[rand(0..10)]
     @mission = Mission.new
     @mission.user = user
+    if w.odd?
+      @mission.status = "done"
+      @mission.completed_at = DateTime.now
+    else
+      @mission.status = "ongoing"
+    end
     @mission.package = @campaign.packages.sample
     @mission.save
 

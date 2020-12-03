@@ -26,17 +26,6 @@
                     new_campaign_path(id: @organisation.id),
                     class: 'btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow' %>
       <% end %>
-      <% if policy(@organisation).destroy? && @organisation.campaigns.ongoing.empty? %>
-        <button data-id="<%= @organisation.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-delete-button">Supprimer</button>
-        <%= link_to "",
-                    organisation_path(@organisation),
-                    method: :delete,
-                    # data: { confirm: "Are you sure?" },
-                    class: 'delete-orga hidden',
-                    id: "del-org-#{@organisation.id}" %>
-      <% elsif policy(@organisation).destroy? && @organisation.campaigns.ongoing.any? %>
-        <button data-id="<%= @organisation.id %>" class="impossible-to-delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-delete-button">Supprimer</button>
-      <% end %>
     </section>
   </div>
   <% if !current_user.campaigns.empty? %>
@@ -58,5 +47,16 @@
         </div>
       <% end %>
     <% end %>
+  <% end %>
+  <% if policy(@organisation).destroy? && @organisation.campaigns.ongoing.empty? %>
+    <button data-id="<%= @organisation.id %>" class="delete-organisation btn btn-outline-danger btn-block rounded-pill mt-2 plastroc-delete-button">Supprimer</button>
+    <%= link_to "",
+                organisation_path(@organisation),
+                method: :delete,
+                # data: { confirm: "Are you sure?" },
+                class: 'delete-orga hidden',
+                id: "del-org-#{@organisation.id}" %>
+  <% elsif policy(@organisation).destroy? && @organisation.campaigns.ongoing.any? %>
+    <button data-id="<%= @organisation.id %>" class="impossible-to-delete-organisation btn btn-danger text-light btn-block rounded-pill mt-2 plastroc-delete-button mb-3"><i class="fas fa-trash-alt"></i> Supprimer l'organisation</button>
   <% end %>
 </div>

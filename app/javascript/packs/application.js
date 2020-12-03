@@ -39,6 +39,7 @@ import { filter } from "../components/filter";
 import { animatedBar } from "../components/progress_bar";
 import { closeModal } from "../components/close_achivement_modal";
 import { share } from "../components/share";
+import { previewImageOnFileSelect } from "../components/photo_preview";
 
 
 
@@ -60,5 +61,5 @@ document.addEventListener('turbolinks:load', () => {
   impossibleToDeleteAlert();
   closeModal();
   share();
+  previewImageOnFileSelect();
 });
-
