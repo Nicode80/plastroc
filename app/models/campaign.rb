@@ -21,6 +21,12 @@ class Campaign < ApplicationRecord
   validates :target, presence: true, numericality: { only_integer: true }
   validates :unit, presence: true, inclusion: { in: UNITS }
 
+  # Utilities
+
+  scope :ongoing, -> { where(status: 'ongoing') }
+  scope :done, -> { where(status: 'done') }
+  scope :paused, -> { where(status: 'paused') }
+
 
   def number_of_days
     (end_date - Date.today).to_i

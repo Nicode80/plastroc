@@ -2,7 +2,7 @@ class MissionsController < ApplicationController
 
   def index
     @missions = policy_scope(Mission).ongoing.first(3)
-    @campaigns = current_user.campaigns
+    @campaigns = current_user.campaigns.first(3)
     @first_mission_done = first_mission_done_achivement?
     @questions = current_user.questions.where(seen: false)
     @top_3 = User.order(xp: :desc).first(3)
