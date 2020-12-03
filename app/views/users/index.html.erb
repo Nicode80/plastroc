@@ -9,7 +9,7 @@
   </div>
   <hr class="mb-3">
   <ul class="list-group">
-    <% @users.order(:xp).reverse.each_with_index do |user, index| %>
+    <% @top_50.each_with_index do |user, index| %>
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <span class="mr-3"><%= "##{index + 1}."%></span><%= user.first_name %>
@@ -24,5 +24,29 @@
         </div>
       </li>
     <% end %>
+    <% if @top_50.count > 50 %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">...</li>
+    <% end %>
+    <% if !@top_50.include?(current_user) %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <span class="mr-3"><%= "##{@user_position}." %></span><%= current_user.first_name %>
+            <% if current_user %>
+              <span class="badge badge-info badge-pill ml-3">you</span>
+            <% elsif current_user.admin %>
+              <span class="badge badge-dark badge-pill ml-3">admin</span>
+            <% end %>
+          </div>
+          <div class="d-flex">
+            <span class="badge badge-primary badge-pill"><i class="fas fa-trophy"></i> <%= current_user.xp %></span>
+          </div>
+        </li>
+      <% end %>
+      </div>
+    </li>
 </ul>
 </div>
+
+
+
+
