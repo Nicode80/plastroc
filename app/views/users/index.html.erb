@@ -9,10 +9,10 @@
   </div>
   <hr class="mb-3">
   <ul class="list-group">
-    <% @users.order(:xp).reverse.each do |user| %>
+    <% @users.order(:xp).reverse.each_with_index do |user, index| %>
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-          <%= user.first_name %>
+          <span class="mr-3"><%= "##{index + 1}."%></span><%= user.first_name %>
           <% if user == current_user %>
             <span class="badge badge-info badge-pill ml-3">you</span>
           <% elsif user.admin %>
