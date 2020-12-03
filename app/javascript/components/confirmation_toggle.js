@@ -1,10 +1,10 @@
 const toggleConfirmation = () => {
   const checkbox = document.querySelector('#confirm');
+  if(!checkbox) return;
+
   const checkList = document.querySelector('#engagements');
   const checkItems = document.querySelectorAll('#engagements li');
   const btn = document.querySelector('#btn-confirm');
-
-  if(!checkbox) return;
   btn.disabled = true;
 
   checkbox.addEventListener('change', (e) => {

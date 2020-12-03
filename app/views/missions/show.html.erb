@@ -116,18 +116,18 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <h5>Vous avez terminé votre mission ? <br> Super !</h5>
         </div>
         <div class="mb-3">
-          <h6>Vérifiez une dernière fois que avez bien respecté les conditions du recycleur.</h6>
-          <p>Si vous avez un doute, référez-vous à l'onglet tuto de votre mission.</p>
+          <h6>Valider la mission en insérant le code transmis par le recycleur</h6>
+          <div class="d-flex justify-content-center mt-4" id="code-form" data-code="<%= @mission.campaign.id %><%= @mission.id %>">
+            <form action="" method="get" class="form-example">
+              <input class="text-center" type="text" name="validation_code" id="validation-code-input" placeholder="Entrez le code" required >
+            </form>
+            <button id="submit-code" class="btn btn-outline-primary rounded-pill d-block plastroc-outline-button ml-2">Vérifier</button>
+          </div>
+          <p id='code-invalid' class="d-none" style='color: red; margin-right: 86px;'>code invalid</p>
         </div>
-        <h6>Avertisseez le recycleur afin qu'il puissse prendre en compte votre contribution et terminer votre mission.</h6>
-          <p>A la dépose, le recycleur vous donnera un code de validation.</p>
-      </div>
-
-      <input type="text" class="col-6 mt-3" placeholder="Entrez le code de validation">
-
-      <button class="col-6 complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow">terminer la mission</button>
-      <%= link_to 'valider la mission', mission_path(@mission), method: :patch, style: 'display: none;', id: 'complete-cta' %>
     </div>
+      <!-- <button class="complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow">terminer la mission</button> -->
+      <%= link_to 'terminer la mission', mission_path(@mission), method: :patch, style: 'display: none;', class: "complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow disabled", id: 'complete-cta' %>
 
   </div>
 </div>
