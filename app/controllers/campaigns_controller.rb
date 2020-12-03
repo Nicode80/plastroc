@@ -64,14 +64,14 @@ class CampaignsController < ApplicationController
     campaign_to_dupilcate = Campaign.find(params[:id])
     @campaign = campaign_to_dupilcate.dup
     authorize @campaign
+    @campaign.start_date = Date.today
+    @campaign.published = true
+    @campaign.status = "ongoing"
     if @campaign.save
       # => Crétation automatique des packages
       create_packages
       redirect_to edit_campaign_path(@campaign) #redirect to edit
-    else
-      render :new
     end
-
   end
 
   def edit
