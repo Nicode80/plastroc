@@ -49,7 +49,6 @@ class CampaignsController < ApplicationController
     else
       render :new
     end
-
     authorize @campaign
   end
 
