@@ -7,6 +7,7 @@ class InstructionsController < ApplicationController
 
   def create
     @instruction = Instruction.new(instruction_params)
+    authorize @instruction
     @material = Material.find(params[:material_id])
     @instruction.rich_content = params[:instruction][:rich_content]
     @instruction.material = @material
@@ -15,17 +16,16 @@ class InstructionsController < ApplicationController
     else
       render :new
     end
-    authorize @instruction
   end
 
   def edit
     @instruction = Instruction.find(params[:id])
-    # @material = Material.find(@instruction.material_id)
     authorize @instruction
   end
 
   def update
     @instruction = Instruction.find(params[:id])
+    authorize @instruction
     @material = Material.find(@instruction.material_id)
     @instruction.rich_content = params[:instruction][:rich_content]
     @instruction.material = @material
@@ -34,14 +34,13 @@ class InstructionsController < ApplicationController
     else
       render :edit
     end
-    authorize @instruction
   end
 
   def destroy
     @instruction = Instruction.find(params[:id])
+    authorize @instruction
     @instruction.media.purge
     @instruction.destroy
-    authorize @instruction
     redirect_to material_path(@instruction.material)
   end
 

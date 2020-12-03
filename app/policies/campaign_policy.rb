@@ -14,11 +14,11 @@ class CampaignPolicy < ApplicationPolicy
   end
 
   def dashboard?
-    record.organisation.user == user
+    record.user == user
   end
 
   def publish?
-    record.organisation.user == user
+    record.user == user
   end
 
   def create?

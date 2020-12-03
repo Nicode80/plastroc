@@ -19,10 +19,21 @@
 //   background: grey;
 // }
 
-#myBar {
+#myEngagedBar {
   width: 10%;
   height: auto;
-  background-color: #4CAF50;
+  background-color: $plastroc-secondary;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#myDoneBar {
+  width: 10%;
+  height: auto;
+  background-color: $plastroc-main;
   text-align: center; /* To center it horizontally (if you want) */
   line-height: 30px; /* To center it vertically */
   color: white;
