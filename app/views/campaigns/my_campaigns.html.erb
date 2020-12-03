@@ -1,18 +1,212 @@
-<div class="container">
-  <h3>Mes Campagnes</h3>
-  <% @campaigns.each do |campaign| %>
-    <div class="d-flex flex-row card card-s">
-        <% if campaign.photo.attached?%>
-           <img src="<%= cl_image_path campaign.photo.key %>"
-              alt="">
-        <% else %>
-          <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-              alt="">
+<div class="home-banner" style="background-image: url(<%= image_path('leaf-illus.png') %>);">
+   <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="circle d-flex justify-content-center align-items-center plastroc-text-shadow">
+        <%= link_to :back do %>
+          <i class="fas fa-arrow-left"></i>
         <% end %>
-        <section>
-            <h6><%= campaign.name %></h6>
-            <p><%= campaign.description %></p>
-        </section>
+      </div>
+      <h3 class="text-left py-4">campagnes</h3>
+      <div class="circle d-flex justify-content-center align-items-center plastroc-text-shadow">
+        <%= link_to new_campaign_path do %>
+          <h6 class="m-0"><i class="fas fa-plus"></i></h6>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+   </div>
+</div>
+<div style="margin-bottom: 72px" class='container'>
+
+<!-- My question's answers if any -->
+<% if @questions.count > 0 %>
+<p>
+  <button class="card d-block mt-2 w-100 border border-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <div class="d-flex align-items-center justify-content-center">
+      <h4 class="m-0 pr-3">📣</h4>
+      <p class="mt-3"><strong><%= @questions.count %> réponse(s) à vos questions</strong></p>
+    </div>
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <ul class="list-group">
+      <% @questions.each do |question| %>
+        <%= link_to seen_question_path(question), method: :patch do %>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-decoration-none">
+          <div class="text-truncate col-9 px-1" > <%=  question.title  %> </div>
+          <span class="badge badge-warning badge-pill col-3"><%=  question.updated_at.strftime("%d/%m/%y")  %></span>
+        </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+<!-- Ongoing missions -->
+
+<!-- Tabs -->
+<nav class="nav plastroc-tabs d-flex justify-content-around flex-nowrap py-3">
+  <a class="active" href="#tab-ongoing" data-toggle="tab">En cours</a>
+  <a class="" href="#tab-paused" data-toggle="tab">En pause</a>
+  <a class="" href="#tab-done" data-toggle="tab">Terminées</a>
+</nav>
+<hr class="mb-3">
+
+<div class="tab-content" style="margin-bottom: 75px;">
+
+  <!-- Tab Ongoing -->
+  <div class="tab-pane active" id="tab-ongoing">
+    <% if !current_user.organisations.empty? %>
+      <div class='d-flex align-items-center justify-content-between mb-2'>
+        <% if current_user.organisations.count == 1 %>
+          <h6 class='mt-3 mr-2'>
+            <%= link_to new_campaign_path(id: current_user.organisations.first.id), class: 'mt-3 mb-1 mr-1' do %>
+              <i class="fas fa-plus"></i>
+            <% end %>
+          </h6>
+        <% end %>
+      </div>
+      <% if !current_user.campaigns.empty? %>
+        <% @ongoing_campaigns.each do |campaign| %>
+          <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
+            <div class="d-flex flex-row card card-s">
+              <% if campaign.questions.where(answer: nil).count > 0 %>
+                      <span style="position: absolute" class="text-light mt-2 ml-2 text-decoration-none badge badge-danger badge-pill mb-2"><%= "#{campaign.questions.where(answer: nil).count}" %> <i class="fas fa-envelope"></i></span>
+                    <% end %>
+              <% if campaign.photo.attached? %>
+                <%= cl_image_tag campaign.photo.key, crop: :fill %>
+              <% else %>
+                <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+              <% end %>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <h6 style='color: grey' class="mb-0"><%= campaign.name %></h6>
+                      <small class='text-truncate' style='max-width: 215px'><%= campaign.organisation.name %></small>
+                    </div>
+                    <% if campaign.status == "ongoing" %>
+                      <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                    <% else %>
+                      <span class="text-decoration-none badge badge-dark badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+      <p class='text-center'>🤨 Pas de campagne en cours...</p>
+      <% if current_user.organisations.count == 1 %>
+        <%= link_to 'Créer une nouvelle campagne', new_campaign_path(id: current_user.organisations.all[0].id), class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+      <% else %>
+        <%= link_to 'Créer une nouvelle campagne', new_campaign_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+      <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+    <!-- Tab Paused -->
+  <div class="tab-pane" id="tab-paused">
+    <% if !current_user.organisations.empty? %>
+      <div class='d-flex align-items-center justify-content-between mb-2'>
+        <% if current_user.organisations.count == 1 %>
+          <h6 class='mt-3 mr-2'>
+            <%= link_to new_campaign_path(id: current_user.organisations.all[0].id), class: 'mt-3 mb-1 mr-1' do %>
+              <i class="fas fa-plus"></i>
+            <% end %>
+          </h6>
+        <% end %>
+      </div>
+      <% if !current_user.campaigns.empty? %>
+        <% @paused_campaigns.each do |campaign| %>
+          <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
+            <div class="d-flex flex-row card card-s">
+              <% if campaign.questions.where(answer: nil).count > 0 %>
+                      <span style="position: absolute" class="text-light mt-2 ml-2 text-decoration-none badge badge-danger badge-pill mb-2"><%= "#{campaign.questions.where(answer: nil).count}" %> <i class="fas fa-envelope"></i></span>
+                    <% end %>
+              <% if campaign.photo.attached? %>
+                <%= cl_image_tag campaign.photo.key, crop: :fill %>
+              <% else %>
+                <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+              <% end %>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <h6 style='color: grey' class="mb-0"><%= campaign.name %></h6>
+                      <small class='text-truncate' style='max-width: 215px'><%= campaign.organisation.name %></small>
+                    </div>
+                    <% if campaign.status == "ongoing" %>
+                      <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                    <% else %>
+                      <span class="text-decoration-none badge badge-dark badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+      <p class='text-center'>🤨 Pas de campagne en cours...</p>
+      <% if current_user.organisations.count == 1 %>
+        <%= link_to 'Créer une nouvelle campagne', new_campaign_path(id: current_user.organisations.all[0].id), class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+      <% else %>
+        <%= link_to 'Créer une nouvelle campagne', new_campaign_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+      <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+
+    <!-- Tab Done -->
+  <div class="tab-pane" id="tab-done">
+    <% if !current_user.organisations.empty? %>
+      <div class='d-flex align-items-center justify-content-between mb-2'>
+        <% if current_user.organisations.count == 1 %>
+          <h6 class='mt-3 mr-2'>
+            <%= link_to new_campaign_path(id: current_user.organisations.all[0].id), class: 'mt-3 mb-1 mr-1' do %>
+              <i class="fas fa-plus"></i>
+            <% end %>
+          </h6>
+        <% end %>
+      </div>
+      <% if !current_user.campaigns.empty? %>
+        <% @done_campaigns.each do |campaign| %>
+          <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
+            <div class="d-flex flex-row card card-s">
+              <% if campaign.questions.where(answer: nil).count > 0 %>
+                      <span style="position: absolute" class="text-light mt-2 ml-2 text-decoration-none badge badge-danger badge-pill mb-2"><%= "#{campaign.questions.where(answer: nil).count}" %> <i class="fas fa-envelope"></i></span>
+                    <% end %>
+              <% if campaign.photo.attached? %>
+                <%= cl_image_tag campaign.photo.key, crop: :fill %>
+              <% else %>
+                <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+              <% end %>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <h6 style='color: grey' class="mb-0"><%= campaign.name %></h6>
+                      <small class='text-truncate' style='max-width: 215px'><%= campaign.organisation.name %></small>
+                    </div>
+                    <% if campaign.status == "ongoing" %>
+                      <span class="text-decoration-none badge badge-primary badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                    <% else %>
+                      <span class="text-decoration-none badge badge-dark badge-pill mb-2"><%= "#{campaign.status}" %></span>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+      <p class='text-center'>🤨 Pas de campagne en cours...</p>
+      <% if current_user.organisations.count == 1 %>
+        <%= link_to 'Créer une nouvelle campagne', new_campaign_path(id: current_user.organisations.all[0].id), class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+      <% else %>
+        <%= link_to 'Créer une nouvelle campagne', new_campaign_path, class: 'btn btn-outline-primary rounded-pill d-block mt-3 plastroc-outline-button w-100' %>
+      <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
 </div>

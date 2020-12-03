@@ -19,6 +19,14 @@ class CampaignsController < ApplicationController
     # end
   end
 
+  def my_campaigns
+    @ongoing_campaigns = current_user.campaigns.ongoing
+    @done_campaigns = current_user.campaigns.done
+    @paused_campaigns = current_user.campaigns.paused
+    @questions = current_user.questions.where(seen: false)
+    authorize Campaign
+  end
+
   def show
     @campaign = Campaign.find(params[:id])
     @packages = @campaign.packages
@@ -69,9 +77,6 @@ class CampaignsController < ApplicationController
     end
   end
 
-  def my_campaigns
-    @campaigns = current_user_campaigns
-  end
 
   def dashboard
     @campaign = Campaign.find(params[:id])
