@@ -120,9 +120,13 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <p>Si vous avez un doute, référez-vous à l'onglet tuto de votre mission.</p>
         </div>
         <h6>Avertisseez le recycleur afin qu'il puissse prendre en compte votre contribution et terminer votre mission.</h6>
+          <p>A la dépose, le recycleur vous donnera un code de validation.</p>
       </div>
-      <button class="complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow">terminer la mission</button>
-      <%= link_to 'terminer la mission', mission_path(@mission), method: :patch, style: 'display: none;', id: 'complete-cta' %>
+
+      <input type="text" class="col-6 mt-3" placeholder="Entrez le code de validation">
+
+      <button class="col-6 complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow">terminer la mission</button>
+      <%= link_to 'valider la mission', mission_path(@mission), method: :patch, style: 'display: none;', id: 'complete-cta' %>
     </div>
 
   </div>
