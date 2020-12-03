@@ -5,12 +5,14 @@
          <% if user_signed_in? %>
             <h6 class="text-primary">Vous êtes déjà connecté</h6>
             <div class="row mt-5">
-               <div class="col-3"></div>
-               <% if current_user.missions.ongoing.empty? %>
-               <%= link_to "Campagnes", campaigns_path, class: 'col-6 btn btn-primary rounded-pill d-block mt-5 plastroc-button plastroc-light-shadow' %>
-               <% else %>
-               <%= link_to "Accueil", missions_path, class: 'col-6 btn btn-primary rounded-pill d-block mt-5 plastroc-button plastroc-light-shadow' %>
-               <% end %>
+               <div class="col-3">
+                 <% if current_user.missions.ongoing.empty? %>
+                   <%= link_to "Accueil", campaigns_path, class: 'col-6 btn btn-primary rounded-pill d-block mt-5 plastroc-button plastroc-light-shadow' %>
+                 <% else %>
+                   <%= link_to "Accueil", missions_path, class: 'col-6 btn btn-primary rounded-pill d-block mt-5 plastroc-button plastroc-light-shadow' %>
+                 <% end %>
+              </div>
+               
             </div>
          <% else %>
             <h6 class="text-primary">Vous souhaitez changer le monde ?</h6>
