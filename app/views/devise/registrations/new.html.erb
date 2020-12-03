@@ -1,6 +1,11 @@
+<div class="home-banner mb-4" style="background-image: url(<%= image_path('leaf-illus.png') %>);">
+  <div class="container">
+    <h3 class="text-center py-4">Créer un compte</h3>
+  </div>
+</div>
+
 <div class="container">
   <div class="col-12 col-md-6 offset-md-3">
-    <h2 class="text-center">Sign up</h2>
 
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= f.error_notification %>
@@ -21,11 +26,14 @@
                     input_html: { autocomplete: "nouveau-mot-de-passe" } %>
         <%= f.input :photo,
                     as: :file,
-                    input_html: { class: "input col-12 mb-3" } %>
+                    input_html: { class: "d-none", id: 'photo-input' },
+                    label_html: { class: 'upload-photo col-12 text-center'},
+                    label: '📷 Choisissez une photo' %>
+        <%= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Sign up", class: 'btn btn-primary rounded-pill col-6 offset-3 mt-3' %>
+        <%= f.button :submit, "Sign up", class: 'mt-2 btn btn-primary rounded-pill col-6 offset-3 mt-3' %>
       </div>
     <% end %>
     <%= render "devise/shared/links" %>

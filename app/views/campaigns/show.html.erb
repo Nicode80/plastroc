@@ -208,12 +208,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                 placeholder: "Contenu*",
                 input_html: { class: "col-12 mb-3" }  %>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-primary rounded-pill plastroc-outline-button" data-dismiss="modal">Annuler</button>
-            <%= f.submit 'Ajouter', class: "btn btn-primary rounded-pill plastroc-button" %>
+            <%= button_tag type: 'submit', class: "btn col-12 btn-primary rounded-pill plastroc-button" do %>
+              <i class="fas fa-paper-plane"></i>
+            <% end %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-

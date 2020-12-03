@@ -1,6 +1,11 @@
+<div class="home-banner mb-4" style="background-image: url(<%= image_path('leaf-illus.png') %>);">
+  <div class="container">
+    <h3 class="text-center py-4">Modifier le mot de passe</h3>
+  </div>
+</div>
+
 <div class="container">
-  <div class="col-12 col-md-6 offset-md-6">
-    <h2 class="text-center">Change your password</h2>
+  <div class="col-12 col-md-6 offset-md-3">
 
     <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
       <%= f.error_notification %>
@@ -22,7 +27,7 @@
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Change my password" %>
+        <%= f.button :submit, "Change my password", class: 'btn btn-primary rounded-pill col-12' %>
       </div>
     <% end %>
 

@@ -34,19 +34,25 @@
                   input_html: { class: "col-12 mb-3" } %>
 
       <div class="form-row mb-3">
-        <%= f.input :start_date,
-                    label: "Date de début",
-                    placeholder: "jj/mm/aaaa",
-                    as: :string,
-                    required: false,
-                    input_html: { class: "date-picker" } %>
+        <div class="d-flex">
+          <div class="mr-1">
+            <%= f.input :start_date,
+                        label: "Date de début",
+                        placeholder: "jj/mm/aaaa",
+                        as: :string,
+                        required: false,
+                        input_html: { class: "date-picker" } %>
+          </div>
 
-        <%= f.input :end_date,
-                    label: "Date de fin",
-                    placeholder: "jj/mm/aaaa",
-                    as: :string,
-                    required: false,
-                    input_html: { class: "date-picker", id: "secondRangeInput" } %>
+          <div class="ml-1">
+            <%= f.input :end_date,
+                        label: "Date de fin",
+                        placeholder: "jj/mm/aaaa",
+                        as: :string,
+                        required: false,
+                        input_html: { class: "date-picker", id: "secondRangeInput" } %>
+          </div>
+        </div>
       </div>
 
       <%= f.input :material_category,
@@ -66,14 +72,17 @@
                         boolean_style: :inline %>
 
       <div class="form-row mb-3">
-        <%= f.input :target,
-                    label: "Objectif de la mission*",
-                    placeholder: "500",
-                    input_html: { min: '0', class: "input" } %>
-
-        <%= f.input :min_package,
-                    label: "Quantité minimum par mission",
-                    input_html: { min: '0', class: "input" } %>
+          <div class="d-flex">
+            <div class="mr-2">
+              <%= f.input :target,
+                          label: "Quantité souhaitée",
+                          placeholder: "500",
+                          input_html: { min: '0', class: "input" } %>
+            </div>
+            <%= f.input :min_package,
+                        label: "Minimum par trieur",
+                        input_html: { min: '0', class: "input" } %>
+          </div>
       </div>
 
       <%= f.input :unit,
@@ -87,10 +96,13 @@
                   input_html: {class: 'unit-selector'} %>
 
       <%= f.input :photo,
-                  as: :file,
-                  input_html: { class: "input col-12 mb-3" } %>
+                    as: :file,
+                    input_html: { class: "d-none", id: 'photo-input' },
+                    label_html: { class: 'upload-photo col-12 text-center'},
+                    label: '📷 Choisissez une photo' %>
+      <%= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
 
-      <%= f.submit 'Valider', class: "btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
+      <%= f.submit 'Valider', class: "mt-2 btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow col-12 mb-3" %>
     <% end %>
 
 

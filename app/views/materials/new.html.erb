@@ -30,13 +30,14 @@
                   input_html: { class: "col-12 mb-3" },
                   placeholder: "Description" %>
       <br>
-      <p>Choissisez une image</p>
       <%= f.input :photo,
                   as: :file,
-                  label: false,
-                  input_html: { class: "input col-12 mb-3" } %>
+                  input_html: { class: "d-none", id: 'photo-input' },
+                  label_html: { class: 'upload-photo col-12 text-center'},
+                  label: '📷 Choisissez une photo' %>
+      <%= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
 
-        <%= f.submit "Valider", class: "col-12 btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" %>
+        <%= f.submit "Valider", class: "mt-2 col-12 btn btn-primary rounded-pill d-block plastroc-button plastroc-light-shadow" %>
         <%= link_to 'Annuler', materials_path, class: "col-12 btn btn-outline-danger rounded-pill d-block mt-3 plastroc-outline-button mr-3" %>
     <% end %>
   </div>
