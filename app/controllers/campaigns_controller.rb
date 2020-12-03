@@ -57,6 +57,15 @@ class CampaignsController < ApplicationController
     authorize @campaign
   end
 
+  def duplicate
+    @campaign = Campaign.find(params[:id])
+    authorize @campaign
+    @new_campaign = @campaign.dup
+    @new_campaign.save
+    authorize @new_campaign
+    redirect_to edit_campaign_path(@new_campaign)
+  end
+
   def update
     @campaign = Campaign.find(params[:id])
     @campaign.update(campaign_params)

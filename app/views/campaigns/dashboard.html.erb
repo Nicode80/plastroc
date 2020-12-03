@@ -90,6 +90,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         <%= @ongoing_missions.count %> en cours
       </button>
 
+      <%= link_to "Duplicate", duplicate_campaign_path(@campaign), class: "col-6 offset-3 btn btn-primary rounded-pill d-block mb-3 plastroc-button plastroc-light-shadow" %>
+
       <!-- Modal missions en cours -->
       <div class="modal fade" id="missions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
