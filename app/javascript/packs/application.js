@@ -40,6 +40,7 @@ import { animatedBar } from "../components/progress_bar";
 import { closeModal } from "../components/close_achivement_modal";
 import { share } from "../components/share";
 import { previewImageOnFileSelect } from "../components/photo_preview";
+import { missionChecker } from "../components/mission_checker";
 
 
 
@@ -62,4 +63,5 @@ document.addEventListener('turbolinks:load', () => {
   closeModal();
   share();
   previewImageOnFileSelect();
+  missionChecker();
 });
