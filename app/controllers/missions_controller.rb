@@ -5,6 +5,7 @@ class MissionsController < ApplicationController
     @campaigns = current_user.campaigns
     @first_mission_done = first_mission_done_achivement?
     @questions = current_user.questions.where(seen: false)
+    @top_3 = User.order(xp: :desc).first(3)
   end
 
   def show

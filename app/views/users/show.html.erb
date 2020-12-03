@@ -30,7 +30,16 @@
   <hr class="mb-3">
   <p><i class="far fa-user mr-2"></i> <%= @user.first_name %> <%= @user.last_name %></p>
   <p><i class="fas fa-envelope mr-2"></i> <%= @user.email %></p>
-  <p><i class="fas fa-trophy mr-2"></i> <%= @user.xp %></p>
+  <% if @leaderboard_position == 1 %>
+    <p><i class="fas fa-trophy mr-2" style="color: #ffd90f;"></i> #<%= @leaderboard_position %></p>
+  <% elsif @leaderboard_position == 2 %>
+    <p><i class="fas fa-trophy mr-2" style="color: #b4babd;"></i> #<%= @leaderboard_position %></p>
+  <% elsif @leaderboard_position == 3 %>
+    <p><i class="fas fa-trophy mr-2" style="color: #cb8524;"></i> #<%= @leaderboard_position %></p>
+  <% else %>
+    <p><i class="fas fa-trophy mr-2"></i> #<%= @leaderboard_position %></p>
+  <% end %>
+  <p><i class="fas fa-chart-line"></i> <%= @user.xp %> xp</p>
 
 
   <!-- My organisations -->
