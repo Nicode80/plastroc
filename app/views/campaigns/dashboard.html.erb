@@ -95,21 +95,25 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Missions en cours</h5>
             </div>
             <div class="modal-body">
               <p class="text-center">Donnez le <span class="badge badge-info badge-pill">code</span> au trieur à la dépose pour validation de la mission:</p>
-              <ul class="list-group">
-                <% @ongoing_missions.each do |mission| %>
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <%= mission.user.first_name %> <%= mission.user.last_name[0] %>
-                    <div class='d-flex'>
-                      <span class="badge badge-primary badge-pill"><i class="fas fa-weight-hanging"></i> <%= mission.package.quantity %> <%= mission.package.campaign.unit %></span>
-                      <span class="badge badge-info badge-pill ml-1"><%= mission.package.campaign.id %><%= mission.id %></span>
-                    </div>
-                  </li>
-                <% end %>
-              </ul>
+              <% if @ongoing_missions.empty? %>
+                <p class="text-center">Pas de mission en cours pour le moment 🤨.</p>
+              <% else %>
+                <ul class="list-group">
+                  <% @ongoing_missions.each do |mission| %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <%= mission.user.first_name %> <%= mission.user.last_name[0] %>
+                      <div class='d-flex'>
+                        <span class="badge badge-primary badge-pill"><i class="fas fa-weight-hanging"></i> <%= mission.package.quantity %> <%= mission.package.campaign.unit %></span>
+                        <span class="badge badge-info badge-pill ml-1"><%= mission.package.campaign.id %><%= mission.id %></span>
+                      </div>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">Close</button>
