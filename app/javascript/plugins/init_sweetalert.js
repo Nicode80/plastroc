@@ -39,7 +39,7 @@ const deleteAlert = () => {
 };
 
 const completeMissionAlert = () => {
-  const elements = document.querySelectorAll("#complete-cta");
+  const elements = document.querySelectorAll(".complete-mission");
   elements.forEach((swalButton) => {
     if (swalButton) {
       swalButton.addEventListener('click', () => {
