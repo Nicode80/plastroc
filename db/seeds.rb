@@ -356,8 +356,8 @@ puts 'Deleting all Users...'
     @nico.admin = true
     file = URI.open('https://i.pravatar.cc/200')
     @nico.photo.attach(
-      io: File.open(Rails.root.join('db/fixtures/goodplanet.png')),
-      filename: 'goodplanet1.jpeg',
+      io: file,
+      filename: "nico.jpg",
       )
     @nico.save!
 
