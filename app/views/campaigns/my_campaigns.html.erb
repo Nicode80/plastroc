@@ -2,7 +2,7 @@
    <div class="container">
     <div class="d-flex align-items-center justify-content-between">
       <div class="circle d-flex justify-content-center align-items-center plastroc-text-shadow">
-        <%= link_to :back do %>
+        <%= link_to missions_path do %>
           <i class="fas fa-arrow-left"></i>
         <% end %>
       </div>
@@ -58,15 +58,6 @@
   <!-- Tab Ongoing -->
   <div class="tab-pane active" id="tab-ongoing">
     <% if !current_user.organisations.empty? %>
-      <div class='d-flex align-items-center justify-content-between mb-2'>
-        <% if current_user.organisations.count == 1 %>
-          <h6 class='mt-3 mr-2'>
-            <%= link_to new_campaign_path(id: current_user.organisations.first.id), class: 'mt-3 mb-1 mr-1' do %>
-              <i class="fas fa-plus"></i>
-            <% end %>
-          </h6>
-        <% end %>
-      </div>
       <% if !current_user.campaigns.empty? %>
         <% @ongoing_campaigns.each do |campaign| %>
           <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
@@ -109,15 +100,6 @@
     <!-- Tab Paused -->
   <div class="tab-pane" id="tab-paused">
     <% if !current_user.organisations.empty? %>
-      <div class='d-flex align-items-center justify-content-between mb-2'>
-        <% if current_user.organisations.count == 1 %>
-          <h6 class='mt-3 mr-2'>
-            <%= link_to new_campaign_path(id: current_user.organisations.all[0].id), class: 'mt-3 mb-1 mr-1' do %>
-              <i class="fas fa-plus"></i>
-            <% end %>
-          </h6>
-        <% end %>
-      </div>
       <% if !current_user.campaigns.empty? %>
         <% @paused_campaigns.each do |campaign| %>
           <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
@@ -161,15 +143,6 @@
     <!-- Tab Done -->
   <div class="tab-pane" id="tab-done">
     <% if !current_user.organisations.empty? %>
-      <div class='d-flex align-items-center justify-content-between mb-2'>
-        <% if current_user.organisations.count == 1 %>
-          <h6 class='mt-3 mr-2'>
-            <%= link_to new_campaign_path(id: current_user.organisations.all[0].id), class: 'mt-3 mb-1 mr-1' do %>
-              <i class="fas fa-plus"></i>
-            <% end %>
-          </h6>
-        <% end %>
-      </div>
       <% if !current_user.campaigns.empty? %>
         <% @done_campaigns.each do |campaign| %>
           <%= link_to dashboard_campaign_path(campaign), class: 'text-decoration-none' do %>
