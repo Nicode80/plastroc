@@ -1,7 +1,7 @@
 class CampaignsController < ApplicationController
 
   def index # for the moment show all campaigns but will need to sort if on organisation view
-
+    @categories = active_materials_categories
     if params[:category] && params[:category].keys.any?
     # if params[:category_filter]&.split(',')&.any?  params[:category_filter].split(',')
       @campaigns = policy_scope(Campaign).where(status: 'ongoing').includes(:material).where(materials: { category: params[:category].keys })
@@ -124,6 +124,16 @@ class CampaignsController < ApplicationController
   end
 
   private
+
+  def active_materials_categories
+    categories = []
+    Material.all.each do |material|
+      if !material.campaigns.empty?
+        categories << material.category
+      end
+    end
+    return categories.uniq
+  end
 
   def organisations_with_active_campaigns
     Organisation.joins(:campaigns).where(campaigns: { status: 'ongoing' })
