@@ -1,317 +1,317 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
-#############################################################################
-# Materials seed
-#############################################################################
 require ('faker')
 require "open-uri"
 
-# clear DB before seed
-puts 'Deleting all citations'
-  Citation.destroy_all #if Rails.env.development?
-puts 'Deleting all missions'
-  Mission.destroy_all #if Rails.env.development?
-puts 'Deleting all packages...'
-  Package.destroy_all #if Rails.env.development?
-puts 'Deleting all questions...'
-  Question.destroy_all #if Rails.env.development?
-puts 'Deleting all campaigns...'
-  Campaign.destroy_all #if Rails.env.development?
-puts 'Deleting all instructions...'
-  Instruction.destroy_all #if Rails.env.development?
-puts 'Deleting all materials...'
-  Material.destroy_all #if Rails.env.development?
+# call all seed methods in prod or in dev env. All should remain in dev by default
+if !Rails.env.development?
+  return
+end
 
-# All 4 Citations
-puts '1/4 citation...'
-@quote1 = Citation.create(
-  author: 'Y. Arthus-Bertrand',
-  quote: "Il est trop tard pour être pessimiste.")
-puts '2/4 citation...'
-@quote2 = Citation.create(
-  author: 'A. Amritanzndamayi',
-  quote: "Maintenant est le moment favorable pour accomplir de bonnes actions. L'instant présent.")
-puts '3/4 citation...'
-@quote3 = Citation.create(
-  author: 'W. Maathai',
-  quote: "Ce n'est pas le courage qui permet de gagner une bataille mais la persévérance.")
-puts '4/4 citation...'
-@quote4 = Citation.create(
-  author: 'M. Fontenoy',
-  quote: "Ne laissez personne vous dire que c'est impossible !!")
+# def delete_all
+  # clear DB before seed
+  puts 'Deleting all citations...'
+    Citation.destroy_all #if Rails.env.development?
+  puts 'Deleting all missions...'
+    Mission.destroy_all #if Rails.env.development?
+  puts 'Deleting all packages...'
+    Package.destroy_all #if Rails.env.development?
+  puts 'Deleting all questions...'
+    Question.destroy_all #if Rails.env.development?
+  puts 'Deleting all campaigns...'
+    Campaign.destroy_all #if Rails.env.development?
+  puts 'Deleting all instructions...'
+    Instruction.destroy_all #if Rails.env.development?
+  puts 'Deleting all materials...'
+    Material.destroy_all #if Rails.env.development?
+  # Delete Current Organisations and Users
+  puts 'Deleting all Orgnanisations...'
+    Organisation.destroy_all # if Rails.env.development?
+  puts 'Deleting all Users...'
+    User.destroy_all # if Rails.env.development?
+# end
 
-################################################################################
+# def citations_seed
+  # All 4 Citations
+  puts '1/4 citation...'
+  @quote1 = Citation.create(
+    author: 'Y. Arthus-Bertrand',
+    quote: "Il est trop tard pour être pessimiste.")
+  puts '2/4 citation...'
+  @quote2 = Citation.create(
+    author: 'A. Amritanzndamayi',
+    quote: "Maintenant est le moment favorable pour accomplir de bonnes actions. L'instant présent.")
+  puts '3/4 citation...'
+  @quote3 = Citation.create(
+    author: 'W. Maathai',
+    quote: "Ce n'est pas le courage qui permet de gagner une bataille mais la persévérance.")
+  puts '4/4 citation...'
+  @quote4 = Citation.create(
+    author: 'M. Fontenoy',
+    quote: "Ne laissez personne vous dire que c'est impossible !!")
+# end
 
-# First Material
-puts 'Creating PET material...'
-@pet = Material.new
-  @pet.name = "PET"
-  @pet.description = "Polytéréphtalate d'éthylène"
-  @pet.category  = "Plastique"
-  @pet.photo.attach(
-    io: File.open(Rails.root.join('db/fixtures/plastic.jpeg')),
-    filename: 'plastic.jpeg',
-    )
-@pet.save!
+# Materials
+#############################################################################
 
-  # Material Instructions
-  puts 'Creating PET instructions...'
-  @instruction1 = Instruction.new
-    @instruction1.title = "Selectionnez les bouteilles"
-    @instruction1.rich_content = "Ne choisissez que les bouteilles en plastique transparent."
-    @instruction1.step_order = 1
-    @instruction1.material = @pet
-    @instruction1.media.attach(
-      io: File.open(Rails.root.join('db/fixtures/bottle.jpeg')),
-      filename: 'bottle.jpeg',
+# def material_seed_1
+  # First Material
+  puts 'Creating PET material...'
+  @pet = Material.new
+    @pet.name = "PET"
+    @pet.description = "Polytéréphtalate d'éthylène"
+    @pet.category  = "Plastique"
+    @pet.photo.attach(
+      io: File.open(Rails.root.join('db/fixtures/plastic.jpeg')),
+      filename: 'plastic.jpeg',
       )
-  @instruction1.save!
+  @pet.save!
 
-  @instruction2 = Instruction.new
-    @instruction2.title = "Retirez bouchons et étiquettes"
-    @instruction2.rich_content = "Retirez les bouchons et les étiquettes.
-      Vous pouvez les garder ou les jeter dans la poubelle de tri.
-      Veillez à bien retirer les couronnes qui attachent les bouchons à la bouteille."
-    @instruction2.step_order = 2
-    @instruction2.material = @pet
-    @instruction2.media.attach(
-      io: File.open(Rails.root.join('db/fixtures/bouchon.jpeg')),
-      filename: 'bouchon.jpeg',
+    # Material Instructions
+    puts 'Creating PET instructions...'
+    @instruction1 = Instruction.new
+      @instruction1.title = "Selectionnez les bouteilles"
+      @instruction1.rich_content = "Ne choisissez que les bouteilles en plastique transparent."
+      @instruction1.step_order = 1
+      @instruction1.material = @pet
+      @instruction1.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/bottle.jpeg')),
+        filename: 'bottle.jpeg',
+        )
+    @instruction1.save!
+
+    @instruction2 = Instruction.new
+      @instruction2.title = "Retirez bouchons et étiquettes"
+      @instruction2.rich_content = "Retirez les bouchons et les étiquettes.
+        Vous pouvez les garder ou les jeter dans la poubelle de tri.
+        Veillez à bien retirer les couronnes qui attachent les bouchons à la bouteille."
+      @instruction2.step_order = 2
+      @instruction2.material = @pet
+      @instruction2.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/bouchon.jpeg')),
+        filename: 'bouchon.jpeg',
+        )
+    @instruction2.save!
+
+    @instruction3 = Instruction.new
+      @instruction3.title = "Retirez les résidus de colle"
+      @instruction3.rich_content = "Retirez les résidus de colle de l'étiquette à l'aide dun couteau.
+        Evitez les dissolvant car cela altère le plastique. Vous pouvez humidifier la bouteille avec de l'eau chaude pour ramolir la colle.
+        Une fois prête vous pouvez compresser la bouteille pour qu'elle prenne moins de place."
+      @instruction3.step_order = 3
+      @instruction3.material = @pet
+      @instruction3.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/etiquette.jpeg')),
+        filename: 'etiquette.jpeg',
+        )
+    @instruction3.save!
+# end
+
+# def material_seed_2
+  # Second Material
+  puts 'Creating ABS material...'
+  @abs = Material.new
+    @abs.name = "ABS"
+    @abs.description = "Acrylonitrile butadiène styrène"
+    @abs.category  = "Plastique"
+    @abs.photo.attach(
+      io: File.open(Rails.root.join('db/fixtures/keyboard.jpeg')),
+      filename: 'keyboard.jpeg',
       )
-  @instruction2.save!
+  @abs.save!
 
-  @instruction3 = Instruction.new
-    @instruction3.title = "Retirez les résidus de colle"
-    @instruction3.rich_content = "Retirez les résidus de colle de l'étiquette à l'aide dun couteau.
-      Evitez les dissolvant car cela altère le plastique. Vous pouvez humidifier la bouteille avec de l'eau chaude pour ramolir la colle.
-      Une fois prête vous pouvez compresser la bouteille pour qu'elle prenne moins de place."
-    @instruction3.step_order = 3
-    @instruction3.material = @pet
-    @instruction3.media.attach(
-      io: File.open(Rails.root.join('db/fixtures/etiquette.jpeg')),
-      filename: 'etiquette.jpeg',
-      )
-  @instruction3.save!
+    # Material Instructions
+    puts 'Creating ABS instructions...'
+    @instruction1 = Instruction.new
+      @instruction1.title = "Trouvez des claviers d'ordinateurs"
+      @instruction1.rich_content = "Ne choisissez que les claviers à touche blanches ou grises.
+        Ne choisissez que les claviers mécaniques comme sur la photo. Tous les claviers avant 2014 sont bien mécaniques.
+        Evitez les claviers apple récents à touches plates."
+      @instruction1.step_order = 1
+      @instruction1.material = @abs
+      @instruction1.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/mecanic.jpeg')),
+        filename: 'mecanic.jpeg',
+        )
+    @instruction1.save!
 
-################################################################################
+    @instruction2 = Instruction.new
+      @instruction2.title = "Démontez le clavier"
+      @instruction2.rich_content = "Retirez toutes les vis et faites sauter toutes les touches à l'aide d'un couteau.
+        Ne gardez que la coque en plastique du clavier et les touches. Retirez tous les composants éléctroniques et les pièces en métal."
+      @instruction2.step_order = 2
+      @instruction2.material = @abs
+      @instruction2.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/elec.jpeg')),
+        filename: 'elec.jpeg',
+        )
+    @instruction2.save!
 
-# Second Material
-puts 'Creating ABS material...'
-@abs = Material.new
-  @abs.name = "ABS"
-  @abs.description = "Acrylonitrile butadiène styrène"
-  @abs.category  = "Plastique"
-  @abs.photo.attach(
-    io: File.open(Rails.root.join('db/fixtures/keyboard.jpeg')),
-    filename: 'keyboard.jpeg',
-    )
-@abs.save!
+    @instruction3 = Instruction.new
+      @instruction3.title = "Laver les touches et la coque"
+      @instruction3.rich_content = "Placez toutes les pièces en platique dans de l'eau savonneuse pendant 30min.
+        Essuyez les pièces avec un chiffon propre et vous assurant qu'elles sont bien sèches."
+      @instruction3.step_order = 3
+      @instruction3.material = @abs
+      @instruction3.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/soap.jpeg')),
+        filename: 'soap.jpeg',
+        )
+    @instruction3.save!
+# end
 
-  # Material Instructions
-  puts 'Creating ABS instructions...'
-  @instruction1 = Instruction.new
-    @instruction1.title = "Trouvez des claviers d'ordinateurs"
-    @instruction1.rich_content = "Ne choisissez que les claviers à touche blanches ou grises.
-      Ne choisissez que les claviers mécaniques comme sur la photo. Tous les claviers avant 2014 sont bien mécaniques.
-      Evitez les claviers apple récents à touches plates."
-    @instruction1.step_order = 1
-    @instruction1.material = @abs
-    @instruction1.media.attach(
-      io: File.open(Rails.root.join('db/fixtures/mecanic.jpeg')),
-      filename: 'mecanic.jpeg',
-      )
-  @instruction1.save!
-
-  @instruction2 = Instruction.new
-    @instruction2.title = "Démontez le clavier"
-    @instruction2.rich_content = "Retirez toutes les vis et faites sauter toutes les touches à l'aide d'un couteau.
-      Ne gardez que la coque en plastique du clavier et les touches. Retirez tous les composants éléctroniques et les pièces en métal."
-    @instruction2.step_order = 2
-    @instruction2.material = @abs
-    @instruction2.media.attach(
-      io: File.open(Rails.root.join('db/fixtures/elec.jpeg')),
-      filename: 'elec.jpeg',
-      )
-  @instruction2.save!
-
-  @instruction3 = Instruction.new
-    @instruction3.title = "Laver les touches et la coque"
-    @instruction3.rich_content = "Placez toutes les pièces en platique dans de l'eau savonneuse pendant 30min.
-      Essuyez les pièces avec un chiffon propre et vous assurant qu'elles sont bien sèches."
-    @instruction3.step_order = 3
-    @instruction3.material = @abs
-    @instruction3.media.attach(
-      io: File.open(Rails.root.join('db/fixtures/soap.jpeg')),
-      filename: 'soap.jpeg',
-      )
-  @instruction3.save!
-
-################################################################################
-
-# Third Material
-puts 'Creating Organic material...'
-@compost = Material.new
-  @compost.name = "Composte ménager"
-  @compost.description = "Epluchures de légumes et de fruits"
-  @compost.category  = "Composte"
-  @compost.photo.attach(
-    io: File.open(Rails.root.join('db/fixtures/compost.jpeg')),
-    filename: 'compost.jpeg',
-    )
-@compost.save!
-
-  # Material Instructions
-  puts 'Creating Organic instructions...'
-  @instruction1 = Instruction.new
-    @instruction1.title = "Récupérez vos épluchures"
-    @instruction1.rich_content = "Ne choisissez que les épluchures de légumes et de fruits hors agrumes et kiwi (trop acides)."
-    @instruction1.step_order = 1
-    @instruction1.material = @compost
-    @instruction1.media.attach(
+# def material_seed_3
+  # Third Material
+  puts 'Creating Organic material...'
+  @compost = Material.new
+    @compost.name = "Composte ménager"
+    @compost.description = "Epluchures de légumes et de fruits"
+    @compost.category  = "Composte"
+    @compost.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/compost.jpeg')),
       filename: 'compost.jpeg',
       )
-  @instruction1.save!
+  @compost.save!
 
-  @instruction2 = Instruction.new
-    @instruction2.title = "Démontez le clavier"
-    @instruction2.rich_content = "Retirez les éventuels résidus de plastique"
-    @instruction2.step_order = 2
-    @instruction2.material = @compost
-    @instruction2.media.attach(
-      io: File.open(Rails.root.join('db/fixtures/compost.jpeg')),
-      filename: 'elec.jpeg',
-      )
-  @instruction2.save!
+    # Material Instructions
+    puts 'Creating Organic instructions...'
+    @instruction1 = Instruction.new
+      @instruction1.title = "Récupérez vos épluchures"
+      @instruction1.rich_content = "Ne choisissez que les épluchures de légumes et de fruits hors agrumes et kiwi (trop acides)."
+      @instruction1.step_order = 1
+      @instruction1.material = @compost
+      @instruction1.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/compost.jpeg')),
+        filename: 'compost.jpeg',
+        )
+    @instruction1.save!
 
-################################################################################
+    @instruction2 = Instruction.new
+      @instruction2.title = "Démontez le clavier"
+      @instruction2.rich_content = "Retirez les éventuels résidus de plastique"
+      @instruction2.step_order = 2
+      @instruction2.material = @compost
+      @instruction2.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/compost.jpeg')),
+        filename: 'elec.jpeg',
+        )
+    @instruction2.save!
+# end
 
-# Fourth Material
-puts 'Creating Paper material...'
-@paper = Material.new
-  @paper.name = "Papier Blanc"
-  @paper.description = "Papier blanc propre"
-  @paper.category = "Papier"
-  @paper.photo.attach(
-    io: File.open(Rails.root.join('db/fixtures/paper.jpeg')),
-    filename: 'paper.jpeg',
-    )
-@paper.save!
-
-  # Material Instructions
-  puts 'Creating Paper instructions...'
-  @instruction1 = Instruction.new
-    @instruction1.title = "Récupérez du papier blanc"
-    @instruction1.rich_content = "Ne choisissez que le papier blanc sans écriture ni taches."
-    @instruction1.step_order = 1
-    @instruction1.material = @paper
-    @instruction1.media.attach(
+# def material_seed_4
+  # Fourth Material
+  puts 'Creating Paper material...'
+  @paper = Material.new
+    @paper.name = "Papier Blanc"
+    @paper.description = "Papier blanc propre"
+    @paper.category = "Papier"
+    @paper.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/paper.jpeg')),
       filename: 'paper.jpeg',
       )
-  @instruction1.save!
+  @paper.save!
 
-################################################################################
+    # Material Instructions
+    puts 'Creating Paper instructions...'
+    @instruction1 = Instruction.new
+      @instruction1.title = "Récupérez du papier blanc"
+      @instruction1.rich_content = "Ne choisissez que le papier blanc sans écriture ni taches."
+      @instruction1.step_order = 1
+      @instruction1.material = @paper
+      @instruction1.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/paper.jpeg')),
+        filename: 'paper.jpeg',
+        )
+    @instruction1.save!
+# end
 
-# Fifth Material
-puts 'Creating Bouhcon material...'
-@bouchon = Material.new
-  @bouchon.name = "Bouchon de liège"
-  @bouchon.description = "Bouchon en véritable liège"
-  @bouchon.category  = "Bois"
-  @bouchon.photo.attach(
-    io: File.open(Rails.root.join('db/fixtures/bouchon.jpeg')),
-    filename: 'bouchon.jpeg',
-    )
-@bouchon.save!
-
-  # Material Instructions
-  puts 'Creating Bouchon instructions...'
-  @instruction1 = Instruction.new
-    @instruction1.title = "Récupérez des bouchons en liège"
-    @instruction1.rich_content = "Ne choisissez que les bouchons en véritables liège (bons vin et champagne)."
-    @instruction1.step_order = 1
-    @instruction1.material = @bouchon
-    @instruction1.media.attach(
+# def material_seed_5
+  # Fifth Material
+  puts 'Creating Bouhcon material...'
+  @bouchon = Material.new
+    @bouchon.name = "Bouchon de liège"
+    @bouchon.description = "Bouchon en véritable liège"
+    @bouchon.category  = "Bois"
+    @bouchon.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/bouchon.jpeg')),
       filename: 'bouchon.jpeg',
       )
-  @instruction1.save!
+  @bouchon.save!
 
-################################################################################
+    # Material Instructions
+    puts 'Creating Bouchon instructions...'
+    @instruction1 = Instruction.new
+      @instruction1.title = "Récupérez des bouchons en liège"
+      @instruction1.rich_content = "Ne choisissez que les bouchons en véritables liège (bons vin et champagne)."
+      @instruction1.step_order = 1
+      @instruction1.material = @bouchon
+      @instruction1.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/bouchon.jpeg')),
+        filename: 'bouchon.jpeg',
+        )
+    @instruction1.save!
+# end
 
-# Sixth Material
-puts 'Creating Cuivre material...'
-@copper = Material.new
-  @copper.name = "Fils de cuivre"
-  @copper.description = "Fils électriques en cuivre"
-  @copper.category  = "Métal"
-  @copper.photo.attach(
-    io: File.open(Rails.root.join('db/fixtures/copper.jpeg')),
-    filename: 'copper.jpeg',
-    )
-@copper.save!
-
-  # Material Instructions
-  puts 'Creating Cuivre instructions...'
-  @instruction1 = Instruction.new
-    @instruction1.title = "Récupérez des fils électriques en cuivre"
-    @instruction1.rich_content = "Ne choisissez que les fils couleur cuivre et retirez la gaine."
-    @instruction1.step_order = 1
-    @instruction1.material = @copper
-    @instruction1.media.attach(
+# def material_seed_6
+  # Sixth Material
+  puts 'Creating Cuivre material...'
+  @copper = Material.new
+    @copper.name = "Fils de cuivre"
+    @copper.description = "Fils électriques en cuivre"
+    @copper.category  = "Métal"
+    @copper.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/copper.jpeg')),
       filename: 'copper.jpeg',
       )
-  @instruction1.save!
+  @copper.save!
 
-################################################################################
+    # Material Instructions
+    puts 'Creating Cuivre instructions...'
+    @instruction1 = Instruction.new
+      @instruction1.title = "Récupérez des fils électriques en cuivre"
+      @instruction1.rich_content = "Ne choisissez que les fils couleur cuivre et retirez la gaine."
+      @instruction1.step_order = 1
+      @instruction1.material = @copper
+      @instruction1.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/copper.jpeg')),
+        filename: 'copper.jpeg',
+        )
+    @instruction1.save!
+# end
 
-# Seventh Material
-puts 'Creating Fabric material...'
-@fabric = Material.new
-  @fabric.name = "Coton blanc"
-  @fabric.description = "Coton blanc propre"
-  @fabric.category  = "Tissu"
-  @fabric.photo.attach(
-    io: File.open(Rails.root.join('db/fixtures/fabric.jpeg')),
-    filename: 'fabric.jpeg',
-    )
-@fabric.save!
-
-  # Material Instructions
-  puts 'Creating Coton instructions...'
-  @instruction1 = Instruction.new
-    @instruction1.title = "Récupérez du tissu blanc"
-    @instruction1.rich_content = "Ne choisissez que du tissu en coton blanc ou très clair et propre."
-    @instruction1.step_order = 1
-    @instruction1.material = @fabric
-    @instruction1.media.attach(
+# def material_seed_7
+  # Seventh Material
+  puts 'Creating Fabric material...'
+  @fabric = Material.new
+    @fabric.name = "Coton blanc"
+    @fabric.description = "Coton blanc propre"
+    @fabric.category  = "Tissu"
+    @fabric.photo.attach(
       io: File.open(Rails.root.join('db/fixtures/fabric.jpeg')),
       filename: 'fabric.jpeg',
       )
-  @instruction1.save!
+  @fabric.save!
 
-########################################################################
-########################################################################
+    # Material Instructions
+    puts 'Creating Coton instructions...'
+    @instruction1 = Instruction.new
+      @instruction1.title = "Récupérez du tissu blanc"
+      @instruction1.rich_content = "Ne choisissez que du tissu en coton blanc ou très clair et propre."
+      @instruction1.step_order = 1
+      @instruction1.material = @fabric
+      @instruction1.media.attach(
+        io: File.open(Rails.root.join('db/fixtures/fabric.jpeg')),
+        filename: 'fabric.jpeg',
+        )
+    @instruction1.save!
+# end
 
-# Delete Current Organisations and Users
-puts 'Deleting all Orgnanisations...'
-  Organisation.destroy_all # if Rails.env.development?
-puts 'Deleting all Users...'
-  User.destroy_all # if Rails.env.development?
-
+# Admin Users Seed
 #####################################################################
-# Users Seed
-#####################################################################
 
-# Platroc Admin Team's accrounts
+# def admin_team_seed
+  # Platroc Admin Team's accrounts
   #if Rails.env.development?
     puts "Creating Maximin's Admin account..."
     @max = User.new
@@ -472,11 +472,14 @@ puts 'Deleting all Users...'
       )
     @organisation.save!
   #end
+# end
 
-# count on seed
+# Fake campaigns Seed - Good Planet & Paprec
+#####################################################################
 
-# 3 random Admin accounts with 2 organisations
-puts "Creating 3 fake user accounts with 2 organisations each..."
+# def campaigns_organisations_seed
+  # 3 random Admin accounts with 2 organisations
+  puts "Creating 3 fake user accounts with 2 organisations each..."
 
   # Premier user
   puts "1/3 - with 2 campaigns"
@@ -794,81 +797,90 @@ puts "Creating 3 fake user accounts with 2 organisations each..."
       @campaign7.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
       x += 1
     end
+# end
 
+# Fake campaigns Seed - Mairie
+#####################################################################
 
-# 5 random accounts with 1 organisation
-x= 0
+# def campaign_mairie_seed
+  # 5 random accounts with 1 organisation
+  x= 0
 
-puts "Creating 5 more fake user accounts with organisation..."
-  5.times do
-    x += 1
-    puts "#{x}/25"
-    @user = User.new
-    @user.first_name = Faker::Name.name
-    @user.last_name = Faker::Name.last_name
-    @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
-    @user.password = "123456"
-    @user.xp = rand(0..800)
-    file = URI.open('https://i.pravatar.cc/200')
-    @user.photo.attach(
-      io: file,
-      filename: "user#{x}.jpg",
-      )
-    @user.save!
+  puts "Creating 5 more fake user accounts with organisation..."
+    5.times do
+      x += 1
+      puts "#{x}/25"
+      @user = User.new
+      @user.first_name = Faker::Name.name
+      @user.last_name = Faker::Name.last_name
+      @user.email = "#{@user.first_name.downcase.gsub(/\s+/, "")}_#{x}@#{@user.last_name.downcase.gsub(/\s+/, "")}.com"
+      @user.password = "123456"
+      @user.xp = rand(0..800)
+      file = URI.open('https://i.pravatar.cc/200')
+      @user.photo.attach(
+        io: file,
+        filename: "user#{x}.jpg",
+        )
+      @user.save!
 
-    # organisation
-    puts "#{x}/25 - Orga"
-    @organisation = Organisation.new
-    @organisation.user = @user
-    @organisation.address = "Mairie du #{x + 10}e, Paris 750#{x + 10}"
-    @organisation.name = "Mairie du #{x + 10}e"
-    @organisation.about = "Lorem ipsum dolor sit amet,
-      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-    @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
-    @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
-    @organisation.photo.attach(
-      io: File.open(Rails.root.join('db/fixtures/mairie.png')),
-      filename: 'mairie.png',
-      )
-    @organisation.save!
+      # organisation
+      puts "#{x}/25 - Orga"
+      @organisation = Organisation.new
+      @organisation.user = @user
+      @organisation.address = "Mairie du #{x + 10}e, Paris 750#{x + 10}"
+      @organisation.name = "Mairie du #{x + 10}e"
+      @organisation.about = "Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
+      @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
+      @organisation.photo.attach(
+        io: File.open(Rails.root.join('db/fixtures/mairie.png')),
+        filename: 'mairie.png',
+        )
+      @organisation.save!
 
-    #campaign
-    puts "#{x}/25 - Campaign"
-    @campaign = Campaign.new
-    @campaign.material = @fabric
-    @campaign.name = "Recyclage Coton Blanc"
-    @campaign.description = "Recyclage #{@campaign.material.name} près de chez vous"
-    @campaign.target = 400
-    @campaign.unit = "kg"
-    @campaign.min_package = 20
-    @campaign.start_date = Date.today
-    @campaign.end_date = Date.today + 4.weeks
-    @campaign.status = 'ongoing'
-    @campaign.organisation = @organisation
-    @campaign.published = true
-    @campaign.photo.attach(
-      io: File.open(Rails.root.join('db/fixtures/fabric.jpeg')),
-      filename: 'fabric.jpeg',
-      )
-    @campaign.save!
+      #campaign
+      puts "#{x}/25 - Campaign"
+      @campaign = Campaign.new
+      @campaign.material = @fabric
+      @campaign.name = "Recyclage Coton Blanc"
+      @campaign.description = "Recyclage #{@campaign.material.name} près de chez vous"
+      @campaign.target = 400
+      @campaign.unit = "kg"
+      @campaign.min_package = 20
+      @campaign.start_date = Date.today
+      @campaign.end_date = Date.today + 4.weeks
+      @campaign.status = 'ongoing'
+      @campaign.organisation = @organisation
+      @campaign.published = true
+      @campaign.photo.attach(
+        io: File.open(Rails.root.join('db/fixtures/fabric.jpeg')),
+        filename: 'fabric.jpeg',
+        )
+      @campaign.save!
 
-    #packages
-    puts "#{x}/25 - Packages"
-    iterators = [(@campaign6.target / @campaign6.min_package).floor, 4].min
-    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
-    z = 0
-    iterators.times do
-      @name = names[z]
-      @quantity = (z + 1) * @campaign.min_package
-      @reward = (z + 1) * @campaign.min_package / 2
-      @campaign.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
-      z += 1
+      #packages
+      puts "#{x}/25 - Packages"
+      iterators = [(@campaign6.target / @campaign6.min_package).floor, 4].min
+      names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+      z = 0
+      iterators.times do
+        @name = names[z]
+        @quantity = (z + 1) * @campaign.min_package
+        @reward = (z + 1) * @campaign.min_package / 2
+        @campaign.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+        z += 1
+      end
     end
-  end
+# end
 
-# 20 random accounts
-puts "Creating 20 fake user accounts..."
+# 20 fake accounts seed
+#####################################################################
+
+# def random_accounts
+  # 20 random accounts
+  puts "Creating 20 fake user accounts..."
   20.times do
     x += 1
     puts "#{x}/25"
@@ -885,39 +897,43 @@ puts "Creating 20 fake user accounts..."
       )
     @user.save!
   end
+# end
 
-# missions and messages
-puts "Creating 1 mission and question per user..."
-# Création des missions pour chaque user
-    # Selection des campagnes au hasard
-  w = 0
-  y = User.count
-  User.all.each do |user|
-    w += 1
-    puts "#{w}/#{y} - mission"
-    @campaign = Campaign.all[rand(0..10)]
-    @mission = Mission.new
-    @mission.user = user
-    if w.odd?
-      @mission.status = "done"
-      @mission.completed_at = DateTime.now
-    else
-      @mission.status = "ongoing"
+# missions and messages seed
+#####################################################################
+
+# def missions_messages_seed
+  # missions and messages
+  puts "Creating 1 mission and question per user..."
+  # Création des missions pour chaque user
+      # Selection des campagnes au hasard
+    w = 0
+    y = User.count
+    User.all.each do |user|
+      w += 1
+      puts "#{w}/#{y} - mission"
+      @campaign = Campaign.all[rand(0..10)]
+      @mission = Mission.new
+      @mission.user = user
+      if w.odd?
+        @mission.status = "done"
+        @mission.completed_at = DateTime.now
+      else
+        @mission.status = "ongoing"
+      end
+      @mission.package = @campaign.packages.sample
+      @mission.save
+
+      #ajout d'une question
+      if w.odd?
+        puts "#{w}/#{y} - message"
+        @question = Question.new
+        @question.user = user
+        @question.campaign = @campaign
+        @question.title = "#{@campaign.material.name}?"
+        @question.content = "Bonjour #{@campaign.organisation.name} Qu'est-ce que le #{@campaign.material.name}?"
+        @question.save
+      end
     end
-    @mission.package = @campaign.packages.sample
-    @mission.save
-
-    #ajout d'une question
-    if w.odd?
-      puts "#{w}/#{y} - message"
-      @question = Question.new
-      @question.user = user
-      @question.campaign = @campaign
-      @question.title = "#{@campaign.material.name}?"
-      @question.content = "Bonjour #{@campaign.organisation.name} Qu'est-ce que le #{@campaign.material.name}?"
-      @question.save
-    end
-  end
-# End of users seed
-
-
+  # End of users seed
+# end
