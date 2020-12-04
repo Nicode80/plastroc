@@ -106,7 +106,7 @@
       <div class="justify-content-center p-2">
         <div class="col-4 d-flex p-1">
           <%= image_tag "picto-laurel-gold.png", class: "m-2", style: "object-fit:cover; height: 30px"%>
-          <%= cl_image_tag @top_3.first.photo.key, style: "height: 40px; width: 40px; crop: 'fill'", class: 'avatar' %>
+          <%= cl_image_tag @top_3.first.photo.key, height: 40, width: 40, crop: :fill, class: 'avatar' %>
         </div>
         <p class="mb-0 podium" style=" font-size: 12px; font-weight: 400;"><%= @top_3.first.first_name.first %>. <%= @top_3.first.last_name %></p>
         <p class="mb-0 podium" style=" font-size: 12px; font-weight: 400;"><%= @top_3.first.xp %>xp</p>
@@ -115,7 +115,7 @@
       <div class="justify-content-center p-2">
         <div class="col-4 d-flex p-1">
           <%= image_tag "picto-laurel-silver.png", class: "m-2", style: "object-fit:cover; height: 30px"%>
-          <%= cl_image_tag @top_3.second.photo.key, style: "height: 40px; width: 40px; crop: 'fill'", class: 'avatar' %>
+          <%= cl_image_tag @top_3.second.photo.key, height: 40, width: 40, crop: :fill, class: 'avatar' %>
         </div>
         <p class="mb-0 podium" style=" font-size: 12px; font-weight: 400;"><%= @top_3.second.first_name.first %>. <%= @top_3.second.last_name %></p>
         <p class="mb-0 podium" style=" font-size: 12px; font-weight: 400;"><%= @top_3.second.xp %>xp</p>
@@ -124,7 +124,7 @@
       <div class="justify-content-center p-2">
         <div class="col-4 d-flex p-1">
           <%= image_tag "picto-laurel-bronze.png", class: "m-2", style: "object-fit:cover; height: 30px"%>
-          <%= cl_image_tag @top_3.third.photo.key, style: "height: 40px; width: 40px; crop: 'fill'", class: 'avatar' %>
+          <%= cl_image_tag @top_3.third.photo.key, height: 40, width: 40, crop: :fill, class: 'avatar' %>
         </div>
         <p class="mb-0 podium" style=" font-size: 12px; font-weight: 400;"><%= @top_3.third.first_name.first %>. <%= @top_3.third.last_name %></p>
         <p class="mb-0 podium" style=" font-size: 12px; font-weight: 400;"><%= @top_3.third.xp %>xp</p>
