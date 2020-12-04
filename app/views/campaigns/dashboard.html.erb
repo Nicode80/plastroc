@@ -162,16 +162,31 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 <!-- Edit & stop buttons -->
 
-  <div class="bottom-nav">
-      <div class="d-flex justify-content-around">
-          <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
-          <% if @campaign.status == "ongoing" %>
-            <p><%= link_to "Stopper", pause_campaign_path(@campaign), method: :patch, style: "color: red", remote: true %></p>
-          <% else %>
-            <p><%= link_to "Reprendre", publish_campaign_path(@campaign), method: :patch, remote: true %></p>
-          <% end %>
-      </div>
-  </div>
+  <% if @campaign.status == "done" %>
+    <div id="bottom-nav-disabled">
+      <p class= "plastroc-button-sticky-bottom d-block py-3">Campagne Terminée</p>
+    </div>
+  <% else %>
+    <div class="bottom-nav">
+        <div class="d-flex justify-content-around">
+            <p><a href="#" style="color: &plastroc-main;" data-toggle="modal" data-target="#editModal">Editer</a></p>
+            <% if @campaign.status == "ongoing" %>
+              <p><%= link_to "Stopper", pause_campaign_path(@campaign), method: :patch, style: "color: red", remote: true %></p>
+            <% else %>
+              <button data-id="<%= @campaign.id %>" class="finish-campaign">Terminer</button>
+      <%= link_to "",
+                  finish_campaign_path(@campaign),
+                  method: :patch,
+                  # data: { confirm: "Are you sure?" },
+                  class: 'hidden',
+                  id: "fin-camp-#{@campaign.id}" %>
+              <p><%= link_to "Reprendre", publish_campaign_path(@campaign), method: :patch, remote: true %></p>
+            <% end %>
+        </div>
+    </div>
+
+  <% end %>
+
 
 </div>
 
@@ -200,20 +215,41 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         placeholder: "Description*",
                         input_html: { class: "col-12 mb-3" } %>
 
-            <%= f.input :end_date,
-                        as: :string,
-                        required: false,
-                        input_html: { class: "date-picker col-12 mb-3" } %>
+            <div class="form-row mb-3">
+              <div class="d-flex">
+                <div class="mr-1">
+                  <%= f.input :start_date,
+                              label: "Date de début",
+                              placeholder: "jj/mm/aaaa",
+                              as: :string,
+                              required: false,
+                              input_html: { class: "date-picker" } %>
+                </div>
 
-            <%= f.input :target,
-                        label: "Quantité totale",
-                        placeholder: "Quantité totale*",
-                        input_html: { class: "input col-12 mb-3" } %>
+                <div class="ml-1">
+                  <%= f.input :end_date,
+                              label: "Date de fin",
+                              placeholder: "jj/mm/aaaa",
+                              as: :string,
+                              required: false,
+                              input_html: { class: "date-picker", id: "secondRangeInput" } %>
+                </div>
+              </div>
+            </div>
 
-            <%= f.input :min_package,
-                        label: "Quantité minimum par mission",
-                        placeholder: "Quantité minimum par mission*",
-                        input_html: { class: "col-12 mb-3" } %>
+            <div class="form-row mb-3">
+              <div class="d-flex">
+                <div class="mr-2">
+                  <%= f.input :target,
+                              label: "Quantité souhaitée",
+                              placeholder: "500",
+                              input_html: { min: '0', class: "input" } %>
+                </div>
+                <%= f.input :min_package,
+                            label: "Minimum par trieur",
+                            input_html: { min: '0', class: "input" } %>
+              </div>
+            </div>
 
             <%= f.input :unit,
                         label: false,
@@ -221,14 +257,9 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         collection: Campaign::UNITS,
                         boolean_style: :inline,
                         collection_wrapper_tag: 'div',
-                        collection_wrapper_class: 'unit-wrapper',
-                        item_wrapper_class: 'unit-item',
+                        collection_wrapper_class: 'flex-nowrap d-flex',
+                        item_wrapper_class: 'unit-item flex-grow-1 align-self-stretch',
                         input_html: {class: 'unit-selector'} %>
-
-            <%= f.input :min_package,
-                        label: "Quantité minimum par mission",
-                        placeholder: "Quantité minimum par mission*",
-                        input_html: { class: "col-12 mb-3" } %>
 
             <%= f.input :photo,
                     as: :file,

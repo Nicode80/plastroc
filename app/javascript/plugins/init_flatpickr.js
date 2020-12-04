@@ -11,7 +11,7 @@ const initFlatpickr = () => {
       dateFormat: "d/m/Y",
       disableMobile: true,
       "plugins": [new rangePlugin({ input: "#secondRangeInput"})]
-    })
+    });
   }
 }
 

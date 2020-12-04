@@ -32,7 +32,7 @@ import { initAutocomplete } from "../plugins/init_autocomplete";
 import { initAutoFadeAlert } from "../plugins/auto_fade_alert";
 import { initFlatpickr} from "../plugins/init_flatpickr";
 import { materialSelect } from "../components/material_select";
-import { initSweetalert, deleteAlert, completeMissionAlert, impossibleToDeleteAlert } from '../plugins/init_sweetalert';
+import { initSweetalert, deleteAlert, completeMissionAlert, impossibleToDeleteAlert, finishCampaignAlert } from '../plugins/init_sweetalert';
 import { initMapbox } from "../plugins/init_mapbox";
 import { toggleConfirmation } from "../components/confirmation_toggle";
 import { filter } from "../components/filter";
@@ -60,6 +60,7 @@ document.addEventListener('turbolinks:load', () => {
   filter();
   completeMissionAlert();
   impossibleToDeleteAlert();
+  finishCampaignAlert();
   closeModal();
   share();
   previewImageOnFileSelect();

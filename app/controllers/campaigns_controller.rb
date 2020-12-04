@@ -60,20 +60,24 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def duplicate
+    campaign_to_dupilcate = Campaign.find(params[:id])
+    @campaign = campaign_to_dupilcate.dup
+    authorize @campaign
+    @campaign.start_date = Date.today
+    @campaign.end_date = Date.today + 10
+    @campaign.published = true
+    @campaign.status = "ongoing"
+    @campaign.save
+    # => Crétation automatique des packages
+    create_packages
+    flash[:alert] = 'campagne dupliquée'
+    redirect_to edit_campaign_path(@campaign) #redirect to edit
+  end
+
   def edit
     @campaign = Campaign.find(params[:id])
     authorize @campaign
-  end
-
-  def duplicate
-    @old_campaign = Campaign.find(params[:id])
-    authorize @old_campaign
-    @campaign = @old_campaign.dup
-    @campaign.save
-    authorize @campaign
-    create_packages
-    flash[:alert] = 'campagne dupliquée'
-    redirect_to edit_campaign_path(@campaign)
   end
 
   def update
@@ -108,6 +112,15 @@ class CampaignsController < ApplicationController
     flash[:notice] = "campagne en pause"
     redirect_to dashboard_campaign_path(@campaign)
   end
+
+  def finish
+    @campaign = Campaign.find(params[:id])
+    authorize @campaign
+    @campaign.update(status: "done")
+    flash[:notice] = "campagne terminée"
+    redirect_to my_campaigns_campaigns_path
+  end
+
 
   def publish
     @campaign = Campaign.find(params[:id])
