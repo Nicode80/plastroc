@@ -365,7 +365,7 @@ puts 'Deleting all Users...'
     @organisation.user = @nico
     @organisation.name = "FabLab du Wagon"
     @organisation.about = "FabLab situé dans l’école de code Le Wagon à Paris où les makers côtoient les web developers."
-    @organisation.address = "Paris 750#{rand(10..20)}"
+    @organisation.address = "16 Villa Gaudelet, Paris 11e Arrondissement, Île-de-France, France"
     @organisation.contact = "06-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}-#{Faker::PhoneNumber.subscriber_number(length: 2)}"
     @organisation.opening_hours = "Du lundi au samedi de #{rand(7..11)}h à #{rand(16..21)}h"
     @organisation.photo.attach(
