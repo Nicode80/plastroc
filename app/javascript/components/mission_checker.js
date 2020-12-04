@@ -6,10 +6,10 @@ const missionChecker = () => {
   const form = document.querySelector('#code-form');
   const check = document.querySelector('#submit-code');
   const error = document.querySelector('#code-invalid');
-  const btn = document.querySelector('#complete-cta');
+  const btn = document.querySelector('#finish-mission');
   const valid = document.querySelector('#valid-tick');
   const invalid = document.querySelector('#invalid-tick');
-  btn.disable = true;
+  btn.disabled = true;
 
   check.addEventListener('click', (e) => {
     if(codeInput.value != code) {
@@ -30,7 +30,7 @@ const missionChecker = () => {
       }
       codeInput.style.border = "2px solid #00CD60";
       valid.classList.toggle('d-none');
-      btn.disable = true;
+      btn.disabled = false;
       btn.classList.remove('disabled');
       }
   });

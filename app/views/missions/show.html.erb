@@ -128,9 +128,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
           <p id='code-invalid' class="d-none" style='color: red; margin-right: 100px;'>code invalid</p>
         </div>
     </div>
-      <!-- <button class="complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow">terminer la mission</button> -->
-      <%= link_to 'terminer la mission', mission_path(@mission), method: :patch, style: 'display: none;', class: "complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow disabled", id: 'complete-cta' %>
-
+      <button class="complete-mission disabled btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow" id="finish-mission">terminer la mission</button>
+      <%= link_to "", mission_path(@mission), method: :patch, class: "hidden", id: 'complete-cta' %>
   </div>
 </div>
 

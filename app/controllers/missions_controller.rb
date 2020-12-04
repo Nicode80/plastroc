@@ -72,7 +72,7 @@ class MissionsController < ApplicationController
 
   def first_mission_subscription_achivement?
     if current_user.missions != []
-      bolean = current_user.missions.ongoing.count == 1 && current_user.missions.last.recently_created?
+      bolean = current_user.missions.count == 1 && current_user.missions.last.recently_created?
     end
     return bolean
   end
