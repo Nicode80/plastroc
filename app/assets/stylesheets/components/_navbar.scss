@@ -77,12 +77,15 @@
     width: 100%;
     background: $plastroc-additional;
     cursor: not-allowed;
+    text-align: center;
+    color:$plastroc-text-light;
+    text-shadow: $plastroc-shadow;
 
     p {
         width: 100%;
-        text-align: center;
-        color: rgb(20, 20, 20);
-        font-size: 700;
+        background: linear-gradient(270deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 99.17%),#8bad9b;
+        font-weight: 700;
+        font-size: 18px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -90,5 +93,7 @@
         margin-bottom: 0;
         transition-duration: .15s;
         transition-timing-function: ease-in-out;
+        text-transform: uppercase;
+        letter-spacing: .5px;
     }
   }
