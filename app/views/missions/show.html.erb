@@ -118,12 +118,14 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         <div class="mb-3">
           <h6>Valider la mission en insérant le code transmis par le recycleur</h6>
           <div class="d-flex justify-content-center mt-4" id="code-form" data-code="<%= @mission.campaign.id %><%= @mission.id %>">
-            <form action="" method="get" class="form-example">
+            <form action="" method="get" class="form-example" id="code-input">
               <input class="text-center" type="text" name="validation_code" id="validation-code-input" placeholder="Entrez le code" required >
+              <i class="fa fa-check-circle d-none" id="valid-tick"></i>
+              <i class="fas fa-exclamation-circle d-none" id="invalid-tick"></i>
             </form>
             <button id="submit-code" class="btn btn-outline-primary rounded-pill d-block plastroc-outline-button ml-2">Vérifier</button>
           </div>
-          <p id='code-invalid' class="d-none" style='color: red; margin-right: 86px;'>code invalid</p>
+          <p id='code-invalid' class="d-none" style='color: red; margin-right: 100px;'>code invalid</p>
         </div>
     </div>
       <!-- <button class="complete-mission btn btn-primary rounded-pill d-block mt-3 plastroc-button plastroc-light-shadow">terminer la mission</button> -->
