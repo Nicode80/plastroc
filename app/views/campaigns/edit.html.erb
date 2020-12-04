@@ -12,20 +12,41 @@
                 placeholder: "Description*",
                 input_html: { class: "col-12 mb-3" } %>
 
-    <%= f.input :end_date,
-                as: :string,
-                required: false,
-                input_html: { class: "edit-date-picker col-12 mb-3" } %>
+        <div class="form-row mb-3">
+          <div class="d-flex">
+            <div class="mr-1">
+              <%= f.input :start_date,
+                          label: "Date de début",
+                          placeholder: "jj/mm/aaaa",
+                          as: :string,
+                          required: false,
+                          input_html: { class: "date-picker" } %>
+            </div>
 
-    <%= f.input :target,
-                label: "Quantité totale",
-                placeholder: "Quantité totale*",
-                input_html: { class: "input col-12 mb-3" } %>
+            <div class="ml-1">
+              <%= f.input :end_date,
+                          label: "Date de fin",
+                          placeholder: "jj/mm/aaaa",
+                          as: :string,
+                          required: false,
+                          input_html: { class: "date-picker", id: "secondRangeInput" } %>
+            </div>
+          </div>
+        </div>
 
-    <%= f.input :min_package,
-                label: "Quantité minimum par mission",
-                placeholder: "Quantité minimum par mission*",
-                input_html: { class: "col-12 mb-3" } %>
+        <div class="form-row mb-3">
+          <div class="d-flex">
+            <div class="mr-2">
+              <%= f.input :target,
+                          label: "Quantité souhaitée",
+                          placeholder: "500",
+                          input_html: { min: '0', class: "input" } %>
+            </div>
+            <%= f.input :min_package,
+                        label: "Minimum par trieur",
+                        input_html: { min: '0', class: "input" } %>
+          </div>
+        </div>
 
     <%= f.input :unit,
                 label: false,
@@ -33,14 +54,9 @@
                 collection: Campaign::UNITS,
                 boolean_style: :inline,
                 collection_wrapper_tag: 'div',
-                collection_wrapper_class: 'unit-wrapper',
-                item_wrapper_class: 'unit-item',
+                collection_wrapper_class: 'flex-nowrap d-flex',
+                item_wrapper_class: 'unit-item flex-grow-1 align-self-stretch',
                 input_html: {class: 'unit-selector'} %>
-
-    <%= f.input :min_package,
-                label: "Quantité minimum par mission",
-                placeholder: "Quantité minimum par mission*",
-                input_html: { class: "col-12 mb-3" } %>
 
     <%= f.input :photo,
                     as: :file,

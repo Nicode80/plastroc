@@ -90,6 +90,9 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
         <%= @ongoing_missions.count %> en cours
       </button>
 
+      <%= link_to duplicate_campaign_path(@campaign), class: "col-6 offset-3 btn btn-outline-primary rounded-pill d-block mb-3 plastroc-outline-button plastroc-light-shadow" do %>
+        <i class="far fa-copy"></i> Dupliquer
+      <% end %>
       <!-- Modal missions en cours -->
       <div class="modal fade" id="missions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -159,8 +162,10 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
 <!-- Edit & stop buttons -->
 
-  <% if @campaign.status == "finished" %>
-    <%= link_to "Dupliquer", duplicate_campaign_path(@campaign), class: "plastroc-button-sticky-bottom btn btn-primary d-block mt-3 plastroc-button plastroc-light-shadow w-100 py-3" %>
+  <% if @campaign.status == "done" %>
+    <div id="bottom-nav-disabled">
+      <p class= "plastroc-button-sticky-bottom d-block py-3">Campagne Terminée</p>
+    </div>
   <% else %>
     <div class="bottom-nav">
         <div class="d-flex justify-content-around">
@@ -210,20 +215,41 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         placeholder: "Description*",
                         input_html: { class: "col-12 mb-3" } %>
 
-            <%= f.input :end_date,
-                        as: :string,
-                        required: false,
-                        input_html: { class: "date-picker col-12 mb-3" } %>
+            <div class="form-row mb-3">
+              <div class="d-flex">
+                <div class="mr-1">
+                  <%= f.input :start_date,
+                              label: "Date de début",
+                              placeholder: "jj/mm/aaaa",
+                              as: :string,
+                              required: false,
+                              input_html: { class: "date-picker" } %>
+                </div>
 
-            <%= f.input :target,
-                        label: "Quantité totale",
-                        placeholder: "Quantité totale*",
-                        input_html: { class: "input col-12 mb-3" } %>
+                <div class="ml-1">
+                  <%= f.input :end_date,
+                              label: "Date de fin",
+                              placeholder: "jj/mm/aaaa",
+                              as: :string,
+                              required: false,
+                              input_html: { class: "date-picker", id: "secondRangeInput" } %>
+                </div>
+              </div>
+            </div>
 
-            <%= f.input :min_package,
-                        label: "Quantité minimum par mission",
-                        placeholder: "Quantité minimum par mission*",
-                        input_html: { class: "col-12 mb-3" } %>
+            <div class="form-row mb-3">
+              <div class="d-flex">
+                <div class="mr-2">
+                  <%= f.input :target,
+                              label: "Quantité souhaitée",
+                              placeholder: "500",
+                              input_html: { min: '0', class: "input" } %>
+                </div>
+                <%= f.input :min_package,
+                            label: "Minimum par trieur",
+                            input_html: { min: '0', class: "input" } %>
+              </div>
+            </div>
 
             <%= f.input :unit,
                         label: false,
@@ -231,8 +257,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         collection: Campaign::UNITS,
                         boolean_style: :inline,
                         collection_wrapper_tag: 'div',
-                        collection_wrapper_class: 'unit-wrapper',
-                        item_wrapper_class: 'unit-item',
+                        collection_wrapper_class: 'flex-nowrap d-flex',
+                        item_wrapper_class: 'unit-item flex-grow-1 align-self-stretch',
                         input_html: {class: 'unit-selector'} %>
 
             <%= f.input :min_package,

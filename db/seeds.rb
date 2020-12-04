@@ -392,6 +392,19 @@ puts 'Deleting all Users...'
       filename: 'fil.jpeg',
       )
     @campaignLeWagon.save!
+
+    #packages
+    puts "Le Wagon's Campaign &packages"
+    iterators = [(@campaignLeWagon.target / @campaignLeWagon.min_package).floor, 4].min
+    names = ['Corail', 'Tortue', 'Dauphin', 'Baleine']
+    z = 0
+    iterators.times do
+      @name = names[z]
+      @quantity = (z + 1) * @campaignLeWagon.min_package
+      @reward = (z + 1) * @campaignLeWagon.min_package / 2
+      @campaignLeWagon.packages.create(name: @name, quantity: @quantity, xp_reward: @reward)
+      z += 1
+    end
   #end
 
   #if Rails.env.development?
