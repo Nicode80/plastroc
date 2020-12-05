@@ -59,6 +59,13 @@ class MissionsController < ApplicationController
     @mission = Mission.find(params[:id])
     authorize @mission
     @mission.update(status: 'done', completed_at: DateTime.now)
+    @user = current_user
+    if @user.missions[0] == @mission
+      @user.xp += @mission.package.xp_reward + 40
+    else
+      @user.xp += @mission.package.xp_reward
+    end
+    @user.save
     redirect_to missions_path
   end
 
